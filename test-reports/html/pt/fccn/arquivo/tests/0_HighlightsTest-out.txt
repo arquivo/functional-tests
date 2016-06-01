@@ -1,4 +1,0 @@
-Run test localy
-Running HighlightsTest. 
-
-URL: http://sobre.arquivo.pt/about-the-archive/example-pages-in-the-portuguese-web-archive

@@ -69,27 +69,27 @@ public class AdvancedPage {
      * @return true if it contains sapo.pt from 1996 on result list
      */
     public boolean existsInResults(boolean isPreProd) {
-    	String title=null;
-    	
-    	try {
-    		
-    		driver.findElement(By.id("adv_and")).clear();
-    	    driver.findElement(By.id("adv_and")).sendKeys("sapo");
-    	    driver.findElement(By.id("site")).clear();
-    	    driver.findElement(By.id("site")).sendKeys("sapo.pt");
-    	    
-    	    driver.findElement(By.id("btnSubmitBottom")).click();
-    	    WebElement listOfResults = driver.findElement(By.id(listOfResultsTag));
-    	    
-    	    title=listOfResults.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[1]/h2")).getText();
-    	    
-    	    results_withWWW=listOfResults.findElement(By.xpath("//*[@id=\"resultados\"]")).getText();
-    	} catch (Exception e) {
-			// TODO Auto-generated catch block
-			return false;
-		}
+        String title=null;
+        
+        try {
+            
+            driver.findElement(By.id("adv_and")).clear();
+            driver.findElement(By.id("adv_and")).sendKeys("sapo");
+            driver.findElement(By.id("site")).clear();
+            driver.findElement(By.id("site")).sendKeys("sapo.pt");
+            
+            driver.findElement(By.id("btnSubmitBottom")).click();
+            WebElement listOfResults = driver.findElement(By.id(listOfResultsTag));
+            
+            title=listOfResults.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[1]/h2")).getText();
+            results_withWWW=listOfResults.findElement(By.xpath("//*[@id=\"resultados\"]")).getText();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            
+            return false;
+        }
         if (!title.contains("SAPO") || title==null)
-        	return false;
+            return false;
         return true;
     }
     
@@ -101,16 +101,16 @@ public class AdvancedPage {
      * @return
      */
     public boolean searchURL(){
-    	
-    	WebElement listOfResults=null;
-    	driver.findElement(By.id("txtSearch")).clear();
-	    driver.findElement(By.id("txtSearch")).sendKeys("sapo site:www.sapo.pt");
-	    driver.findElement(By.id("btnSubmit")).click();
-	    listOfResults = driver.findElement(By.id(listOfResultsTag));
-	    results_withoutWWW=listOfResults.findElement(By.xpath("//*[@id=\"resultados\"]")).getText();
-	    
-	    if (results_withoutWWW.equals(results_withWWW))
-	    	return true;
+        
+        WebElement listOfResults=null;
+        driver.findElement(By.id("txtSearch")).clear();
+        driver.findElement(By.id("txtSearch")).sendKeys("sapo site:www.sapo.pt");
+        driver.findElement(By.id("btnSubmit")).click();
+        listOfResults = driver.findElement(By.id(listOfResultsTag));
+        results_withoutWWW=listOfResults.findElement(By.xpath("//*[@id=\"resultados\"]")).getText();
+        
+        if (results_withoutWWW.equals(results_withWWW))
+            return true;
     return false;
     }
 }

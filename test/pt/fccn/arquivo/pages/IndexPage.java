@@ -60,8 +60,8 @@ public class IndexPage {
      * @return
      */
     public boolean setPreProd(String pre_prod){
-    	 if (driver.getCurrentUrl().contains(pre_prod)){
-         	this.isPreProd=true;
+         if (driver.getCurrentUrl().contains(pre_prod)){
+            this.isPreProd=true;
          }
          return isPreProd;
     }
@@ -83,8 +83,8 @@ public class IndexPage {
      * @return result page for query
      */
     public OpenSearchPage opensarch(String searchTerms,boolean isPredprod){
-    	String[] Url = driver.getCurrentUrl().split(".pt");
-    	driver.get(Url[0]+".pt/opensearch?query="+searchTerms);
+        String[] Url = driver.getCurrentUrl().split(".pt");
+        driver.get(Url[0]+".pt/opensearch?query="+searchTerms);
         return new OpenSearchPage(driver,isPredprod);
     }
     
@@ -93,8 +93,8 @@ public class IndexPage {
      * Change language of the page to english
      */
     public void langToEnglish(){
-    	
-    	 WebElement langElem = driver.findElement(By.linkText(linkTextEN));
+        
+         WebElement langElem = driver.findElement(By.linkText(linkTextEN));
          langElem.click();
          String pageTitle = driver.getTitle();
          if (!titleTextEN.contentEquals(pageTitle))
@@ -153,18 +153,18 @@ public class IndexPage {
      * @return
      */
     public boolean searchbyURL(String query,String queryPT){
-	 	
-    	this.url = driver.getCurrentUrl();
-    	String date="26 Nov"; // historical link selected
-    	String title = getTitlesearchbyURL(query,date);
-    	String title_cap=getTitlesearchbyURL(queryPT,date);
-    	System.out.print("SearchbyURL: "+title +"\nSc: "+title_cap);
-    	if (title==null)
-    		return false;
-    	if (!title.equals(title_cap))
-    		return false;
-    	return true;
-	
+        
+        this.url = driver.getCurrentUrl();
+        String date="26 Nov"; // historical link selected
+        String title = getTitlesearchbyURL(query,date);
+        String title_cap=getTitlesearchbyURL(queryPT,date);
+        System.out.print("SearchbyURL: "+title +"\nSc: "+title_cap);
+        if (title==null)
+            return false;
+        if (!title.equals(title_cap))
+            return false;
+        return true;
+    
 }
 
 /**
@@ -174,21 +174,21 @@ public class IndexPage {
  * @return title of the webapge on 10 Dez
  */
 public String getTitlesearchbyURL(String query,String date){
-		driver.get(this.url);
-		
-		driver.findElement(By.id("txtSearch")).clear();
-		driver.findElement(By.id("txtSearch")).sendKeys(query);
-		driver.findElement(By.id("btnSubmit")).click();
-		String title=null;
-		try {
-			driver.findElement(By.linkText(date)).click();
-			title= driver.getTitle();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.print(e);
-			return title;
-		}
-		 
-		return title;
-	}
+        driver.get(this.url);
+        
+        driver.findElement(By.id("txtSearch")).clear();
+        driver.findElement(By.id("txtSearch")).sendKeys(query);
+        driver.findElement(By.id("btnSubmit")).click();
+        String title=null;
+        try {
+            driver.findElement(By.linkText(date)).click();
+            title= driver.getTitle();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            System.out.print(e);
+            return title;
+        }
+         
+        return title;
+    }
 }
