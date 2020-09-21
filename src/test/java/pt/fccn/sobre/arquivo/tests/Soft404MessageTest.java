@@ -44,16 +44,16 @@ public class Soft404MessageTest extends WebDriverTestBaseParalell {
 			//The language of the page is not based on the "English or Portugues" button, but depends on the language of the search engine. 
 			
 			appendError(() -> assertThat("Verify text from Arquivo.pt link",
-					driver.findElement(By.id("onArquivo")).getText(),
-					containsString("Visite uma versão anterior desta página em 28 Março, 2017")));
+					driver.findElement(By.xpath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a")).getText(),
+					containsString("Visit an earlier version of this page on 27 February, 2017")));
 
-			List<WebElement> wes = driver.findElementsByXPath("//*[@id=\"onArquivo\"]");
+			List<WebElement> wes = driver.findElementsByXPath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a");
 			WebElement we = wes.get(0);
 			String href = we.getAttribute("href");
-			assertEquals("Check link to wayback", href, "https://arquivo.pt/wayback/20170227184149/https://sobre.arquivo.pt" + WAYBACK_404_PAGE_EXAMPLE);
+			assertEquals("Check link to wayback", href, "https://arquivo.pt/wayback/20170227184149mp_/http://sobre.arquivo.pt" + WAYBACK_404_PAGE_EXAMPLE);
 			
 			//Test search
-			appendError(() -> assertEquals("Verify text from search", "Maybe try searching?",
+			appendError(() -> assertEquals("Ou experimente pesquisar.",
 					driver.findElement(By.id("messageSearch")).getText()));
 			
 			appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
