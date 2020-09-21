@@ -53,7 +53,7 @@ public class Soft404MessageTest extends WebDriverTestBaseParalell {
 			assertEquals("Check link to wayback", href, "https://arquivo.pt/wayback/20170227184149mp_/http://sobre.arquivo.pt" + WAYBACK_404_PAGE_EXAMPLE);
 			
 			//Test search
-			appendError(() -> assertEquals("Ou experimente pesquisar.",
+			appendError(() -> assertEquals("Maybe try searching?",
 					driver.findElement(By.id("messageSearch")).getText()));
 			
 			appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
