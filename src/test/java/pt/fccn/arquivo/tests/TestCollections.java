@@ -110,6 +110,20 @@ public class TestCollections extends AppendableErrorsBaseTest {
 	
 	@Test
 	@Retry
+	public void testCollectionNON() {
+		test(new TestCollectionConfig().collectionId("NON").timestamp("20021209122700")
+				.url("http://zonanon.org/plural/rroque/beuys4.jpg"));
+	}
+	
+	@Test
+	@Retry
+	public void testCollectionGeocities() {
+		test(new TestCollectionConfig().collectionId("Geocities").timestamp("20091009074215")
+				.url("http://www.geocities.com/1alphawolf/meditativezone.html"));
+	}
+	
+	@Test
+	@Retry
 	public void testCollectionRAQ2017() {
 		test(new TestCollectionConfig().collectionId("RAQ2017").timestamp("20170831104506").url("http://www.umic.pt/"));
 	}
@@ -700,14 +714,14 @@ public class TestCollections extends AppendableErrorsBaseTest {
 	@Test
 	@Retry
 	public void testCollectionFAWP36() {
-		test(new TestCollectionConfig().collectionId("FAWP35").timestamp("20190115214628").url(
+		test(new TestCollectionConfig().collectionId("FAWP36").timestamp("20190115214628").url(
 				"https://www.diariandorra.ad/NUCLEO/jquery/images/ui-bg_flat_75_ffffff_40x100.png"));
 	}
 	
 	@Test
 	@Retry
 	public void testCollectionFAWP37() {
-		test(new TestCollectionConfig().collectionId("FAWP35").timestamp("20190622090359").url(
+		test(new TestCollectionConfig().collectionId("FAWP37").timestamp("20190622090359").url(
 				"https://blogs.uaeu.ac.ae/"));
 	}
 	
