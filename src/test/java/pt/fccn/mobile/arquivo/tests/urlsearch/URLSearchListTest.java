@@ -102,11 +102,11 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
 			String expected = new BundleMessage().pt("{0,date,d} {0,date,MMMM} às {0,time,HH}:{0,time,mm}")
 					.en("{0,date,d} {0,date,MMMM} at {0,time,HH}:{0,time,mm}")
 					.format(locale, DateUtils.asDateFromTimestamp(timestamp));
-
+			
 			assertEquals(expected, dayWE.getText());
 			
 			assertThat("Verify href",
-					driver.findElement(By.xpath("//*[@id=\"19961013145650\"]")).getAttribute("href"), containsString(System.getProperty("test.url").replace("http://", "https://")+"/wayback/19961013145650/http://www.fccn.pt/"));
+					driver.findElement(By.xpath("//*[@id=\"19961013145650\"]")).getAttribute("href").replace(":80", ""), containsString(System.getProperty("test.url").replace("http://", "https://")+"/wayback/19961013145650/http://www.fccn.pt/"));
 			
 		});
 
