@@ -1,6 +1,11 @@
 package pt.fccn.mobile.arquivo.tests.menu;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -36,9 +41,12 @@ public class MenuAboutHomepageTest extends MenuTest {
 		openMenu();
 
 		run("Click about button", () -> driver.findElementByXPath("//*[@id=\"menuSwiperSlide\"]/a/h4").click());
-
-		appendError("Check if current url is the about page",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(expectedUrl)));
+				
+		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]")); 
+				
+		run("Verify sobre.arquivo.pt", () -> {
+			assertEquals("Check if current url is the about page", driver.getCurrentUrl(), expectedUrl);
+		});
 
 	}
 
