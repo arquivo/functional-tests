@@ -82,7 +82,7 @@ public class TimemapTest extends AppendableErrorsBaseTest {
 				assertThat("Check first rel memento", line[1], containsString("rel=\"memento\""));
 				assertThat("Check first datetime memento", line[2], containsString("datetime=\""));
 				if (lines[i].contains("19961013145650mp_")) {
-					assertThat("Check first url memento", line[0],
+					assertThat("Check first url memento", line[0].replace(":80", ""),
 							containsString("<" + this.testURL + "/wayback/19961013145650mp_/http://www.fccn.pt/>"));
 					assertThat("Check first datetime memento", line[2],
 							containsString("datetime=\"Sun, 13 Oct 1996 14:56:50 GMT\""));
