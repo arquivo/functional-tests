@@ -45,7 +45,7 @@ public class ImageSearchTest extends WebDriverTestBaseParalell {
 		Double number_of_display_results = Double.valueOf(element); 
 		
 		assertTrue("Verify if the estimated results count message is displayed on image search is greater than 2.200",
-				number_of_display_results >= 2.200);
+				number_of_display_results >= 1.000);
 		
 		run("Click/open one image on search results to open modal",
 				() -> waitUntilElementIsVisibleAndGet(By.id("imageResults0")).click());
