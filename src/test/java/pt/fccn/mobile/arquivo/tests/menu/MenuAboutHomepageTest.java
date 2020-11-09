@@ -42,10 +42,13 @@ public class MenuAboutHomepageTest extends MenuTest {
 
 		run("Click about button", () -> driver.findElementByXPath("//*[@id=\"menuSwiperSlide\"]/a/h4").click());
 				
-		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]")); 
+		//waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]")); 
+		
+		appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, 100)
+				.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoContainer"))));
 				
 		run("Verify sobre.arquivo.pt", () -> {
-			assertEquals("Check if current url is the about page", driver.getCurrentUrl(), expectedUrl);
+			assertEquals("Check if current url is the about page", expectedUrl, driver.getCurrentUrl());
 		});
 
 	}
