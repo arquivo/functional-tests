@@ -19,38 +19,38 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
  */
 public class MenuAboutHomepageTest extends MenuTest {
 
-	public MenuAboutHomepageTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
-	}
+    public MenuAboutHomepageTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
+        super(os, version, browser, deviceName, deviceOrientation);
+    }
 
-	@Test
-	@Retry
-	public void menuAboutHomepagePTTest() {
-		LocaleUtils.changeLanguageToPT(this);
-		menuAbout("https://sobre.arquivo.pt/pt/");
-	}
+    @Test
+    @Retry
+    public void menuAboutHomepagePTTest() {
+        LocaleUtils.changeLanguageToPT(this);
+        menuAbout("https://sobre.arquivo.pt/pt/");
+    }
 
-	@Test
-	@Retry
-	public void menuAboutHomepageENTest() {
-		LocaleUtils.changeLanguageToEN(this);
-		menuAbout("https://sobre.arquivo.pt/en/");
-	}
+    @Test
+    @Retry
+    public void menuAboutHomepageENTest() {
+        LocaleUtils.changeLanguageToEN(this);
+        menuAbout("https://sobre.arquivo.pt/en/");
+    }
 
-	private void menuAbout(String expectedUrl) {
-		openMenu();
+    private void menuAbout(String expectedUrl) {
+        openMenu();
 
-		run("Click about button", () -> driver.findElementByXPath("//*[@id=\"menuSwiperSlide\"]/a/h4").click());
-				
-		//waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]")); 
-		
-		appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, 100)
-				.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoContainer"))));
-				
-		run("Verify sobre.arquivo.pt", () -> {
-			assertEquals("Check if current url is the about page", expectedUrl, driver.getCurrentUrl());
-		});
+        run("Click about button", () -> driver.findElementById("menu-about").click());
 
-	}
+        //waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]"));
+
+        appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, 100)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/div/div/aside/div/a/img"))));
+
+        run("Verify sobre.arquivo.pt", () -> {
+            assertEquals("Check if current url is the about page", expectedUrl, driver.getCurrentUrl());
+        });
+
+    }
 
 }
