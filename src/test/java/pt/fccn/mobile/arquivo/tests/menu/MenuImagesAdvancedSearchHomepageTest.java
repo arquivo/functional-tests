@@ -24,12 +24,11 @@ public class MenuImagesAdvancedSearchHomepageTest extends MenuTest {
 	public void menuImagesAdvancedSearchHomepageTest() {
 		openMenu();
 
-		run("Open images sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("imagesMenu")).click());
+		run("Open images sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-images")).click());
 
-		run("Click new search button", () -> waitUntilElementIsVisibleAndGet(By.id("advancedImages")).click());
+		run("Click advanced", () -> waitUntilElementIsVisibleAndGet(By.id("menu-images-advanced-search")).click());
 
-		appendError("Check if current url is the image search",
+		appendError("Check if current url is the advanced image search",
 				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/image/advanced/search?")));
 	}
-
 }
