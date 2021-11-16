@@ -14,23 +14,23 @@ import pt.fccn.arquivo.selenium.Retry;
  */
 public class MenuPagesNewAvancedSearchHomepageTest extends MenuTest {
 
-	public MenuPagesNewAvancedSearchHomepageTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
-	}
+    public MenuPagesNewAvancedSearchHomepageTest(String os, String version, String browser, String deviceName,
+            String deviceOrientation) {
+        super(os, version, browser, deviceName, deviceOrientation);
+    }
 
-	@Test
-	@Retry
-	public void menuPagesNewAvancedSearchHomepageTest() {
-		openMenu();
+    @Test
+    @Retry
+    public void menuPagesNewAvancedSearchHomepageTest() {
+        openMenu();
 
-		run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
+        run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
 
-		run("Click new advanced search button",
-				() -> driver.findElement(By.id("menu-pages-advanced-search")).click());
+        run("Click new advanced search button",
+                () -> driver.findElement(By.id("menu-pages-advanced-search")).click());
 
-		appendError("Check if current url is the advanced search",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/advanced/search?")));
-	}
+        appendError("Check if current url is the advanced search",
+                () -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/advanced/search?")));
+    }
 
 }

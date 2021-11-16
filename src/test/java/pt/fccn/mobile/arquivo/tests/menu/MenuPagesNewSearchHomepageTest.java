@@ -14,23 +14,23 @@ import pt.fccn.arquivo.selenium.Retry;
  */
 public class MenuPagesNewSearchHomepageTest extends MenuTest {
 
-	public MenuPagesNewSearchHomepageTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
-	}
+    public MenuPagesNewSearchHomepageTest(String os, String version, String browser, String deviceName,
+            String deviceOrientation) {
+        super(os, version, browser, deviceName, deviceOrientation);
+    }
 
-	@Test
-	@Retry
-	public void menuPagesNewSearchHomepageTest() {
-		openMenu();
+    @Test
+    @Retry
+    public void menuPagesNewSearchHomepageTest() {
+        openMenu();
 
-		run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("pagesMenu")).click());
+        run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
 
-		run("Click new search button",
-				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pageOptions\"]/a/h4")).click());
-		
-		appendError("Check if current url is the page search",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/search?")));
-	}
+        run("Click new search button",
+                () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages-new-search")).click());
+
+        appendError("Check if current url is the page search",
+                () -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/search?")));
+    }
 
 }
