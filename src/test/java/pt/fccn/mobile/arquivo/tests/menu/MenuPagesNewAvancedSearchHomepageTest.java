@@ -24,10 +24,10 @@ public class MenuPagesNewAvancedSearchHomepageTest extends MenuTest {
 	public void menuPagesNewAvancedSearchHomepageTest() {
 		openMenu();
 
-		run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("pagesMenu")).click());
+		run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
 
 		run("Click new advanced search button",
-				() -> driver.findElement(By.xpath("//*[@id=\"advancedSearch\"]/h4")).click());
+				() -> driver.findElement(By.id("menu-pages-advanced-search")).click());
 
 		appendError("Check if current url is the advanced search",
 				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/advanced/search?")));
