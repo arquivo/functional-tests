@@ -76,12 +76,6 @@ public class ImageSearchTest extends WebDriverTestBaseParalell {
         			.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText());
         });
 
-        // appendError(() -> {
-        // 	assertEquals("Check page attributes in image viewer", "wiki.di.uminho.pt/twiki/bin/view/Mestrado/TPI",
-        // 			driver.findElement(By.xpath("//*[@id=\"card0\"]/ion-card-content[2]/ion-list/ion-item[2]"))
-        // 					.getText());
-        // });
-
         appendError(() -> {
         	assertEquals("Check page title in image viewer", "FCCN - Fundação para a Computação Científica Nacional",
         			driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[5]/p/a")).getText());
@@ -97,102 +91,43 @@ public class ImageSearchTest extends WebDriverTestBaseParalell {
         			.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/span")).getText());
         });
 
-        // appendError(() -> { // Click in Details button
-        // 	driver.findElement(By.xpath("//*[@id=\"card0\"]/ion-row[1]/ion-col[2]/ion-button")).click();
-        // });
+        appendError(() -> { // Click in Details button
+        	driver.findElement(By.id("image-details-button")).click();
+        });
 
-        // /**************************/
-        // /*** Details attributes ***/
-        // /**************************/
+        /**************************/
+        /*** Details attributes ***/
+        /**************************/
 
-        // appendError(() -> {
-        // 	assertEquals("Check image detail page contains page url",
-        // 			"http://wiki.di.uminho.pt/twiki/bin/view/Mestrado/TPI",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[1]/ion-list/ion-item[1]/h5/a"))
-        // 					.getText());
-        // });
+        appendError(() -> {
+        	assertThat("Check image detail page contains page timestamp",
+        			driver.findElement(
+        					By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText(),
+        			containsString("a6e8551fe818ebddbcc791f424c765aa95e22d5ed6a8960be6ce58cb5e7633cd"));
+        });
 
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[1]/ion-list/ion-item[2]/h5"))
-        // 					.getText(),
-        // 			containsString("20070707201604"));
-        // });
+        appendError(() -> {
+        	assertThat("Check image detail page contains page timestamp",
+        			driver.findElement(
+        					By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText(),
+        			containsString("Apresentados os recentes desenvolvimentos da RCTS A FCCN contou com a presença do Ministro da C"));
+        });
 
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[1]/ion-list/ion-item[3]/h5"))
-        // 					.getText(),
-        // 			containsString("Segundo Ciclo em Informática - Universidade do Minho - TWiki"));
-        // });
+        appendError(() -> {
+        	assertThat("Check image detail page contains page timestamp",
+        			driver.findElement(
+        					By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText(),
+        			containsString("https://arquivo.pt/wayback/20090904173557/http://www.fccn.eu/"));
+        });
 
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[2]/ion-list/ion-item[1]/h5/a"))
-        // 					.getText(),
-        // 			containsString("http://wiki.di.uminho.pt/twiki/pub/Mestrado/TPI/fccn.jpg"));
-        // });
+        /**************************/
 
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[2]/ion-list/ion-item[2]/h5"))
-        // 					.getText(),
-        // 			containsString("20070707201644"));
-        // });
+        run("Click copy API details ", () -> {
+        	driver.findElement(By.id("copy-raw-api-data")).click();
+        });
 
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[2]/ion-list/ion-item[3]/h5"))
-        // 					.getText(),
-        // 			containsString("FCCN"));
-        // });
-
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[2]/ion-list/ion-item[4]/h5"))
-        // 					.getText(),
-        // 			containsString("319 x 69 pixels"));
-        // });
-
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[2]/ion-list/ion-item[5]/h5"))
-        // 					.getText(),
-        // 			containsString("jpeg"));
-        // });
-
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(
-        // 					By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[2]/ion-list/ion-item[6]/h5"))
-        // 					.getText(),
-        // 			containsString("0.999"));
-        // });
-
-        // appendError(() -> {
-        // 	assertThat("Check image detail page contains page timestamp",
-        // 			driver.findElement(By.xpath("//*[@id=\"detailsCard0\"]/ion-card-content[3]/ion-list/ion-item/h5"))
-        // 					.getText(),
-        // 			containsString("IA"));
-        // });
-
-        // /**************************/
-
-        // run("Close image details modal", () -> {
-        // 	driver.findElement(By.id("closeCard0")).click();
-        // });
-
-        // run("Close image first modal", () -> {
-        // 	driver.findElement(By.id("close0")).click();
-        // });
+        run("Close image first modal", () -> {
+        	driver.findElement(By.xpath("//*[@id=\"close-modal-tecnhical\"]/button")).click();
+        });
     }
-
 }
