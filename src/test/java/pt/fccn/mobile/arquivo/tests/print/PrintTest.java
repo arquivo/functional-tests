@@ -23,70 +23,70 @@ import pt.fccn.arquivo.util.AppendableErrorsBaseTest;
  */
 public class PrintTest extends AppendableErrorsBaseTest {
 
-	private String testURL;
+    private String testURL;
 
-	public PrintTest() {
-		this.testURL = System.getProperty("test.url");
-	}
+    public PrintTest() {
+        this.testURL = System.getProperty("test.url");
+    }
 
-	@Test
-	@Retry
-	public void printTest() {
-		String screenshotUrlStr = this.testURL + "/screenshot?url=" + this.testURL
-				+ "/noFrame/replay/19961013145650/http://www.fccn.pt/&download=false";
+    @Test
+    @Retry
+    public void printTest() {
+        String screenshotUrlStr = this.testURL + "/screenshot?url=" + this.testURL
+                + "/noFrame/replay/19961013145650/http://www.fccn.pt/&download=false";
 
-		byte[] bytes = print(screenshotUrlStr);
+        byte[] bytes = print(screenshotUrlStr);
 
-		String md5 = getMd5(bytes);
-		
-		assertEquals("Verify print md5sum", "b1871abd5bb8934a56cc4023547f354d", md5);
-	}
+        String md5 = getMd5(bytes);
 
-	private byte[] print(String screenshotUrlStr) {
-		URL url;
-		try {
-			url = new URL(screenshotUrlStr);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(
-					"Error generating URL to a screenshot of a page verify if you have passed correct test url parameter",
-					e);
-		}
+        assertEquals("Verify print md5sum", "f7a0fbcf7268f98a7b38840a09abf479", md5);
+    }
 
-		byte[] bytes;
-		try {
-			InputStream is = url.openStream();
-			bytes = IOUtils.toByteArray(is);
-		} catch (IOException e) {
-			throw new RuntimeException("Error downloading a screenshot", e);
-		}
-		return bytes;
-	}
+    private byte[] print(String screenshotUrlStr) {
+        URL url;
+        try {
+            url = new URL(screenshotUrlStr);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(
+                    "Error generating URL to a screenshot of a page verify if you have passed correct test url parameter",
+                    e);
+        }
 
-	public static String getMd5(byte[] input) {
-		try {
+        byte[] bytes;
+        try {
+            InputStream is = url.openStream();
+            bytes = IOUtils.toByteArray(is);
+        } catch (IOException e) {
+            throw new RuntimeException("Error downloading a screenshot", e);
+        }
+        return bytes;
+    }
 
-			// Static getInstance method is called with hashing MD5
-			MessageDigest md = MessageDigest.getInstance("MD5");
+    public static String getMd5(byte[] input) {
+        try {
 
-			// digest() method is called to calculate message digest
-			// of an input digest() return array of byte
-			byte[] messageDigest = md.digest(input);
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
 
-			// Convert byte array into signum representation
-			BigInteger no = new BigInteger(1, messageDigest);
+            // digest() method is called to calculate message digest
+            // of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input);
 
-			// Convert message digest into hex value
-			String hashtext = no.toString(16);
-			while (hashtext.length() < 32) {
-				hashtext = "0" + hashtext;
-			}
-			return hashtext;
-		}
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
 
-		// For specifying wrong message digest algorithms
-		catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
