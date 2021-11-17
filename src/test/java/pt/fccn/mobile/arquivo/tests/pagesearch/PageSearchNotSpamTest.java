@@ -10,7 +10,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  * 
- * @author pedro.gomes.fccn@gmail.com
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 
@@ -25,20 +25,20 @@ public class PageSearchNotSpamTest extends WebDriverTestBaseParalell {
 	@Test
 	@Retry
 	public void pageSearchNotSpamTest() throws Exception {
-		run("Search Lisboa", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("Lisboa");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+		run("Search with Lisboa", () -> {
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("lisboa");
+			driver.findElement(By.id("submit-search")).click();
 		});
 
-		waitUntilElementIsVisibleAndGet(By.id("resultados-lista"));
+		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));
 
 		int OLXanchorsCount = driver
-				.findElementsByXPath("//*[@id=\"resultados-lista\"]//*[@class=\"url\"][contains(text(),'olx')]").size();
+				.findElementsByXPath("//*[@class=\"page-search-result\"]//*[@class=\"results-url blockUrl\"][contains(text(),'olx')]").size();
 
 		System.out.println("OLX anchors count " + OLXanchorsCount);
 
-		long OLXemsCount = driver.findElementsByXPath("//*[@id=\"resultados-lista\"]") //
+		long OLXemsCount = driver.findElementsByXPath("//*[@class=\"page-search-result\"]") //
 				.stream() //
 				.filter(em -> em.getText().toLowerCase().contains("olx")) //
 				.count();

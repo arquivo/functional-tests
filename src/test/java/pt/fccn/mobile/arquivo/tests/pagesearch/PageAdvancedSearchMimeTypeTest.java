@@ -13,7 +13,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  * 
- * @author pedro.gomes.fccn@gmail.com
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 
@@ -27,42 +27,37 @@ public class PageAdvancedSearchMimeTypeTest extends WebDriverTestBaseParalell {
 	@Test
 	@Retry
 	public void testPageAdvancedSearchMimeType() throws Exception {
-		run("Search FCCN term", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("fccn");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+		run("Search with fccn", () -> {
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
+			driver.findElement(By.id("submit-search")).click();
 		});
 		
 		run("Click on advanced search link to navigate to advanced search page",
-				() -> waitUntilElementIsVisibleAndGet(By.id("advancedSearchButton")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"search-form-advanced\"]/button")).click());
 		
 		appendError(() -> {
 			assertEquals("Check if search words maintain fccn term", "fccn",
-					driver.findElement(By.id("adv_and")).getAttribute("value"));
+					driver.findElement(By.id("words")).getAttribute("value"));
 		});
 		
-		appendError("Open format type", () -> driver.findElement(By.id("formatType")).click());
+		appendError("Open format type", () -> driver.findElement(By.id("format-type")).click());
 
-		Select dropdown = new Select(driver.findElement(By.id("formatType")));
+		Select dropdown = new Select(driver.findElement(By.id("format-type")));
 		
 		appendError("Set format type",
 				() -> dropdown.selectByValue("pdf"));
-
-		run("Close format box", () -> driver
-				.findElement(
-						By.xpath("//*[@id=\"formatType\"]/ancestor::div[contains(@class, 'expandable-div')]"))
-				.click());
 		
-		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.id("btnSubmitBottom")).click());
+		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
 		
 		appendError(() -> assertEquals("Verify if the - operator is on text box",
 				"fccn type:pdf",
-				driver.findElement(By.id("txtSearch")).getAttribute("value").trim()));
+				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
 		
 		assertThat("Verify if the term fccn is displayed on any search result",
-				driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[1]/div[2]/span")).getText(), containsString("fccn"));
+				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a")).getText().toLowerCase(), containsString("fccn"));
 		
 		appendError(() -> assertEquals("Check mime of first result", "[PDF]",
-				driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li/div[1]/a/h2/span")).getText()));
+				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a/span")).getText()));
 	}
 }

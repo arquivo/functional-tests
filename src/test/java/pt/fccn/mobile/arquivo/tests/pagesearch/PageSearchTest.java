@@ -11,7 +11,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class PageSearchTest extends WebDriverTestBaseParalell {
@@ -23,33 +23,29 @@ public class PageSearchTest extends WebDriverTestBaseParalell {
 	@Test
 	@Retry
 	public void pageSearchTest() {
-		if (this.testURL.toLowerCase().contains("preprod.arquivo.pt")) {
-			pageSearch("fccn collection:Roteiro", "59");
-		} else {
-			pageSearch("fccn", "2.960.097");
-		}
+		pageSearch("fccn collection:Roteiro", "Cerca de 59 resultados desde 1991 até 2021");
 	}
 	
 	public void pageSearch(String query, String numberResults) {
 		
 		run("Search fccn", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys(query);
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys(query);
+			driver.findElement(By.id("submit-search")).click();
 		});
 	
 		
-		waitUntilElementIsVisibleAndGet(By.id("resultados-lista"));
+		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));
 		
 		appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", numberResults,
 				driver.findElement(By.id("estimated-results-value")).getText()));
 		
-		int anchorsCount = driver.findElementsByXPath("//*[@id=\"resultados-lista\"]//*[@class=\"url\"][contains(text(),'fccn')]")
+		int anchorsCount = driver.findElementsByXPath("//*[@class=\"page-search-result\"]//*[@class=\"results-url blockUrl\"][contains(text(),'fccn')]")
 				.size();
 	
 		System.out.println("anchorsCount " + anchorsCount);
 		
-		long emsCount = driver.findElementsByXPath("//*[@id=\"resultados-lista\"]//em") //
+		long emsCount = driver.findElementsByXPath("//*[@class=\"page-search-result\"]//em") //
 				.stream() //
 				.filter(em -> em.getText().toLowerCase().contains("fccn")) //
 				.count();

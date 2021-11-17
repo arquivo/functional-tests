@@ -10,7 +10,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  * 
- * @author pedro.gomes.fccn@gmail.com
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 
@@ -24,16 +24,16 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParalell {
 	@Test
 	@Retry
 	public void notArchivedFileTest() throws Exception {
-		run("Search fccn", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("fccn");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+		run("Search with Lisboa", () -> {
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
+			driver.findElement(By.id("submit-search")).click();
 		});
 
-		waitUntilElementIsVisibleAndGet(By.id("resultados-lista"));
+		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));
 
 		run("click first position", () -> {
-			driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[1]/div[1]/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).click();
 		});
 
 		appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
@@ -41,10 +41,10 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParalell {
 
 		driver.navigate().back();
 
-		waitUntilElementIsVisibleAndGet(By.id("resultados-lista"));
+		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]"));
 
 		run("click second position", () -> {
-			driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[2]/div[1]/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[2]")).click();
 		});
 
 		appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
@@ -52,10 +52,10 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParalell {
 
 		driver.navigate().back();
 
-		waitUntilElementIsVisibleAndGet(By.id("resultados-lista"));
+		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]"));
 
 		run("click third position", () -> {
-			driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[2]/div[1]/a")).click();
+			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[3]")).click();
 		});
 
 		appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)

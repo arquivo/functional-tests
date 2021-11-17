@@ -6,6 +6,9 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
@@ -13,7 +16,7 @@ import pt.fccn.mobile.arquivo.utils.IonicDatePicker;
 
 /**
  * 
- * @author pedro.gomes.fccn@gmail.com
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 
@@ -27,19 +30,42 @@ public class PageSearchOverlapDatesTest extends WebDriverTestBaseParalell {
 	@Test
 	@Retry
 	public void pageSearchOverlapDatesTest() throws Exception {
-		run("Search FCCN term", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("fccn");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+		run("Search with fccn", () -> {
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
+			driver.findElement(By.id("submit-search")).click();
 		});
 
-		run("Open from date picker", () -> waitUntilElementIsVisibleAndGet(By.id("sliderCircleStart")).click());
-		LocalDate fromDate = LocalDate.of(1997, 5, 20);
-		run("Insert " + fromDate.toString() + " on start date picker",
-				() -> IonicDatePicker.changeTo(driver, fromDate));
+		Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
+        String platform = capabilities.getPlatform().name();
+		
+		run("Open start date picker", () -> driver.findElement(By.id("date-container-start")).click());
 
-		run("Open until date picker", () -> waitUntilElementIsVisibleAndGet(By.id("sliderCircleEnd")).click());
-		LocalDate untilDate = LocalDate.of(1996, 8, 22);
+		run("Insert 20/05/1997 on start date picker", () -> {
+            if (platform == "LINUX" || platform == "WINDOWS")
+                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("20/05/1997");
+            else
+                System.out.println("TODO: Android test");
+        });
+
+        run("Click OK", () -> {
+            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
+        });
+
+		run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
+
+        run("Insert 22/08/1996 on end date picker", () -> {
+            if (platform == "LINUX" || platform == "WINDOWS")
+                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("22/08/1996");
+            else
+                System.out.println("TODO: Android test");
+        });
+
+        run("Click OK", () -> {
+            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
+        });
+
+        LocalDate untilDate = LocalDate.of(1996, 8, 22);
 
 		appendError(() -> {
 			assertTrue("Check if it is possible to do date overlap: ", checkDatePicker(untilDate));

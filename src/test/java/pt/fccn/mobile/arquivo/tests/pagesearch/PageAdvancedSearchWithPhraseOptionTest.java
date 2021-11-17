@@ -14,7 +14,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  * 
- * @author pedro.gomes.fccn@gmail.com
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 
@@ -28,31 +28,31 @@ public class PageAdvancedSearchWithPhraseOptionTest extends WebDriverTestBasePar
 	@Retry
 	public void testPageAdvancedSearchWithPhraseOption() throws Exception {
 		run("Search FCCN term", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("fccn");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
+			driver.findElement(By.id("submit-search")).click();
 		});
 		
 		run("Click on advanced search link to navigate to advanced search page",
-				() -> waitUntilElementIsVisibleAndGet(By.id("advancedSearchButton")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"search-form-advanced\"]/button")).click());
 		
 		appendError(() -> {
 			assertEquals("Check if search words maintain fccn term", "fccn",
-					driver.findElement(By.id("adv_and")).getAttribute("value"));
+					driver.findElement(By.id("words")).getAttribute("value"));
 		});
 		
-		appendError("Insert the negation option on form field", () -> driver.findElement(By.id("adv_phr")).sendKeys("speedmeter"));
+		appendError("Insert the option on form field", () -> driver.findElement(By.id("phrase")).sendKeys("speedmeter"));
 		
-		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.id("btnSubmitBottom")).click());
-		 
+		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
+
 		appendError(() -> assertEquals("Verify if the - operator is on text box",
 				"fccn \"speedmeter\"",
-				driver.findElement(By.id("txtSearch")).getAttribute("value").trim()));
+				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
 
 		assertThat("Verify if the term fccn is displayed on any search result",
-				driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[1]/div[1]/a/h2")).getText(), containsString("FCCN"));
+				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText(), containsString("FCCN"));
 		
 		assertThat("Verify if the term fccn is displayed on any search result",
-				driver.findElement(By.xpath("//*[@id=\"resultados-lista\"]/ul/li[1]/div[1]/a/h2")).getText(), containsString("Speedmeter FCCN"));
+				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText(), containsString("Speedmeter FCCN"));
 	}
 }

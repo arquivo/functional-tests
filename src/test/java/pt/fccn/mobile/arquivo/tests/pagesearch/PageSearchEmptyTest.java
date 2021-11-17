@@ -14,7 +14,7 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class PageSearchEmptyTest extends WebDriverTestBaseParalell {
@@ -29,27 +29,27 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParalell {
 	@Retry
 	public void pageSearchTestPT() {
 		LocaleUtils.changeLanguageToPT(this);
-		pageSearchTest("Não foram encontrados resultados para a sua pesquisa");
+		pageSearchTest("→ Não foram encontrados resultados para a sua pesquisa: ");
 	}
 
 	@Test
 	@Retry
 	public void pageSearchTestEN() {
 		LocaleUtils.changeLanguageToEN(this);
-		pageSearchTest("No results were found for the query");
+		pageSearchTest("→ No results were found for the query: ");
 	}
 
 	private void pageSearchTest(String noResultsMessage) {
 		run("Search with " + QUERY, () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys(QUERY);
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys(QUERY);
+			driver.findElement(By.id("submit-search")).click();
 		});
 
-		run("Wait for search results appear", () -> waitUntilElementIsVisibleAndGet(By.id("resultados-lista")));
+		run("Wait for search results appear", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]")));
 
 		appendError("Check result count should be zero", () -> {
-			int count = driver.findElementsByXPath("//*[@id=\"resultados-lista\"]/ul/li").size();
+			int count = driver.findElementsByXPath("//*[@class=\"page-search-result\"]").size();
 			assertEquals("Check result count should be zero", 0, count);
 		});
 
@@ -60,10 +60,10 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParalell {
 				() -> ExpectedConditions.visibilityOfElementLocated(emptyResultMessageBy));
 		
 		appendError(() -> assertThat("Empty result message should contains specific text",
-				driver.findElement(By.xpath("//*[@id=\"conteudo-resultado\"]/div[3]")).getText(), containsString(noResultsMessage)));
+				driver.findElement(By.xpath("//*[@id=\"no-results-were-found\"]")).getText(), containsString(noResultsMessage)));
 		
 		appendError(() -> assertThat("Empty result message should show search criteria",
-				driver.findElement(By.xpath("//*[@id=\"conteudo-resultado\"]/div[3]")).getText(), containsString(QUERY)));
+				driver.findElement(By.xpath("//*[@id=\"no-results-were-found\"]")).getText(), containsString(QUERY)));
 	}
 
 }

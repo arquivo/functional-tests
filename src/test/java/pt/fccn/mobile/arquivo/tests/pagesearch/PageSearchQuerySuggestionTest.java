@@ -11,7 +11,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class PageSearchQuerySuggestionTest extends WebDriverTestBaseParalell {
@@ -24,14 +24,14 @@ public class PageSearchQuerySuggestionTest extends WebDriverTestBaseParalell {
 	@Test
 	@Retry
 	public void pageSearchQuerySuggestionTest() {
-		run("Search with testre", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("testre");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+		run("Search with lisbo", () -> {
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("lisbo");
+			driver.findElement(By.id("submit-search")).click();
 		});
 
 		assertThat("Verify if a suggestion is presented",
-				driver.findElement(By.xpath("//*[@class=\"suggestion\"]/a")).getText(), containsString("teste"));
+				driver.findElement(By.id("term-suggested")).getText(), containsString("→ Será que quis dizer: lisboa"));
 	}
 
 }
