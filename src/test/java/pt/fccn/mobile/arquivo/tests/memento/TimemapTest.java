@@ -61,14 +61,14 @@ public class TimemapTest extends AppendableErrorsBaseTest {
 			String[] line = lines[i].split(";");
 			if (lines[i].contains("rel=\"self\"")) {
 				assertThat("Check url self", line[0],
-						containsString("<" + this.testURL + "/wayback/timemap/link/http://www.fccn.pt"));
+						containsString("<" + this.testURL + "/noFrame/replay/timemap/link/http://www.fccn.pt"));
 				assertThat("Check rel self", line[1], containsString("rel=\"self\""));
 				assertThat("Check type self", line[2], containsString("type=\"application/link-format\""));
 				assertThat("Check from self", line[3], containsString("from=\"Sun, 13 Oct 1996 14:56:50 GMT\""));
 				existSelf = true;
 			} else if (lines[i].contains("rel=\"timegate\"")) {
 				assertThat("Check url timegate", line[0],
-						containsString("<" + this.testURL + "/wayback/http://www.fccn.pt>"));
+						containsString("<" + this.testURL + "/noFrame/replay/http://www.fccn.pt>"));
 				assertThat("Check rel timegate", line[1], containsString("rel=\"timegate\""));
 				existTimegate = true;
 			} else if (lines[i].contains("rel=\"original\"")) {
@@ -83,7 +83,7 @@ public class TimemapTest extends AppendableErrorsBaseTest {
 				assertThat("Check first datetime memento", line[2], containsString("datetime=\""));
 				if (lines[i].contains("19961013145650mp_")) {
 					assertThat("Check first url memento", line[0].replace(":80", ""),
-							containsString("<" + this.testURL + "/wayback/19961013145650mp_/http://www.fccn.pt/>"));
+							containsString("<" + this.testURL + "/noFrame/replay/19961013145650mp_/http://www.fccn.pt/>"));
 					assertThat("Check first datetime memento", line[2],
 							containsString("datetime=\"Sun, 13 Oct 1996 14:56:50 GMT\""));
 				}
