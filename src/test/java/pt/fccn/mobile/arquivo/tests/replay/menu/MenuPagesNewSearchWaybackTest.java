@@ -9,7 +9,7 @@ import pt.fccn.arquivo.selenium.Retry;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class MenuPagesNewSearchWaybackTest extends MenuWaybackTest {
@@ -26,12 +26,14 @@ public class MenuPagesNewSearchWaybackTest extends MenuWaybackTest {
 	public void menuPagesNewSearchWaybackTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
-		openMenu();
+		run("Click about button",
+				() -> waitUntilElementIsVisibleAndGet(By.id("nav-menu-button-left")).click());
 
-		run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("pagesMenu")).click());
+		run("Open pages sub menu", 
+				() -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
 
 		run("Click new search button",
-				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pageOptions\"]/a/h4")).click());
+				() ->  waitUntilElementIsVisibleAndGet(By.id("menu-pages-new-search")).click());
 
 		appendError("Check if current url is the page search",
 				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/search?")));

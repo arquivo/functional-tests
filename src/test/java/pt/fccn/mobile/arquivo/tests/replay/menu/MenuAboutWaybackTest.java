@@ -10,7 +10,7 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class MenuAboutWaybackTest extends MenuWaybackTest {
@@ -39,10 +39,14 @@ public class MenuAboutWaybackTest extends MenuWaybackTest {
 	}
 
 	private void menuAbout(String expectedUrl) {
-		openMenu();
+		
+		System.out.println("Current url: " + driver.getCurrentUrl());
 
 		run("Click about button",
-				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"swiperWrapper\"]/div[1]/a[2]/h4")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"nav-menu-button-left\"]")).click());
+
+		run("Click about button",
+				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"menu-about\"]")).click());
 
 		appendError("Check if current url is the about page",
 				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(expectedUrl)));

@@ -14,7 +14,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class ReplayListVersionsTest extends WebDriverTestBaseParalell {
@@ -31,20 +31,24 @@ public class ReplayListVersionsTest extends WebDriverTestBaseParalell {
 	public void replayListVersionsTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
-		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
+		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("nav-options-right-button")).click());
+
+		//run("Get list versions button", () -> waitUntilElementIsVisibleAndGet(By.id("menuListVersions")).click());
 
 		WebElement anchor = run("Get list versions button",
-				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"swiperWrapper\"]/div[3]/a[1]")));
+				() -> waitUntilElementIsVisibleAndGet(By.id("menuListVersions")));
 
-		String expectedUrlSuffix = "/page/search?l=pt&query=http%3A%2F%2Fwww.fccn.pt%2F";
+		String expectedUrlHref = this.testURL + "/page/search?q=http://www.fccn.pt/";
 		
 		run("Check list version button to correct page",
-				() -> assertThat(anchor.getAttribute("href"), endsWith(expectedUrlSuffix)));
+				() -> assertThat(anchor.getAttribute("href"), endsWith(expectedUrlHref)));
 
 		run("Click list versions anchor", () -> anchor.click());
 
+		String expectedUrl = this.testURL + "/url/search?q=http%3A%2F%2Fwww.fccn.pt%2F&from=19910806&to=20211117&adv_and=http%3A%2F%2Fwww.fccn.pt%2F";
+
 		run("Check url is on list versions",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(expectedUrlSuffix)));
+				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(expectedUrl)));
 	}
 
 }

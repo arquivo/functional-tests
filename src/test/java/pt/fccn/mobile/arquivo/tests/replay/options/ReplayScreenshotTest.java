@@ -10,7 +10,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class ReplayScreenshotTest extends WebDriverTestBaseParalell {
@@ -27,23 +27,23 @@ public class ReplayScreenshotTest extends WebDriverTestBaseParalell {
 	public void replayScreenshotTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
-		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
+		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("nav-options-right-button")).click());
 
-		run("Click screenshot link", () -> waitUntilElementIsVisibleAndGet(By.id("screenshotOption")).click());
+		run("Click screenshot page link", () -> waitUntilElementIsVisibleAndGet(By.id("menuScreenshot")).click());
 
-		run("Cancel take screenshot", () -> waitUntilElementIsVisibleAndGet(By.id("cancelPopup")).click());
+		run("Cancel take screenshot", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"screenshot\"]/ul/li[3]/button")).click());
 
 		appendError("Check save page as image modal is closed", () -> new WebDriverWait(driver, 20)
-				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("uglipop_popbox"))));
+				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("screenshot"))));
 
-		run("Click again on screenshot link", () -> waitUntilElementIsVisibleAndGet(By.id("screenshotOption")).click());
+		run("Click again on screenshot link", () -> waitUntilElementIsVisibleAndGet(By.id("menuScreenshot")).click());
 
-		run("Take screenshot", () -> waitUntilElementIsVisibleAndGet(By.id("takeScreenshot")).click());
+		run("Take screenshot", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"screenshot\"]/ul/li[2]/button")).click());
 
-		run("Close replay menu ", () -> waitUntilElementIsVisibleAndGet(By.id("closeSpecPopUp")).click());
+		run("Close replay menu ", () -> waitUntilElementIsVisibleAndGet(By.id("right-nav-close-button")).click());
 
 		run("Wait until Arquivo.pt logo is again displayed",
-				() -> waitUntilElementIsVisibleAndGet(By.id("arquivoLogo")));
+				() -> waitUntilElementIsVisibleAndGet(By.id("logo-arquivo")));
 	}
 
 }

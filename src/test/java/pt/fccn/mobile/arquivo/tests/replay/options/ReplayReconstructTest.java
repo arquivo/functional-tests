@@ -10,7 +10,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class ReplayReconstructTest extends WebDriverTestBaseParalell {
@@ -28,33 +28,18 @@ public class ReplayReconstructTest extends WebDriverTestBaseParalell {
 	public void replayReconstructTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
-		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
+		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("nav-options-right-button")).click());
 
-		run("Click reconstruct link", () -> {
-			By reconstructBy = By.id("a_reconstruct");
-			driver.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(reconstructBy));
-			waitUntilElementIsVisibleAndGet(reconstructBy).click();
-		});
+		run("Click complete page link", () -> waitUntilElementIsVisibleAndGet(By.id("menuCompleteThePage")).click());
 
-		// the reconstruct button goes to timetravel only on production mode
-		if (isProduction()) {
-			run("Click cancel reconstruct", () -> waitUntilElementIsVisibleAndGet(By.id("cancelPopup")).click());
+		run("Click cancel complete page", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"complete-the-page\"]/ul/li[3]/button")).click());
 
-			run("Check if cancel button really closes confirm reconstruct modal box", () -> {
-				new WebDriverWait(driver, 20)
-						.until(ExpectedConditions.invisibilityOfElementLocated(By.id("cancelPopup")));
-				new WebDriverWait(driver, 20)
-						.until(ExpectedConditions.invisibilityOfElementLocated(By.id("uglipop_popbox")));
-			});
+		appendError("Check complete page confirm page is closed", () -> new WebDriverWait(driver, 20)
+				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("complete-the-page"))));
 
-			run("Click again on reconstruct link",
-					() -> waitUntilElementIsVisibleAndGet(By.id("a_reconstruct")).click());
+		run("Click complete page link", () -> waitUntilElementIsVisibleAndGet(By.id("menuCompleteThePage")).click());
 
-			run("Confirm go to reconstruct page", () -> waitUntilElementIsVisibleAndGet(By.id("completePage")).click());
-		}
-
-//		run("Check on memento timetravel page",
-//				() -> new WebDriverWait(driver, 200).until(urlToBe(MEMENTO_TIMETRAVEL)));
+		run("Click cancel complete page", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"complete-the-page\"]/ul/li[2]/button")).click());
 	}
 
 }

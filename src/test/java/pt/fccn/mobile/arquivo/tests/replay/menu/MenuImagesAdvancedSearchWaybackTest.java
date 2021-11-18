@@ -9,7 +9,7 @@ import pt.fccn.arquivo.selenium.Retry;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class MenuImagesAdvancedSearchWaybackTest extends MenuWaybackTest {
@@ -26,12 +26,14 @@ public class MenuImagesAdvancedSearchWaybackTest extends MenuWaybackTest {
 	public void menuImagesAdvancedSearchWaybackTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
-		openMenu();
+		run("Click about button",
+				() -> waitUntilElementIsVisibleAndGet(By.id("nav-menu-button-left")).click());
 
-		run("Open images sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("imagesMenu")).click());
+		run("Open images sub menu", 
+				() -> waitUntilElementIsVisibleAndGet(By.id("menu-images")).click());
 
 		run("Click new search button",
-				() -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"imageOptions\"]/a[2]/h4")).click());
+				() ->  waitUntilElementIsVisibleAndGet(By.id("menu-images-advanced-search")).click());
 
 		appendError("Check if current url is the image search",
 				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/image/advanced/search?")));

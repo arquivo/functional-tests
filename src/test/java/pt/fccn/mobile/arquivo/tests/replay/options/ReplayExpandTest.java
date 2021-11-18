@@ -10,7 +10,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class ReplayExpandTest extends WebDriverTestBaseParalell {
@@ -30,20 +30,14 @@ public class ReplayExpandTest extends WebDriverTestBaseParalell {
 	public void replayExpandTest() throws InterruptedException {
 		driver.get(this.testURL + WAYBACK_PATH);
 
-		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
+		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("nav-options-right-button")).click());
 
-		run("Click expand link", () -> waitUntilElementIsVisibleAndGet(By.id("expandPage")).click());
+		run("Click expand link", () -> waitUntilElementIsVisibleAndGet(By.id("menuFullScreen")).click());
 
 		// or url contains wayback site (specific for android driver) or the correct
 		// full no frame url
 		run("Check we go to correct no frame url", () -> new WebDriverWait(driver, 20).until(ExpectedConditions
 				.or(ExpectedConditions.urlContains(WAYBACK_SITE), ExpectedConditions.urlContains(NOFRAME_EXAMPLE))));
-
-		run("Check we go to correct no frame text", () -> {
-			new WebDriverWait(driver, 20).until(
-					ExpectedConditions.textToBePresentInElementLocated(By.xpath("/html/body/center/h2"), "Nacional"));
-		});
-
 	}
 
 }
