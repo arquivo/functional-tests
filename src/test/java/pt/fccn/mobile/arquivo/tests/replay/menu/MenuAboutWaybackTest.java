@@ -7,13 +7,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class MenuAboutWaybackTest extends MenuWaybackTest {
+public class MenuAboutWaybackTest extends WebDriverTestBaseParalell {
 
 	public MenuAboutWaybackTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

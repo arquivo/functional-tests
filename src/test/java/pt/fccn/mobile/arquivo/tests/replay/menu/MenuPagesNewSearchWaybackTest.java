@@ -6,13 +6,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class MenuPagesNewSearchWaybackTest extends MenuWaybackTest {
+public class MenuPagesNewSearchWaybackTest extends WebDriverTestBaseParalell {
 
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
