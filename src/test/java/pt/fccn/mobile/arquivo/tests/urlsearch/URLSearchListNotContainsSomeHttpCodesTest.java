@@ -91,8 +91,8 @@ public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBase
             driver.findElement(By.id("replay-list-button")).getText(), containsString(listText.apply(locale)));
 
         run("Change to list mode if not in it", () -> {
-            WebElement resultsGridCurrentType = driver.findElementByXPath("//*[@id=\"replay-list\"]/input[5]");
-            if (!resultsGridCurrentType.getAttribute("value").contains("list")) {
+            WebElement resultsGridCurrentType = driver.findElementById("replay-list-button");
+            if (resultsGridCurrentType.getAttribute("disabled") == null) {
                 driver.findElementById("replay-list-button").click();
             }
         });
