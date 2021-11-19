@@ -1,29 +1,23 @@
 package pt.fccn.mobile.arquivo.tests.replay;
 
-import java.io.InputStreamReader;
-import java.util.Arrays;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertEquals;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
-import pt.fccn.arquivo.tests.util.ReplayUtils;
+
 
 /**
  *
- * @author Ivo Branco <ivo.branco@fccn.pt>
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 public class ReplayTest extends WebDriverTestBaseParalell {
-
-	private static final String WAYBACK_PATH = "/wayback";
 
 	public ReplayTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
 		super(os, version, browser, deviceName, deviceOrientation);
@@ -33,84 +27,58 @@ public class ReplayTest extends WebDriverTestBaseParalell {
 	@Retry
 	public void replayTest() throws Exception {
 
-		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-		ReplayTestConfigYAMLFile configsy = mapper.readValue(
-				new InputStreamReader(ClassLoader.getSystemResourceAsStream("replay_test_config.yml")),
-				ReplayTestConfigYAMLFile.class);
+		//Check FCCN Replay Page
+		driver.get(this.testURL + "/wayback/19961013145650/http://www.fccn.pt/");
 
-		Arrays.asList(configsy.getConfigs()).forEach(config -> {
+		driver.switchTo().frame("replay-in-iframe");
+			
+		driver.switchTo().frame("replay_iframe");
 
-			String url = config.getWaybackUrl();
-			System.out.println(String.format("Begin checking url: %s with full configuration as: %s", url,
-					ReflectionToStringBuilder.toString(config, ToStringStyle.MULTI_LINE_STYLE)));
+		assertThat("Verify if the term RCCN is displayed on the FCCN web page",
+				driver.findElement(By.xpath("/html/body/blockquote[1]/h1/a")).getText().toLowerCase(), containsString("rccn"));
 
-			// go to replay url
-			driver.get(this.testURL + config.getWaybackUrl());
+		//Check FCCN Replay Page
+		driver.get(this.testURL + "/wayback/19961013171554/http://www.fccn.pt/index_i.html");
 
-			appendError("Check wayback page url",
-					() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(config.getWaybackUrl())));
+		driver.switchTo().frame("replay-in-iframe");
+			
+		driver.switchTo().frame("replay_iframe");
 
-			run("Check some text on wayback page",
-					() -> ReplayUtils.checkTextOnReplayPage(driver, config.getXpath(), config.getText()));
+		assertThat("Verify if the term Portuguese is displayed on the FCCN web page",
+		
+		driver.findElement(By.xpath("/html/body/b[1]")).getText().toLowerCase(), containsString("portuguese"));
 
-			System.out.println(String.format("End checking url: %s", url));
+		//Check Uminho Replay Page
 
-		});
-	}
+		driver.get(this.testURL + "/wayback/19961013145852/http://s700.uminho.pt:80/homepage-pt.html");
 
-	public static class ReplayTestConfigYAMLFile {
-		ReplayTestConfig[] configs;
+		driver.switchTo().frame("replay-in-iframe");
+			
+		driver.switchTo().frame("replay_iframe");
 
-		public ReplayTestConfig[] getConfigs() {
-			return configs;
-		}
+		assertThat("Verify if the term Portugal is displayed on the Uminho web page",
+				driver.findElement(By.xpath("/html/body/center[1]/h1")).getText().toLowerCase(), containsString("portugal"));
 
-		public void setConfigs(ReplayTestConfig[] configs) {
-			this.configs = configs;
-		}
+		//Check ISCT Replay Page
+		driver.get(this.testURL + "/wayback/19961013202814/http://www.iscte.pt/");
 
-	}
+		driver.switchTo().frame("replay-in-iframe");
+			
+		driver.switchTo().frame("replay_iframe");
 
-	public static class ReplayTestConfig {
-		private String timestamp;
-		private String url;
-		private String xpath;
-		private String text;
+		assertThat("Verify if the term ISCTE is displayed on the ISCTE web page",
+				driver.findElement(By.xpath("/html/body/center[2]/table/tbody/tr/td[1]/h1/center")).getText().toLowerCase(), containsString("iscte"));
 
-		public String getTimestamp() {
-			return timestamp;
-		}
+		//Check IST Replay Page
 
-		public void setTimestamp(String timestamp) {
-			this.timestamp = timestamp;
-		}
+		driver.get(this.testURL + "/wayback/19961013171626/http://www.ist.utl.pt/");
 
-		public String getUrl() {
-			return url;
-		}
+		driver.switchTo().frame("replay-in-iframe");
+			
+		driver.switchTo().frame("replay_iframe");
 
-		public void setUrl(String url) {
-			this.url = url;
-		}
+		assertThat("Verify if the term IST is displayed on the IST web page",
+				driver.findElement(By.xpath("/html/body/p[1]/b")).getText().toLowerCase(), containsString("ist"));
 
-		public String getXpath() {
-			return xpath;
-		}
-
-		public void setXpath(String xpath) {
-			this.xpath = xpath;
-		}
-
-		public String getText() {
-			return text;
-		}
-
-		public void setText(String text) {
-			this.text = text;
-		}
-
-		public String getWaybackUrl() {
-			return WAYBACK_PATH + "/" + getTimestamp() + "/" + getUrl();
-		}
 	}
 }
