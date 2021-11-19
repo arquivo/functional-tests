@@ -45,7 +45,7 @@ public class ReplayListVersionsTest extends WebDriverTestBaseParalell {
 
 		run("Click list versions anchor", () -> anchor.click());
 
-		String expectedUrl = this.testURL + "/url/search?q=http%3A%2F%2Fwww.fccn.pt%2F&from=19910806&to=20211117&adv_and=http%3A%2F%2Fwww.fccn.pt%2F";
+		String expectedUrl = this.testURL + "/url/search?q=http%3A%2F%2Fwww.fccn.pt%2F&from=19910806";
 
 		run("Check url is on list versions",
 				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(expectedUrl)));
