@@ -15,7 +15,7 @@ Generate eclipse .project and .classpath files, similar for idea.
 Execute the tests
 
 ```bash
- mvn clean verify -Dit.test=pt.fccn.arquivo.tests.AllTests -Dtest.url=https://preprod.arquivo.pt -Dremote.saucelabs.user=xxxx -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Dtest.resolution=1280x1024
+ mvn clean verify -Dit.test=pt.fccn.arquivo.tests.AllTests -Dtest.url=https://preprod.arquivo.pt -Dremote.saucelabs.user=xxxx -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Dtest.resolution=1280x1024 -Djava.locale.providers=COMPAT,SPI
 ```
 
 To debug tests add the argument:
@@ -62,7 +62,7 @@ docker-compose up
 And another run your tests like:
 
 ```bash
-mvn clean verify -Dbrowsers=desktop-linux -Dit.test=pt.fccn.arquivo.tests.imagesearch.ImageSearchTest -Dtest.url=https://arquivo.pt
+mvn clean verify -Dbrowsers=desktop-linux -Dit.test=pt.fccn.arquivo.tests.imagesearch.ImageSearchTest -Dtest.url=https://arquivo.pt -Djava.locale.providers=COMPAT,SPI
 ```
 
 More information on:
