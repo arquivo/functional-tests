@@ -4,14 +4,20 @@ import java.time.LocalDate;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 import pt.fccn.mobile.arquivo.utils.IonicDatePicker;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * 
- * @author pedro.gomes.fccn@gmail.com
+ * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
 
@@ -26,58 +32,83 @@ public class WorkflowStateBetweenSearchPageAndImageTest extends WebDriverTestBas
 	@Retry
 	public void stateBetweenSearchPageAndImageTest() throws Exception {
 		run("Search FCCN term", () -> {
-			driver.findElement(By.id("txtSearch")).clear();
-			driver.findElement(By.id("txtSearch")).sendKeys("fccn");
-			driver.findElement(By.xpath("//*[@id=\"buttonSearch\"]/button")).click();
+			driver.findElement(By.id("submit-search-input")).clear();
+			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
+			driver.findElement(By.id("submit-search")).click();
 		});
 
-		run("Open from date picker", () -> waitUntilElementIsVisibleAndGet(By.id("sliderCircleStart")).click());
-		LocalDate fromDate = LocalDate.of(1997, 5, 20);
-		run("Insert " + fromDate.toString() + " on start date picker",
-				() -> IonicDatePicker.changeTo(driver, fromDate));
+		Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
+        String platform = capabilities.getPlatform().name();
+		
+		run("Open start date picker", () -> driver.findElement(By.id("date-container-start")).click());
 
-		run("Open until date picker", () -> waitUntilElementIsVisibleAndGet(By.id("sliderCircleEnd")).click());
-		LocalDate untilDate = LocalDate.of(2014, 1, 1);
-		run("Insert " + untilDate.toString() + " on end date picker",
-				() -> IonicDatePicker.changeTo(driver, untilDate));
+		run("Insert 20/06/1997 on start date picker", () -> {
+            if (platform == "LINUX" || platform == "WINDOWS")
+                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("20/06/1997");
+            else
+                System.out.println("TODO: Android test");
+        });
 
-		run("Click Image Button", () -> {
-			driver.findElement(By.xpath("//*[@id=\"ImageButton\"]")).click();
-		});
+        run("Click OK", () -> {
+            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
+        });
 
-		appendError("Check if fccn is in search box on second page",
-				() -> driver.findElement(By.xpath("//*[@value=\"fccn\"]")));
+        run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
 
-		appendError("Check if sliderLeft is the same on second page", () -> {
-			driver.findElement(By.xpath("//*[@id=\"calendarDayStart\"][contains(text(),'20')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarMonthStart\"][contains(text(),'Mai')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarYearStart\"][contains(text(),'1997')]"));
-		});
+        run("Insert 1/1/2014 on end date picker", () -> {
+            if (platform == "LINUX" || platform == "WINDOWS")
+                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("01/01/2014");
+            else
+                System.out.println("TODO: Android test");
+        });
 
-		appendError("Check if sliderRigth is the same on second page", () -> {
-			driver.findElement(By.xpath("//*[@id=\"calendarDayEnd\"][contains(text(),'1')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarMonthEnd\"][contains(text(),'Jan')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarYearEnd\"][contains(text(),'2014')]"));
-		});
+        run("Click OK", () -> {
+            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
+        });
 
-		run("Click Page Button", () -> {
-			driver.findElement(By.xpath("//*[@id=\"PageButton\"]")).click();
-		});
+		run("Click on Image search button", () -> driver.findElement(By.id("search-form-images")).click());
 
-		appendError("Check if fccn is in search box on first page",
-				() -> driver.findElement(By.xpath("//*[@value=\"fccn\"]")));
+		waitUntilElementIsVisibleAndGet(By.id("images-results"));
 
-		appendError("Check if sliderLeft is the same on first page", () -> {
-			driver.findElement(By.xpath("//*[@id=\"calendarDayStart\"][contains(text(),'20')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarMonthStart\"][contains(text(),'Mai')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarYearStart\"][contains(text(),'1997')]"));
-		});
+		appendError(() -> assertEquals("Check if fccn is in search box on image search", "fccn",
+				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
 
-		appendError("Check if sliderRigth is the same on first page", () -> {
-			driver.findElement(By.xpath("//*[@id=\"calendarDayEnd\"][contains(text(),'1')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarMonthEnd\"][contains(text(),'Jan')]"));
-			driver.findElement(By.xpath("//*[@id=\"calendarYearEnd\"][contains(text(),'2014')]"));
-		});
+		System.out.println("Current url: " + driver.getCurrentUrl());
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "1997",
+				driver.findElement(By.id("start-year")).getAttribute("value").trim()));
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "20 Jun",
+				driver.findElement(By.id("start-day-month")).getAttribute("value").trim()));
+
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "2014",
+				driver.findElement(By.id("end-year")).getAttribute("value").trim()));
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "1 Jan",
+				driver.findElement(By.id("end-day-month")).getAttribute("value").trim()));
+
+		run("Click on Page search button", () -> driver.findElement(By.id("search-form-pages")).click());
+
+		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
+
+		appendError(() -> assertEquals("Check if fccn is in search box on image search", "fccn",
+				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
+
+		System.out.println("Current url: " + driver.getCurrentUrl());
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "1997",
+				driver.findElement(By.id("start-year")).getAttribute("value").trim()));
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "20 Jun",
+				driver.findElement(By.id("start-day-month")).getAttribute("value").trim()));
+
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "2014",
+				driver.findElement(By.id("end-year")).getAttribute("value").trim()));
+
+		appendError(() -> assertEquals("Check if 1977 is in the year left datepicker", "1 Jan",
+				driver.findElement(By.id("end-day-month")).getAttribute("value").trim()));
 	}
 
 }
