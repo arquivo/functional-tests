@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -55,27 +56,39 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
         String platform = capabilities.getPlatform().name();
 
         run("Insert 31 may 2010 on start date picker", () -> {
-            if (platform == "LINUX" || platform == "WINDOWS")
-                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("31/05/2010");
-            else
+            // FF reports ANY
+            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
+                driver.findElement(By.id("modal-datepicker-input")).sendKeys("31/05/2010");
+            } else {
                 System.out.println("TODO: Android test");
+            }
         });
 
         run("Click OK", () -> {
-            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
+            if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
+                driver.findElementById("modal-datepicker-confirm-button").click();
+            } else {
+                // FF hack W3C saucelabs hack, we are still using legacy code
+                driver.findElementById("modal-datepicker-confirm-button").sendKeys(Keys.ENTER);
+            }
         });
 
         run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
 
         run("Insert 1 jan 2012 on end date picker", () -> {
-            if (platform == "LINUX" || platform == "WINDOWS")
-                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("01/01/2012");
-            else
+            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
+                driver.findElement(By.id("modal-datepicker-input")).sendKeys("01/01/2012");
+            } else {
                 System.out.println("TODO: Android test");
+            }
         });
 
         run("Click OK", () -> {
-            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
+            if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
+                driver.findElementById("modal-datepicker-confirm-button").click();
+            } else {
+                driver.findElementById("modal-datepicker-confirm-button").sendKeys(Keys.ENTER);
+            }
         });
 
         appendError("Open select size (images)", () -> driver.findElement(By.id("image-size")).click());
@@ -108,7 +121,7 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
             "https://arquivo.pt/wayback/20110120225358im_/http://fccn.pt/images/announce/modulo_moodle_04109.jpg",
             driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[2]/a/img")).getAttribute("src")));
 
-        appendError(() -> assertEquals("After advanced search check search term contains", "fccn site:fccn.pt size:sm type:png safe:on",
+        appendError(() -> assertEquals("After advanced search check search term contains", "fccn site:fccn.pt size:sm type:png",
             driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
 
         System.out.println("Current url: " + driver.getCurrentUrl());
