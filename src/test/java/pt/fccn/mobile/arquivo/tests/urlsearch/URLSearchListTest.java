@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.text.MessageFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -76,6 +75,7 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
 
         run("Verify month", () -> {
             String monthContent = driver.findElement(By.id("list-results-month-1996-10")).getText();
+            System.out.println("Month content: " + monthContent);
             String monthVersionLocal = new LocalizedString().pt("1 versão").en("1 version").apply(locale);
             String monthLocal = new LocalizedString().pt("Outubro").en("October").apply(locale);
             assertThat("Verify month version", monthContent, containsString(monthVersionLocal));
