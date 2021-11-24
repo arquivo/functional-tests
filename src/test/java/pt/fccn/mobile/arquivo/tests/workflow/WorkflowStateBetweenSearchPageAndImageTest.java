@@ -47,11 +47,7 @@ public class WorkflowStateBetweenSearchPageAndImageTest extends WebDriverTestBas
         });
 
         run("Click OK", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
-                driver.findElementById("modal-datepicker-confirm-button").click();
-            } else {
-                driver.findElementById("modal-datepicker-confirm-button").sendKeys(Keys.ENTER);
-            }
+            driver.findElementById("modal-datepicker-confirm-button").click();
         });
 
         run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
@@ -65,11 +61,7 @@ public class WorkflowStateBetweenSearchPageAndImageTest extends WebDriverTestBas
         });
 
         run("Click OK", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
-                driver.findElementById("modal-datepicker-confirm-button").click();
-            } else {
-                driver.findElementById("modal-datepicker-confirm-button").sendKeys(Keys.ENTER);
-            }
+            driver.findElementById("modal-datepicker-confirm-button").click();
         });
 
         run("Click on Image search button", () -> driver.findElement(By.id("search-form-images")).click());
