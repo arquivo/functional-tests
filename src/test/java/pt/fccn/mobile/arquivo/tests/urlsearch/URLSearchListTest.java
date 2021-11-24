@@ -93,21 +93,21 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
         });
 
         appendError("Verify specific timestamp", () -> {
-            String timestamp = "19961013145650";
             System.out.println("Current url: " + driver.getCurrentUrl());
+            String timestamp = "19961013145650";
             WebElement dayWE = waitUntilElementIsVisibleAndGet(By.id("list-results-timestamp-" + timestamp));
-            System.out.println("List results value: " + dayWE.getText());
+            //System.out.println("List results value: " + dayWE.getText());
 
-            System.out.println("Locale value: " + locale.toString());
+            //System.out.println("Locale value: " + locale.toString());
             MessageFormat messageFormat = new MessageFormat("{0,date,d} {0,date,MMMM} {0,time,HH}h{0,time,mm}, {0,time,yyyy}", locale);
-            System.out.println("Message format: " + messageFormat.toPattern());
+            //System.out.println("Message format: " + messageFormat.toPattern());
             Object[] dates = {DateUtils.asDateFromTimestamp(timestamp)};
-            for (Object date: dates) {
+            /*for (Object date: dates) {
                 System.out.println(date.toString());
-            }
-            System.out.println("Message format locate: " + messageFormat.getLocale());
+            }*/
+            //System.out.println("Message format locate: " + messageFormat.getLocale());
             String expected = messageFormat.format(dates, new StringBuffer(), null).toString();
-            System.out.println("Expected list results value: " + expected);
+            //System.out.println("Expected list results value: " + expected);
 
             assertEquals(expected, dayWE.getText());
 
