@@ -100,9 +100,12 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
 
             System.out.println("Locale value: " + locale.toString());
             MessageFormat messageFormat = new MessageFormat("{0,date,d} {0,date,MMMM} {0,time,HH}h{0,time,mm}, {0,time,yyyy}", locale);
-            System.out.println("Message format: " + messageFormat.toString());
-            Object[] date = {DateUtils.asDateFromTimestamp(timestamp)};
-            String expected = messageFormat.format(date, new StringBuffer(), null).toString();
+            System.out.println("Message format: " + messageFormat.toPattern());
+            Object[] dates = {DateUtils.asDateFromTimestamp(timestamp)};
+            for (Object date: dates) {
+                System.out.println(date.toString());
+            }
+            String expected = messageFormat.format(dates, new StringBuffer(), null).toString();
             System.out.println("Expected list results value: " + expected);
 
             assertEquals(expected, dayWE.getText());
@@ -114,6 +117,7 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
 
     public static void main(String[] args) {
         MessageFormat messageFormat = new MessageFormat("{0,date,d} {0,date,MMMM} {0,time,HH}h{0,time,mm}, {0,time,yyyy}");
+        System.out.println(messageFormat.toPattern());
         System.out.println(DateUtils.asDateFromTimestamp("19961013145650"));
         Object[] dates = {DateUtils.asDateFromTimestamp("19961013145650")};
         String expected = messageFormat.format(dates, new StringBuffer(), null).toString();
