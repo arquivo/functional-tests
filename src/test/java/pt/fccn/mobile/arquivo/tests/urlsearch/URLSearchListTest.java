@@ -98,6 +98,7 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
             WebElement dayWE = waitUntilElementIsVisibleAndGet(By.id("list-results-timestamp-" + timestamp));
             System.out.println("List results value: " + dayWE.getText());
 
+            System.out.println("Locale value: " + locale.toString());
             MessageFormat messageFormat = new MessageFormat("{0,date,d} {0,date,MMMM} {0,time,HH}h{0,time,mm}, {0,time,yyyy}", locale);
             Object[] date = {DateUtils.asDateFromTimestamp(timestamp)};
             String expected = messageFormat.format(date, new StringBuffer(), null).toString();
