@@ -33,6 +33,8 @@ public class LocaleUtils {
 	}
 
 	private static void changeLanguageTo(WebDriverTestBaseParalell test, String language) {
+		System.out.println(test.getTestURL());
+		System.out.println(test.getTestURL() + "?" + "l=" + language);
 		test.getDriver().get(test.getTestURL() + "?" + "l=" + language);
 	}
 
