@@ -75,7 +75,6 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
 
         run("Verify month", () -> {
             String monthContent = driver.findElement(By.id("list-results-month-1996-10")).getText();
-            System.out.println("Month content: " + monthContent);
             String monthVersionLocal = new LocalizedString().pt("1 versão").en("1 version").apply(locale);
             String monthLocal = new LocalizedString().pt("Outubro").en("October").apply(locale);
             assertThat("Verify month version", monthContent, containsString(monthVersionLocal));
@@ -95,11 +94,14 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
 
         appendError("Verify specific timestamp", () -> {
             String timestamp = "19961013145650";
+            System.out.println("Current url: " + driver.getCurrentUrl());
             WebElement dayWE = waitUntilElementIsVisibleAndGet(By.id("list-results-timestamp-" + timestamp));
+            System.out.println("List results value: " + dayWE.getText());
 
             MessageFormat messageFormat = new MessageFormat("{0,date,d} {0,date,MMMM} {0,time,HH}h{0,time,mm}, {0,time,yyyy}", locale);
             Object[] date = {DateUtils.asDateFromTimestamp(timestamp)};
             String expected = messageFormat.format(date, new StringBuffer(), null).toString();
+            System.out.println("Expected list results value: " + expected);
 
             assertEquals(expected, dayWE.getText());
 
