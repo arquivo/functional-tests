@@ -29,7 +29,7 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
     }
 
     @Test
-    // @Retry
+    @Retry
     public void testImageAdvancedSearchPage() throws Exception {
 
         run("Search FCCN term", () -> {
