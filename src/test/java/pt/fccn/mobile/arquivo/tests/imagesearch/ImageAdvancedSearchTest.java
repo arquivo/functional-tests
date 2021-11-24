@@ -65,12 +65,12 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
         });
 
         run("Click OK", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
+            //if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
                 driver.findElementById("modal-datepicker-confirm-button").click();
-            } else {
+            /*} else {
                 // FF hack W3C saucelabs hack, we are still using legacy code
                 driver.findElementById("modal-datepicker-confirm-button").sendKeys(Keys.ENTER);
-            }
+            }*/
         });
 
         run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
@@ -84,11 +84,11 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
         });
 
         run("Click OK", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
+            //if (platform.equals("LINUX") || platform.equals("WINDOWS")) {
                 driver.findElementById("modal-datepicker-confirm-button").click();
-            } else {
+            /*} else {
                 driver.findElementById("modal-datepicker-confirm-button").sendKeys(Keys.ENTER);
-            }
+            }*/
         });
 
         appendError("Open select size (images)", () -> driver.findElement(By.id("image-size")).click());
