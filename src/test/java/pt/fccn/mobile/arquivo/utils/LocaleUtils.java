@@ -13,7 +13,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
 public class LocaleUtils {
 
 	public static Locale ENGLISH = Locale.ENGLISH;
-	public static Locale PORTUGUESE = Locale.forLanguageTag("pt");
+	public static Locale PORTUGUESE = Locale.forLanguageTag("pt-PT");
 
 	private static final String EN_LANGUAGE = "en";
 	private static final String PT_LANGUAGE = "pt";
