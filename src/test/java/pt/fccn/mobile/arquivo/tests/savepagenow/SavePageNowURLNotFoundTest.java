@@ -40,10 +40,10 @@ public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParalell {
         });
 
         appendError(() -> assertEquals("Verify text from Save Page Now", "Use o SavePageNow para gravar a página em falta",
-            driver.findElement(By.id("//*[@id=\"not-found-message\"]/ul/li[5]")).getText()));
+            driver.findElement(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]")).getText()));
 
         run("Wait for results not found", () -> {
-            driver.findElement(By.id("//*[@id=\"not-found-message\"]/ul/li[5]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]/a")).click();
         });
 
         appendError(() -> assertEquals("Check if fccn is in search box on second page", query,
