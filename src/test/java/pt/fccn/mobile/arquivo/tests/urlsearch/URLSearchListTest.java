@@ -105,6 +105,7 @@ public class URLSearchListTest extends WebDriverTestBaseParalell {
             for (Object date: dates) {
                 System.out.println(date.toString());
             }
+            System.out.println("Message format locate: " + messageFormat.getLocale());
             String expected = messageFormat.format(dates, new StringBuffer(), null).toString();
             System.out.println("Expected list results value: " + expected);
 
