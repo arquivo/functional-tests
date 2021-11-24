@@ -57,9 +57,9 @@ public class DatePicker {
             driver.findElement(By.id("modal-datepicker-input")).sendKeys(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } else {
             new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ap-cont")));
-            DatePicker.mobileDatepickerChangeDayTo(driver,date.getDayOfMonth());
-            DatePicker.mobileDatepickerChangeMonthTo(driver,date.getMonth().ordinal());
             DatePicker.mobileDatepickerChangeYearTo(driver,date.getYear());
+            DatePicker.mobileDatepickerChangeMonthTo(driver,date.getMonth().ordinal());
+            DatePicker.mobileDatepickerChangeDayTo(driver,date.getDayOfMonth());
         }
 	}
 
