@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 /**
  *
@@ -33,36 +34,9 @@ public class WorkflowStateBetweenSearchPageAndImageTest extends WebDriverTestBas
             driver.findElement(By.id("submit-search")).click();
         });
 
-        Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
-        String platform = capabilities.getPlatform().name();
+        run("Set start date to 20 June 1997", () -> DatePicker.setStartDatePicker(driver, "20/06/1997"));
 
-        run("Open start date picker", () -> driver.findElement(By.id("date-container-start")).click());
-
-        run("Insert 20/06/1997 on start date picker", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
-                driver.findElementById("modal-datepicker-input").sendKeys("20/06/1997");
-            } else {
-                System.out.println("TODO: Android test");
-            }
-        });
-
-        run("Click OK", () -> {
-            driver.findElementById("modal-datepicker-confirm-button").click();
-        });
-
-        run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
-
-        run("Insert 1/1/2014 on end date picker", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
-                driver.findElementById("modal-datepicker-input").sendKeys("01/01/2014");
-            } else {
-                System.out.println("TODO: Android test");
-            }
-        });
-
-        run("Click OK", () -> {
-            driver.findElementById("modal-datepicker-confirm-button").click();
-        });
+        run("Set end date to 1 January 2014", () -> DatePicker.setEndDatePicker(driver, "01/01/2014"));
 
         run("Click on Image search button", () -> driver.findElement(By.id("search-form-images")).click());
 

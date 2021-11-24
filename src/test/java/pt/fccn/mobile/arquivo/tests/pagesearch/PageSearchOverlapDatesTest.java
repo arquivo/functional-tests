@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
-import pt.fccn.mobile.arquivo.utils.IonicDatePicker;
+import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 /**
  * 
@@ -36,49 +36,23 @@ public class PageSearchOverlapDatesTest extends WebDriverTestBaseParalell {
 			driver.findElement(By.id("submit-search")).click();
 		});
 
-		Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
-        String platform = capabilities.getPlatform().name();
-		
-		run("Open start date picker", () -> driver.findElement(By.id("date-container-start")).click());
+        run("Set start date to 20 May 1997", () -> DatePicker.setStartDatePicker(driver, "20/05/1997"));
 
-		run("Insert 20/05/1997 on start date picker", () -> {
-            if (platform == "LINUX" || platform == "WINDOWS")
-                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("20/05/1997");
-            else
-                System.out.println("TODO: Android test");
-        });
-
-        run("Click OK", () -> {
-            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
-        });
-
-		run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
-
-        run("Insert 22/08/1996 on end date picker", () -> {
-            if (platform == "LINUX" || platform == "WINDOWS")
-                waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-input")).sendKeys("22/08/1996");
-            else
-                System.out.println("TODO: Android test");
-        });
-
-        run("Click OK", () -> {
-            waitUntilElementIsVisibleAndGet(By.id("modal-datepicker-confirm-button-span")).click();
-        });
-
-        LocalDate untilDate = LocalDate.of(1996, 8, 22);
+        run("Set end date to 22 August 1996", () -> DatePicker.setEndDatePicker(driver, "22/08/1996"));
 
 		appendError(() -> {
-			assertTrue("Check if it is possible to do date overlap: ", checkDatePicker(untilDate));
+			assertTrue("Check if it is possible to do date overlap: ", checkDatePicker());
 		});
 
 	}
 
-	private boolean checkDatePicker(LocalDate untilDate) {
-		try {
-			IonicDatePicker.changeTo(driver, untilDate);
+	private boolean checkDatePicker() {
+		String start = driver.findElementById("start-date").getAttribute("value");
+		String end = driver.findElementById("end-date").getAttribute("value");
+		try{
+			return (Integer.parseInt(start) <= Integer.parseInt(end));
+		} catch (Error e){
 			return false;
-		} catch (Exception e) {
-			return true;
 		}
 	}
 

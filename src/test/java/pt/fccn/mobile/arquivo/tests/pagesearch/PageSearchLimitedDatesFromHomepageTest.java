@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
-import pt.fccn.mobile.arquivo.utils.IonicDatePicker;
+import pt.fccn.mobile.arquivo.utils.DatePicker;
 import org.openqa.selenium.Keys;
 
 /**
@@ -40,37 +40,9 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
             driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
         });
 
-        Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
-        String platform = capabilities.getPlatform().name();
+        run("Set start date to 12 October 1996", () -> DatePicker.setStartDatePicker(driver, "12/10/1996"));
 
-        run("Open start date picker", () -> driver.findElement(By.id("date-container-start")).click());
-
-        run("Insert 12/10/1996 on start date picker", () -> {
-            // FF reports ANY
-            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
-                driver.findElement(By.id("modal-datepicker-input")).sendKeys("12/10/1996");
-            } else {
-                System.out.println("TODO: Android test");
-            }
-        });
-
-        run("Click OK", () -> {
-            driver.findElementById("modal-datepicker-confirm-button").click();
-        });
-
-        run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
-
-        run("Insert 01/01/1997 on end date picker", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
-                driver.findElement(By.id("modal-datepicker-input")).sendKeys("01/01/1997");
-            } else {
-                System.out.println("TODO: Android test");
-            }
-        });
-
-        run("Click OK", () -> {
-            driver.findElementById("modal-datepicker-confirm-button").click();
-        });
+        run("Set end date to 1 January 1997", () -> DatePicker.setEndDatePicker(driver, "01/01/1997"));
 
         run("Click on search button", () -> driver.findElement(By.id("submit-search")).click());
 

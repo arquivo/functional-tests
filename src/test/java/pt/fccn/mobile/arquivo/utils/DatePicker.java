@@ -12,13 +12,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-/**
- * Class with utility method to deal with ionic date picker.
- *
- * @author Ivo Branco <ivo.branco@fccn.pt>
- *
- */
 public class DatePicker {
 
     private static String startId = "date-container-start";
@@ -47,7 +40,6 @@ public class DatePicker {
         Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
         String platform = capabilities.getPlatform().name();
         String userAgent = (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent;");
-        System.out.println("Platform: "+platform+" User Agent: "+userAgent);
         return ( (platform.equals("LINUX") && !userAgent.contains("Android") ) || platform.equals("WINDOWS") || platform.equals("ANY"));
     }
 
@@ -131,28 +123,22 @@ public class DatePicker {
 
     private static void moveMouseWheel(WebDriver driver, String selector, int deltaY)
     {
-        try{
-              String script = 
-                 "var selector = arguments[0];"
-                +"var deltaY = arguments[1];"
-                +"var element = document.querySelector(selector);"
-                +"var box = element.getBoundingClientRect();"
-                +"var clientX = box.left + (box.width / 2);"
-                +"var clientY = box.top + (box.height / 2);"
-                +"var target = element.ownerDocument.elementFromPoint(clientX, clientY);"
-                +"for (var e = target; e; e = e.parentElement) {"
-                +    "if (e === element) {"
-                +        "target.dispatchEvent(new MouseEvent('mouseover', {view: window, bubbles: true, cancelable: true, clientX: clientX, clientY: clientY}));"
-                +        "target.dispatchEvent(new MouseEvent('mousemove', {view: window, bubbles: true, cancelable: true, clientX: clientX, clientY: clientY}));"
-                +        "target.dispatchEvent(new WheelEvent('wheel',     {view: window, bubbles: true, cancelable: true, clientX: clientX, clientY: clientY, deltaY: deltaY}));"
-                +        "return;"
-                +    "}"
-                +"}";  
-              ((JavascriptExecutor) driver).executeScript(script, selector, deltaY);
-            }
-            catch(WebDriverException e)
-            {
-            System.out.println("Exception caught in Catch block");
-            }
+        String script = 
+            "var selector = arguments[0];"
+        +"var deltaY = arguments[1];"
+        +"var element = document.querySelector(selector);"
+        +"var box = element.getBoundingClientRect();"
+        +"var clientX = box.left + (box.width / 2);"
+        +"var clientY = box.top + (box.height / 2);"
+        +"var target = element.ownerDocument.elementFromPoint(clientX, clientY);"
+        +"for (var e = target; e; e = e.parentElement) {"
+        +    "if (e === element) {"
+        +        "target.dispatchEvent(new MouseEvent('mouseover', {view: window, bubbles: true, cancelable: true, clientX: clientX, clientY: clientY}));"
+        +        "target.dispatchEvent(new MouseEvent('mousemove', {view: window, bubbles: true, cancelable: true, clientX: clientX, clientY: clientY}));"
+        +        "target.dispatchEvent(new WheelEvent('wheel',     {view: window, bubbles: true, cancelable: true, clientX: clientX, clientY: clientY, deltaY: deltaY}));"
+        +        "return;"
+        +    "}"
+        +"}";  
+        ((JavascriptExecutor) driver).executeScript(script, selector, deltaY);
     }
 }

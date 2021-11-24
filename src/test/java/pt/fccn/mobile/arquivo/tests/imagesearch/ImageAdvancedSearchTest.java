@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 /**
  * Test the search of one term in the index interface.
@@ -28,7 +29,7 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
     }
 
     @Test
-    @Retry
+    // @Retry
     public void testImageAdvancedSearchPage() throws Exception {
 
         run("Search FCCN term", () -> {
@@ -50,37 +51,9 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
                             .getAttribute("value"));
         });
 
-        run("Open start date picker", () -> driver.findElement(By.id("start-year")).click());
+        run("Set start date to 31 may 2010", () -> DatePicker.setStartDatePicker(driver, "31/05/2010"));
 
-        Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
-        String platform = capabilities.getPlatform().name();
-
-        run("Insert 31 may 2010 on start date picker", () -> {
-            // FF reports ANY
-            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
-                driver.findElement(By.id("modal-datepicker-input")).sendKeys("31/05/2010");
-            } else {
-                System.out.println("TODO: Android test");
-            }
-        });
-
-        run("Click OK", () -> {
-            driver.findElementById("modal-datepicker-confirm-button").click();
-        });
-
-        run("Open end date picker", () -> driver.findElement(By.id("end-year")).click());
-
-        run("Insert 1 jan 2012 on end date picker", () -> {
-            if (platform.equals("LINUX") || platform.equals("WINDOWS") || platform.equals("ANY")) {
-                driver.findElement(By.id("modal-datepicker-input")).sendKeys("01/01/2012");
-            } else {
-                System.out.println("TODO: Android test");
-            }
-        });
-
-        run("Click OK", () -> {
-            driver.findElementById("modal-datepicker-confirm-button").click();
-        });
+        run("Set end date to 1 jan 2012", () -> DatePicker.setEndDatePicker(driver, "01/01/2012"));
 
         appendError("Open select size (images)", () -> driver.findElement(By.id("image-size")).click());
 

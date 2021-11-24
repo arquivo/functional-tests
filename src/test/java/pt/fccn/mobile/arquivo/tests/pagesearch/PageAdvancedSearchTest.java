@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
-import pt.fccn.mobile.arquivo.utils.IonicDatePicker;
 
 /**
  * 
