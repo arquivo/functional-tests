@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,7 +41,13 @@ public class DatePicker {
         Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
         String platform = capabilities.getPlatform().name();
         String userAgent = (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent;");
-        return ( (platform.equals("LINUX") && !userAgent.contains("Android") ) || platform.equals("WINDOWS") || platform.equals("ANY"));
+        System.out.println("Platform: " + platform + " User agent: " + userAgent);
+        return ( 
+               ( platform.equals("LINUX") && !userAgent.contains("Android") ) 
+            || platform.equals("WINDOWS") 
+            || platform.equals("ANY")
+            || ( platform.equals("MAC") && userAgent.contains("Macintosh") ) 
+            );
     }
 
 	public static void changeTo(WebDriver driver, LocalDate date) {
