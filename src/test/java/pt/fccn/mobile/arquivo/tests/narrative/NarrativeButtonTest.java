@@ -10,14 +10,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell; 
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class NarrativeButtonTest extends WebDriverTestBaseParalell {
+public class NarrativeButtonTest extends WebDriverTestBaseParallel {
 
     public NarrativeButtonTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
         super(os, version, browser, deviceName, deviceOrientation);
@@ -26,10 +26,10 @@ public class NarrativeButtonTest extends WebDriverTestBaseParalell {
     @Test
     @Retry
     public void narrativeButtonTest() {
-        
+
         run("Search fccn", () -> {
             driver.findElement(By.id("submit-search-input")).clear();
-           driver.findElement(By.id("submit-search-input")).sendKeys("fccn"); 
+           driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
         });
 
         run("Search Narrative", () -> {

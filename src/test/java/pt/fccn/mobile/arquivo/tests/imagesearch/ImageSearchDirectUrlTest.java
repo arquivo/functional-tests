@@ -13,7 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 
 /**
@@ -21,7 +21,7 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
  * @author ivo.branco@fccn.pt
  *
  */
-public class ImageSearchDirectUrlTest extends WebDriverTestBaseParalell {
+public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
 
     private static final String IMAGE_SEARCH_DIRECT_URL = "/image/search?size=all&type=&tools=off&safeSearch=on&query=fccn&btnSubmit=Search&dateStart=26%2F06%2F2007&dateEnd=27%2F06%2F2007";
 

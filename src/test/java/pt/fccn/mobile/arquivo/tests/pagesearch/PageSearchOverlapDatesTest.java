@@ -2,16 +2,11 @@ package pt.fccn.mobile.arquivo.tests.pagesearch;
 
 import static org.junit.Assert.assertTrue;
 
-import java.time.LocalDate;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 /**
@@ -20,7 +15,7 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
  *
  */
 
-public class PageSearchOverlapDatesTest extends WebDriverTestBaseParalell {
+public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 
 	public PageSearchOverlapDatesTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

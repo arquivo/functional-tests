@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -14,7 +14,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class PageSearchNotSpamTest extends WebDriverTestBaseParalell {
+public class PageSearchNotSpamTest extends WebDriverTestBaseParallel {
 
 	public PageSearchNotSpamTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

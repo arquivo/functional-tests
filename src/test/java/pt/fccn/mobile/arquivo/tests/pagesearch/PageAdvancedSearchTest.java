@@ -2,14 +2,12 @@ package pt.fccn.mobile.arquivo.tests.pagesearch;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDate;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -17,7 +15,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class PageAdvancedSearchTest extends WebDriverTestBaseParalell {
+public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
 	public PageAdvancedSearchTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

@@ -9,7 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 /**
@@ -18,7 +18,7 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
  *
  */
 
-public class WorkflowStateBetweenSeachImagesTest extends WebDriverTestBaseParalell {
+public class WorkflowStateBetweenSeachImagesTest extends WebDriverTestBaseParallel {
 
     public WorkflowStateBetweenSeachImagesTest(String os, String version, String browser, String deviceName,
             String deviceOrientation) {

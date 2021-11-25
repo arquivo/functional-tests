@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 import pt.fccn.mobile.arquivo.utils.LocalizedString;
 
@@ -19,7 +19,7 @@ import pt.fccn.mobile.arquivo.utils.LocalizedString;
  *
  */
 
-public class MenuChangeLanguageTest extends WebDriverTestBaseParalell {
+public class MenuChangeLanguageTest extends WebDriverTestBaseParallel {
 
     public MenuChangeLanguageTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
         super(os, version, browser, deviceName, deviceOrientation);

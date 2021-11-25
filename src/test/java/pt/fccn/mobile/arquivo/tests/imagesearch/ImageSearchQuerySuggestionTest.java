@@ -7,14 +7,14 @@
 //import org.openqa.selenium.By;
 //
 //import pt.fccn.arquivo.selenium.Retry;
-//import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+//import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 //
 ///**
 // *
 // * @author Ivo Branco <ivo.branco@fccn.pt>
 // *
 // */
-//public class ImageSearchQuerySuggestionTest extends WebDriverTestBaseParalell {
+//public class ImageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 //
 //	public ImageSearchQuerySuggestionTest(String os, String version, String browser, String deviceName,
 //			String deviceOrientation) {

@@ -6,13 +6,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 /**
@@ -21,7 +18,7 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
  * @author ivo.branco@fccn.pt
  *
  */
-public class ImageAdvancedSearchTest extends WebDriverTestBaseParalell {
+public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
     public ImageAdvancedSearchTest(String os, String version, String browser, String deviceName,
             String deviceOrientation) {

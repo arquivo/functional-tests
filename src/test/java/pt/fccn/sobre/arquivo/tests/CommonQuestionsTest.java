@@ -9,11 +9,11 @@ import java.io.IOException;
 import org.junit.Test;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.sobre.arquivo.pages.CommonQuestionsPage;
 import pt.fccn.sobre.arquivo.pages.IndexSobrePage;
 
-public class CommonQuestionsTest extends WebDriverTestBaseParalell {
+public class CommonQuestionsTest extends WebDriverTestBaseParallel {
 
 	public CommonQuestionsTest( String os, String version, String browser, String deviceName, String deviceOrientation ) {
 		super( os, version, browser, deviceName, deviceOrientation );

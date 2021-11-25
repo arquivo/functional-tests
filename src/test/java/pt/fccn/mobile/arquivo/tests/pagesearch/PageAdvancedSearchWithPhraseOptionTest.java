@@ -6,11 +6,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -18,7 +16,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class PageAdvancedSearchWithPhraseOptionTest extends WebDriverTestBaseParalell {
+public class PageAdvancedSearchWithPhraseOptionTest extends WebDriverTestBaseParallel {
 
 	public PageAdvancedSearchWithPhraseOptionTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

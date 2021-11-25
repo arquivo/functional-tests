@@ -6,14 +6,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class ReplayExpandTest extends WebDriverTestBaseParalell {
+public class ReplayExpandTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_SITE = "http://www.fccn.pt/";
 

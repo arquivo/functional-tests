@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *
@@ -17,7 +17,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class ImageSearchTest extends WebDriverTestBaseParalell {
+public class ImageSearchTest extends WebDriverTestBaseParallel {
 
     /**
      * Test the search of one term in the index interface.

@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.sobre.arquivo.pages.AboutPage;
 import pt.fccn.sobre.arquivo.pages.AudioPage;
 import pt.fccn.sobre.arquivo.pages.CollaboratePage;
@@ -19,7 +19,7 @@ import pt.fccn.sobre.arquivo.pages.PresentationsPage;
 import pt.fccn.sobre.arquivo.pages.PublicationsPage;
 import pt.fccn.sobre.arquivo.pages.ReportsPage;
 
-public class NavigationTest  extends WebDriverTestBaseParalell {
+public class NavigationTest  extends WebDriverTestBaseParallel {
 
 	public NavigationTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
 		super( os, version, browser, deviceName, deviceOrientation );

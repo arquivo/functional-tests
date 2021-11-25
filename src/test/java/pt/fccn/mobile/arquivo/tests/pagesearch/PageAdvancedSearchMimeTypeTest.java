@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -17,7 +17,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class PageAdvancedSearchMimeTypeTest extends WebDriverTestBaseParalell {
+public class PageAdvancedSearchMimeTypeTest extends WebDriverTestBaseParallel {
 
 	public PageAdvancedSearchMimeTypeTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

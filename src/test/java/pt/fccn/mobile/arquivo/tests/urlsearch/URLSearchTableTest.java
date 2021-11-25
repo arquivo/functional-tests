@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.DateUtils;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 
@@ -19,7 +19,7 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
  * @author Ivo Branco <ivo.branco@fccn.pt>
  *
  */
-public class URLSearchTableTest extends WebDriverTestBaseParalell {
+public class URLSearchTableTest extends WebDriverTestBaseParallel {
 
     public URLSearchTableTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
         super(os, version, browser, deviceName, deviceOrientation);

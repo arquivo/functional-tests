@@ -5,27 +5,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.DatePicker;
-import org.openqa.selenium.Keys;
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBaseParalell {
+public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBaseParallel {
 
     public PageSearchLimitedDatesFromHomepageTest(String os, String version, String browser, String deviceName,
             String deviceOrientation) {

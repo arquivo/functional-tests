@@ -8,14 +8,14 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell; 
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel; 
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParalell {
+public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
 
     public SavePageNowURLNotFoundTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
         super(os, version, browser, deviceName, deviceOrientation);

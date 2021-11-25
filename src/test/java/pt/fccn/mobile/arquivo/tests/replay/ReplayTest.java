@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 
 /**
@@ -17,7 +17,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class ReplayTest extends WebDriverTestBaseParalell {
+public class ReplayTest extends WebDriverTestBaseParallel {
 
 	public ReplayTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
 		super(os, version, browser, deviceName, deviceOrientation);

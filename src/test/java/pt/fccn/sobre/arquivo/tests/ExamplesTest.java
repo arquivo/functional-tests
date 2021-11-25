@@ -8,11 +8,11 @@ import java.io.IOException;
 import org.junit.Test;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.sobre.arquivo.pages.ExamplesPage;
 import pt.fccn.sobre.arquivo.pages.IndexSobrePage;
 
-public class ExamplesTest extends WebDriverTestBaseParalell {
+public class ExamplesTest extends WebDriverTestBaseParallel {
 
 	public ExamplesTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
 		super( os, version, browser, deviceName, deviceOrientation );

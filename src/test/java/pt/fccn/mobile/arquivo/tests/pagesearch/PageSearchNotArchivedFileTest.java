@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -14,7 +14,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParalell {
+public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 
 	public PageSearchNotArchivedFileTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

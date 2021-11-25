@@ -5,14 +5,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *
  * @author Ivo Branco <ivo.branco@fccn.pt>
  *
  */
-public class ContaMeHistoriasTest extends WebDriverTestBaseParalell {
+public class ContaMeHistoriasTest extends WebDriverTestBaseParallel {
 
 	public ContaMeHistoriasTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

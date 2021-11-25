@@ -3,7 +3,6 @@ package pt.fccn.mobile.arquivo.tests.pagesearch;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -19,7 +18,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  *
  */
 
-public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParalell {
+public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParallel {
 
 	public PageAdvancedSearchNegationOptionTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

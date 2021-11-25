@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.DateUtils;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 import pt.fccn.mobile.arquivo.utils.LocalizedString;
@@ -25,7 +25,7 @@ import pt.fccn.mobile.arquivo.utils.LocalizedString;
  * @author Ivo Branco <ivo.branco@fccn.pt>
  *
  */
-public class URLSearchListTest extends WebDriverTestBaseParalell {
+public class URLSearchListTest extends WebDriverTestBaseParallel {
 
     public URLSearchListTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
         super(os, version, browser, deviceName, deviceOrientation);

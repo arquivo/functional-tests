@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 
 /**
@@ -17,7 +17,7 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class PageSearchEmptyTest extends WebDriverTestBaseParalell {
+public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 
 	private static final String QUERY = "xptoxptoxptoxptoxptoxptoxptoxptoxpto";
 

@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.fccn.arquivo.tests.util.ReplayUtils;
 
 /**
@@ -48,7 +48,7 @@ import pt.fccn.arquivo.tests.util.ReplayUtils;
  * @author Ivo Branco <ivo.branco@fccn.pt>
  *
  */
-public class MemorialTest extends WebDriverTestBaseParalell {
+public class MemorialTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_PATH = "/wayback";
 

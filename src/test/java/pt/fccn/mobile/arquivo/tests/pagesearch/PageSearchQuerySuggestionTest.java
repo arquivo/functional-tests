@@ -7,14 +7,14 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class PageSearchQuerySuggestionTest extends WebDriverTestBaseParalell {
+public class PageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 
 	public PageSearchQuerySuggestionTest(String os, String version, String browser, String deviceName,
 			String deviceOrientation) {

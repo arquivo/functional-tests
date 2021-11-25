@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 
 /**
@@ -14,7 +14,7 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParalell;
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
  *
  */
-public class MenuPagesNewAvancedSearchWaybackTest extends WebDriverTestBaseParalell {
+public class MenuPagesNewAvancedSearchWaybackTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
