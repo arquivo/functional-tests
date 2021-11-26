@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
@@ -41,6 +42,7 @@ import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebDriver.Timeouts;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -239,11 +241,10 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         System.out.println(message);
 
 
-//        Timeouts timeouts = driver.manage().timeouts();
-//         // it isn't working on latest firefox
-// //		timeouts.pageLoadTimeout(25, TimeUnit.SECONDS);
-//         timeouts.implicitlyWait(5, TimeUnit.SECONDS);
-//         timeouts.setScriptTimeout(5, TimeUnit.SECONDS);
+        Timeouts timeouts = driver.manage().timeouts();
+        timeouts.pageLoadTimeout(2, TimeUnit.MINUTES);
+        timeouts.implicitlyWait(2, TimeUnit.MINUTES);
+        timeouts.setScriptTimeout(2, TimeUnit.MINUTES);
 
         System.out.println(String.format("Start running test: %s\n", this.getClass().getSimpleName()));
     }

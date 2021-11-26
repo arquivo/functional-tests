@@ -312,7 +312,7 @@
             <properties>
                 <test.browsers.json>
                 [{
-                  "platform":"Linux",
+                  "platform":"LINUX",
                   "browser":"firefox"
                 }]</test.browsers.json>
                 <test.resolution>1024x768</test.resolution>
@@ -416,5 +416,10 @@
             </properties>
         </profile>
     </profiles>
-
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 </project>
