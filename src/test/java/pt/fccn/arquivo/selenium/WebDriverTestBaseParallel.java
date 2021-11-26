@@ -22,6 +22,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import com.saucelabs.common.SauceOnDemandAuthentication;
@@ -200,7 +201,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
     @Before
     public void setUp() throws Exception {
 
-        HashMap<String, Object> sauceOptions = new HashMap<>();
+        Map<String, Object> sauceOptions = new HashMap<>();
         sauceOptions.put("username", authentication.getUsername());
         sauceOptions.put("accessKey", authentication.getAccessKey());
 
@@ -213,7 +214,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         String methodName = name.getMethodName() + " " + browser + " " + browserVersion;
         sauceOptions.put("name", methodName);
 
-        //defaults false
+        //the default value is false
         //sauceOptions.put("acceptInsecureCerts", true);
 
         if (screenResolution != null && !screenResolution.isEmpty()) {
@@ -237,7 +238,8 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, methodName);
         System.out.println(message);
 
-//         Timeouts timeouts = driver.manage().timeouts();
+
+//        Timeouts timeouts = driver.manage().timeouts();
 //         // it isn't working on latest firefox
 // //		timeouts.pageLoadTimeout(25, TimeUnit.SECONDS);
 //         timeouts.implicitlyWait(5, TimeUnit.SECONDS);
