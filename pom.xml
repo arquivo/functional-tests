@@ -312,8 +312,13 @@
             <properties>
                 <test.browsers.json>
                 [{
-                  "platform":"LINUX",
-                  "browser":"firefox"
+                  "platform":"linux",
+                  "browser":"chrome",
+                  "browser-version":"94.0.4606.61",
+                },
+                {
+                    "platform":"linux",
+                    "browser":"firefox",
                 }]</test.browsers.json>
                 <test.resolution>1024x768</test.resolution>
             </properties>
