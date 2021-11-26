@@ -207,12 +207,6 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         sauceOptions.put("username", authentication.getUsername());
         sauceOptions.put("accessKey", authentication.getAccessKey());
 
-        if (device != null)
-            sauceOptions.put("deviceName", device);
-
-        if (deviceOrientation != null)
-            sauceOptions.put("deviceOrientation", deviceOrientation);
-
         String methodName = name.getMethodName() + " " + browser + " " + browserVersion;
         sauceOptions.put("name", methodName);
 

@@ -103,7 +103,8 @@ public class DriveManager {
         capabilities.setCapability(CapabilityType.PLATFORM_NAME,PlatformName);
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
-        capabilities.setCapability(MobileCapabilityType.ORIENTATION, deviceOrientation);
+        if(deviceOrientation != null)
+            capabilities.setCapability(MobileCapabilityType.ORIENTATION, deviceOrientation);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
         sauceOptions.remove("screenResolution");
         capabilities.setCapability("sauce:options", sauceOptions);
