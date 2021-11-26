@@ -49,7 +49,7 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 		run("Wait for search results appear", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]")));
 
 		appendError("Check result count should be zero", () -> {
-			int count = driver.findElementsByXPath("//*[@class=\"page-search-result\"]").size();
+			int count = driver.findElements(By.xpath("//*[@class=\"page-search-result\"]")).size();
 			assertEquals("Check result count should be zero", 0, count);
 		});
 

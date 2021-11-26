@@ -20,11 +20,14 @@ package pt.fccn.arquivo.selenium;
 
 import static org.junit.Assert.assertNotNull;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
+
+import com.saucelabs.common.SauceOnDemandAuthentication;
+import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import com.saucelabs.junit.ConcurrentParameterized;
+import com.saucelabs.junit.SauceOnDemandTestWatcher;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,22 +39,12 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver.Timeouts;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.junit.ConcurrentParameterized;
-import com.saucelabs.junit.SauceOnDemandTestWatcher;
-
 import pt.fccn.arquivo.util.AppendableErrorsBaseTest;
-
-//import org.json.*;
 
 /**
  * The base class for tests using WebDriver to test specific browsers. This test
@@ -65,8 +58,6 @@ import pt.fccn.arquivo.util.AppendableErrorsBaseTest;
 @Ignore
 @RunWith(ConcurrentParameterized.class)
 public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implements SauceOnDemandSessionIdProvider {
-    private String port = System.getProperty("test.remote.access.port");
-
     public static String seleniumURI;
 
     public static String buildTag;
@@ -107,15 +98,15 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
     /**
      * Represents the operating system to be used as part of the test run.
      */
-    protected String os;
+    protected String platformName;
     /**
      * Represents the version of the browser to be used as part of the test run.
      */
-    protected String version;
+    protected String browserVersion;
     /**
      * Represents the deviceName of mobile device
      */
-    protected String deviceName;
+    protected String device;
     /**
      * Represents the device-orientation of mobile device
      */
@@ -130,7 +121,6 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
     protected String screenResolution;
     protected String testURL;
-    protected String browserVersion;
     protected String titleOfFirstResult;
 
     @Deprecated
@@ -138,23 +128,24 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
     protected final boolean isPreProd;
 
-    public WebDriverTestBaseParallel(String os, String version, String browser, String deviceName,
-            String deviceOrientation) {
+    public WebDriverTestBaseParallel(String platformName, String browser, String browserVersion,
+        String device, String deviceOrientation) {
+
         super();
-        this.os = os;
-        this.version = version;
+        this.platformName = platformName;
+        this.browserVersion = browserVersion;
         this.browser = browser;
-        this.deviceName = deviceName;
+        this.device = device;
         this.deviceOrientation = deviceOrientation;
         this.testURL = System.getProperty("test.url");
         assertNotNull("test.url property is required", this.testURL);
         this.isPreProd = this.testURL.contains(pre_prod);
         this.screenResolution = System.getProperty("test.resolution");
 
-        System.out.println("OS: " + os);
-        System.out.println("Version: " + version);
+        System.out.println("Platform name: " + platformName);
         System.out.println("Browser: " + browser);
-        System.out.println("Device: " + deviceName);
+        System.out.println("Browser version: " + browserVersion);
+        System.out.println("Device: " + device);
         System.out.println("Orientation: " + deviceOrientation);
     }
 
@@ -182,13 +173,13 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
             for (int i = 0; i < browsersJSONArray.length(); i++) {
                 JSONObject browserConfigs = browsersJSONArray.getJSONObject(i);
-                String browserOS = browserConfigs.getString("os");
-                //String browserPlatform = browserConfigs.getString("platform");
-                String browserName = browserConfigs.getString("browser");
-                String browserVersion = browserConfigs.optString("browser-version");
-                String device = browserConfigs.optString("device", null);
-                String deviceOrientation = browserConfigs.optString("device-orientation", null);
-                browsers.add(new String[] { browserOS, browserVersion, browserName, device, deviceOrientation });
+                browsers.add(new String[] {
+                    browserConfigs.getString("platform"),
+                    browserConfigs.getString("browser"),
+                    browserConfigs.optString("browser-version"),
+                    browserConfigs.optString("device", null),
+                    browserConfigs.optString("device-orientation", null)
+                });
             }
         }
 
@@ -198,7 +189,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
     /**
      * Constructs a new {@link RemoteWebDriver} instance which is configured to use
-     * the capabilities defined by the {@link #browser}, {@link #version} and
+     * the capabilities defined by the {@link #browser}, {@link #browserVersion} and
      * {@link #os} instance variables, and which is configured to run against
      * ondemand.saucelabs.com, using the username and access key populated by the
      * {@link #authentication} instance.
@@ -206,45 +197,39 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * @throws Exception if an error occurs during the creation of the
      *                   {@link RemoteWebDriver} instance.
      */
-    @SuppressWarnings("deprecation")
     @Before
     public void setUp() throws Exception {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        if (browser != null)
-            capabilities.setCapability(CapabilityType.BROWSER_NAME, browser);
-        if (version != null)
-            capabilities.setCapability(CapabilityType.VERSION, version);
-        if (deviceName != null)
-            capabilities.setCapability("deviceName", deviceName);
+        HashMap<String, Object> sauceOptions = new HashMap<>();
+        sauceOptions.put("username", authentication.getUsername());
+        sauceOptions.put("accessKey", authentication.getAccessKey());
+
+        if (device != null)
+            sauceOptions.put("deviceName", device);
+
         if (deviceOrientation != null)
-            capabilities.setCapability("device-orientation", deviceOrientation);
+            sauceOptions.put("deviceOrientation", deviceOrientation);
 
-        capabilities.setCapability(CapabilityType.PLATFORM, os);
-//		capabilities.setCapability(CapabilityType.PLATFORM, "ANY");
+        String methodName = name.getMethodName() + " " + browser + " " + browserVersion;
+        sauceOptions.put("name", methodName);
 
-        String methodName = name.getMethodName() + " " + browser + " " + version;
-        capabilities.setCapability("name", methodName);
+        //defaults false
+        //sauceOptions.put("acceptInsecureCerts", true);
 
-        capabilities.setCapability("acceptSslCerts", true);
-
-        capabilities.setCapability("acceptInsecureCerts", true);
-
-        System.out.println("Screen Resolution: " + screenResolution);
         if (screenResolution != null && !screenResolution.isEmpty()) {
-            capabilities.setCapability("screenResolution", screenResolution);
+            System.out.println("Screen Resolution: " + screenResolution);
+            sauceOptions.put("screenResolution", screenResolution);
         }
+
         // Getting the build name.
         // Using the Jenkins ENV var. You can use your own. If it is not set test will
         // run without a build id.
-        /*
-         * if (buildTag != null) { capabilities.setCapability("build", buildTag); }
-         */
-        capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("BUILD_NUMBER"));
+        sauceOptions.put("build", System.getenv("JOB_NAME") + "__" + System.getenv("BUILD_NUMBER"));
 
-        SauceHelpers.addSauceConnectTunnelId(capabilities);
+        //SauceHelpers.addSauceConnectTunnelId(capabilities);
 
-        this.driver = new RemoteWebDriver(buildUrl(), capabilities);
+        DriveManager driveManager = new DriveManager();
+        this.driver = driveManager.getDriver(browser, platformName, browserVersion, sauceOptions);
         this.driver.get(testURL);
 
         this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
@@ -252,38 +237,13 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, methodName);
         System.out.println(message);
 
-        Timeouts timeouts = driver.manage().timeouts();
-        // it isn't working on latest firefox
-//		timeouts.pageLoadTimeout(25, TimeUnit.SECONDS);
-        timeouts.implicitlyWait(5, TimeUnit.SECONDS);
-        timeouts.setScriptTimeout(5, TimeUnit.SECONDS);
+//         Timeouts timeouts = driver.manage().timeouts();
+//         // it isn't working on latest firefox
+// //		timeouts.pageLoadTimeout(25, TimeUnit.SECONDS);
+//         timeouts.implicitlyWait(5, TimeUnit.SECONDS);
+//         timeouts.setScriptTimeout(5, TimeUnit.SECONDS);
 
         System.out.println(String.format("Start running test: %s\n", this.getClass().getSimpleName()));
-    }
-
-    private URL buildUrl() throws MalformedURLException {
-        String username = authentication.getUsername();
-        String accessKey = authentication.getAccessKey();
-
-        StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append("http://");
-        if (username != null && !username.isEmpty()) {
-            urlBuilder.append(username);
-            urlBuilder.append(":");
-        }
-        if (accessKey != null && !accessKey.isEmpty()) {
-            urlBuilder.append(accessKey);
-            urlBuilder.append("@");
-        }
-        urlBuilder.append("127.0.0.1:");
-        urlBuilder.append(port);
-        urlBuilder.append("/wd/hub");
-
-        URL url = new URL(urlBuilder.toString());
-
-        System.out.println(url);
-
-        return url;
     }
 
     /**

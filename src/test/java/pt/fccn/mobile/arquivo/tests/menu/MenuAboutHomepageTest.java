@@ -38,7 +38,7 @@ public class MenuAboutHomepageTest extends MenuTest {
     private void menuAbout(String expectedUrl) {
         openMenu();
 
-        run("Click about button", () -> driver.findElementById("menu-about").click());
+        run("Click about button", () -> driver.findElement(By.id("menu-about")).click());
 
         //waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]"));
 

@@ -34,11 +34,11 @@ public class PageSearchNotSpamTest extends WebDriverTestBaseParallel {
 		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));
 
 		int OLXanchorsCount = driver
-				.findElementsByXPath("//*[@class=\"page-search-result\"]//*[@class=\"results-url blockUrl\"][contains(text(),'olx')]").size();
+				.findElements(By.xpath("//*[@class=\"page-search-result\"]//*[@class=\"results-url blockUrl\"][contains(text(),'olx')]")).size();
 
 		System.out.println("OLX anchors count " + OLXanchorsCount);
 
-		long OLXemsCount = driver.findElementsByXPath("//*[@class=\"page-search-result\"]") //
+		long OLXemsCount = driver.findElements(By.xpath("//*[@class=\"page-search-result\"]")) //
 				.stream() //
 				.filter(em -> em.getText().toLowerCase().contains("olx")) //
 				.count();

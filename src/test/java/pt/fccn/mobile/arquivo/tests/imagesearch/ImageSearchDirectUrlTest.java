@@ -67,7 +67,7 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
 
         if (imageButtonText.isPresent()) {
             appendError(() -> assertEquals("Check page language by verifying images button text", imageButtonText.get(),
-                    driver.findElementById("search-form-images").getText()));
+                    driver.findElement(By.id("search-form-images")).getText()));
         }
     }
 }

@@ -47,7 +47,7 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
                 driver.findElement(By.id("estimated-results-value")).getText()));
 
         appendError("Check first result url", () -> {
-            List<WebElement> wes = driver.findElementsByXPath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a");
+            List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
             assertTrue("Mininium of urls should be 1", wes.size() > 0);
 
             WebElement we = wes.get(0);
@@ -63,7 +63,7 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
         });
 
         appendError("Check first result title", () -> {
-            List<WebElement> wes = driver.findElementsByXPath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a");
+            List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
             assertTrue("Mininium of title should be 1", wes.size() > 0);
 
             WebElement we = wes.get(0);
@@ -72,14 +72,14 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
 
         appendError("Check first result version", () -> {
             WebElement we = driver
-                    .findElementByXPath("//*[@id=\"pages-results\"]/ul[1]/li[3]/p");
+                    .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[3]/p"));
 
             assertThat("Check first result version", we.getText(), containsString("13 Outubro 1996"));
         });
 
         appendError("Check first result summary", () -> {
             WebElement we = driver
-                    .findElementByXPath("//*[@id=\"pages-results\"]/ul[1]/li[4]/a/p");
+                    .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[4]/a/p"));
 
             assertThat("Check first result version", we.getText(), containsString("Av. Brasil"));
         });

@@ -57,7 +57,7 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
         System.out.println("Current url: " + driver.getCurrentUrl());
 
         run("Verify year", () -> {
-            WebElement yearTableHeader = driver.findElementById("list-results-year-1996");
+            WebElement yearTableHeader = driver.findElement(By.id("list-results-year-1996"));
             assertNotNull("Verify if year table header exist", yearTableHeader);
 
             appendError("Year 1995 shouldn't be visible", () -> new WebDriverWait(driver, 20)

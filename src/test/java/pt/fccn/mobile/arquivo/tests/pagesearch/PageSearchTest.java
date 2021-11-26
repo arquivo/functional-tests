@@ -40,12 +40,12 @@ public class PageSearchTest extends WebDriverTestBaseParallel {
 		appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", numberResults,
 				driver.findElement(By.id("estimated-results-value")).getText()));
 		
-		int anchorsCount = driver.findElementsByXPath("//*[@class=\"page-search-result\"]//*[@class=\"results-url blockUrl\"][contains(text(),'fccn')]")
+		int anchorsCount = driver.findElements(By.xpath("//*[@class=\"page-search-result\"]//*[@class=\"results-url blockUrl\"][contains(text(),'fccn')]"))
 				.size();
 	
 		System.out.println("anchorsCount " + anchorsCount);
 		
-		long emsCount = driver.findElementsByXPath("//*[@class=\"page-search-result\"]//em") //
+		long emsCount = driver.findElements(By.xpath("//*[@class=\"page-search-result\"]//em")) //
 				.stream() //
 				.filter(em -> em.getText().toLowerCase().contains("fccn")) //
 				.count();

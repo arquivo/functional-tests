@@ -42,8 +42,8 @@ public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 	}
 
 	private boolean checkDatePicker() {
-		String start = driver.findElementById("start-date").getAttribute("value");
-		String end = driver.findElementById("end-date").getAttribute("value");
+		String start = driver.findElement(By.id("start-date")).getAttribute("value");
+		String end = driver.findElement(By.id("end-date")).getAttribute("value");
 		try{
 			return (Integer.parseInt(start) <= Integer.parseInt(end));
 		} catch (Error e){

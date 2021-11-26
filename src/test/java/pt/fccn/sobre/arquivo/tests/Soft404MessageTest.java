@@ -47,7 +47,7 @@ public class Soft404MessageTest extends WebDriverTestBaseParallel {
 					driver.findElement(By.xpath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a")).getText(),
 					containsString("Visit an earlier version of this page on 27 February, 2017")));
 
-			List<WebElement> wes = driver.findElementsByXPath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a");
+			List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a"));
 			WebElement we = wes.get(0);
 			String href = we.getAttribute("href");
 			assertEquals("Check link to wayback", href, "https://arquivo.pt/wayback/20170227184149mp_/http://sobre.arquivo.pt" + WAYBACK_404_PAGE_EXAMPLE);

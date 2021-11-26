@@ -48,9 +48,9 @@ public class URLSearchTableTest extends WebDriverTestBaseParallel {
         });
 
         run("Change to Table mode if not in it", () -> {
-            WebElement resultsGridCurrentType = driver.findElementById("replay-table-button");
+            WebElement resultsGridCurrentType = driver.findElement(By.id("replay-table-button"));
             if (resultsGridCurrentType.getAttribute("disabled") == null) {
-                driver.findElementById("replay-table-button").click();
+                driver.findElement(By.id("replay-table-button")).click();
             }
         });
 
