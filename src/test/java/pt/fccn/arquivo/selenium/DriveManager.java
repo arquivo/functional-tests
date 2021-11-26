@@ -47,8 +47,17 @@ public class DriveManager {
         return url;
     }
 
-    public RemoteWebDriver getDriver(String browserName, String platformName, String browserVersion,
-            Map<String, Object> sauceOptions) throws Exception {
+    public RemoteWebDriver getDriver(String platformName, String browser, String browserVersion,
+            String device, String deviceOrientation, Map<String, Object> sauceOptions) throws MalformedURLException {
+        if(device != null) {
+            return getMobileDriver(platformName, browser, device, browserVersion, deviceOrientation, sauceOptions);
+        } else {
+            return getDesktopDriver(browser, platformName, browserVersion, sauceOptions);
+        }
+    }
+
+    public RemoteWebDriver getDesktopDriver(String browserName, String platformName, String browserVersion,
+            Map<String, Object> sauceOptions) throws MalformedURLException {
 
         BrowsersTypes browser = BrowsersTypes.valueOf(browserName.toUpperCase());
 
@@ -87,13 +96,16 @@ public class DriveManager {
         return new RemoteWebDriver(buildUrl(), capabilities);
     }
 
-    public RemoteWebDriver getMobileDriver(String PlatformName, String browserName, String deviceName, String platformVersion, Map<String, Object> sauceOptions) throws Exception {
+    public RemoteWebDriver getMobileDriver(String PlatformName, String browserName, String deviceName,
+     String platformVersion, String deviceOrientation, Map<String, Object> sauceOptions) throws MalformedURLException {
 
         MutableCapabilities capabilities = new MutableCapabilities();
         capabilities.setCapability(CapabilityType.PLATFORM_NAME,PlatformName);
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+        capabilities.setCapability(MobileCapabilityType.ORIENTATION, deviceOrientation);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+        sauceOptions.remove("screenResolution");
         capabilities.setCapability("sauce:options", sauceOptions);
 
         System.out.println("moibile Web driver configurations: browser[" + browserName +
