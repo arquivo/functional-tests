@@ -238,9 +238,9 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
 
         Timeouts timeouts = driver.manage().timeouts();
-        timeouts.pageLoadTimeout(2, TimeUnit.MINUTES);
-        timeouts.implicitlyWait(2, TimeUnit.MINUTES);
-        timeouts.setScriptTimeout(2, TimeUnit.MINUTES);
+        timeouts.pageLoadTimeout(5, TimeUnit.MINUTES);
+        timeouts.implicitlyWait(5, TimeUnit.MINUTES);
+        timeouts.setScriptTimeout(5, TimeUnit.MINUTES);
 
         System.out.println(String.format("Start running test: %s\n", this.getClass().getSimpleName()));
     }

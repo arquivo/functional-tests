@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel; 
+import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *
@@ -26,9 +26,9 @@ public class SavePageNowMenuTest extends WebDriverTestBaseParallel {
     public void savePageNowMenuTest() {
         savePageNowMenu("ddadfcfe.cdsffds", "http://info.cern.ch/");
     }
-    
+
     private void savePageNowMenu(String wrongQuery, String goodQuery) {
-        
+
         run("Open left menu", () -> {
             waitUntilElementIsVisibleAndGet(By.id("nav-menu-button-left")).click();
             waitUntilElementIsVisibleAndGet(By.id("left-nav"));
@@ -59,7 +59,7 @@ public class SavePageNowMenuTest extends WebDriverTestBaseParallel {
             driver.findElement(By.id("submit-search-input")).sendKeys(goodQuery);
             driver.findElement(By.id("submit-search")).click();
         });
-        
+
         waitUntilElementIsVisibleAndGet(By.id("logo-arquivo"));
 
         driver.switchTo().frame("replay_iframe");
@@ -83,8 +83,5 @@ public class SavePageNowMenuTest extends WebDriverTestBaseParallel {
         run("Check Save Page Now Homepage", () -> {
             waitUntilElementIsVisibleAndGet(By.id("logo-save-page-now"));
         });
-        
-        
     }
-
 }
