@@ -1,7 +1,12 @@
 Recursive tests developed with selenium framework for Arquivo.pt
 ---------------
 
-[![Build Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/builds/7cf39791df3937efa655426a7768c0bb)
+The link below must be updated for each build:
+[![Build Status](https://app.saucelabs.com/buildstatus/ArquivoPT)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
+
+[![Build Status](https://app.saucelabs.com/buildstatus/ArquivoPT?saucy)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
+
+[![Build Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
 
 Functional Tests
 
