@@ -1,4 +1,4 @@
-package pt.fccn.arquivo.webapp;
+package pt.fccn.arquivo.tests.webapp;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
