@@ -1,15 +1,13 @@
-Recursive tests developed with selenium framework for Arquivo.pt
+# Recursive tests developed with selenium framework for Arquivo.pt
 ---------------
 
-The link below must be updated for each build:
-[![Build Status](https://app.saucelabs.com/buildstatus/ArquivoPT)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
+## Status of functional tests build
 
-[![Build Status](https://app.saucelabs.com/buildstatus/ArquivoPT?saucy)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
+The link below must be updated for each build:
 
 [![Build Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
 
-Functional Tests
-
+## Run Functional Tests
 
 Generate eclipse .project and .classpath files, similar for idea.
 
