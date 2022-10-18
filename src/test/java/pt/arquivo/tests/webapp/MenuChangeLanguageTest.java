@@ -29,70 +29,68 @@ public class MenuChangeLanguageTest extends WebDriverTestBaseParallel {
     @Retry
     public void menuChangeLaguageTestPTtoEN() {
         LocaleUtils.changeLanguageToPT(this);
-        
-        run("Open menu", () -> driver.findElement(By.id("nav-menu-button-left")).click());
-        // menuChangeLaguageTest(LocaleUtils.PORTUGUESE);
+        menuChangeLaguageTest(LocaleUtils.PORTUGUESE);
     }
 
-//     @Test
-//     @Retry
-//     public void menuChangeLaguageTestENtoPT() {
-//         LocaleUtils.changeLanguageToEN(this);
-//         menuChangeLaguageTest(LocaleUtils.ENGLISH);
-//     }
+    @Test
+    @Retry
+    public void menuChangeLaguageTestENtoPT() {
+        LocaleUtils.changeLanguageToEN(this);
+        menuChangeLaguageTest(LocaleUtils.ENGLISH);
+    }
 
-//     private void menuChangeLaguageTest(Locale locale) {
+    private void menuChangeLaguageTest(Locale locale) {
 
-//         //regular verification
+        //regular verification
 
-//         String pageLabel = new LocalizedString().pt("Páginas").en("Pages").apply(locale);
+        String pageLabel = new LocalizedString().pt("Páginas").en("Pages").apply(locale);
 
-//         assertThat("Verify page label",
-//                 driver.findElement(By.id("search-form-pages")).getText(), containsString(pageLabel));
+        assertThat("Verify page label",
+                driver.findElement(By.id("search-form-pages")).getText(), containsString(pageLabel));
 
-//         String ImageLabel = new LocalizedString().pt("Imagens").en("Images").apply(locale);
+        String ImageLabel = new LocalizedString().pt("Imagens").en("Images").apply(locale);
 
-//         assertThat("Verify image label",
-//                 driver.findElement(By.id("search-form-images")).getText(), containsString(ImageLabel));
+        assertThat("Verify image label",
+                driver.findElement(By.id("search-form-images")).getText(), containsString(ImageLabel));
 
-//         String advancedLabel = new LocalizedString().pt("Pesquisa avançada").en("Advanced search").apply(locale);
+        String advancedLabel = new LocalizedString().pt("Pesquisa avançada").en("Advanced search").apply(locale);
 
-//         assertThat("Verify advanced search label",
-//                 driver.findElement(By.id("search-form-advanced")).getText(), containsString(advancedLabel));
+        assertThat("Verify advanced search label",
+                driver.findElement(By.id("search-form-advanced")).getText(), containsString(advancedLabel));
 
-//         run("Open menu", () -> driver.findElement(By.id("nav-menu-button-left")).click());
+        run("Open menu", () -> driver.findElement(By.id("nav-menu-button-left")).click());
 
-//         String languageLabel = new LocalizedString().pt("English").en("Português").apply(locale);
+        String languageLabel = new LocalizedString().pt("English").en("Português").apply(locale);
 
-//         assertThat("Verify language label",
-//                 driver.findElement(By.id("menu-language")).getText(), containsString(languageLabel));
+        assertThat("Verify language label",
+                driver.findElement(By.id("menu-language")).getText(), containsString(languageLabel));
 
-//         run("Change language", () -> driver.findElement(By.id("menu-language")).click());
+        run("Change language", () -> driver.findElement(By.id("menu-language")).click());
 
-//         //opposite verification after changing the language
+        //opposite verification after changing the language
 
-//         String pageLabel_changeLang = new LocalizedString().pt("Pages").en("Páginas").apply(locale);
+        String pageLabel_changeLang = new LocalizedString().pt("Pages").en("Páginas").apply(locale);
 
-//         assertThat("Verify page label",
-//                 driver.findElement(By.id("search-form-pages")).getText(), containsString(pageLabel_changeLang));
+        assertThat("Verify page label",
+                driver.findElement(By.id("search-form-pages")).getText(), containsString(pageLabel_changeLang));
 
-//         String ImageLabel_changeLang = new LocalizedString().pt("Images").en("Imagens").apply(locale);
+        String ImageLabel_changeLang = new LocalizedString().pt("Images").en("Imagens").apply(locale);
 
-//         assertThat("Verify image label",
-//                 driver.findElement(By.id("search-form-images")).getText(), containsString(ImageLabel_changeLang));
+        assertThat("Verify image label",
+                driver.findElement(By.id("search-form-images")).getText(), containsString(ImageLabel_changeLang));
 
-//         String advancedLabel_changeLang = new LocalizedString().pt("Advanced search").en("Pesquisa avançada").apply(locale);
+        String advancedLabel_changeLang = new LocalizedString().pt("Advanced search").en("Pesquisa avançada").apply(locale);
 
-//         assertThat("Verify advanced search label",
-//                 driver.findElement(By.id("search-form-advanced")).getText(), containsString(advancedLabel_changeLang));
+        assertThat("Verify advanced search label",
+                driver.findElement(By.id("search-form-advanced")).getText(), containsString(advancedLabel_changeLang));
 
-//         run("Open menu", () -> driver.findElement(By.id("nav-menu-button-left")).click());
+        run("Open menu", () -> driver.findElement(By.id("nav-menu-button-left")).click());
 
-//         String languageLabel_changeLang = new LocalizedString().pt("Português").en("English").apply(locale);
+        String languageLabel_changeLang = new LocalizedString().pt("Português").en("English").apply(locale);
 
-//         assertThat("Verify language label",
-//                 driver.findElement(By.id("menu-language")).getText(), containsString(languageLabel_changeLang));
+        assertThat("Verify language label",
+                driver.findElement(By.id("menu-language")).getText(), containsString(languageLabel_changeLang));
 
-//     }
+    }
 
 }
