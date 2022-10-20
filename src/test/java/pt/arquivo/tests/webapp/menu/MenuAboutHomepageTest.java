@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.mobile.arquivo.tests.menu.MenuTest;
 import pt.fccn.mobile.arquivo.utils.LocaleUtils;
 
 /**
