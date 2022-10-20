@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.menu;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,7 +32,7 @@ public class MenuPagesNewAvancedSearchHomepageTest extends MenuTest {
                 () -> driver.findElement(By.id("menu-pages-advanced-search")).click());
 
         appendError("Check if current url is the advanced search",
-                () -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/advanced/search?")));
+                () -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/page/advanced/search?")));
     }
 
 }

@@ -1,15 +1,11 @@
-package pt.fccn.mobile.arquivo.tests.pagesearch;
+package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
-import java.time.Duration;
-
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
@@ -54,10 +50,15 @@ public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParal
 				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
 		
 		assertThat("Verify if the term fccn is displayed on any search result (tird position)",
-				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p")).getText(), containsString("fccn"));
+				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p")).getText().toLowerCase(), containsString("fccn"));
 		
-		appendError("Verify if any of the search results contains the visible text Fundação", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
-				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p[contains(text(),'Fundação')]"))));
+		appendError("Verify that no search result contains the visible text Fundação", () -> {
+			long count = driver.findElements(By.cssSelector("#pages-results > ul"))
+				.stream() //
+				.filter(em -> em.getText().toLowerCase().contains("Fundação"))
+				.count();
+			assertEquals("Check result count should be zero", 0, count);
+		});
 	}
 
 }

@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.replay.options;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,7 +34,7 @@ public class ReplayPrintTest extends WebDriverTestBaseParallel {
 
 		run("Cancel print page", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"print\"]/ul/li[3]/button")).click());
 
-		appendError("Check print confirm page is closed", () -> new WebDriverWait(driver, 20)
+		appendError("Check print confirm page is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("print"))));
 
 		run("Click again on print link", () -> waitUntilElementIsVisibleAndGet(By.id("menuPrint")).click());

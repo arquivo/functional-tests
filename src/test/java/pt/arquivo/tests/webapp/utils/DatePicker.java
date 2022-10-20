@@ -1,5 +1,6 @@
 package pt.arquivo.tests.webapp.utils;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +25,7 @@ public class DatePicker {
         DatePicker.open(driver,DatePicker.endId);
     }
     public static void open(WebDriver driver, String id){
-        new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+        new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
         driver.findElement(By.id(id)).click();
     }
 
@@ -38,7 +39,7 @@ public class DatePicker {
 
     private static Boolean isDesktop(WebDriver driver){
         Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
-        String platform = capabilities.getPlatform().name();
+        String platform = capabilities.getPlatformName().name();
         String userAgent = (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent;");
         System.out.println("Platform: " + platform + " User agent: " + userAgent);
         return ( 
@@ -51,10 +52,10 @@ public class DatePicker {
 
 	public static void changeTo(WebDriver driver, LocalDate date) {
         if (DatePicker.isDesktop(driver)) {
-            new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOfElementLocated(By.id("modal-datepicker-container")));
+            new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.id("modal-datepicker-container")));
             driver.findElement(By.id("modal-datepicker-input")).sendKeys(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } else {
-            new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ap-cont")));
+            new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ap-cont")));
             DatePicker.mobileDatepickerChangeYearTo(driver,date.getYear());
             DatePicker.mobileDatepickerChangeMonthTo(driver,date.getMonth().ordinal());
             DatePicker.mobileDatepickerChangeDayTo(driver,date.getDayOfMonth());

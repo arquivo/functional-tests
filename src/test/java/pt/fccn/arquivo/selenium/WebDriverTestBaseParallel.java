@@ -20,6 +20,7 @@ package pt.fccn.arquivo.selenium;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -298,7 +299,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 //		WebElement element = driver.findElement(by);
 //		driver.executeScript("arguments[0].click();", element);
 
-        new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOfElementLocated(by));
+        new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(by));
         return driver.findElement(by);
     }
 

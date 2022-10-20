@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.replay.options;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,7 +36,7 @@ public class ReplayReconstructTest extends WebDriverTestBaseParallel {
 
 		run("Click cancel complete page", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"complete-the-page\"]/ul/li[3]/button")).click());
 
-		appendError("Check complete page confirm page is closed", () -> new WebDriverWait(driver, 20)
+		appendError("Check complete page confirm page is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("complete-the-page"))));
 
 		run("Click complete page link", () -> waitUntilElementIsVisibleAndGet(By.id("menuCompleteThePage")).click());

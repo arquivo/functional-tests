@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
-
+import java.time.Duration;
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
@@ -38,7 +38,7 @@ public class MenuPagesNewAvancedSearchWaybackTest extends WebDriverTestBaseParal
 				() ->  waitUntilElementIsVisibleAndGet(By.id("menu-pages-advanced-search")).click());
 
 		appendError("Check if current url is the advanced search",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/advanced/search?")));
+				() -> new WebDriverWait(driver, java.time.Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/page/advanced/search?")));
 	}
 
 }

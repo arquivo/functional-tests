@@ -2,6 +2,7 @@ package pt.arquivo.tests.webapp.menu;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -55,7 +56,7 @@ public class MenuAboutHomepageTest extends MenuTest {
         
         //waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]"));
 
-        appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, 100)
+        appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(logoXpath))));
 
                 

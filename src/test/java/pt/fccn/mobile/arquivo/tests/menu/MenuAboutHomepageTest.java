@@ -2,6 +2,8 @@ package pt.fccn.mobile.arquivo.tests.menu;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,7 +44,7 @@ public class MenuAboutHomepageTest extends MenuTest {
 
         //waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]"));
 
-        appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, 100)
+        appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, Duration.ofSeconds(100))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/div/div/aside/div/a/img"))));
 
         run("Verify sobre.arquivo.pt", () -> {

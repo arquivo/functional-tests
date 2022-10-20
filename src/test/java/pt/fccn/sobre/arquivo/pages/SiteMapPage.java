@@ -11,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 import pt.fccn.arquivo.tests.util.AnalyzeURLs;
 
 public class SiteMapPage {
@@ -34,7 +36,7 @@ public class SiteMapPage {
 
 		String xpathDiv = "//*[@id=\""+ idDiv +"\"]/div/div/div"; //find the div tag
 		try{
-		   WebElement divTag = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+		   WebElement divTag = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	                .until(
 	                		ExpectedConditions.presenceOfElementLocated(
 	                				By.xpath( xpathDiv ) ) );

@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
 
+import java.time.Duration;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -108,7 +110,7 @@ public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBase
             invisibleVersions.stream().forEach(version -> {
                 String msg = String.format("The timestamp %s for %s shoud not exist", version, url);
 
-                appendError(msg, () -> new WebDriverWait(driver, 20)
+                appendError(msg, () -> new WebDriverWait(driver, Duration.ofSeconds(20))
                         .until(ExpectedConditions.invisibilityOfElementLocated(By.id(version))));
             });
         });

@@ -54,7 +54,7 @@
         <remote.saucelabs.user>${env.SAUCE_USERNAME}</remote.saucelabs.user>
 
         <test.resolution></test.resolution>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.4.0</selenium.version>
         <test.browsers.json>${env.SAUCE_ONDEMAND_BROWSERS}</test.browsers.json>
 
     </properties>

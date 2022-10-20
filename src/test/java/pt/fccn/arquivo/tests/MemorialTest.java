@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.InputStreamReader;
+import java.time.Duration;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -89,7 +90,7 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 					() -> driver.findElement(By.id("redirectButton")).sendKeys(Keys.RETURN));
 
 			appendError("Check wayback page url",
-					() -> new WebDriverWait(driver, 120).until(ExpectedConditions.urlContains(config.getWaybackUrl())));
+					() -> new WebDriverWait(driver, Duration.ofSeconds(120)).until(ExpectedConditions.urlContains(config.getWaybackUrl())));
 
 			run("Check some text on wayback page", () -> ReplayUtils.checkTextOnReplayPage(driver,
 					config.getWaybackTextXPath(), config.getWaybackText()));

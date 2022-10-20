@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.AbstractMap.SimpleEntry;
@@ -119,7 +121,7 @@ public class ReplayTechnicalDetailsTest extends WebDriverTestBaseParallel {
 		appendError("Close technical detail modal", () -> driver.findElement(By.xpath("//*[@id=\"technical-details\"]/button")).click());
 
 		appendError("Check that tecnical details modal is closed when clicking on close button",
-				() -> new WebDriverWait(driver, 20)
+				() -> new WebDriverWait(driver, Duration.ofSeconds(20))
 						.until(ExpectedConditions.invisibilityOfElementLocated(By.id("technical-details"))));
 	}
 }

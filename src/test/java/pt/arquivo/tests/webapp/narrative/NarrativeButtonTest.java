@@ -2,6 +2,8 @@ package pt.arquivo.tests.webapp.narrative;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,7 +47,7 @@ public class NarrativeButtonTest extends WebDriverTestBaseParallel {
             driver.findElement(By.xpath("//*[@id=\"confirm-narrative-modal\"]/ul/li[3]/a/button")).click();
         });
 
-        appendError("Check if modal is closed", () -> new WebDriverWait(driver, 20)
+        appendError("Check if modal is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.invisibilityOfElementLocated(By.id("confirm-narrative-modal"))));
 
         run("Search Narrative", () -> {

@@ -2,6 +2,8 @@ package pt.fccn.sobre.arquivo.pages;
 
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,7 +38,7 @@ public class ExamplesPage {
     			xpatha = "//*[@id=\"post-1861\"]/div/div/div/div/div/div/p[2]/a"; //*[@id="post-1861"]/div
     		             
     		
-    		List< WebElement > results = ( new WebDriverWait( driver, timeout ) )
+    		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
 	                        .visibilityOfAllElementsLocatedBy(
 	                        		      By.xpath( xpatha )

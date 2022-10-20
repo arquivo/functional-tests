@@ -8,6 +8,8 @@ import static org.junit.Assert.assertNotNull;
 import java.text.MessageFormat;
 import java.util.Locale;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -60,7 +62,7 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
             WebElement yearTableHeader = driver.findElement(By.id("list-results-year-1996"));
             assertNotNull("Verify if year table header exist", yearTableHeader);
 
-            appendError("Year 1995 shouldn't be visible", () -> new WebDriverWait(driver, 20)
+            appendError("Year 1995 shouldn't be visible", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
                     .until(ExpectedConditions.invisibilityOfElementLocated(By.id("list-results-year-1995"))));
 
             WebElement yearWebElement = yearTableHeader.findElement(By.xpath("//*[@id=\"list-results-year-1996\"]/a"));
@@ -81,9 +83,9 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
             assertThat("Verify versions", monthContent, containsString(monthLocal));
         });
 
-        appendError("September shouldn't be visible", () -> new WebDriverWait(driver, 20)
+        appendError("September shouldn't be visible", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.invisibilityOfElementLocated(By.id("list-results-month-1996-09"))));
-        appendError("November shouldn't be visible", () -> new WebDriverWait(driver, 20)
+        appendError("November shouldn't be visible", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.invisibilityOfElementLocated(By.id("list-results-month-1996-11"))));
 
         run("Open october", () -> {
