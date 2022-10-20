@@ -10,8 +10,8 @@ import org.openqa.selenium.By;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
-import pt.fccn.mobile.arquivo.utils.LocalizedString;
+import pt.arquivo.tests.webapp.utils.LocaleUtils;
+import pt.arquivo.tests.webapp.utils.LocalizedString;
 
 /**
  *

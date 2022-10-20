@@ -2,13 +2,16 @@ package pt.arquivo.tests.webapp.menu;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Locale;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.arquivo.tests.webapp.utils.LocaleUtils;
+import pt.arquivo.tests.webapp.utils.LocalizedString;
 
 /**
  *
@@ -25,26 +28,37 @@ public class MenuAboutHomepageTest extends MenuTest {
     @Retry
     public void menuAboutHomepagePTTest() {
         LocaleUtils.changeLanguageToPT(this);
-        menuAbout("https://sobre.arquivo.pt/pt/");
+        menuAbout(LocaleUtils.PORTUGUESE);
     }
 
-    // @Test
-    // @Retry
-    // public void menuAboutHomepageENTest() {
-    //     LocaleUtils.changeLanguageToEN(this);
-    //     menuAbout("https://sobre.arquivo.pt/en/");
-    // }
+    @Test
+    @Retry
+    public void menuAboutHomepageENTest() {
+        LocaleUtils.changeLanguageToEN(this);
+        menuAbout(LocaleUtils.ENGLISH);
+    }
 
-    private void menuAbout(String expectedUrl) {
+    private void menuAbout(Locale locale) {
         openMenu();
 
         run("Click about button", () -> driver.findElement(By.id("menu-about")).click());
+        
+        String expectedUrl = new LocalizedString()
+            .pt("https://sobre.arquivo.pt/pt/")
+            .en("https://sobre.arquivo.pt/en/")
+            .apply(locale);
 
+        String logoXpath = new LocalizedString()
+            .pt("/html/body/header/div/div/aside/div/a/img")
+            .en("/html/body/header/div/div/aside/div/p/a/img")
+            .apply(locale);
+        
         //waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]"));
 
         appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, 100)
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/header/div/div/aside/div/a/img"))));
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(logoXpath))));
 
+                
         run("Verify sobre.arquivo.pt", () -> {
             assertEquals("Check if current url is the about page", expectedUrl, driver.getCurrentUrl());
         });
