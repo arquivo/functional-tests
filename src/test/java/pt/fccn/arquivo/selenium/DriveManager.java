@@ -16,7 +16,10 @@ import org.openqa.selenium.safari.SafariOptions;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
+import io.appium.java_client.appmanagement.BaseOptions;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.options.XCUITestOptions;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 public class DriveManager {
@@ -99,15 +102,28 @@ public class DriveManager {
     public RemoteWebDriver getMobileDriver(String PlatformName, String browserName, String deviceName,
      String platformVersion, String deviceOrientation, String automationName, Map<String, Object> sauceOptions) throws MalformedURLException {
 
-        MutableCapabilities capabilities = new MutableCapabilities();
-        
+        switch (automationName) {
+            case "XCUITest":
+                XCUITestOptions xcuiOptions = new XCUITestOptions();
+                capabilities = xcuiOptions;
+                break;
+            case "UiAutomator2":
+                UiAutomator2Options uiautomatorOptions = new UiAutomator2Options();
+                capabilities = uiautomatorOptions;
+                break;
+            default:
+                capabilities = new MutableCapabilities();
+        }
+
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
         capabilities.setCapability(CapabilityType.PLATFORM_NAME,PlatformName);
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
+
         if(deviceOrientation != null)
             capabilities.setCapability(MobileCapabilityType.ORIENTATION, deviceOrientation);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
+
         sauceOptions.remove("screenResolution");
         capabilities.setCapability("sauce:options", sauceOptions);
 
