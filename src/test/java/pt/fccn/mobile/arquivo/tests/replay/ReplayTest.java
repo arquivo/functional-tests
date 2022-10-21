@@ -30,8 +30,6 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 		//Check FCCN Replay Page
 		driver.get(this.testURL + "/wayback/19961013145650/http://www.fccn.pt/");
 
-		driver.switchTo().frame("replay-in-iframe");
-			
 		driver.switchTo().frame("replay_iframe");
 
 		assertThat("Verify if the term RCCN is displayed on the FCCN web page",
@@ -39,8 +37,6 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 
 		//Check FCCN Replay Page
 		driver.get(this.testURL + "/wayback/19961013171554/http://www.fccn.pt/index_i.html");
-
-		driver.switchTo().frame("replay-in-iframe");
 			
 		driver.switchTo().frame("replay_iframe");
 
@@ -51,8 +47,6 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 		//Check Uminho Replay Page
 
 		driver.get(this.testURL + "/wayback/19961013145852/http://s700.uminho.pt:80/homepage-pt.html");
-
-		driver.switchTo().frame("replay-in-iframe");
 			
 		driver.switchTo().frame("replay_iframe");
 
@@ -62,8 +56,6 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 		//Check ISCT Replay Page
 		driver.get(this.testURL + "/wayback/19961013202814/http://www.iscte.pt/");
 
-		driver.switchTo().frame("replay-in-iframe");
-			
 		driver.switchTo().frame("replay_iframe");
 
 		assertThat("Verify if the term ISCTE is displayed on the ISCTE web page",
@@ -73,8 +65,6 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 
 		driver.get(this.testURL + "/wayback/19961013171626/http://www.ist.utl.pt/");
 
-		driver.switchTo().frame("replay-in-iframe");
-			
 		driver.switchTo().frame("replay_iframe");
 
 		assertThat("Verify if the term IST is displayed on the IST web page",
