@@ -93,7 +93,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * rule.
      */
     @Rule
-    public RetryRule rule = new RetryRule(2);
+    public RetryRule rule = new RetryRule(1);
 
     /**
      * Represents the browser to be used as part of the test run.

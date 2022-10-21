@@ -100,6 +100,7 @@ public class DriveManager {
      String platformVersion, String deviceOrientation, String automationName, Map<String, Object> sauceOptions) throws MalformedURLException {
 
         MutableCapabilities capabilities = new MutableCapabilities();
+        
         capabilities.setCapability(CapabilityType.PLATFORM_NAME,PlatformName);
         capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);

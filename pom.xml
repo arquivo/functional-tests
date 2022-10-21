@@ -206,7 +206,7 @@
                     <systemPropertyVariables>
                         <test.project.name>${project.name} ${testcase}</test.project.name>
                         <test.url>https://preprod.arquivo.pt</test.url>
-                        <test.resolution>1280x1024</test.resolution>
+                        <test.resolution>1280x960</test.resolution>
                         <test.remote.access.user>${remote.saucelabs.user}</test.remote.access.user>
                         <test.remote.access.key>${remote.saucelabs.key}</test.remote.access.key>
                         <test.runRemote>true</test.runRemote>
