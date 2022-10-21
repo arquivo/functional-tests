@@ -50,7 +50,7 @@ public class DriveManager {
     public RemoteWebDriver getDriver(String platformName, String browser, String browserVersion,
             String device, String deviceOrientation, String automationName, Map<String, Object> sauceOptions) throws MalformedURLException {
         if(device != null) {
-            return getMobileDriver(platformName, browser, device, browserVersion, deviceOrientation, sauceOptions);
+            return getMobileDriver(platformName, browser, device, browserVersion, deviceOrientation, automationName, sauceOptions);
         } else {
             return getDesktopDriver(browser, platformName, browserVersion, sauceOptions);
         }
