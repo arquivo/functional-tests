@@ -26,14 +26,14 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
-	// @Retry
+	@Retry
 	public void pageSearchEmptyTestPT() {
 		LocaleUtils.changeLanguageToPT(this);
 		pageSearchTest("Não foram encontrados resultados para a sua pesquisa: ");
 	}
 
 	@Test
-	// @Retry
+	@Retry
 	public void pageSearchEmptyTestEN() {
 		LocaleUtils.changeLanguageToEN(this);
 		pageSearchTest("No results were found for the query: ");
