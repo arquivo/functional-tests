@@ -48,7 +48,7 @@ public class DriveManager {
     }
 
     public RemoteWebDriver getDriver(String platformName, String browser, String browserVersion,
-            String device, String deviceOrientation, Map<String, Object> sauceOptions) throws MalformedURLException {
+            String device, String deviceOrientation, String automationName, Map<String, Object> sauceOptions) throws MalformedURLException {
         if(device != null) {
             return getMobileDriver(platformName, browser, device, browserVersion, deviceOrientation, sauceOptions);
         } else {
@@ -97,7 +97,7 @@ public class DriveManager {
     }
 
     public RemoteWebDriver getMobileDriver(String PlatformName, String browserName, String deviceName,
-     String platformVersion, String deviceOrientation, Map<String, Object> sauceOptions) throws MalformedURLException {
+     String platformVersion, String deviceOrientation, String automationName, Map<String, Object> sauceOptions) throws MalformedURLException {
 
         MutableCapabilities capabilities = new MutableCapabilities();
         capabilities.setCapability(CapabilityType.PLATFORM_NAME,PlatformName);
@@ -106,6 +106,7 @@ public class DriveManager {
         if(deviceOrientation != null)
             capabilities.setCapability(MobileCapabilityType.ORIENTATION, deviceOrientation);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
         sauceOptions.remove("screenResolution");
         capabilities.setCapability("sauce:options", sauceOptions);
 
@@ -117,11 +118,11 @@ public class DriveManager {
         System.out.println("Capabilities: " + capabilities.toString());
 
         if(PlatformName.equals("iOS")){
-            return new IOSDriver<>(buildUrl(), capabilities);
+            return new IOSDriver(buildUrl(), capabilities);
         } else if (PlatformName.equals("Android")){
-            return new AndroidDriver<>(buildUrl(), capabilities);
+            return new AndroidDriver(buildUrl(), capabilities);
         } else {
-            return new AppiumDriver<>(buildUrl(), capabilities);
+            return new AppiumDriver(buildUrl(), capabilities);
         }
     }
 }

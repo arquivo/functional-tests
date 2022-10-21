@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.Retry;
 public class MenuImagesAdvancedSearchHomepageTest extends MenuTest {
 
     public MenuImagesAdvancedSearchHomepageTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+            String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test

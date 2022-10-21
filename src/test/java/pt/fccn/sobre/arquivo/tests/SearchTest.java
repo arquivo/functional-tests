@@ -14,8 +14,8 @@ import pt.fccn.sobre.arquivo.pages.SearchPage;
 
 public class SearchTest extends WebDriverTestBaseParallel {
 
-	public SearchTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super( os, version, browser, deviceName, deviceOrientation );
+	public SearchTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 	
 	@Test

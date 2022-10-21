@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
 
-    public SavePageNowURLNotFoundTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+    public SavePageNowURLNotFoundTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test

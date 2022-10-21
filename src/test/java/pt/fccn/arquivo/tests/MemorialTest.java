@@ -53,8 +53,8 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_PATH = "/wayback";
 
-	public MemorialTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+	public MemorialTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test

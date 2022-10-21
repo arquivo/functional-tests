@@ -18,8 +18,8 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
 public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 
 	public PageSearchOverlapDatesTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test

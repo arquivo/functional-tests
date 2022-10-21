@@ -14,8 +14,8 @@ import pt.fccn.sobre.arquivo.pages.SiteMapPage;
 
 public class SiteMapTest extends WebDriverTestBaseParallel {
 
-	public SiteMapTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super( os, version, browser, deviceName, deviceOrientation );
+	public SiteMapTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test

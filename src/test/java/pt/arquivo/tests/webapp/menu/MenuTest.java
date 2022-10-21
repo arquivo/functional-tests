@@ -6,8 +6,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 public abstract class MenuTest extends WebDriverTestBaseParallel {
 
-	public MenuTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+	public MenuTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	protected void openMenu() {

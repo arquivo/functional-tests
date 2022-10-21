@@ -15,8 +15,8 @@ import pt.fccn.sobre.arquivo.pages.IndexSobrePage;
 
 public class CommonQuestionsTest extends WebDriverTestBaseParallel {
 
-	public CommonQuestionsTest( String os, String version, String browser, String deviceName, String deviceOrientation ) {
-		super( os, version, browser, deviceName, deviceOrientation );
+	public CommonQuestionsTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 	
 	boolean isPreProd = true;

@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 public class ImageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 
 	public ImageSearchQuerySuggestionTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test

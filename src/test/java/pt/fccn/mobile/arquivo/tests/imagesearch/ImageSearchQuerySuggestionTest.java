@@ -18,7 +18,7 @@
 //
 //	public ImageSearchQuerySuggestionTest(String os, String version, String browser, String deviceName,
 //			String deviceOrientation) {
-//		super(os, version, browser, deviceName, deviceOrientation);
+//		super(os, version, browser, deviceName, deviceOrientation, automationName);
 //	}
 //
 //	@Test
