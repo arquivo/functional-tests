@@ -4,9 +4,11 @@ import java.time.Duration;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pt.arquivo.tests.webapp.utils.CustomConditions;
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
@@ -36,10 +38,9 @@ public class ReplayExpandTest extends WebDriverTestBaseParallel {
 
 		run("Click expand link", () -> waitUntilElementIsVisibleAndGet(By.id("expandPage")).click());
 
-		// or url contains wayback site (specific for android driver) or the correct
-		// full no frame url
-		run("Check we go to correct no frame url", () -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions
-				.or(ExpectedConditions.urlContains(WAYBACK_SITE), ExpectedConditions.urlContains(NOFRAME_EXAMPLE))));
-	}
+		run("Check we go to correct no frame url", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
+			.until(CustomConditions.browserUrlContains(NOFRAME_EXAMPLE)));
 
+	}
+		
 }
