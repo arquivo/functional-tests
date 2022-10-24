@@ -30,8 +30,8 @@ import pt.fccn.mobile.arquivo.utils.LocalizedString;
  */
 public class URLSearchListTest extends WebDriverTestBaseParallel {
 
-    public URLSearchListTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+    public URLSearchListTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test

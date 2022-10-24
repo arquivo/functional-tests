@@ -20,8 +20,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class PageSearchTest extends WebDriverTestBaseParallel {
 
-	public PageSearchTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+	public PageSearchTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test
