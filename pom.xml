@@ -177,19 +177,9 @@
                         <SAUCE_ONDEMAND_BROWSERS>
                         [
                             {
-                                "platform":"Windows 10",
-                                "browser":"Chrome",
-                                "browser-version":"latest"
-                            },
-                            {
-                                "platform":"macOS 11.00",
-                                "browser":"Safari",
-                                "browser-version":"latest"
-                            },
-                            {
                                 "platform":"iOS",
                                 "browser":"Safari",
-                                "browser-version":"15.4",
+                                "browser-version":"14.0",
                                 "device": "iPhone Simulator",
                                 "automation-name": "XCUITest"
                             },
