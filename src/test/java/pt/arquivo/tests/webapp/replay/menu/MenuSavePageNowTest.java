@@ -27,14 +27,14 @@ public class MenuSavePageNowTest extends WebDriverTestBaseParallel {
 
 	@Test
 	@Retry
-	public void menuPagesNewSearchWaybackTest() {
+	public void menuSavePageNowTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
 		run("Click menu button",
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
 
 		run("Click SavePageNow button",
-				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#swiperWrapper > div.swiper-slide.menu.swiper-slide-active > a:nth-child(8)")).click());
+				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(1) > a:nth-child(8) > h4:nth-child(1)")).click());
 
 
 		appendError("Check if current url is the page search",
