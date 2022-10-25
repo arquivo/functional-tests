@@ -93,7 +93,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * rule.
      */
     @Rule
-    public RetryRule rule = new RetryRule(2);
+    public RetryRule rule = new RetryRule(1);
 
     /**
      * Represents the browser to be used as part of the test run.
@@ -115,6 +115,8 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * Represents the device-orientation of mobile device
      */
     protected String deviceOrientation;
+
+    protected String automationName;
     /**
      * Instance variable which contains the Sauce Job Id.
      */
@@ -133,7 +135,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
     protected final boolean isPreProd;
 
     public WebDriverTestBaseParallel(String platformName, String browser, String browserVersion,
-        String device, String deviceOrientation) {
+        String device, String deviceOrientation, String automationName) {
 
         super();
         this.platformName = platformName;
@@ -141,6 +143,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         this.browser = browser;
         this.device = device;
         this.deviceOrientation = deviceOrientation;
+        this.automationName = automationName;
         this.testURL = System.getProperty("test.url");
         assertNotNull("test.url property is required", this.testURL);
         this.isPreProd = this.testURL.contains(pre_prod);
@@ -182,7 +185,8 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
                     browserConfigs.getString("browser"),
                     browserConfigs.optString("browser-version"),
                     browserConfigs.optString("device", null),
-                    browserConfigs.optString("device-orientation", null)
+                    browserConfigs.optString("device-orientation", null),
+                    browserConfigs.optString("automation-name", null)
                 });
             }
         }
@@ -229,7 +233,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
         DriveManager driveManager = new DriveManager();
 
-        this.driver = driveManager.getDriver(platformName, browser, browserVersion, device, deviceOrientation, sauceOptions);
+        this.driver = driveManager.getDriver(platformName, browser, browserVersion, device, deviceOrientation, automationName, sauceOptions);
         this.driver.get(testURL);
 
         this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();

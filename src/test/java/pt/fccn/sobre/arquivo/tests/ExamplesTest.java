@@ -14,8 +14,8 @@ import pt.fccn.sobre.arquivo.pages.IndexSobrePage;
 
 public class ExamplesTest extends WebDriverTestBaseParallel {
 
-	public ExamplesTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super( os, version, browser, deviceName, deviceOrientation );
+	public ExamplesTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 	
 	@Test

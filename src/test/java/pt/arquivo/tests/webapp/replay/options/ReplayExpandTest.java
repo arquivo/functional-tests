@@ -25,8 +25,8 @@ public class ReplayExpandTest extends WebDriverTestBaseParallel {
 
 	private static final String NOFRAME_EXAMPLE = "/noFrame/replay/19961013145650/" + WAYBACK_SITE;
 
-	public ReplayExpandTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+	public ReplayExpandTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test

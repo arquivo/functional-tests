@@ -37,6 +37,9 @@
     </ciManagement>
 
     <properties>
+        <selenium.version>4.4.0</selenium.version>
+        <appium.version>8.2.0</appium.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -54,9 +57,8 @@
         <remote.saucelabs.user>${env.SAUCE_USERNAME}</remote.saucelabs.user>
 
         <test.resolution></test.resolution>
-        <selenium.version>4.4.0</selenium.version>
-        <test.browsers.json>${env.SAUCE_ONDEMAND_BROWSERS}</test.browsers.json>
 
+        <test.browsers.json>${env.SAUCE_ONDEMAND_BROWSERS}</test.browsers.json>
     </properties>
 
     <dependencies>
@@ -135,7 +137,7 @@
         <dependency>
 			<groupId>com.github.appium</groupId>
 			<artifactId>java-client</artifactId>
-			<version>7.6.0</version>
+			<version>${appium.version}</version>
 		</dependency>
     </dependencies>
 
@@ -170,21 +172,35 @@
                     <!-- force encoding -->
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                     <environmentVariables>
-                        <SAUCE_USERNAME>${remote.saucelabs.user}</SAUCE_USERNAME>
-                        <SAUCE_ACCESS_KEY>${remote.saucelabs.key}</SAUCE_ACCESS_KEY>
-                        <SAUCE_ONDEMAND_BROWSERS>${test.browsers.json}</SAUCE_ONDEMAND_BROWSERS>
+                        <SAUCE_USERNAME>ArquivoPT</SAUCE_USERNAME>
+                        <SAUCE_ACCESS_KEY>663108d4-2412-436a-89d0-f8856bd33377</SAUCE_ACCESS_KEY>
+                        <SAUCE_ONDEMAND_BROWSERS>
+                        [
+                            {
+                                "platform":"iOS",
+                                "browser":"Safari",
+                                "browser-version":"15.4",
+                                "device": "iPhone Simulator",
+                                "automation-name": "XCUITest"
+                            },
+                            {
+                                "platform":"Android",
+                                "browser":"Chrome",
+                                "browser-version":"12.0",
+                                "device": "Android GoogleAPI Emulator",
+                                "automation-name": "UiAutomator2"
+                            }
+                        ]
+                        </SAUCE_ONDEMAND_BROWSERS>
                     </environmentVariables>
                     <systemPropertyVariables>
                         <test.project.name>${project.name} ${testcase}</test.project.name>
-                        <test.url>${test.url}</test.url>
-                        <test.resolution>${test.resolution}</test.resolution>
-                        <test.platform>${test.platform}</test.platform>
-                        <test.browser>${test.browser}</test.browser>
-                        <test.browser.version>${test.browser.version}</test.browser.version>
+                        <test.url>https://preprod.arquivo.pt</test.url>
+                        <test.resolution>1280x960</test.resolution>
                         <test.remote.access.user>${remote.saucelabs.user}</test.remote.access.user>
                         <test.remote.access.key>${remote.saucelabs.key}</test.remote.access.key>
                         <test.runRemote>true</test.runRemote>
-                        <test.remote.access.port>${test.remote.access.port}</test.remote.access.port>
+                        <test.remote.access.port>4444</test.remote.access.port>
                     </systemPropertyVariables>
                     <includes>
                         <include>**/*.java</include>

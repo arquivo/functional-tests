@@ -21,8 +21,8 @@ public class MenuImagesNewSearchWaybackTest extends WebDriverTestBaseParallel {
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
 	public MenuImagesNewSearchWaybackTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test
