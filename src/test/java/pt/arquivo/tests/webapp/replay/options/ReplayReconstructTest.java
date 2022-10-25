@@ -7,11 +7,8 @@ import java.util.logging.Level;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-<<<<<<< HEAD
-=======
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
->>>>>>> origin/tests-desktop
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
