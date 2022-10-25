@@ -32,10 +32,10 @@ public class MenuPagesNewAvancedSearchWaybackTest extends WebDriverTestBaseParal
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
 
 		run("Open pages sub menu", 
-				() -> waitUntilElementIsVisibleAndGet(By.id("pagesMenu")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#pagesMenu > h4:nth-child(1)")).click());
 
-		run("Click new search button",
-				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#pageOptions > a:nth-child(2)")).click());
+		run("Click new advanced search button",
+				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#pageOptions > a:nth-child(2) > h4:nth-child(1)")).click());
 
 		appendError("Check if current url is the advanced search",
 				() -> new WebDriverWait(driver, java.time.Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/page/advanced/search?")));

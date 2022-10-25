@@ -50,7 +50,7 @@ public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
 
 		run("Click about button",
-				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#swiperWrapper > div.swiper-slide.menu.swiper-slide-active > a:nth-child(9)")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(1) > a:nth-child(9) > h4:nth-child(1)")).click());
 
 		appendError("Check if current url is the about page",
 				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains(expectedUrl)));

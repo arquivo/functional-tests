@@ -35,10 +35,10 @@ public class MenuPagesNewSearchWaybackTest extends WebDriverTestBaseParallel {
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
 
 		run("Open pages sub menu", 
-				() -> waitUntilElementIsVisibleAndGet(By.id("pagesMenu")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#pagesMenu > h4:nth-child(1)")).click());
 
 		run("Click new search button",
-				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#pageOptions > a:nth-child(1)")).click());
+				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#pageOptions > a:nth-child(1) > h4:nth-child(1)")).click());
 
 
 		appendError("Check if current url is the page search",

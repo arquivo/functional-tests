@@ -30,14 +30,14 @@ public class ReplayPrintTest extends WebDriverTestBaseParallel {
 
 		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
 
-		run("Click print link", () -> waitUntilElementIsVisibleAndGet(By.id("printOption")).click());
+		run("Click print link", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#printOption > h4:nth-child(1)")).click());
 
 		run("Cancel print page", () -> waitUntilElementIsVisibleAndGet(By.id("cancelPopup")).click());
 
 		appendError("Check print confirm page is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("uglipop_content_fixed"))));
 
-		run("Click again on print link", () -> waitUntilElementIsVisibleAndGet(By.id("printOption")).click());
+		run("Click again on print link", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#printOption > h4:nth-child(1)")).click());
 
 		run("Print page", () -> waitUntilElementIsVisibleAndGet(By.id("printPage")).click());
 

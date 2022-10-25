@@ -57,7 +57,7 @@ public class ReplayTechnicalDetailsTest extends WebDriverTestBaseParallel {
 
 		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
 
-		run("Click on tecnical details anchor", () -> waitUntilElementIsVisibleAndGet(By.id("a_moreinfo")).click());
+		run("Click on tecnical details anchor", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#a_moreinfo > h4:nth-child(1)")).click());
 
 		waitUntilElementIsVisibleAndGet(By.id("uglipop_popbox"));
 		

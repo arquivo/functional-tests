@@ -34,10 +34,10 @@ public class MenuImagesAdvancedSearchWaybackTest extends WebDriverTestBaseParall
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
 
 		run("Open images sub menu", 
-				() -> waitUntilElementIsVisibleAndGet(By.id("imagesMenu")).click());
+				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#imagesMenu > h4:nth-child(1)")).click());
 
 		run("Click new advanced search button",
-				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#imageOptions > a:nth-child(2)")).click());
+				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#imageOptions > a:nth-child(2) > h4:nth-child(1)")).click());
 
 		appendError("Check if current url is the advanced image search",
 				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/image/advanced/search?")));
