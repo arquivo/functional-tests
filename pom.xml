@@ -177,23 +177,11 @@
                         <SAUCE_ONDEMAND_BROWSERS>
                         [
                             {
-                                "platform":"macOS 11.00",
-                                "browser":"Safari",
-                                "browser-version":"latest"
-                            },
-                            {
                                 "platform":"iOS",
                                 "browser":"Safari",
-                                "browser-version":"14.0",
+                                "browser-version":"15.4",
                                 "device": "iPhone Simulator",
                                 "automation-name": "XCUITest"
-                            },
-                            {
-                                "platform":"Android",
-                                "browser":"Chrome",
-                                "browser-version":"12.0",
-                                "device": "Android GoogleAPI Emulator",
-                                "automation-name": "UiAutomator2"
                             }
                         ]
                         </SAUCE_ONDEMAND_BROWSERS>
