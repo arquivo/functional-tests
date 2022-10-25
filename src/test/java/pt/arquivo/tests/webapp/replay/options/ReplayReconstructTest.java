@@ -7,6 +7,8 @@ import java.util.logging.Level;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
@@ -33,20 +35,20 @@ public class ReplayReconstructTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
-	@Retry
+	// @Retry
 	public void replayReconstructTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
 		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
 
-		run("Click complete page link", () -> waitUntilElementIsVisibleAndGet(By.id("a_reconstruct")).click());
+		run("Click complete page link", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#a_reconstruct > h4:nth-child(1)")).click());
 
 		run("Click cancel on the popup", () -> waitUntilElementIsVisibleAndGet(By.id("cancelPopup")).click());
 
 		appendError("Check complete page confirm page is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("uglipop_content_fixed"))));
 
-		run("Click complete page link again", () -> waitUntilElementIsVisibleAndGet(By.id("a_reconstruct")).click());
+		run("Click complete page link", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#a_reconstruct > h4:nth-child(1)")).click());
 
 		run("Click confirm on the popup", () -> waitUntilElementIsVisibleAndGet(By.id("completePage")).click());
 
