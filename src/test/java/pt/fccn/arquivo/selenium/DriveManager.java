@@ -135,6 +135,8 @@ public class DriveManager {
         System.out.println("Capabilities: " + capabilities.toString());
 
         if(PlatformName.equals("iOS")){
+            capabilities.setCapability("appium:nativeWebTap", true);
+            capabilities.setCapability("appium:nativeWebTapStrict", true);
             return new IOSDriver(buildUrl(), capabilities);
         } else if (PlatformName.equals("Android")){
             return new AndroidDriver(buildUrl(), capabilities);
