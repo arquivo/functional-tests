@@ -35,7 +35,7 @@ public class ReplayReconstructTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
-	// @Retry
+	@Retry
 	public void replayReconstructTest() {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 

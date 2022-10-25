@@ -31,14 +31,14 @@ public class ReplayScreenshotTest extends WebDriverTestBaseParallel {
 
 		run("Open replay right menu", () -> waitUntilElementIsVisibleAndGet(By.id("replayMenuButton")).click());
 
-		run("Click screenshot page link", () -> waitUntilElementIsVisibleAndGet(By.id("screenshotOption")).click());
+		run("Click screenshot page link", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#screenshotOption > h4:nth-child(1)")).click());
 
 		run("Cancel take screenshot", () -> waitUntilElementIsVisibleAndGet(By.id("cancelPopup")).click());
 
 		appendError("Check save page as image modal is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("uglipop_content_fixed"))));
 
-		run("Click again on screenshot link", () -> waitUntilElementIsVisibleAndGet(By.id("screenshotOption")).click());
+		run("Click again on screenshot link", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("#screenshotOption > h4:nth-child(1)")).click());
 
 		run("Take screenshot", () -> waitUntilElementIsVisibleAndGet(By.id("takeScreenshot")).click());
 
