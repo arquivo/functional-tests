@@ -46,8 +46,8 @@ public class ReplayListVersionsTest extends WebDriverTestBaseParallel {
 					assertThat("Href is searching the right URL ( "+href+" )" , href.contains("query=http%3A%2F%2Fwww.fccn.pt%2F"));
 					assertThat("Href is searching in the right place ( "+href+" )", href.contains("/page/search"));
 				});
-
-		run("Click list versions anchor", () -> anchor.click());
+		
+		run("Click list versions anchor", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(3) > a:nth-child(2) > h4:nth-child(1)")).click());
 
 		String expectedUrl = this.testURL + "/url/search?q=http%3A%2F%2Fwww.fccn.pt%2F&from=19910806";
 
