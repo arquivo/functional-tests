@@ -35,7 +35,7 @@ public class ImageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 		});
 
 		assertThat("Verify if a suggestion is presented",
-				driver.findElement(By.cssSelector("#term-suggested a")).getText(), containsString("amazon.co.uk"));
+				driver.findElement(By.cssSelector("#term-suggested a")).getText().trim(), containsString("amazon.co.uk"));
 	}
 
 }

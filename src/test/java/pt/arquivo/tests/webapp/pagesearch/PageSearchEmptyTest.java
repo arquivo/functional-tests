@@ -53,7 +53,7 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 		appendError("Empty result message should be visible",
 				() -> ExpectedConditions.visibilityOfElementLocated(emptyResultMessageBy));
 		
-		String emptyResultMessage = driver.findElement(emptyResultMessageBy).getText();
+		String emptyResultMessage = driver.findElement(emptyResultMessageBy).getText().trim();
 		appendError(() -> assertThat("Empty result message should contains specific text",
 			emptyResultMessage, containsString(noResultsMessage)));
 		

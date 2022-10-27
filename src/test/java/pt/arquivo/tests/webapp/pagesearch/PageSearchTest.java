@@ -42,7 +42,7 @@ public class PageSearchTest extends WebDriverTestBaseParallel {
 		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
 		
 		appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", numberResults,
-				driver.findElement(By.id("estimated-results-value")).getText()));
+				driver.findElement(By.id("estimated-results-value")).getText().trim()));
 		
 		long totalResults = driver.findElements(By.cssSelector(".page-search-result")).stream().count();
 		long relevantResults = driver.findElements(By.cssSelector(".page-search-result")).stream().filter(em -> em.getText().toLowerCase().contains("fccn")).count();

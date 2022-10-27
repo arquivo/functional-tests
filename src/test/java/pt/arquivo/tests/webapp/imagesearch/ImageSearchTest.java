@@ -41,7 +41,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         });
 
         //Get estimated-results-value
-        String element = driver.findElement(By.id("estimated-results")).getText();
+        String element = driver.findElement(By.id("estimated-results")).getText().trim();
         String[] elements = element.split(" ");
         Double number_of_display_results = Double.valueOf(elements[2]);
 
@@ -58,37 +58,37 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> {
             assertEquals("Check image name in image viewer", "FCCN",
-                    driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[1]/p/a")).getText());
+                    driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[1]/p/a")).getText().trim());
         });
 
         appendError(() -> {
             assertEquals("Check image original link in image viewer", "http://www.fccn.eu/images/announce/thumbs/020_58137.jpg", driver
-                    .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[3]/p/span")).getText());
+                    .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[3]/p/span")).getText().trim());
         });
 
         // appendError(() -> {
         // 	assertEquals("Check image type and size on opened modal", "jpeg 319 x 69", driver
-        // 			.findElement(By.xpath("//*[@id=\"card0\"]/ion-card-content[1]/ion-list/ion-item[3]")).getText());
+        // 			.findElement(By.xpath("//*[@id=\"card0\"]/ion-card-content[1]/ion-list/ion-item[3]")).getText().trim());
         // });
 
         appendError(() -> {
             assertEquals("Check image capture date in image viewer", "4 Setembro 17h36, 2009", driver
-                    .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText());
+                    .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
         });
 
         appendError(() -> {
             assertEquals("Check page title in image viewer", "FCCN - Fundação para a Computação Científica Nacional",
-                    driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText());
+                    driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText().trim());
         });
 
         appendError(() -> {
             assertEquals("Check page URL in image viewer", "http://www.fccn.eu/", driver
-                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[8]/p/span")).getText());
+                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[8]/p/span")).getText().trim());
         });
 
         appendError(() -> {
             assertEquals("Check page capture date in image viewer", "4 Setembro 17h36, 2009", driver
-                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText());
+                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
         });
 
         appendError(() -> { // Click in Details button
@@ -102,21 +102,21 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
                     driver.findElement(
-                            By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText(),
+                            By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
                     containsString("a6e8551fe818ebddbcc791f424c765aa95e22d5ed6a8960be6ce58cb5e7633cd"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
                     driver.findElement(
-                            By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText(),
+                            By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
                     containsString("Apresentados os recentes desenvolvimentos da RCTS A FCCN contou com a presença do Ministro da C"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
                     driver.findElement(
-                            By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText(),
+                            By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
                     containsString("https://arquivo.pt/wayback/20090904173557/http://www.fccn.eu/"));
         });
 

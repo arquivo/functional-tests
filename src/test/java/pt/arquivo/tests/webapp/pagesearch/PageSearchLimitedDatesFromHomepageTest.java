@@ -44,14 +44,14 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
         run("Wait until search results are shown", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]")));
 
         appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", "Cerca de 74 resultados desde 1996 até 1997",
-                driver.findElement(By.id("estimated-results-value")).getText()));
+                driver.findElement(By.id("estimated-results-value")).getText().trim()));
 
         appendError("Check first result url", () -> {
             List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
             assertTrue("Mininium of urls should be 1", wes.size() > 0);
 
             WebElement we = wes.get(0);
-            assertThat("Check first result url", we.getText(), containsString("fccn.pt"));
+            assertThat("Check first result url", we.getText().trim(), containsString("fccn.pt"));
 
             assertEquals("After advanced search check search term contains",
                 "19961013145650",
@@ -67,21 +67,21 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
             assertTrue("Mininium of title should be 1", wes.size() > 0);
 
             WebElement we = wes.get(0);
-            assertEquals("Check first result title", "www.fccn.pt", we.getText());
+            assertEquals("Check first result title", "www.fccn.pt", we.getText().trim());
         });
 
         appendError("Check first result version", () -> {
             WebElement we = driver
                     .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[3]/p"));
 
-            assertThat("Check first result version", we.getText(), containsString("13 Outubro 1996"));
+            assertThat("Check first result version", we.getText().trim(), containsString("13 Outubro 1996"));
         });
 
         appendError("Check first result summary", () -> {
             WebElement we = driver
                     .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[4]/a/p"));
 
-            assertThat("Check first result version", we.getText(), containsString("Av. Brasil"));
+            assertThat("Check first result version", we.getText().trim(), containsString("Av. Brasil"));
         });
     }
 

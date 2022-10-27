@@ -70,11 +70,11 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
         System.out.println("Current url: " + driver.getCurrentUrl());
 
         appendError(() -> assertThat("Check image original origin/domain",
-            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]")).getText(),
+            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]")).getText().trim(),
             containsString("fccn.pt")));
 
         appendError(() -> assertEquals("Check image date", "20 Janeiro 2011",
-            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[5]/p")).getText()));
+            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[5]/p")).getText().trim()));
 
         appendError(() -> assertEquals("Check image src",
             "https://arquivo.pt/wayback/20110120225358im_/http://fccn.pt/images/announce/modulo_moodle_04109.jpg",
