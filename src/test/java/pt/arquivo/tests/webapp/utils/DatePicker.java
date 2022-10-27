@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -90,19 +91,21 @@ public class DatePicker {
 
     private static void mobileDatepickerChangeValueTo(WebDriver driver, Integer value, char type){
         WebElement selectedWebElement = driver.findElement(By.cssSelector("#ap-component-"+type+" .ap-row-selected"));
-            Integer selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
-            Integer counter = Math.abs(value - selectedValue);
+        Integer selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
+        Integer counter = Math.abs(value - selectedValue);
             
-            while (selectedValue != value && counter > 0){
-                DatePicker.changeValueByOne(
-                    driver,
-                    value > selectedValue,
-                    "#ap-component-selector-"+type
-                );
-                selectedWebElement = driver.findElement(By.cssSelector("#ap-component-"+type+" .ap-row-selected"));
-                selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
-                counter--;
-            }
+        Platform platform = ((RemoteWebDriver) driver).getCapabilities().getPlatformName();
+
+        while (selectedValue != value && counter > 0){
+            DatePicker.changeValueByOne(
+                driver,
+                (value > selectedValue && platform.equals(Platform.IOS)) || (value < selectedValue && platform.equals(Platform.ANDROID)),
+                "#ap-component-selector-"+type
+            );
+            selectedWebElement = driver.findElement(By.cssSelector("#ap-component-"+type+" .ap-row-selected"));
+            selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
+            counter--;
+        }
     }
 
     private static void mobileDatepickerChangeDayTo(WebDriver driver, Integer day){
