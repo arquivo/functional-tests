@@ -62,8 +62,17 @@ public class NarrativeButtonTest extends WebDriverTestBaseParallel {
             driver.findElement(By.xpath("//*[@id=\"search-form-narrative\"]/button")).click();
         });
 
-        appendError(() -> assertEquals("Verify text from ContaMeHistorias.pt", "https://contamehistorias.pt/arquivopt/searching?query=fccn&last_years=10&lang=pt",
-            driver.getCurrentUrl()));
+        appendError("Verify text from ContaMeHistorias.pt", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
+        .until(ExpectedConditions.and(
+            ExpectedConditions.urlContains("https://contamehistorias.pt/arquivopt/search"),
+            ExpectedConditions.urlContains("query=fccn"),
+            ExpectedConditions.urlContains("last_years=10"),
+            ExpectedConditions.urlContains("lang=pt")
+        )));
+        
+        
+        // assertEquals("Verify text from ContaMeHistorias.pt", "https://contamehistorias.pt/arquivopt/searching?query=fccn&last_years=10&lang=pt",
+        //     driver.getCurrentUrl()));
     }
 
 }
