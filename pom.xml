@@ -398,7 +398,7 @@
                             <sauceUsername>${remote.saucelabs.user}</sauceUsername>
                             <sauceAccessKey>${remote.saucelabs.key}</sauceAccessKey>
                             <!-- WARN: do not format the followin line (!) -->
-                            <options>--logfile /tmp/sc_${remote.saucelabs.port.scproxy}.log --scproxy-port ${remote.saucelabs.port.scproxy} --se-port ${remote.saucelabs.port.se} --tunnel-name tests-desktop</options>
+                            <options>--logfile /tmp/sc_${remote.saucelabs.port.scproxy}.log --scproxy-port ${remote.saucelabs.port.scproxy} --se-port ${remote.saucelabs.port.se} --tunnel-name tests-mobile</options>
                         </configuration>
                         <dependencies>
                             <dependency>
