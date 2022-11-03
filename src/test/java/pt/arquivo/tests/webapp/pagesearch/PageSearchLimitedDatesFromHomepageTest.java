@@ -31,20 +31,20 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
     @Retry
     public void pageSearchLimitedDatesFromHomepageTest() throws Exception {
         run("Search with fccn", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
         });
 
         run("Set start date to 12 October 1996", () -> DatePicker.setStartDatePicker(driver, "12/10/1996"));
 
         run("Set end date to 1 January 1997", () -> DatePicker.setEndDatePicker(driver, "01/01/1997"));
 
-        run("Click on search button", () -> driver.findElement(By.id("submit-search")).click());
+        run("Click on search button", () -> waitUntilElementIsVisibleAndGet(By.id("submit-search")).click());
 
         run("Wait until search results are shown", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]")));
 
         appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", "Cerca de 74 resultados desde 1996 até 1997",
-                driver.findElement(By.id("estimated-results-value")).getText().trim()));
+                waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim()));
 
         appendError("Check first result url", () -> {
             List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
@@ -55,11 +55,11 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
 
             assertEquals("After advanced search check search term contains",
                 "19961013145650",
-                driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getAttribute("data-tstamp").trim());
+                waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getAttribute("data-tstamp").trim());
 
             assertEquals("After advanced search check search term contains",
                 "http://www.fccn.pt/",
-                driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getAttribute("data-url").trim());
+                waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getAttribute("data-url").trim());
         });
 
         appendError("Check first result title", () -> {

@@ -31,9 +31,9 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
     public void testImageSearchOneTerm() throws Exception {
 
         run("Search FCCN term", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-            driver.findElement(By.id("submit-search")).click();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+            waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
         run("Search images instead of text", () -> {
@@ -41,7 +41,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         });
 
         //Get estimated-results-value
-        String element = driver.findElement(By.id("estimated-results")).getText().trim();
+        String element = waitUntilElementIsVisibleAndGet(By.id("estimated-results")).getText().trim();
         String[] elements = element.split(" ");
         Double number_of_display_results = Double.valueOf(elements[2]);
 
@@ -53,12 +53,12 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> {
             assertTrue("First image details should be shown after clicking on it",
-                    driver.findElement(By.id("modal")).isDisplayed());
+                    waitUntilElementIsVisibleAndGet(By.id("modal")).isDisplayed());
         });
 
         appendError(() -> {
             assertEquals("Check image name in image viewer", "FCCN",
-                    driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[1]/p/a")).getText().trim());
+                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[1]/p/a")).getText().trim());
         });
 
         appendError(() -> {
@@ -78,7 +78,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> {
             assertEquals("Check page title in image viewer", "FCCN - Fundação para a Computação Científica Nacional",
-                    driver.findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText().trim());
+                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText().trim());
         });
 
         appendError(() -> {
@@ -92,7 +92,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> { // Click in Details button
-            driver.findElement(By.id("image-details-button")).click();
+            waitUntilElementIsVisibleAndGet(By.id("image-details-button")).click();
         });
 
         /**************************/
@@ -101,21 +101,21 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
-                    driver.findElement(
+                    waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
                     containsString("a6e8551fe818ebddbcc791f424c765aa95e22d5ed6a8960be6ce58cb5e7633cd"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
-                    driver.findElement(
+                    waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
                     containsString("Apresentados os recentes desenvolvimentos da RCTS A FCCN contou com a presença do Ministro da C"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
-                    driver.findElement(
+                    waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
                     containsString("https://arquivo.pt/wayback/20090904173557/http://www.fccn.eu/"));
         });
@@ -123,11 +123,11 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         /**************************/
 
         run("Click copy API details ", () -> {
-            driver.findElement(By.id("copy-raw-api-data")).click();
+            waitUntilElementIsVisibleAndGet(By.id("copy-raw-api-data")).click();
         });
 
         run("Close image first modal", () -> {
-            driver.findElement(By.xpath("//*[@id=\"close-modal-tecnhical\"]/button")).click();
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"close-modal-tecnhical\"]/button")).click();
         });
     }
 }

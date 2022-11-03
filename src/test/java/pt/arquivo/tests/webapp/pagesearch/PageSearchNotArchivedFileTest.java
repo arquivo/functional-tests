@@ -40,15 +40,15 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 	@Retry
 	public void notArchivedFileTest() throws Exception {
 		run("Search with Lisboa", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
 		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));
 
 		run("click first position", () -> {
-			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).click();
+			waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).click();
 		});
 
 		waitForWaybackThenRun(() -> assertTrue("Verify that first result is archived", isPageArchived()));
@@ -58,7 +58,7 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]"));
 
 		run("click second position", () -> {
-			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[2]")).click();
+			waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[2]")).click();
 		});
 
 		waitForWaybackThenRun(() -> assertTrue("Verify that second result is archived", isPageArchived()));
@@ -68,7 +68,7 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]"));
 
 		run("click forth position", () -> {
-			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[4]")).click();
+			waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[4]")).click();
 		});
 
 		waitForWaybackThenRun(() -> assertTrue("Verify that fourth result is archived", isPageArchived()));

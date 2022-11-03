@@ -33,16 +33,16 @@ public class PageSearchTest extends WebDriverTestBaseParallel {
 	public void pageSearch(String query, String numberResults) {
 		
 		run("Search fccn", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys(query);
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys(query);
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 	
 		
 		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
 		
 		appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", numberResults,
-				driver.findElement(By.id("estimated-results-value")).getText().trim()));
+				waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim()));
 		
 		long totalResults = driver.findElements(By.cssSelector(".page-search-result")).stream().count();
 		long relevantResults = driver.findElements(By.cssSelector(".page-search-result")).stream().filter(em -> em.getText().toLowerCase().contains("fccn")).count();
