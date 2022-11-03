@@ -26,9 +26,9 @@ public class PageSearchNotSpamTest extends WebDriverTestBaseParallel {
 	@Retry
 	public void pageSearchNotSpamTest() throws Exception {
 		run("Search with Lisboa", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("lisboa");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("lisboa");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
 		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));

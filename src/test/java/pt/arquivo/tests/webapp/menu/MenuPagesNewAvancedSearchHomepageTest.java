@@ -29,7 +29,7 @@ public class MenuPagesNewAvancedSearchHomepageTest extends MenuTest {
         run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
 
         run("Click new advanced search button",
-                () -> driver.findElement(By.id("menu-pages-advanced-search")).click());
+                () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages-advanced-search")).click());
 
         appendError("Check if current url is the advanced search",
                 () -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/page/advanced/search?")));

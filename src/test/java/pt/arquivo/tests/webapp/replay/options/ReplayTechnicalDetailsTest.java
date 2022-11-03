@@ -62,60 +62,60 @@ public class ReplayTechnicalDetailsTest extends WebDriverTestBaseParallel {
 		waitUntilElementIsVisibleAndGet(By.id("uglipop_popbox"));
 		
 		appendError(() -> assertEquals("Check originalURL", "http://www.fccn.pt/",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[1]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[1]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check linkToArchive", this.testURL + WAYBACK_EXAMPLE,
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[2]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[2]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check tstamp", "tstamp: 19961013145650",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[3]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[3]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check contentLength", "contentLength: 3760",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[4]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[4]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check digest", "digest: b5f96e1014f99bbd9ef0277cde883f37",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[5]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[5]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check mimeType", "mimeType: text/html",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[6]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[6]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check encoding", "encoding: windows-1252",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[7]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[7]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check date", "date: 0845218610",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[8]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[8]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check linkToScreenshot", this.testURL + "/screenshot?url=https%3A%2F%2Fpreprod.arquivo.pt%2FnoFrame%2Freplay%2F19961013145650%2Fhttp%3A%2F%2Fwww.fccn.pt%2F",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[9]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[9]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check linkToNoFrame:", this.testURL + "/noFrame/replay/19961013145650/http://www.fccn.pt/",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[10]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[10]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check linkToExtractedText", this.testURL + "/textextracted?m=http%3A%2F%2Fwww.fccn.pt%2F%2F19961013145650",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[11]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[11]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check linkToMetadata", this.testURL + "/textsearch?metadata=http%3A%2F%2Fwww.fccn.pt%2F%2F19961013145650",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[12]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[12]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check linkToOriginalFile", this.testURL + "/noFrame/replay/19961013145650id_/http://www.fccn.pt/",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[13]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[13]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check snippet", "snippet: Fundação para a Computação Científica Nacional \" A promoção de infraestruturas no domínio da ...",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[14]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[14]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check fileName", "fileName: AWP-Roteiro-20090510220155-00000",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[15]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[15]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check collection", "Roteiro",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[16]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[16]/a")).getText().trim()));
 
 		appendError(() -> assertEquals("Check offset", "offset: 45198",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[17]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[17]")).getText().trim()));
 
 		appendError(() -> assertEquals("Check statusCode", "statusCode: 200",
-				driver.findElement(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[18]")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"uglipop_popbox\"]/div/p[18]")).getText().trim()));
 
-		appendError("Close technical detail modal", () -> driver.findElement(By.id("removeModal")).click());
+		appendError("Close technical detail modal", () -> waitUntilElementIsVisibleAndGet(By.id("removeModal")).click());
 
 		appendError("Check that tecnical details modal is closed when clicking on close button",
 				() -> new WebDriverWait(driver, Duration.ofSeconds(20))

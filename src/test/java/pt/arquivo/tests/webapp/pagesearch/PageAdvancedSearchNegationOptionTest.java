@@ -28,9 +28,9 @@ public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParal
 	@Retry
 	public void testPageAdvancedSearchNegationOption() throws Exception {
 		run("Search with fccn", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 		
 		run("Click on advanced search link to navigate to advanced search page",
@@ -38,19 +38,19 @@ public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParal
 		
 		appendError(() -> {
 			assertEquals("Check if search words maintain fccn term", "fccn",
-					driver.findElement(By.id("words")).getAttribute("value"));
+					waitUntilElementIsVisibleAndGet(By.id("words")).getAttribute("value"));
 		});
 		
-		appendError("Insert the negation option on form field", () -> driver.findElement(By.id("without")).sendKeys("Fundação"));
+		appendError("Insert the negation option on form field", () -> waitUntilElementIsVisibleAndGet(By.id("without")).sendKeys("Fundação"));
 		
-		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
+		appendError("Click on search on arquivo.pt button", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
 		 
 		appendError(() -> assertEquals("Verify if the - operator is on text box",
 				"fccn -Fundação",
-				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
+				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 		
 		assertThat("Verify if the term fccn is displayed on any search result (tird position)",
-				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p")).getText().toLowerCase(), containsString("fccn"));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p")).getText().toLowerCase(), containsString("fccn"));
 		
 		appendError("Verify that no search result contains the visible text Fundação", () -> {
 			long count = driver.findElements(By.cssSelector("#pages-results > ul"))

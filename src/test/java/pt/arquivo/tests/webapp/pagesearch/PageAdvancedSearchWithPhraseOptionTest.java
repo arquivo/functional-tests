@@ -26,9 +26,9 @@ public class PageAdvancedSearchWithPhraseOptionTest extends WebDriverTestBasePar
 	@Retry
 	public void testPageAdvancedSearchWithPhraseOption() throws Exception {
 		run("Search FCCN term", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 		
 		run("Click on advanced search link to navigate to advanced search page",
@@ -36,21 +36,21 @@ public class PageAdvancedSearchWithPhraseOptionTest extends WebDriverTestBasePar
 		
 		appendError(() -> {
 			assertEquals("Check if search words maintain fccn term", "fccn",
-					driver.findElement(By.id("words")).getAttribute("value"));
+					waitUntilElementIsVisibleAndGet(By.id("words")).getAttribute("value"));
 		});
 		
-		appendError("Insert the option on form field", () -> driver.findElement(By.id("phrase")).sendKeys("speedmeter"));
+		appendError("Insert the option on form field", () -> waitUntilElementIsVisibleAndGet(By.id("phrase")).sendKeys("speedmeter"));
 		
-		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
+		appendError("Click on search on arquivo.pt button", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
 
 		appendError(() -> assertEquals("Verify if the - operator is on text box",
 				"fccn \"speedmeter\"",
-				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
+				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 
 		assertThat("Verify if the term fccn is displayed on any search result",
-				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText(), containsString("FCCN"));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText().trim(), containsString("FCCN"));
 		
 		assertThat("Verify if the term fccn is displayed on any search result",
-				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText(), containsString("Speedmeter FCCN"));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText().trim(), containsString("Speedmeter FCCN"));
 	}
 }

@@ -62,12 +62,12 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> assertThat("Check image original origin/domain",
-                driver.findElement(By.xpath("//*[@id=\"image-card-1\"]/ul/li[4]/a")).getText(),
+                waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-card-1\"]/ul/li[4]/a")).getText().trim(),
                 containsString("fccn.pt")));
 
         if (imageButtonText.isPresent()) {
             appendError(() -> assertEquals("Check page language by verifying images button text", imageButtonText.get(),
-                    driver.findElement(By.id("search-form-images")).getText()));
+                    waitUntilElementIsVisibleAndGet(By.id("search-form-images")).getText().trim()));
         }
     }
 }

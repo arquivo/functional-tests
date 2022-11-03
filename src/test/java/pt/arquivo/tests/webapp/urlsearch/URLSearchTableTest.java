@@ -42,15 +42,15 @@ public class URLSearchTableTest extends WebDriverTestBaseParallel {
     private void urlSearchTableTest(String url, String tableText, String firstResultText, Locale locale) {
 
         run("Search fccn.pt url", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys(url);
-            driver.findElement(By.id("submit-search")).click();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys(url);
+            waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
         run("Change to Table mode if not in it", () -> {
-            WebElement resultsGridCurrentType = driver.findElement(By.id("replay-table-button"));
+            WebElement resultsGridCurrentType = waitUntilElementIsVisibleAndGet(By.id("replay-table-button"));
             if (resultsGridCurrentType.getAttribute("disabled") == null) {
-                driver.findElement(By.id("replay-table-button")).click();
+                waitUntilElementIsVisibleAndGet(By.id("replay-table-button")).click();
             }
         });
 
@@ -59,13 +59,13 @@ public class URLSearchTableTest extends WebDriverTestBaseParallel {
         run("Check if first version match", () -> {
             waitUntilElementIsVisibleAndGet(By.id("url-results"));
             assertEquals("Check if first version match", firstResultText,
-                driver.findElement(By.id("table-cell-19961013145650")).getText());
+                waitUntilElementIsVisibleAndGet(By.id("table-cell-19961013145650")).getText().trim());
         });
 
         appendError("Verify specific timetamp", () -> {
             String timestamp = "table-cell-19961013145650";
             WebElement dayWE = waitUntilElementIsVisibleAndGet(By.id(timestamp));
-            assertEquals(firstResultText, dayWE.getText());
+            assertEquals(firstResultText, dayWE.getText().trim());
         });
     }
 }

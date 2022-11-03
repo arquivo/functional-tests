@@ -25,9 +25,9 @@ public class ImageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 	@Retry
 	public void imageSearchQuerySuggestionTest() {
 		run("Search with testre", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("amazoncouk");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("amazoncouk");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
 		run("Search images instead of text", () -> {
@@ -35,7 +35,7 @@ public class ImageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 		});
 
 		assertThat("Verify if a suggestion is presented",
-				driver.findElement(By.cssSelector("#term-suggested a")).getText(), containsString("amazon.co.uk"));
+				waitUntilElementIsVisibleAndGet(By.cssSelector("#term-suggested a")).getText().trim(), containsString("amazon.co.uk"));
 	}
 
 }

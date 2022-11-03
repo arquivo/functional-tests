@@ -83,26 +83,27 @@ public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBase
         LocaleUtils.changeLanguageTo(this, locale);
 
         run("Search url", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys(url);
-            driver.findElement(By.id("submit-search")).click();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys(url);
+            waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
         LocalizedString listText = new LocalizedString().pt("Lista").en("List");
 
         assertThat("List button is available",
-            driver.findElement(By.id("replay-list-button")).getText(), containsString(listText.apply(locale)));
+            waitUntilElementIsVisibleAndGet(By.id("replay-list-button")).getText().trim(), containsString(listText.apply(locale)));
 
         run("Change to list mode if not in it", () -> {
-            WebElement resultsGridCurrentType = driver.findElement(By.id("replay-list-button"));
+            WebElement resultsGridCurrentType = waitUntilElementIsVisibleAndGet(By.id("replay-list-button"));
             if (resultsGridCurrentType.getAttribute("disabled") == null) {
-                driver.findElement(By.id("replay-list-button")).click();
+                waitUntilElementIsVisibleAndGet(By.id("replay-list-button")).click();
             }
         });
 
         run("Check specific timestamp should exist", () -> {
             visibleVersions.stream().forEach(version -> {
-                WebElement e = driver.findElement(By.id(version));
+                WebElement e = new WebDriverWait(driver, Duration.ofSeconds(20))
+                    .until(ExpectedConditions.presenceOfElementLocated(By.id(version)));
                 assertNotNull(String.format("The timestamp %s for %s shoud be presented", version, url), e);
             });
         });
@@ -112,7 +113,7 @@ public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBase
                 String msg = String.format("The timestamp %s for %s shoud not exist", version, url);
 
                 appendError(msg, () -> new WebDriverWait(driver, Duration.ofSeconds(20))
-                        .until(CustomConditions.invisibilityOfElementLocatedById(version)));
+                    .until(CustomConditions.invisibilityOfElementLocatedById(version)));
             });
         });
     }
