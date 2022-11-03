@@ -3,10 +3,13 @@ package pt.arquivo.tests.webapp.menu;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Duration;
 import java.util.Locale;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
@@ -66,6 +69,10 @@ public class MenuChangeLanguageTest extends WebDriverTestBaseParallel {
                 waitUntilElementIsVisibleAndGet(By.id("menu-language")).getText().trim(), containsString(languageLabel));
 
         run("Change language", () -> waitUntilElementIsVisibleAndGet(By.id("menu-language")).click());
+
+        String newLanguageUrlLabel = new LocalizedString().pt("l=en").en("l=pt").apply(locale);
+
+        run("Wait for page to change", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.urlContains(newLanguageUrlLabel)));
 
         //opposite verification after changing the language
 
