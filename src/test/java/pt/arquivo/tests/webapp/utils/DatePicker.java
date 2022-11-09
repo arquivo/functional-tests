@@ -1,23 +1,34 @@
 package pt.arquivo.tests.webapp.utils;
 
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DatePicker {
 
-    private static String startId = "date-container-start";
-    private static String endId = "date-container-end";
+    private final static String startId = "date-container-start";
+    private final static String endId = "date-container-end";
+
+    private final static String startInputId = "start-date";
+    private final static String endInputId = "end-date";
 
     public static void openStart(WebDriver driver){
         DatePicker.open(driver,DatePicker.startId);
@@ -63,6 +74,31 @@ public class DatePicker {
         }
 	}
 
+    public static LocalDate getStartDate(WebDriver driver){
+        return stringToLocalDate(getStartDateString(driver));
+    }
+
+    public static String getStartDateString(WebDriver driver){
+        return getDateString(driver, DatePicker.startInputId);
+    }
+
+    public static LocalDate getEndDate(WebDriver driver){
+        return stringToLocalDate(getEndDateString(driver));
+    }
+
+    public static String getEndDateString(WebDriver driver){
+        return getDateString(driver, DatePicker.endInputId);
+    }
+
+    private static String getDateString(WebDriver driver, String inputId){
+        String originalString = (String) ((JavascriptExecutor) driver).executeScript("return document.querySelector('#"+inputId+"').value");
+        
+        String year = originalString.substring(0, 4);
+        String month = originalString.substring(4, 6);
+        String day = originalString.substring(6, 8);
+        return day + "/" + month + "/" + year;
+    }
+
     public static void setDatePicker(WebDriver driver, LocalDate date, String openerId){
         DatePicker.open(driver, openerId);
         DatePicker.changeTo(driver, date);
@@ -90,21 +126,12 @@ public class DatePicker {
     }
 
     private static void mobileDatepickerChangeValueTo(WebDriver driver, Integer value, char type){
-        WebElement selectedWebElement = driver.findElement(By.cssSelector("#ap-component-"+type+" .ap-row-selected"));
-        Integer selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
-        Integer counter = Math.abs(value - selectedValue);
-            
-        Platform platform = ((RemoteWebDriver) driver).getCapabilities().getPlatformName();
-
-        while (selectedValue != value && counter > 0){
-            DatePicker.changeValueByOne(
-                driver,
-                (value > selectedValue && platform.equals(Platform.IOS)) || (value < selectedValue && platform.equals(Platform.ANDROID)),
-                "#ap-component-selector-"+type
-            );
-            selectedWebElement = driver.findElement(By.cssSelector("#ap-component-"+type+" .ap-row-selected"));
-            selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
-            counter--;
+        Integer selectedValue = mobileGetCurrentValue(driver,type);
+        int steps = Math.abs(value-selectedValue);  
+ 
+        for (int step = 0; step < steps; step++){
+            DatePicker.changeValueByOne(driver, value > selectedValue, type);
+            selectedValue = mobileGetCurrentValue(driver,type);
         }
     }
 
@@ -126,15 +153,125 @@ public class DatePicker {
         }
     }
 
-    private static void changeValueByOne(WebDriver driver, Boolean increment, String selector){
-        Integer dy = increment ? 100 : -100;
-        DatePicker.moveMouseWheel(driver,selector,dy);
+    private static void changeValueByOne(WebDriver driver, Boolean increment, char type){
+        if(((RemoteWebDriver) driver).getCapabilities().getPlatformName().equals(Platform.IOS)){
+            changeValueByOneIOS(driver, increment, type);
+            return;
+        }
+        
+        if(((RemoteWebDriver) driver).getCapabilities().getPlatformName().equals(Platform.ANDROID)){
+            changeValueByOneAndroid(driver, increment, type);
+            return;
+        }
+
+        throw new Error("Failed to change value by one: Unrecognized mobile platform: "+((RemoteWebDriver) driver).getCapabilities().getPlatformName() );
     }
 
-    private static void moveMouseWheel(WebDriver driver, String selector, int deltaY)
-    {
+    private static void changeValueByOneIOS(WebDriver driver, Boolean increment, char type){
+        int startValue = mobileGetCurrentValue(driver,type);
+        int endValue = startValue + (increment ? 1 : -1);
+       
+        String startSelector = "#ap-component-"+type+" .ap-row[data-value=\""+endValue+"\"]";
+        String endSelector = "#ap-component-"+type+" .ap-row-selected";
+        jsTouchAndDrag(driver,startSelector,endSelector);
+
+        int currentValue = mobileGetCurrentValue(driver,type);
+
+        if(currentValue == endValue){
+            return;
+        } 
+        throw new Error("Failed to change value by one via touch and drag: Value changed unexpectedly. Started as [ " + startValue + " ], expected: [ " + endValue + " ] but got [ " + currentValue + " ]." );
+    }
+
+    private static void changeValueByOneAndroid(WebDriver driver, Boolean increment, char type){
+        int startValue = mobileGetCurrentValue(driver,type);
+        int endValue = startValue + (increment ? 1 : -1);
+        int currentValue;
+
+        String selector = "#ap-component-selector-" + type;
+        Integer dy = increment ? -100 : 100;
+        DatePicker.twoFingerDrag(driver,selector,dy);
+
+        currentValue = mobileGetCurrentValue(driver,type);
+
+        if(currentValue == endValue){
+            return;
+        }
+
+        throw new Error("Failed to change value by one via moveMouseWheel: Value changed unexpectedly. Started as [ " + startValue + " ], expected: [ " + endValue + " ] but got [ " + currentValue + " ]." );
+
+    }
+    private static int mobileGetCurrentValue(WebDriver driver, char type){
+        WebElement selectedWebElement = driver.findElement(By.cssSelector("#ap-component-"+type+" .ap-row-selected"));
+        Integer selectedValue = Integer.parseInt(selectedWebElement.getAttribute("data-value"));
+        return selectedValue;
+    }
+
+    // Touch and drag using selenium getLocation() function on web elements. Fails to properly find the elements on iOS, does not work at all on Android.
+    // Leaving this here for future reference and in case they update Appium/Selenium to make this work properly.
+    private static void touchAndDrag(WebDriver driver, WebElement start, WebElement end){
+        Point source = start.getLocation();
+        Point destination = end.getLocation();
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence sequence = new Sequence(finger, 1);
+        sequence.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), source.x, source.y));
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        sequence.addAction(new Pause(finger, Duration.ofMillis(600)));
+        sequence.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), destination.x, destination.y));
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        RemoteWebDriver rwd = ((RemoteWebDriver) driver);
+        rwd.perform(Arrays.asList(sequence));
+
+        // Pause for 1 second to make sure animations finish playing and any events that need to trigger do so.
+        try{
+            Thread.sleep(1000);
+        } catch (Exception e){
+            System.out.println("Exception while waiting: "+e);
+        }
+    }
+
+    // Touch and drag using javascript to find the location of elements. Fails to properly find the elements on Android.
+    private static void jsTouchAndDrag (WebDriver driver, String startSelector, String endSelector) {
+        
+        int startX = ((Number) ((JavascriptExecutor) driver).executeScript("var r = document.querySelector(arguments[0]).getBoundingClientRect(); return Math.floor(r.left + r.width/2)", startSelector)).intValue();
+        int startY = ((Number) ((JavascriptExecutor) driver).executeScript("var r = document.querySelector(arguments[0]).getBoundingClientRect(); return Math.floor(r.top + r.height/2)", startSelector)).intValue();
+        int endX   = ((Number) ((JavascriptExecutor) driver).executeScript("var r = document.querySelector(arguments[0]).getBoundingClientRect(); return Math.floor(r.left + r.width/2)", endSelector)).intValue();
+        int endY   = ((Number) ((JavascriptExecutor) driver).executeScript("var r = document.querySelector(arguments[0]).getBoundingClientRect(); return Math.floor(r.top + r.height/2)", endSelector)).intValue();
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence sequence = new Sequence(finger, 1);
+        sequence.addAction(finger.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), startX, startY));
+        sequence.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        sequence.addAction(new Pause(finger, Duration.ofMillis(600)));
+        sequence.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), endX, endY));
+        sequence.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        // sequence.addAction(new Pause(finger, Duration.ofMillis(1000)));
+        RemoteWebDriver rwd = ((RemoteWebDriver) driver);
+        rwd.perform(Arrays.asList(sequence));
+
+        // Pause for 1 second to make sure animations finish playing and any events that need to trigger do so.
+        try{
+            Thread.sleep(1000);
+        } catch (Exception e){
+            System.out.println("Exception while waiting: "+e);
+        }
+        
+    }
+
+    /**
+     * Uses javascript to make the browser think a two-finger drag was used over the element located by selector. 
+     * In practice this means creating a 'wheel' event after moving the mouse over the element. deltaY represents the
+     *   strength of the mouseWheel event, and is 100 (or -100) for most mouses. 
+     * On mobile, a two finger drag is also handled as a 'wheel' event but with a variable deltaY.    
+     * This method works well on Android but not on iOS. Also, usually iOS handles deltaY the opposite way od Android,  
+     *   so 100 deltaY on Android is the same as -100 deltaY on iOS and vice-versa.
+     * @param driver
+     * @param cssSelector
+     * @param deltaY
+     */
+    private static void twoFingerDrag(WebDriver driver, String cssSelector, int deltaY){
         String script = 
-            "var selector = arguments[0];"
+        "var selector = arguments[0];"
         +"var deltaY = arguments[1];"
         +"var element = document.querySelector(selector);"
         +"var box = element.getBoundingClientRect();"
@@ -149,6 +286,13 @@ public class DatePicker {
         +        "return;"
         +    "}"
         +"}";  
-        ((JavascriptExecutor) driver).executeScript(script, selector, deltaY);
+        ((JavascriptExecutor) driver).executeScript(script, cssSelector, deltaY);
+        
+        // Pause for 1 second to make sure animations finish playing and any events that need to trigger do so.
+        try{
+            Thread.sleep(1000);
+        } catch (Exception e){
+            System.out.println("Exception while waiting: "+e);
+        }
     }
 }
