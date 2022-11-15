@@ -214,27 +214,23 @@
                 </property>
             </activation>
             <properties>
-                <test.browsers.json>[
-                {
-                  "platform":"android",
-                  "browser":"android",
-                  "browser-version":"6.0",
-                  "long-name":"Android Emulator",
-                  "long-version":"6.0.",
-                  "device":"Android Emulator",
-                  "device-orientation":"portrait"
-                }
-                ,
-                {
-                  "platform":"iphone",
-                  "browser":"iphone",
-                  "browser-version":"11.2",
-                  "long-name":"iPhone 7 Simulator",
-                  "long-version":"11.2.",
-                  "device":"iPhone 7 Simulator",
-                  "device-orientation":"portrait"
-                }
-                ]</test.browsers.json>
+                <test.browsers.json>
+                [
+                            {
+                                "platform":"iOS",
+                                "browser":"Safari",
+                                "browser-version":"15.4",
+                                "device": "iPhone Simulator",
+                                "automation-name": "XCUITest"
+                            },
+                            {
+                                "platform":"Android",
+                                "browser":"Chrome",
+                                "browser-version":"12.0",
+                                "device": "Android GoogleAPI Emulator",
+                                "automation-name": "UiAutomator2"
+                            }
+                        ]</test.browsers.json>
                 <test.resolution>1024x768</test.resolution>
             </properties>
         </profile>
