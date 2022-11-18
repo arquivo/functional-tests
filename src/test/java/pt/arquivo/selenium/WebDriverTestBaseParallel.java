@@ -70,7 +70,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * variables or from an external file, use the no-arg
      * {@link SauceOnDemandAuthentication} constructor.
      */
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication();
+    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getProperty("test.saucelabs.user"), System.getProperty("test.saucelabs.key"));
 
     /**
      * JUnit Rule which will mark the Sauce Job as passed/failed when the test

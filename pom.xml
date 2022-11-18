@@ -31,10 +31,6 @@
         <system>Github</system>
         <url>https://github.com/arquivo/pwa-technologies/issues</url>
     </issueManagement>
-    <ciManagement>
-        <system>jenkins</system>
-        <url>http://p26.arquivo.pt:8081/jenkins/</url>
-    </ciManagement>
 
     <properties>
         <selenium.version>4.4.0</selenium.version>
@@ -46,19 +42,15 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <build.timestamp>${maven.build.timestamp}</build.timestamp>
-
-        <test.url>${env.SELENIUM_TEST_URL}</test.url>
-        <test.platform>${env.SELENIUM_PLATFORM}</test.platform>
-        <test.browser>${env.SELENIUM_BROWSER}</test.browser>
-        <test.browser.version>
-            ${env.SELENIUM_BROWSER_VERSION}</test.browser.version>
-        <remote.saucelabs.key>${env.SAUCE_ACCESS_KEY}</remote.saucelabs.key>
-        <remote.saucelabs.user>${env.SAUCE_USERNAME}</remote.saucelabs.user>
-
-        <test.resolution></test.resolution>
-
+        <!-- OVERRIDABLE PROPERTIES -->
+        <test.url>https://preprod.arquivo.pt</test.url>
+        <test.saucelabs.key>${env.SAUCE_ACCESS_KEY}</test.saucelabs.key>
+        <test.saucelabs.user>${env.SAUCE_USERNAME}</test.saucelabs.user>
+        <test.saucelabs.tunnelid>${env.TUNNEL_IDENTIFIER}</test.saucelabs.tunnelid>
+        <test.selenium.port>${env.SELENIUM_PORT}</test.selenium.port>
+        <test.selenium.host>${env.SELENIUM_HOST}</test.selenium.host>
         <test.browsers.json>${env.SAUCE_ONDEMAND_BROWSERS}</test.browsers.json>
+        <test.build.id>${env.JOB_NAME}_${env.BUILD_NUMBER}</test.build.id>
     </properties>
 
     <dependencies>
@@ -143,7 +135,6 @@
 
     <build>
         <plugins>
-            <!-- Exclude all tests, because they're integration tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -154,8 +145,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Configure integration tests plugin. In future replace the 'Test'
-                suffix with 'IT' -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -171,20 +160,14 @@
                 <configuration>
                     <!-- force encoding -->
                     <argLine>-Dfile.encoding=UTF-8</argLine>
-                    <environmentVariables>
-                        <SAUCE_USERNAME>ArquivoPT</SAUCE_USERNAME>
-                        <SAUCE_ACCESS_KEY>663108d4-2412-436a-89d0-f8856bd33377</SAUCE_ACCESS_KEY>
-                        <SAUCE_ONDEMAND_BROWSERS>${test.browsers.json}</SAUCE_ONDEMAND_BROWSERS>
-                    </environmentVariables>
                     <systemPropertyVariables>
-                        <test.project.name>${project.name} ${testcase}</test.project.name>
-                        <test.url>https://preprod.arquivo.pt</test.url>
-                        <test.resolution>1280x960</test.resolution>
-                        <test.remote.access.user>${remote.saucelabs.user}</test.remote.access.user>
-                        <test.remote.access.key>${remote.saucelabs.key}</test.remote.access.key>
-                        <test.runRemote>true</test.runRemote>
-                        <test.remote.access.port>${test.remote.access.port}</test.remote.access.port>
-
+                        <test.url>${test.url}</test.url>
+                        <test.saucelabs.key>${test.saucelabs.key}</test.saucelabs.key>
+                        <test.saucelabs.user>${test.saucelabs.user}</test.saucelabs.user>
+                        <test.saucelabs.tunnelid>${test.saucelabs.tunnelid}</test.saucelabs.tunnelid>
+                        <test.selenium.port>${test.selenium.port}</test.selenium.port>
+                        <test.selenium.host>${test.selenium.host}</test.selenium.host>
+                        <test.browsers.json>${test.browsers.json}</test.browsers.json>
                     </systemPropertyVariables>
                     <includes>
                         <include>**/*.java</include>
@@ -204,237 +187,6 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>browsers-mobile</id>
-            <activation>
-                <property>
-                    <name>browsers</name>
-                    <value>mobile</value>
-                </property>
-            </activation>
-            <properties>
-                <test.browsers.json>
-                [
-                            {
-                                "platform":"iOS",
-                                "browser":"Safari",
-                                "browser-version":"15.4",
-                                "device": "iPhone Simulator",
-                                "automation-name": "XCUITest"
-                            },
-                            {
-                                "platform":"Android",
-                                "browser":"Chrome",
-                                "browser-version":"12.0",
-                                "device": "Android GoogleAPI Emulator",
-                                "automation-name": "UiAutomator2"
-                            }
-                        ]</test.browsers.json>
-                <test.resolution>1024x768</test.resolution>
-            </properties>
-        </profile>
-        <profile>
-            <id>browsers-android</id>
-            <activation>
-                <property>
-                    <name>browsers</name>
-                    <value>android</value>
-                </property>
-            </activation>
-            <properties>
-                <test.browsers.json>[
-                {
-                  "platform":"android",
-                  "browser":"android",
-                  "browser-version":"6.0",
-                  "long-name":"Android Emulator",
-                  "long-version":"6.0.",
-                  "device":"Android Emulator",
-                  "device-orientation":"portrait"
-                }
-                ]</test.browsers.json>
-                <test.resolution>1024x768</test.resolution>
-            </properties>
-        </profile>
-        <profile>
-            <id>browsers-IE</id>
-            <activation>
-                <property>
-                    <name>browsers</name>
-                    <value>IE</value>
-                </property>
-            </activation>
-            <properties>
-                <test.browsers.json>[{
-                  "platform":"Windows 10",
-                  "browser":"internet explorer",
-                  "browser-version":"11",
-                }]</test.browsers.json>
-                <test.resolution>1920x1080</test.resolution>
-            </properties>
-        </profile>
-        <profile>
-            <id>browsers-minimum-requirements</id>
-            <activation>
-                <property>
-                    <name>browsers</name>
-                    <value>minimum-requirements</value>
-                </property>
-            </activation>
-            <properties>
-                <test.browsers.json>
-                [{
-                  "platform":"Windows 10",
-                  "browser":"firefox",
-                  "browser-version":"latest",
-                }]</test.browsers.json>
-                <test.resolution>1280x960</test.resolution>
-            </properties>
-        </profile>
-        <profile>
-            <id>browsers-desktop-windows</id>
-            <activation>
-                <property>
-                    <name>browsers</name>
-                    <value>desktop-windows</value>
-                </property>
-            </activation>
-            <properties>
-                <test.browsers.json>
-                [{
-                  "platform":"Windows 10",
-                  "browser":"chrome",
-                  "browser-version":"latest",
-                },
-                {
-                  "platform":"Windows 10",
-                  "browser":"firefox",
-                  "browser-version":"latest",
-                }]</test.browsers.json>
-                <test.resolution>1280x1024</test.resolution>
-            </properties>
-        </profile>
-        <profile>
-            <id>browsers-desktop-linux</id>
-            <activation>
-                <property>
-                    <name>browsers</name>
-                    <value>desktop-linux</value>
-                </property>
-            </activation>
-            <properties>
-                <test.browsers.json>
-                [{
-                  "platform":"linux",
-                  "browser":"chrome",
-                  "browser-version":"94.0.4606.61",
-                },
-                {
-                    "platform":"linux",
-                    "browser":"firefox",
-                }]</test.browsers.json>
-                <test.resolution>1024x768</test.resolution>
-            </properties>
-        </profile>
-        <profile>
-            <!-- If "-Dremote.saucelabs.user=XXXX" is passed on argument create the sauce labs tunnel -->
-            <id>sauce-labs-tunnel</id>
-            <activation>
-                <property>
-                    <name>remote.saucelabs.user</name>
-                </property>
-            </activation>
-            <properties>
-                <test.remote.access.port>${remote.saucelabs.port.se}</test.remote.access.port>
-            </properties>
-            <build>
-                <plugins>
-                    <!-- Reserve some free ports to saucelabs given a range -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.0.0</version>
-                        <executions>
-                            <execution>
-                                <id>reserve-network-port</id>
-                                <goals>
-                                    <goal>reserve-network-port</goal>
-                                </goals>
-                                <phase>generate-sources</phase>
-                                <configuration>
-                                    <minPortNumber>4446</minPortNumber>
-                                    <maxPortNumber>4500</maxPortNumber>
-                                    <randomPort>true</randomPort>
-                                    <portNames>
-                                        <portName>remote.saucelabs.port.se</portName>
-                                        <portName>remote.saucelabs.port.scproxy</portName>
-                                    </portNames>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Connect to saucelabs using a tunnel -->
-                    <plugin>
-                        <groupId>com.saucelabs.maven.plugin</groupId>
-                        <artifactId>sauce-connect-plugin</artifactId>
-                        <version>2.1.25</version>
-                        <configuration>
-                            <sauceUsername>${remote.saucelabs.user}</sauceUsername>
-                            <sauceAccessKey>${remote.saucelabs.key}</sauceAccessKey>
-                            <!-- WARN: do not format the followin line (!) -->
-                            <options>--logfile /tmp/sc_${remote.saucelabs.port.scproxy}.log --scproxy-port ${remote.saucelabs.port.scproxy} --se-port ${remote.saucelabs.port.se} --tunnel-name tests-desktop</options>
-                        </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.saucelabs</groupId>
-                                <artifactId>ci-sauce</artifactId>
-                                <version>1.154</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>commons-io</groupId>
-                                <artifactId>commons-io</artifactId>
-                                <version>2.11.0</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.apache.maven</groupId>
-                                <artifactId>maven-plugin-api</artifactId>
-                                <version>3.8.4</version>
-                                </dependency>
-                        </dependencies>
-                        <executions>
-                            <execution>
-                                <id>start-sauceconnect</id>
-                                <phase>pre-integration-test</phase>
-                                <goals>
-                                    <goal>start-sauceconnect</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>stop-sauceconnect</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>stop-sauceconnect</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <!-- If "-Dremote.saucelabs.user=XXXX" is passed on argument create the sauce labs tunnel -->
-            <id>local-selenium-grid</id>
-            <activation>
-                <property>
-                    <name>!remote.saucelabs.user</name>
-                </property>
-            </activation>
-            <properties>
-                <test.remote.access.port>4444</test.remote.access.port>
-            </properties>
-        </profile>
-    </profiles>
     <repositories>
         <repository>
             <id>jitpack.io</id>
