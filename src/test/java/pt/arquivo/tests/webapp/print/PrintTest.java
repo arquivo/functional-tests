@@ -13,8 +13,8 @@ import java.security.NoSuchAlgorithmException;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.util.AppendableErrorsBaseTest;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.utils.AppendableErrorsBaseTest;
 
 /**
  *

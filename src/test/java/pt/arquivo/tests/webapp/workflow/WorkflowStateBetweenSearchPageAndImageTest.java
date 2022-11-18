@@ -8,9 +8,9 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.tests.webapp.utils.DatePicker;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DatePicker;
 
 /**
  *

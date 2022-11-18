@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.tests.webapp.utils.DatePicker;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DatePicker;
 
 /**
  * Test the search of one term in the index interface.

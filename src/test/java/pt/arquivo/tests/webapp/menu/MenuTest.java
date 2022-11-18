@@ -2,7 +2,7 @@ package pt.arquivo.tests.webapp.menu;
 
 import org.openqa.selenium.By;
 
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 public abstract class MenuTest extends WebDriverTestBaseParallel {
 

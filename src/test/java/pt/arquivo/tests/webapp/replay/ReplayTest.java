@@ -14,8 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 
 /**

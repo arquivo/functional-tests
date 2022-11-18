@@ -12,9 +12,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.tests.webapp.utils.LocaleUtils;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.LocaleUtils;
 
 /**
  *

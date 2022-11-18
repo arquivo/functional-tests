@@ -8,8 +8,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  *

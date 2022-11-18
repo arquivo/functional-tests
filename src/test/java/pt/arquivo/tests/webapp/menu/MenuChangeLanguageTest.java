@@ -11,10 +11,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.tests.webapp.utils.LocaleUtils;
-import pt.arquivo.tests.webapp.utils.LocalizedString;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.LocalizedString;
 
 /**
  *

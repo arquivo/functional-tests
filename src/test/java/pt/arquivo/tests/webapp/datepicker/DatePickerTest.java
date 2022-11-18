@@ -2,9 +2,9 @@ package pt.arquivo.tests.webapp.datepicker;
 
 import org.junit.Test;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.tests.webapp.utils.DatePicker;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DatePicker;
 
 import static org.junit.Assert.assertEquals;
 

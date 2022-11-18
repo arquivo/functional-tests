@@ -12,7 +12,7 @@ import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
-import pt.fccn.arquivo.util.AppendableErrorsBaseTest;
+import pt.arquivo.utils.AppendableErrorsBaseTest;
 
 /**
  *
