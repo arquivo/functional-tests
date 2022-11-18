@@ -27,13 +27,6 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import com.saucelabs.common.SauceOnDemandAuthentication;
-import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.junit.ConcurrentParameterized;
-import com.saucelabs.junit.SauceOnDemandTestWatcher;
-
-import pt.arquivo.utils.AppendableErrorsBaseTest;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
@@ -44,11 +37,18 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver.Timeouts;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.saucelabs.common.SauceOnDemandAuthentication;
+import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import com.saucelabs.junit.ConcurrentParameterized;
+import com.saucelabs.junit.SauceOnDemandTestWatcher;
+
+import pt.arquivo.utils.AppendableErrorsBaseTest;
 
 /**
  * The base class for tests using WebDriver to test specific browsers. This test
@@ -64,7 +64,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implements SauceOnDemandSessionIdProvider {
     public static String seleniumURI;
 
-    public static String buildTag;
     /**
      * Constructs a {@link SauceOnDemandAuthentication} instance using the supplied
      * user name/access key. To use the authentication supplied by environment
@@ -100,13 +99,17 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      */
     protected String browser;
     /**
+     * Represents the version of the browser to be used as part of the test run.
+     */
+    protected String browserVersion;
+    /**
      * Represents the operating system to be used as part of the test run.
      */
     protected String platformName;
     /**
-     * Represents the version of the browser to be used as part of the test run.
+     * Represents the operating system version to be used as part of the test run.
      */
-    protected String browserVersion;
+    protected String platformVersion;
     /**
      * Represents the deviceName of mobile device
      */
@@ -115,17 +118,21 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * Represents the device-orientation of mobile device
      */
     protected String deviceOrientation;
-
+    /**
+     * Represents the automation driver of the mobile device
+     */
     protected String automationName;
+    /**
+     * Represents the screen resolution
+     */
+    protected String screenResolution;
     /**
      * Instance variable which contains the Sauce Job Id.
      */
     protected String sessionId;
 
     protected RemoteWebDriver driver;
-    // protected static ArrayList<WebDriver> drivers;
 
-    protected String screenResolution;
     protected String testURL;
     protected String titleOfFirstResult;
 
@@ -134,20 +141,21 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
     protected final boolean isPreProd;
 
-    public WebDriverTestBaseParallel(String platformName, String browser, String browserVersion,
-        String device, String deviceOrientation, String automationName) {
+    public WebDriverTestBaseParallel(String platformName, String platformVersion, String browser, String browserVersion,
+        String device, String deviceOrientation, String automationName, String resolution) {
 
         super();
         this.platformName = platformName;
-        this.browserVersion = browserVersion;
+        this.platformVersion = platformVersion;
         this.browser = browser;
+        this.browserVersion = browserVersion;
         this.device = device;
         this.deviceOrientation = deviceOrientation;
         this.automationName = automationName;
+        this.screenResolution = resolution;
         this.testURL = System.getProperty("test.url");
         assertNotNull("test.url property is required", this.testURL);
         this.isPreProd = this.testURL.contains(pre_prod);
-        this.screenResolution = System.getProperty("test.resolution");
 
         System.out.println("Platform name: " + platformName);
         System.out.println("Browser: " + browser);
@@ -163,15 +171,12 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      */
     @ConcurrentParameterized.Parameters
     public static LinkedList<String[]> browsersStrings() {
-        String browsersJSON = System.getenv("SAUCE_ONDEMAND_BROWSERS");
+        String browsersJSON = System.getProperty("test.browsers.json");
         System.out.println("SAUCE_ONDEMAND_BROWSERS: " + browsersJSON);
 
         LinkedList<String[]> browsers = new LinkedList<String[]>();
         if (browsersJSON == null || browsersJSON.isEmpty()) {
             System.out.println("You did not specify browsers, testing with latest firefox on Linux...");
-            //browsers.add(new String[] { "Windows 8.1", "latest", "chrome", null, null });
-            //browsers.add(new String[] { "Mac 10.14", "latest", "safari", null, null });
-            //browsers.add(new String[] { "Linux", null, "chrome", null, null });
             browsers.add(new String[] { "Linux", null, "firefox", null, null });
         } else {
             JSONObject browsersJSONObject = new JSONObject("{browsers:" + browsersJSON + "}");
@@ -182,8 +187,9 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
                 JSONObject browserConfigs = browsersJSONArray.getJSONObject(i);
                 browsers.add(new String[] {
                     browserConfigs.getString("platform"),
+                    browserConfigs.optString("platform-version", null),
                     browserConfigs.getString("browser"),
-                    browserConfigs.optString("browser-version"),
+                    browserConfigs.optString("browser-version", null),
                     browserConfigs.optString("device", null),
                     browserConfigs.optString("device-orientation", null),
                     browserConfigs.optString("automation-name", null)
@@ -207,38 +213,29 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      */
     @Before
     public void setUp() throws Exception {
-
         Map<String, Object> sauceOptions = new HashMap<>();
         sauceOptions.put("username", authentication.getUsername());
         sauceOptions.put("accessKey", authentication.getAccessKey());
-
-        String methodName = name.getMethodName() + " " + browser + " " + browserVersion;
-        sauceOptions.put("name", methodName);
+        sauceOptions.put("name", name.getMethodName());
 
         //the default value is false
         //sauceOptions.put("acceptInsecureCerts", true);
-
-        if (screenResolution != null && !screenResolution.isEmpty()) {
-            System.out.println("Screen Resolution: " + screenResolution);
-            sauceOptions.put("screenResolution", screenResolution);
-        }
-
         
         // Getting the build name.
         // Using the Jenkins ENV var. You can use your own. If it is not set test will
         // run without a build id.
-        sauceOptions.put("build", System.getenv("JOB_NAME") + "__" + System.getenv("BUILD_NUMBER"));
+        sauceOptions.put("build", System.getProperty("test.build.id"));
 
         //SauceHelpers.addSauceConnectTunnelId(capabilities);
 
-        DriveManager driveManager = new DriveManager();
+        DriverManager driveManager = new DriverManager();
 
-        this.driver = driveManager.getDriver(platformName, browser, browserVersion, device, deviceOrientation, automationName, sauceOptions);
+        this.driver = driveManager.getDriver(platformName, platformVersion, browser, browserVersion, device, deviceOrientation, automationName, screenResolution, sauceOptions);
         this.driver.get(testURL);
 
         this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
 
-        String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, methodName);
+        String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, name.getMethodName());
         System.out.println(message);
 
 
@@ -272,10 +269,6 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
     public static void setupClass() {
         // get the uri to send the commands to.
         seleniumURI = SauceHelpers.buildSauceUri();
-        // If available add build tag. When running under Jenkins BUILD_TAG is
-        // automatically set.
-        // You can set this manually on manual runs.
-        buildTag = System.getenv("BUILD_TAG");
     }
 
     /**

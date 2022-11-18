@@ -16,15 +16,15 @@ public class SauceHelpers {
      */
     public static String buildSauceUri(boolean doNotUseSauceConnectCmdRelay) {
         String seleniumURI = "@ondemand.saucelabs.com:443";
-        String seleniumPort = System.getenv("SELENIUM_PORT");
-        String seleniumHost = System.getenv("SELENIUM_HOST");
+        String seleniumPort = System.getProperty("test.selenium.port");
+        String seleniumHost = System.getProperty("test.selenium.host");
         if (!doNotUseSauceConnectCmdRelay &&
                 seleniumPort != null &&
                 seleniumHost != null &&
                 !seleniumHost.contentEquals("ondemand.saucelabs.com")) {
             //While running in CI, if Sauce Connect is running the SELENIUM_PORT env var will be set.
             //use SC relay port
-            seleniumURI = String.format("@localhost:%s", seleniumPort);
+            seleniumURI = String.format("@%s:%s", seleniumHost, seleniumPort);
 
         }
         return seleniumURI;
@@ -45,7 +45,7 @@ public class SauceHelpers {
      */
     public static void addSauceConnectTunnelId(DesiredCapabilities desiredCapabilities, String tunnelId) {
         if (tunnelId == null || tunnelId.length() == 0) {
-            tunnelId = System.getenv("TUNNEL_IDENTIFIER");
+            tunnelId = System.getProperty("test.saucelabs.tunnelid");
         }
 
         if (tunnelId != null && tunnelId.length() > 0){
