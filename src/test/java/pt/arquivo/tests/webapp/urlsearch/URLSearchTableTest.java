@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.DateUtils;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.DateUtils;
+import pt.arquivo.utils.LocaleUtils;
 
 /**
  *

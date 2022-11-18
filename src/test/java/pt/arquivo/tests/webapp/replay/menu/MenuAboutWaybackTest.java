@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.arquivo.selenium.Retry;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.LocaleUtils;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 

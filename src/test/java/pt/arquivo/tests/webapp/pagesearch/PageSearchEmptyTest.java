@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.LocaleUtils;
 
 /**
  *

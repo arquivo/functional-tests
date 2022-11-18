@@ -19,8 +19,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.arquivo.utils.CustomConditions;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
-import pt.fccn.mobile.arquivo.utils.LocalizedString;
+import pt.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.LocalizedString;
 
 /**
  *

@@ -1,4 +1,4 @@
-package pt.fccn.sobre.arquivo.tests;
+package pt.arquivo.tests.cms.tests;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -9,15 +9,15 @@ import org.junit.Test;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.sobre.arquivo.pages.AboutPage;
-import pt.fccn.sobre.arquivo.pages.AudioPage;
-import pt.fccn.sobre.arquivo.pages.CollaboratePage;
-import pt.fccn.sobre.arquivo.pages.IndexSobrePage;
-import pt.fccn.sobre.arquivo.pages.NewsOnMediaPage;
-import pt.fccn.sobre.arquivo.pages.NewsPage;
-import pt.fccn.sobre.arquivo.pages.PresentationsPage;
-import pt.fccn.sobre.arquivo.pages.PublicationsPage;
-import pt.fccn.sobre.arquivo.pages.ReportsPage;
+import pt.arquivo.tests.cms.pages.AboutPage;
+import pt.arquivo.tests.cms.pages.AudioPage;
+import pt.arquivo.tests.cms.pages.CollaboratePage;
+import pt.arquivo.tests.cms.pages.IndexSobrePage;
+import pt.arquivo.tests.cms.pages.NewsOnMediaPage;
+import pt.arquivo.tests.cms.pages.NewsPage;
+import pt.arquivo.tests.cms.pages.PresentationsPage;
+import pt.arquivo.tests.cms.pages.PublicationsPage;
+import pt.arquivo.tests.cms.pages.ReportsPage;
 
 public class NavigationTest  extends WebDriverTestBaseParallel {
 

@@ -1,18 +1,18 @@
-package pt.fccn.sobre.arquivo.suite;
+package pt.arquivo.tests.cms.suite;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import pt.fccn.sobre.arquivo.tests.CommonQuestionsTest;
-import pt.fccn.sobre.arquivo.tests.ExamplesTest;
-import pt.fccn.sobre.arquivo.tests.FooterTest;
-import pt.fccn.sobre.arquivo.tests.NavigationTest;
-import pt.fccn.sobre.arquivo.tests.NewsTest;
-import pt.fccn.sobre.arquivo.tests.PublicationsTest;
-import pt.fccn.sobre.arquivo.tests.SearchTest;
-import pt.fccn.sobre.arquivo.tests.SiteMapTest;
-import pt.fccn.sobre.arquivo.tests.Soft404MessageTest;
+import pt.arquivo.tests.cms.tests.CommonQuestionsTest;
+import pt.arquivo.tests.cms.tests.ExamplesTest;
+import pt.arquivo.tests.cms.tests.FooterTest;
+import pt.arquivo.tests.cms.tests.NavigationTest;
+import pt.arquivo.tests.cms.tests.NewsTest;
+import pt.arquivo.tests.cms.tests.PublicationsTest;
+import pt.arquivo.tests.cms.tests.SearchTest;
+import pt.arquivo.tests.cms.tests.SiteMapTest;
+import pt.arquivo.tests.cms.tests.Soft404MessageTest;
 
 	
 /**

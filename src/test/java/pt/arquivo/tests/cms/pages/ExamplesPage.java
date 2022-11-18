@@ -1,4 +1,4 @@
-package pt.fccn.sobre.arquivo.pages;
+package pt.arquivo.tests.cms.pages;
 
 import java.util.List;
 

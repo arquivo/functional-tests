@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.DatePicker;
+import pt.arquivo.utils.DatePicker;
 
 /**
  *
