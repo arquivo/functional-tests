@@ -46,7 +46,7 @@
         <test.url>https://preprod.arquivo.pt</test.url>
         <test.saucelabs.key>${env.SAUCE_ACCESS_KEY}</test.saucelabs.key>
         <test.saucelabs.user>${env.SAUCE_USERNAME}</test.saucelabs.user>
-        <test.saucelabs.tunnelid>${env.TUNNEL_IDENTIFIER}</test.saucelabs.tunnelid>
+        <test.saucelabs.tunnelid>${env.TUNNEL_NAME}</test.saucelabs.tunnelid>
         <test.selenium.port>${env.SELENIUM_PORT}</test.selenium.port>
         <test.selenium.host>${env.SELENIUM_HOST}</test.selenium.host>
         <test.browsers.json>${env.SAUCE_ONDEMAND_BROWSERS}</test.browsers.json>
