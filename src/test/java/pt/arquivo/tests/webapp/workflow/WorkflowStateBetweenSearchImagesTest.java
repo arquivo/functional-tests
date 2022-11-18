@@ -6,10 +6,6 @@ import java.time.Duration;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -25,9 +21,8 @@ import pt.arquivo.utils.DatePicker;
 
 public class WorkflowStateBetweenSearchImagesTest extends WebDriverTestBaseParallel {
 
-    public WorkflowStateBetweenSearchImagesTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public WorkflowStateBetweenSearchImagesTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test

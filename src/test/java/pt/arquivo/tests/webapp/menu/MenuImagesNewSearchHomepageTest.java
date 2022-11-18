@@ -16,9 +16,8 @@ import pt.arquivo.selenium.Retry;
  */
 public class MenuImagesNewSearchHomepageTest extends MenuTest {
 
-    public MenuImagesNewSearchHomepageTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public MenuImagesNewSearchHomepageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test

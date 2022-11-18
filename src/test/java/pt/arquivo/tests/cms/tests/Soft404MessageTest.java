@@ -27,8 +27,8 @@ public class Soft404MessageTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_404_PAGE_EXAMPLE = "/about-the-archive/publications-1/documents/peopleware-rarc-article-in-jpg/image_preview";
 	
-	public Soft404MessageTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public Soft404MessageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 		
 	}
 

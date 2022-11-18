@@ -29,35 +29,34 @@ import pt.arquivo.utils.LocalizedString;
  */
 public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBaseParallel {
 
-    public URLSearchListNotContainsSomeHttpCodesTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public URLSearchListNotContainsSomeHttpCodesTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test
     @Retry
-    public void urlSearchListNotContains406PT() {
+    public void urlSearchListNotContains406PTTest() {
         test("http://www.caleida.pt/saramago/", LocaleUtils.PORTUGUESE, Arrays.asList("list-results-timestamp-19980205082901"),
                 Arrays.asList("list-results-timestamp-20120131163447"));
     }
 
     @Test
     @Retry
-    public void urlSearchListNotContains404EN() {
+    public void urlSearchListNotContains404ENTest() {
         test("http://www.caleida.pt/saramago/", LocaleUtils.ENGLISH, Arrays.asList("list-results-timestamp-20000413142115"),
                 Arrays.asList("list-results-timestamp-20160210151550"));
     }
 
     @Test
     @Retry
-    public void urlSearchListNotContains403PT() {
+    public void urlSearchListNotContains403PTTest() {
         test("sapo.pt", LocaleUtils.PORTUGUESE, Arrays.asList("list-results-timestamp-19971210144509"),
             Arrays.asList("list-results-timestamp-20150424043204"));
     }
 
     @Test
     @Retry
-    public void urlSearchListNotContains503EN() {
+    public void urlSearchListNotContains503ENTest() {
         test("record.pt", LocaleUtils.ENGLISH, Arrays.asList("list-results-timestamp-19981202152653"),
             Arrays.asList("list-results-timestamp-20171031183600"));
     }
@@ -66,14 +65,14 @@ public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBase
 
     @Test
     @Retry
-    public void urlSearchListNotContains302PT() {
+    public void urlSearchListNotContains302PTTest() {
         test("fccn.pt", LocaleUtils.PORTUGUESE, Arrays.asList("list-results-timestamp-20161212184040"),
             Arrays.asList("list-results-timestamp-20161213184117"));
     }
 
     @Test
     @Retry
-    public void urlSearchListNotContains302EN() {
+    public void urlSearchListNotContains302ENTest() {
         test("fccn.pt", LocaleUtils.ENGLISH, Arrays.asList("list-results-timestamp-20161212184040"),
             Arrays.asList("list-results-timestamp-20161213184117"));
     }

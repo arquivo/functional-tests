@@ -22,13 +22,13 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
     /**
      * Test the search of one term in the index interface.
      */
-    public ImageSearchTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public ImageSearchTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test
     @Retry
-    public void testImageSearchOneTerm() throws Exception {
+    public void imageSearchOneTermTest() throws Exception {
 
         run("Search FCCN term", () -> {
             waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();

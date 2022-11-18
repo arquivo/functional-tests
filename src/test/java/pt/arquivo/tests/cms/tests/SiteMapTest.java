@@ -14,8 +14,8 @@ import pt.arquivo.tests.cms.pages.SiteMapPage;
 
 public class SiteMapTest extends WebDriverTestBaseParallel {
 
-	public SiteMapTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public SiteMapTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test

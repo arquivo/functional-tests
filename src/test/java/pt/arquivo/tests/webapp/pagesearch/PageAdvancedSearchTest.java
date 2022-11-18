@@ -21,14 +21,13 @@ import pt.arquivo.utils.DatePicker;
 
 public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
-	public PageAdvancedSearchTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public PageAdvancedSearchTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 	
 	@Test
 	@Retry
-	public void testPageAdvancedSearch() throws Exception {
+	public void pageAdvancedSearchTest() throws Exception {
 		run("Search with fccn", () -> {
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");

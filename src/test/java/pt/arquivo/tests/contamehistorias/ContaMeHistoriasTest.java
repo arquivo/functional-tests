@@ -14,9 +14,8 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class ContaMeHistoriasTest extends WebDriverTestBaseParallel {
 
-	public ContaMeHistoriasTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public ContaMeHistoriasTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test

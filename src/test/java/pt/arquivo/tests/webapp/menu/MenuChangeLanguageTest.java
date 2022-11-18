@@ -24,20 +24,20 @@ import pt.arquivo.utils.LocalizedString;
 
 public class MenuChangeLanguageTest extends WebDriverTestBaseParallel {
 
-    public MenuChangeLanguageTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public MenuChangeLanguageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test
     @Retry
-    public void menuChangeLaguageTestPTtoEN() {
+    public void menuChangeLaguagePTtoENTest() {
         LocaleUtils.changeLanguageToPT(this);
         menuChangeLaguageTest(LocaleUtils.PORTUGUESE);
     }
 
     @Test
     @Retry
-    public void menuChangeLaguageTestENtoPT() {
+    public void menuChangeLaguageENtoPTTest() {
         LocaleUtils.changeLanguageToEN(this);
         menuChangeLaguageTest(LocaleUtils.ENGLISH);
     }

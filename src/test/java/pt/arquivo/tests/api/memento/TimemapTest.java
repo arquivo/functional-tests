@@ -1,4 +1,4 @@
-package pt.arquivo.tests.webapp.memento;
+package pt.arquivo.tests.api.memento;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -19,9 +19,8 @@ public class ReplayScreenshotTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
-	public ReplayScreenshotTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public ReplayScreenshotTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test

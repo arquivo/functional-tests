@@ -18,15 +18,14 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParallel {
 
-	public PageAdvancedSearchNegationOptionTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public PageAdvancedSearchNegationOptionTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 
 	}
 	
 	@Test
 	@Retry
-	public void testPageAdvancedSearchNegationOption() throws Exception {
+	public void pageAdvancedSearchNegationOptionTest() throws Exception {
 		run("Search with fccn", () -> {
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");

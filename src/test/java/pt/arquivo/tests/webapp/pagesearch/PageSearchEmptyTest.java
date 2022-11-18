@@ -21,20 +21,20 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 
 	private static final String QUERY = "xptoxptoxptoxptoxptoxptoxptoxptoxpto";
 
-	public PageSearchEmptyTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public PageSearchEmptyTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test
 	@Retry
-	public void pageSearchEmptyTestPT() {
+	public void pageSearchEmptyPTTest() {
 		LocaleUtils.changeLanguageToPT(this);
 		pageSearchTest("Não foram encontrados resultados para a sua pesquisa: ");
 	}
 
 	@Test
 	@Retry
-	public void pageSearchEmptyTestEN() {
+	public void pageSearchEmptyENTest() {
 		LocaleUtils.changeLanguageToEN(this);
 		pageSearchTest("No results were found for the query: ");
 	}
