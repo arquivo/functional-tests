@@ -7,6 +7,7 @@ Recursive tests developed with selenium framework for Arquivo.pt
 
 To select which platform/browser combinations to test on, set the SAUCE_ONDEMAND_BROWSERS environment variable to a string such as:
 
+```bash
 [
   {
     "platform": "Windows 10",
@@ -22,6 +23,7 @@ To select which platform/browser combinations to test on, set the SAUCE_ONDEMAND
     "automation-name": "UiAutomator2"
   }
 ]
+```
 
 ## Execute the tests
 
