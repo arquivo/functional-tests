@@ -26,6 +26,7 @@ To select which platform/browser combinations to test on, set the **SAUCE_ONDEMA
   }
 ]
 ```
+Then execute maven:
 
 ```bash
  mvn clean verify -Djava.locale.providers=COMPAT,SPI \
@@ -85,7 +86,12 @@ docker-compose up
 And another run your tests like:
 
 ```bash
-mvn clean verify -Dit.test=pt.fccn.arquivo.tests.imagesearch.ImageSearchTest -Dtest.url=https://arquivo.pt -Djava.locale.providers=COMPAT,SPI -Dtest.selenium.port=4444 -Dtest.selenium.host=localhost
+mvn clean verify \
+    -Dit.test=pt.fccn.arquivo.tests.imagesearch.ImageSearchTest \
+    -Dtest.url=https://arquivo.pt \
+    -Djava.locale.providers=COMPAT,SPI \
+    -Dtest.selenium.port=4444 \
+    -Dtest.selenium.host=localhost
 ```
 
 More information on:
