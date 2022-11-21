@@ -28,7 +28,13 @@ To select which platform/browser combinations to test on, set the **SAUCE_ONDEMA
 ```
 
 ```bash
- mvn clean verify -Dit.test=pt.arquivo.tests.** -Dtest.url=https://preprod.arquivo.pt -Dremote.saucelabs.user=xxxx -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Djava.locale.providers=COMPAT,SPI -Dtest.selenium.host=ondemand.us-west-1.saucelabs.com -Dtest.selenium.port=443
+ mvn clean verify -Djava.locale.providers=COMPAT,SPI \
+    -Dit.test=pt.arquivo.tests.** \
+    -Dtest.url=https://preprod.arquivo.pt \
+    -Dremote.saucelabs.user=xxxx \
+    -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+    -Dtest.selenium.host=ondemand.us-west-1.saucelabs.com \
+    -Dtest.selenium.port=443
 ```
 
 To debug tests add the argument:
@@ -45,7 +51,13 @@ First start the proxy:
 ```
 
 ```bash
- mvn clean verify -Dit.test=pt.arquivo.tests.** -Dtest.url=https://preprod.arquivo.pt -Dremote.saucelabs.user=xxxx -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Djava.locale.providers=COMPAT,SPI -Dtest.selenium.host=localhost -Dtest.selenium.port=4444
+ mvn clean verify -Djava.locale.providers=COMPAT,SPI \
+    -Dit.test=pt.arquivo.tests.** \
+    -Dtest.url=https://preprod.arquivo.pt \
+    -Dremote.saucelabs.user=xxxx \
+    -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+    -Dtest.selenium.host=localhost \
+    -Dtest.selenium.port=4444
 ```
 
 In some cases when the test or tunnel is closed incorrectly a process is pending which makes it impossible to run the test again. So, use the following steps:
