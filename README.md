@@ -32,8 +32,8 @@ Then execute maven:
  mvn clean verify -Djava.locale.providers=COMPAT,SPI \
     -Dit.test=pt.arquivo.tests.** \
     -Dtest.url=https://preprod.arquivo.pt \
-    -Dremote.saucelabs.user=xxxx \
-    -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+    -Dtest.saucelabs.user=xxxx \
+    -Dtest.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
     -Dtest.selenium.host=ondemand.us-west-1.saucelabs.com \
     -Dtest.selenium.port=443
 ```
@@ -55,8 +55,8 @@ First start the proxy:
  mvn clean verify -Djava.locale.providers=COMPAT,SPI \
     -Dit.test=pt.arquivo.tests.** \
     -Dtest.url=https://preprod.arquivo.pt \
-    -Dremote.saucelabs.user=xxxx \
-    -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+    -Dtest.saucelabs.user=xxxx \
+    -Dtest.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
     -Dtest.selenium.host=localhost \
     -Dtest.selenium.port=4444
 ```
