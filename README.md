@@ -19,8 +19,8 @@ To select which platform/browser combinations to test on, set the **SAUCE_ONDEMA
   },
   {
     "platform":"Android",
+    "platform-version":"12.0",
     "browser":"Chrome",
-    "browser-version":"12.0",
     "device": "Android GoogleAPI Emulator",
     "automation-name": "UiAutomator2"
   }
