@@ -87,7 +87,7 @@ And another run your tests like:
 
 ```bash
 mvn clean verify \
-    -Dit.test=pt.fccn.arquivo.tests.imagesearch.ImageSearchTest \
+    -Dit.test=pt.arquivo.tests.webapp.imagesearch.ImageSearchTest \
     -Dtest.url=https://arquivo.pt \
     -Djava.locale.providers=COMPAT,SPI \
     -Dtest.selenium.port=4444 \
