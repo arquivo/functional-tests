@@ -192,7 +192,8 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
                     browserConfigs.optString("browser-version", null),
                     browserConfigs.optString("device", null),
                     browserConfigs.optString("device-orientation", null),
-                    browserConfigs.optString("automation-name", null)
+                    browserConfigs.optString("automation-name", null),
+                    browserConfigs.optString("resolution", null)
                 });
             }
         }
