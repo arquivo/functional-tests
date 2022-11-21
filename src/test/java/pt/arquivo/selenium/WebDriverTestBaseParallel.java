@@ -177,7 +177,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         LinkedList<String[]> browsers = new LinkedList<String[]>();
         if (browsersJSON == null || browsersJSON.isEmpty()) {
             System.out.println("You did not specify browsers, testing with latest firefox on Linux...");
-            browsers.add(new String[] { "Linux", null, "firefox", null, null });
+            browsers.add(new String[] { "Linux", null, "Firefox", "latest", null, null, null, "1280x960" });
         } else {
             JSONObject browsersJSONObject = new JSONObject("{browsers:" + browsersJSON + "}");
 
