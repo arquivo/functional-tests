@@ -5,7 +5,9 @@ Recursive tests developed with selenium framework for Arquivo.pt
 
 # Functional Tests
 
-To select which platform/browser combinations to test on, set the SAUCE_ONDEMAND_BROWSERS environment variable to a string such as:
+## Execute the tests
+
+To select which platform/browser combinations to test on, set the **SAUCE_ONDEMAND_BROWSERS** environment variable to a string such as:
 
 ```bash
 [
@@ -24,8 +26,6 @@ To select which platform/browser combinations to test on, set the SAUCE_ONDEMAND
   }
 ]
 ```
-
-## Execute the tests
 
 ```bash
  mvn clean verify -Dit.test=pt.arquivo.tests.** -Dtest.url=https://preprod.arquivo.pt -Dremote.saucelabs.user=xxxx -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Djava.locale.providers=COMPAT,SPI -Dtest.selenium.host=ondemand.us-west-1.saucelabs.com -Dtest.selenium.port=443
