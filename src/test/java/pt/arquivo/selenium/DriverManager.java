@@ -36,9 +36,9 @@ public class DriverManager {
     private URL buildUrl() throws MalformedURLException {
 
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append("http://");
-        urlBuilder.append(HOST+":");
-        urlBuilder.append(PORT);
+        urlBuilder.append(PORT.equals("443") ? "https://" : "http://");
+        urlBuilder.append(HOST);
+        urlBuilder.append(PORT.equals("443") ? "" : ":" + PORT);
         urlBuilder.append("/wd/hub");
 
         URL url = new URL(urlBuilder.toString());
