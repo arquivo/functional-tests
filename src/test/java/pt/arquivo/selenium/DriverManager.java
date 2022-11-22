@@ -30,7 +30,7 @@ public class DriverManager {
 
     // Browser types
     private enum BrowsersTypes {
-        CHROME, FIREFOX, MICROSOFTEDGE, SAFARI,
+        CHROME, FIREFOX, EDGE, SAFARI,
     }
 
     private URL buildUrl() throws MalformedURLException {
@@ -71,7 +71,7 @@ public class DriverManager {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 capabilities = (MutableCapabilities) firefoxOptions;
                 break;
-            case MICROSOFTEDGE:
+            case EDGE:
                 EdgeOptions edgeOptions = new EdgeOptions();
                 capabilities = (MutableCapabilities) edgeOptions;
                 break;
