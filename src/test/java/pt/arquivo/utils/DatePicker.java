@@ -65,9 +65,8 @@ public class DatePicker {
 
 	public static void changeTo(WebDriver driver, LocalDate date) {
         if (DatePicker.isDesktop(driver)) {
-            new WebDriverWait(driver, Duration.ofSeconds(40))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.id("modal-datepicker-container")))
-                .sendKeys(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.id("modal-datepicker-container")));
+            driver.findElement(By.id("modal-datepicker-input")).sendKeys(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } else {
             new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ap-cont")));
             DatePicker.mobileDatepickerChangeYearTo(driver,date.getYear());
