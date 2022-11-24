@@ -2,6 +2,8 @@ package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -41,13 +43,9 @@ public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 	}
 
 	private boolean checkDatePicker() {
-		String start = waitUntilElementIsVisibleAndGet(By.id("start-date")).getAttribute("value");
-		String end = waitUntilElementIsVisibleAndGet(By.id("end-date")).getAttribute("value");
-		try{
-			return (Integer.parseInt(start) <= Integer.parseInt(end));
-		} catch (Error e){
-			return false;
-		}
+		LocalDate start = DatePicker.getStartDate(driver);
+		LocalDate end = DatePicker.getEndDate(driver);
+		return start.isBefore(end) || start.isEqual(end);
 	}
 
 }
