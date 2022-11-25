@@ -46,7 +46,18 @@ public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 		System.out.println("Current url: " + driver.getCurrentUrl());
 
 		run("Click menu button",
-				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
+		() -> {
+			waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton"));
+			
+			if(driver.findElement(By.cssSelector("#menuButton > span")).isDisplayed()){
+				// Desktop
+				driver.findElement(By.cssSelector("#menuButton > span")).click();
+			} else {
+				// Mobile
+				driver.findElement(By.cssSelector("#menuButton > div")).click();
+			}
+		});
+		
 
 		run("Click about button",
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(1) > a:nth-child(9) > h4:nth-child(1)")).click());

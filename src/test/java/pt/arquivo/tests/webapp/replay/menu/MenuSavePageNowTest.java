@@ -30,13 +30,24 @@ public class MenuSavePageNowTest extends WebDriverTestBaseParallel {
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
 		run("Click menu button",
-				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
+				() -> {
+					waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton"));
+					
+					if(driver.findElement(By.cssSelector("#menuButton > span")).isDisplayed()){
+						// Desktop
+						driver.findElement(By.cssSelector("#menuButton > span")).click();
+					} else {
+						// Mobile
+						driver.findElement(By.cssSelector("#menuButton > div")).click();
+					}
+				});
+				
 
 		run("Click SavePageNow button",
-				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(1) > a:nth-child(8) > h4:nth-child(1)")).click());
+				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#swiperWrapper > div.swiper-slide.menu.swiper-slide-active > a:nth-child(8) > h4")).click());
 
 
-		appendError("Check if current url is the page search",
+		appendError("Check if current url is savepagenow",
 				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/services/savepagenow?")));
 	}
 

@@ -28,7 +28,18 @@ public class MenuPagesNewAvancedSearchWaybackTest extends WebDriverTestBaseParal
 		driver.get(this.testURL + WAYBACK_EXAMPLE);
 
 		run("Click menu button",
-				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
+		() -> {
+			waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton"));
+			
+			if(driver.findElement(By.cssSelector("#menuButton > span")).isDisplayed()){
+				// Desktop
+				driver.findElement(By.cssSelector("#menuButton > span")).click();
+			} else {
+				// Mobile
+				driver.findElement(By.cssSelector("#menuButton > div")).click();
+			}
+		});
+		
 
 		run("Open pages sub menu", 
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#pagesMenu > h4:nth-child(1)")).click());
