@@ -26,8 +26,8 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
     private static final String IMAGE_SEARCH_DIRECT_URL = "/image/search?size=all&type=&tools=off&safeSearch=on&query=fccn&btnSubmit=Search&dateStart=26%2F06%2F2007&dateEnd=27%2F06%2F2007";
 
     public ImageSearchDirectUrlTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+            String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test
@@ -62,12 +62,12 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> assertThat("Check image original origin/domain",
-                driver.findElement(By.xpath("//*[@id=\"image-card-1\"]/ul/li[4]/a")).getText(),
+                waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-card-1\"]/ul/li[4]/a")).getText().trim(),
                 containsString("fccn.pt")));
 
         if (imageButtonText.isPresent()) {
             appendError(() -> assertEquals("Check page language by verifying images button text", imageButtonText.get(),
-                    driver.findElement(By.id("search-form-images")).getText()));
+                    waitUntilElementIsVisibleAndGet(By.id("search-form-images")).getText().trim()));
         }
     }
 }

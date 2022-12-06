@@ -2,9 +2,14 @@ package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pt.arquivo.tests.webapp.utils.DatePicker;
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
@@ -17,17 +22,17 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
 	public PageAdvancedSearchTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 	
 	@Test
 	@Retry
 	public void testPageAdvancedSearch() throws Exception {
 		run("Search with fccn", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 		
 		run("Click on advanced search link to navigate to advanced search page",
@@ -35,60 +40,41 @@ public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 		
 		appendError(() -> {
 			assertEquals("Check if search words maintain fccn term", "fccn",
-					driver.findElement(By.id("words")).getAttribute("value"));
+					waitUntilElementIsVisibleAndGet(By.id("words")).getAttribute("value"));
 		});
-		
 
-		//run("Open start date picker", () -> driver.findElement(By.id("date-container-start")).click());
+		run("Insert 31 may 2010 on start date picker", () -> DatePicker.setStartDatePicker(driver, "31/05/2010"));
 
-		//run("Insert 31 may 2010 on start date picker", () -> {
-		//	IonicDatePicker.changeTo(driver, LocalDate.of(2006, 5, 31));
-		//});
+		run("Insert 1 jan 2019 on end date picker", () -> DatePicker.setEndDatePicker(driver, "01/01/2019"));
 		
-		//run("Open end date picker", () -> driver.findElement(By.id("date-container-end")).click());
-		//run("Insert 1 jan 2019 on end date picker", () -> {
-		//	IonicDatePicker.changeTo(driver, LocalDate.of(2019, 1, 1));
-		//});
-		
-		appendError("Unselect 'All formats'", () -> driver.findElement(By.cssSelector("input[type=checkbox][format=all]")).click());
+		appendError("Unselect 'All formats'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=all]")).click());
 
-        appendError("Set format type to 'PDF'", () -> driver.findElement(By.cssSelector("input[type=checkbox][format=pdf]")).click());
+        appendError("Set format type to 'PDF'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=pdf]")).click());
 
-		appendError("Set site", () -> driver.findElement(By.id("website")).sendKeys("fccn.pt"));
+		appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("fccn.pt"));
 		
-		appendError("Click on search on arquivo.pt button", () -> driver.findElement(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
+		appendError("Click on search on arquivo.pt button", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
 		
 		appendError(() -> assertEquals("After advanced search check search term contains",
 				"fccn site:fccn.pt type:pdf",
-				driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
+				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 
 		System.out.println("Current url: " + driver.getCurrentUrl());
 		
 		appendError(() -> assertEquals("Check mime of first result", "[PDF]",
-				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a/span")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a/span")).getText().trim()));
 		
 		appendError(() -> assertEquals("Check url of first result", "fccn.pt/wp-content/uploads/2017/06/booklet_RCTS2017.pdf",
-				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul/li[1]/a")).getText()));
+				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul/li[1]/a")).getText().trim()));
 		
 		// start date - from
-		//appendError(() -> assertEquals("After advanced search check day start date contains", "31",
-		//		driver.findElement(By.id("calendarDayStart")).getText()));
-
-		//appendError(() -> assertEquals("After advanced search check month start date contains", "Mai",
-		//		driver.findElement(By.id("calendarMonthStart")).getText()));
-
-		//appendError(() -> assertEquals("After advanced search check year start date contains", "2006",
-		//		driver.findElement(By.id("calendarYearStart")).getText()));
-
+		appendError(() -> assertEquals("After advanced search check day start date contains", "20100531",
+			new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated((By.id("start-date")))).getAttribute("value").trim()
+		));
 		// until - end date
-		//appendError(() -> assertEquals("After advanced search check day end date contains", "1",
-		//		driver.findElement(By.id("calendarDayEnd")).getText()));
-
-		//appendError(() -> assertEquals("After advanced search check month end date contains", "Jan",
-		//		driver.findElement(By.id("calendarMonthEnd")).getText()));
-
-		//appendError(() -> assertEquals("After advanced search check year end date contains", "2019",
-		//		driver.findElement(By.id("calendarYearEnd")).getText()));
+		appendError(() -> assertEquals("After advanced search check day end date contains", "20190101",
+			new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated((By.id("end-date")))).getAttribute("value").trim()
+		));
 	}
 
 }

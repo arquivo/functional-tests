@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.Retry;
 public class MenuPagesNewAvancedSearchHomepageTest extends MenuTest {
 
     public MenuPagesNewAvancedSearchHomepageTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+            String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class MenuPagesNewAvancedSearchHomepageTest extends MenuTest {
         run("Open pages sub menu", () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages")).click());
 
         run("Click new advanced search button",
-                () -> driver.findElement(By.id("menu-pages-advanced-search")).click());
+                () -> waitUntilElementIsVisibleAndGet(By.id("menu-pages-advanced-search")).click());
 
         appendError("Check if current url is the advanced search",
                 () -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/page/advanced/search?")));

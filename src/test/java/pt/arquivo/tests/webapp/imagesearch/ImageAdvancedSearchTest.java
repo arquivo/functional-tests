@@ -21,8 +21,8 @@ import pt.arquivo.tests.webapp.utils.DatePicker;
 public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
     public ImageAdvancedSearchTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+            String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test
@@ -30,9 +30,9 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
     public void testImageAdvancedSearchPage() throws Exception {
 
         run("Search FCCN term", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-            driver.findElement(By.id("submit-search")).click();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+            waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
         run("Search images instead of text", () -> {
@@ -44,7 +44,7 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> {
             assertEquals("Check if search words maintain fccn term", "fccn",
-                    driver.findElement(By.xpath("//*[@id=\"advanced-search-form-images\"]/fieldset/input[1]"))
+                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"advanced-search-form-images\"]/fieldset/input[1]"))
                             .getAttribute("value"));
         });
 
@@ -52,17 +52,17 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
         run("Set end date to 1 jan 2012", () -> DatePicker.setEndDatePicker(driver, "01/01/2012"));
 
-        appendError("Open select size (images)", () -> driver.findElement(By.id("image-size")).click());
+        appendError("Open select size (images)", () -> waitUntilElementIsVisibleAndGet(By.id("image-size")).click());
 
-        Select dropdown_size = new Select(driver.findElement(By.id("image-size")));
+        Select dropdown_size = new Select(waitUntilElementIsVisibleAndGet(By.id("image-size")));
 
         appendError("Set size", () -> dropdown_size.selectByValue("sm"));
 
-        appendError("Unselect 'All formats'", () -> driver.findElement(By.cssSelector("input[type=checkbox][format=all]")).click());
+        appendError("Unselect 'All formats'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=all]")).click());
 
-        appendError("Set format type to 'PNG'", () -> driver.findElement(By.cssSelector("input[type=checkbox][format=png]")).click());
+        appendError("Set format type to 'PNG'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=png]")).click());
 
-        appendError("Set site", () -> driver.findElement(By.id("website")).sendKeys("fccn.pt"));
+        appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("fccn.pt"));
 
         appendError("Click on search on arquivo.pt button", () -> driver
             .findElement(By.xpath("//*[@id=\"advanced-search-form-images\"]/fieldset/section[2]/button")).click());
@@ -70,33 +70,33 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
         System.out.println("Current url: " + driver.getCurrentUrl());
 
         appendError(() -> assertThat("Check image original origin/domain",
-            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]")).getText(),
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]")).getText().trim(),
             containsString("fccn.pt")));
 
         appendError(() -> assertEquals("Check image date", "20 Janeiro 2011",
-            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[5]/p")).getText()));
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[5]/p")).getText().trim()));
 
         appendError(() -> assertEquals("Check image src",
             "https://arquivo.pt/wayback/20110120225358im_/http://fccn.pt/images/announce/modulo_moodle_04109.jpg",
-            driver.findElement(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[2]/a/img")).getAttribute("src")));
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[2]/a/img")).getAttribute("src")));
 
         appendError(() -> assertEquals("After advanced search check search term contains", "fccn site:fccn.pt size:sm type:png",
-            driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 
         System.out.println("Current url: " + driver.getCurrentUrl());
 
         //start date - from
         appendError(() -> assertEquals("After advanced search check day start date contains", "31 Mai",
-            driver.findElement(By.id("start-day-month")).getAttribute("value")));
+            waitUntilElementIsVisibleAndGet(By.id("start-day-month")).getAttribute("value")));
 
         appendError(() -> assertEquals("After advanced search check year start date contains", "2010",
-            driver.findElement(By.id("start-year")).getAttribute("value")));
+            waitUntilElementIsVisibleAndGet(By.id("start-year")).getAttribute("value")));
 
         // until - end date
         appendError(() -> assertEquals("After advanced search check month end date contains", "1 Jan",
-            driver.findElement(By.id("end-day-month")).getAttribute("value")));
+            waitUntilElementIsVisibleAndGet(By.id("end-day-month")).getAttribute("value")));
 
         appendError(() -> assertEquals("After advanced search check year end date contains", "2012",
-            driver.findElement(By.id("end-year")).getAttribute("value")));
+            waitUntilElementIsVisibleAndGet(By.id("end-year")).getAttribute("value")));
     }
 }

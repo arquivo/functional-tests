@@ -21,8 +21,8 @@ import pt.arquivo.tests.webapp.utils.LocalizedString;
  */
 public class MenuAboutHomepageTest extends MenuTest {
 
-    public MenuAboutHomepageTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+    public MenuAboutHomepageTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class MenuAboutHomepageTest extends MenuTest {
     private void menuAbout(Locale locale) {
         openMenu();
 
-        run("Click about button", () -> driver.findElement(By.id("menu-about")).click());
+        run("Click about button", () -> waitUntilElementIsVisibleAndGet(By.id("menu-about")).click());
         
         String expectedUrl = new LocalizedString()
             .pt("https://sobre.arquivo.pt/pt/")

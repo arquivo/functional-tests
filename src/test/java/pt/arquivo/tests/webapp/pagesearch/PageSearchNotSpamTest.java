@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 public class PageSearchNotSpamTest extends WebDriverTestBaseParallel {
 
 	public PageSearchNotSpamTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 
 	}
 
@@ -26,9 +26,9 @@ public class PageSearchNotSpamTest extends WebDriverTestBaseParallel {
 	@Retry
 	public void pageSearchNotSpamTest() throws Exception {
 		run("Search with Lisboa", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("lisboa");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("lisboa");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
 		waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]"));

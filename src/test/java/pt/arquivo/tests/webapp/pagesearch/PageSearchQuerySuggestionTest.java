@@ -17,21 +17,21 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 public class PageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 
 	public PageSearchQuerySuggestionTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test
 	@Retry
 	public void pageSearchQuerySuggestionTest() {
 		run("Search with amazoncouk", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("amazoncouk");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("amazoncouk");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
 		assertThat("Verify if a suggestion is presented",
-				driver.findElement(By.id("term-suggested")).getText(), containsString("→ Será que quis dizer: amazon.co.uk"));
+				waitUntilElementIsVisibleAndGet(By.id("term-suggested")).getText().trim(), containsString("→ Será que quis dizer: amazon.co.uk"));
 	}
 
 }

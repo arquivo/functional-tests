@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class SavePageNowMenuTest extends WebDriverTestBaseParallel {
 
-    public SavePageNowMenuTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+    public SavePageNowMenuTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test

@@ -18,17 +18,17 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
 public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 
 	public PageSearchOverlapDatesTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test
 	@Retry
 	public void pageSearchOverlapDatesTest() throws Exception {
 		run("Search with fccn", () -> {
-			driver.findElement(By.id("submit-search-input")).clear();
-			driver.findElement(By.id("submit-search-input")).sendKeys("fccn");
-			driver.findElement(By.id("submit-search")).click();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
         run("Set start date to 20 May 1997", () -> DatePicker.setStartDatePicker(driver, "20/05/1997"));
@@ -42,8 +42,8 @@ public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 	}
 
 	private boolean checkDatePicker() {
-		String start = driver.findElement(By.id("start-date")).getAttribute("value");
-		String end = driver.findElement(By.id("end-date")).getAttribute("value");
+		String start = waitUntilElementIsVisibleAndGet(By.id("start-date")).getAttribute("value");
+		String end = waitUntilElementIsVisibleAndGet(By.id("end-date")).getAttribute("value");
 		try{
 			return (Integer.parseInt(start) <= Integer.parseInt(end));
 		} catch (Error e){

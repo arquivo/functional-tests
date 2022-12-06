@@ -30,8 +30,8 @@ public class ReplayReconstructTest extends WebDriverTestBaseParallel {
 //	private static final String MEMENTO_TIMETRAVEL = "https://timetravel.mementoweb.org/reconstruct/http://www.fccn.pt/";
 
 	public ReplayReconstructTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+			String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test
@@ -56,13 +56,13 @@ public class ReplayReconstructTest extends WebDriverTestBaseParallel {
 		//Code below to handle weird behaviour where the web driver wouldn't realize they opened  
 		//   CompletePage even though the SauceLabs video clearly displayed it being loaded.
 		//   The video would show the CompletePage page, but using something like diver.getCurrentUrl() 
-		//   would yield the original Replay page URL, or using driver.findElement() wouldn't work on 
+		//   would yield the original Replay page URL, or using waitUntilElementIsVisibleAndGet() wouldn't work on 
 		//   elements on the CompletePage page, but would work on elements on the Replay page.
 		try {
 			new WebDriverWait(driver, Duration.ofSeconds(20)).until(CustomConditions.browserUrlContains("/services/complete-page"));
 		} catch (Exception e) {
 			if(driver.findElements(By.cssSelector("head, #a_reconstruct")).stream().count() > 1){
-				String completePageUrl = driver.findElement(By.id("a_reconstruct")).getAttribute("href");
+				String completePageUrl = waitUntilElementIsVisibleAndGet(By.id("a_reconstruct")).getAttribute("href");
 				System.out.println("Web driver stuck. Forcing redirect to: " + completePageUrl);
 				driver.get(completePageUrl);
 			}

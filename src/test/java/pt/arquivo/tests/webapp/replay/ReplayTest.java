@@ -4,9 +4,15 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.fccn.arquivo.selenium.Retry;
 import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
@@ -19,8 +25,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class ReplayTest extends WebDriverTestBaseParallel {
 
-	public ReplayTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-		super(os, version, browser, deviceName, deviceOrientation);
+	public ReplayTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+		super(os, version, browser, deviceName, deviceOrientation, automationName);
 	}
 
 	@Test
@@ -30,45 +36,52 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 		//Check FCCN Replay Page
 		driver.get(this.testURL + "/wayback/19961013145650/http://www.fccn.pt/");
 
-		driver.switchTo().frame("replay_iframe");
+		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
 
-		assertThat("Verify if the term RCCN is displayed on the FCCN web page",
-				driver.findElement(By.xpath("/html/body/blockquote[1]/h1/a")).getText().toLowerCase(), containsString("rccn"));
-
+		assertThat("Verify that the term RCCN is displayed on the FCCN web page",
+			getTextContentUsingJs("body > blockquote:nth-child(5) > h1 > a").toLowerCase(), containsString("rccn"));
 		//Check FCCN Replay Page
 		driver.get(this.testURL + "/wayback/19961013171554/http://www.fccn.pt/index_i.html");
 			
-		driver.switchTo().frame("replay_iframe");
+		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
 
 		assertThat("Verify if the term Portuguese is displayed on the FCCN web page",
-		
-		driver.findElement(By.xpath("/html/body/b[1]")).getText().toLowerCase(), containsString("portuguese"));
+			getTextContentUsingJs("body > b:nth-child(12)").toLowerCase(), containsString("portuguese"));
 
 		//Check Uminho Replay Page
 
 		driver.get(this.testURL + "/wayback/19961013145852/http://s700.uminho.pt:80/homepage-pt.html");
 			
-		driver.switchTo().frame("replay_iframe");
+		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
 
 		assertThat("Verify if the term Portugal is displayed on the Uminho web page",
-				driver.findElement(By.xpath("/html/body/center[1]/h1")).getText().toLowerCase(), containsString("portugal"));
+			getTextContentUsingJs("body > center:nth-child(1) > h1").toLowerCase(), containsString("portugal"));
 
 		//Check ISCT Replay Page
 		driver.get(this.testURL + "/wayback/19961013202814/http://www.iscte.pt/");
 
-		driver.switchTo().frame("replay_iframe");
+		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
 
 		assertThat("Verify if the term ISCTE is displayed on the ISCTE web page",
-				driver.findElement(By.xpath("/html/body/center[2]/table/tbody/tr/td[1]/h1/center")).getText().toLowerCase(), containsString("iscte"));
+			getTextContentUsingJs("body > center:nth-child(3) > table > tbody > tr > td:nth-child(1) > h1 > center").toLowerCase(), containsString("iscte"));
 
 		//Check IST Replay Page
 
 		driver.get(this.testURL + "/wayback/19961013171626/http://www.ist.utl.pt/");
 
-		driver.switchTo().frame("replay_iframe");
+		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
 
 		assertThat("Verify if the term IST is displayed on the IST web page",
-				driver.findElement(By.xpath("/html/body/p[1]/b")).getText().toLowerCase(), containsString("ist"));
+				getTextContentUsingJs("body > p:nth-child(3) > b").toLowerCase(), containsString("ist"));
 
+	}
+
+	/** 
+	 * The driver for desktop Safari doesn't work properly after switching to iframes, see https://github.com/nightwatchjs/nightwatch/issues/2943
+	 * 		I found out that we could work around this problem using a <code>JavascriptExecutor</code> to run javascript that uses <code>document.querySelector</code>
+	 * 		instead of using a <code>WebElement</code>. This function is an implementation of the workaround.
+	 * */ 
+	private String getTextContentUsingJs(String cssSelector){
+		return ((JavascriptExecutor) driver).executeScript("return document.querySelector('"+cssSelector+"').textContent").toString();
 	}
 }

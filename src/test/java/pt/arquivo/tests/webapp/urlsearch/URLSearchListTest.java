@@ -30,8 +30,8 @@ import pt.fccn.mobile.arquivo.utils.LocalizedString;
  */
 public class URLSearchListTest extends WebDriverTestBaseParallel {
 
-    public URLSearchListTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+    public URLSearchListTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test
@@ -50,9 +50,9 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
         LocaleUtils.changeLanguageTo(this, locale);
 
         run("Search fccn.pt url", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys(url);
-            driver.findElement(By.id("submit-search")).click();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys(url);
+            waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
         String versionLabel = new LocalizedString().pt("versão").en("version").apply(locale);
@@ -60,7 +60,7 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
         System.out.println("Current url: " + driver.getCurrentUrl());
 
         run("Verify year", () -> {
-            WebElement yearTableHeader = driver.findElement(By.id("list-results-year-1996"));
+            WebElement yearTableHeader = waitUntilElementIsVisibleAndGet(By.id("list-results-year-1996"));
             assertNotNull("Verify if year table header exist", yearTableHeader);
 
             appendError("Year 1995 shouldn't be visible", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
@@ -68,16 +68,16 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
 
             WebElement yearWebElement = yearTableHeader.findElement(By.xpath("//*[@id=\"list-results-year-1996\"]/a"));
             assertNotNull("Year web element not found", yearWebElement);
-            assertThat("Year is available", yearWebElement.getText(), containsString("1996"));
+            assertThat("Year is available", yearWebElement.getText().trim(), containsString("1996"));
 
             assertThat("Verify versions",
-                    driver.findElement(By.xpath("//*[@id=\"list-results-year-1996\"]/a/span")).getText(), containsString("1 " + versionLabel));
+                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"list-results-year-1996\"]/a/span")).getText().trim(), containsString("1 " + versionLabel));
 
-            driver.findElement(By.xpath("//*[@id=\"list-results-year-1996\"]/a")).click();
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"list-results-year-1996\"]/a")).click();
         });
 
         run("Verify month", () -> {
-            String monthContent = driver.findElement(By.id("list-results-month-1996-10")).getText();
+            String monthContent = waitUntilElementIsVisibleAndGet(By.id("list-results-month-1996-10")).getText().trim();
             String monthVersionLocal = new LocalizedString().pt("1 versão").en("1 version").apply(locale);
             String monthLocal = new LocalizedString().pt("Outubro").en("October").apply(locale);
             assertThat("Verify month version", monthContent, containsString(monthVersionLocal));
@@ -90,7 +90,7 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
                 .until(CustomConditions.invisibilityOfElementLocatedById("list-results-month-1996-11")));
 
         run("Open october", () -> {
-            WebElement monthHeaderWE = driver.findElement(By.id("list-results-month-1996-10"));
+            WebElement monthHeaderWE = waitUntilElementIsVisibleAndGet(By.id("list-results-month-1996-10"));
             assertNotNull("Month should be not null", monthHeaderWE);
             monthHeaderWE.click();
         });
@@ -99,7 +99,7 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
             System.out.println("Current url: " + driver.getCurrentUrl());
             String timestamp = "19961013145650";
             WebElement dayWE = waitUntilElementIsVisibleAndGet(By.id("list-results-timestamp-" + timestamp));
-            //System.out.println("List results value: " + dayWE.getText());
+            //System.out.println("List results value: " + dayWE.getText().trim());
 
             //System.out.println("Locale value: " + locale.toString());
             MessageFormat messageFormat = new MessageFormat("{0,date,d} {0,date,MMMM} {0,time,HH}h{0,time,mm}, {0,time,yyyy}", locale);
@@ -112,10 +112,10 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
             String expected = messageFormat.format(dates, new StringBuffer(), null).toString();
             //System.out.println("Expected list results value: " + expected);
 
-            assertEquals(expected, dayWE.getText());
+            assertEquals(expected, dayWE.getText().trim());
 
             assertThat("Verify href",
-                    driver.findElement(By.xpath("//*[@id=\"list-results-timestamp-19961013145650\"]/a")).getAttribute("href").replace(":80", ""), containsString(System.getProperty("test.url").replace("http://", "https://")+"/wayback/19961013145650/http://www.fccn.pt/"));
+                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"list-results-timestamp-19961013145650\"]/a")).getAttribute("href").replace(":80", ""), containsString(System.getProperty("test.url").replace("http://", "https://")+"/wayback/19961013145650/http://www.fccn.pt/"));
         });
     }
 

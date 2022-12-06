@@ -17,8 +17,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
 
-    public SavePageNowURLNotFoundTest(String os, String version, String browser, String deviceName, String deviceOrientation) {
-        super(os, version, browser, deviceName, deviceOrientation);
+    public SavePageNowURLNotFoundTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
+        super(os, version, browser, deviceName, deviceOrientation, automationName);
     }
 
     @Test
@@ -30,9 +30,9 @@ public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
     private void savePageNowURLNotFound(String query) {
 
         run("Search ddadfcfe.cdsffds", () -> {
-            driver.findElement(By.id("submit-search-input")).clear();
-            driver.findElement(By.id("submit-search-input")).sendKeys(query);
-            driver.findElement(By.id("submit-search")).click();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys(query);
+            waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
         run("Wait for results not found", () -> {
@@ -40,14 +40,14 @@ public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> assertEquals("Verify text from Save Page Now", "Use o SavePageNow para gravar a página em falta",
-            driver.findElement(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]")).getText()));
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]")).getText().trim()));
 
         run("Wait for results not found", () -> {
-            driver.findElement(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]/a")).click();
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]/a")).click();
         });
 
         appendError(() -> assertEquals("Check if fccn is in search box on second page", query,
-                driver.findElement(By.id("submit-search-input")).getAttribute("value").trim()));
+                waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
         
     }
 
