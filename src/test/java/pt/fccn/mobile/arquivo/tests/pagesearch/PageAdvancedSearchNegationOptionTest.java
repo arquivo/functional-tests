@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,7 +56,7 @@ public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParal
 		assertThat("Verify if the term fccn is displayed on any search result (tird position)",
 				driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p")).getText(), containsString("fccn"));
 		
-		appendError("Verify if any of the search results contains the visible text Fundação", () -> new WebDriverWait(driver, 20)
+		appendError("Verify if any of the search results contains the visible text Fundação", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p[contains(text(),'Fundação')]"))));
 	}
 

@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -35,7 +37,7 @@ public class NewsOnMediaPage {
 		
 		try{
 
-     		WebElement divTag = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+     		WebElement divTag = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
    	                .until(
    	                		ExpectedConditions.presenceOfElementLocated(
    	                				By.xpath( xpathDiv ) ) );

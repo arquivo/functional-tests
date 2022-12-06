@@ -9,6 +9,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -87,7 +89,7 @@ public class SearchPage {
 		String teste = "//div/div/div/table/tbody/tr/td/div[@class=\"gs-bidi-start-align gs-snippet\"]";
 		// //*[@id="___gcse_0"]/div/div/div/div[5]/div[2]/div/div/div[3]/div[1]/div[1]/table/tbody/tr/td[2]/div[3]
 		try{sleepThread( )
-    		WebElement divElem = ( new WebDriverWait( driver, timeout + 40 ) )
+    		WebElement divElem = ( new WebDriverWait( driver, Duration.ofSeconds(timeout + 40 )) )
 	                .until( ExpectedConditions
 	                			.presenceOfElementLocated(
 	                        		      By.xpath( xpathResults )
@@ -127,7 +129,7 @@ public class SearchPage {
 	private boolean searchEN( String xpathResults , String xpathButton ) {
 		System.out.println( "[searchEN]" );
         for( String topic : topicsEN ) {
-			WebElement emailElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+			WebElement emailElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	                .until(
 	                		ExpectedConditions.presenceOfElementLocated(
 	                				By.xpath( xpathResults ) ) );
@@ -137,7 +139,7 @@ public class SearchPage {
 
 	        IndexSobrePage.sleepThread( );
 
-	        WebElement btnSubmitElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+	        WebElement btnSubmitElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	            .until(
 	            		ExpectedConditions.presenceOfElementLocated(
 	            				By.xpath( xpathButton ) ) );
@@ -155,7 +157,7 @@ public class SearchPage {
 		System.out.println( "[searchPT]" );
         for( String topic : topicsPT ) {
         	System.out.println( "Search for " + topic );
-    		WebElement emailElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+    		WebElement emailElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathResults ) ) );
@@ -164,7 +166,7 @@ public class SearchPage {
 
             IndexSobrePage.sleepThread( );
 
-            WebElement btnSubmitElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement btnSubmitElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                 .until(
                 		ExpectedConditions.presenceOfElementLocated(
                 				By.xpath( xpathSendButton ) ) );

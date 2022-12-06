@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.replay.options;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,7 +35,7 @@ public class ReplayScreenshotTest extends WebDriverTestBaseParallel {
 
 		run("Cancel take screenshot", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"screenshot\"]/ul/li[3]/button")).click());
 
-		appendError("Check save page as image modal is closed", () -> new WebDriverWait(driver, 20)
+		appendError("Check save page as image modal is closed", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("screenshot"))));
 
 		run("Click again on screenshot link", () -> waitUntilElementIsVisibleAndGet(By.id("menuScreenshot")).click());

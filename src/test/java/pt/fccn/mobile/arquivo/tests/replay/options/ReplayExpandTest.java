@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.replay.options;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -36,7 +38,7 @@ public class ReplayExpandTest extends WebDriverTestBaseParallel {
 
 		// or url contains wayback site (specific for android driver) or the correct
 		// full no frame url
-		run("Check we go to correct no frame url", () -> new WebDriverWait(driver, 20).until(ExpectedConditions
+		run("Check we go to correct no frame url", () -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions
 				.or(ExpectedConditions.urlContains(WAYBACK_SITE), ExpectedConditions.urlContains(NOFRAME_EXAMPLE))));
 	}
 

@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.replay.menu;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,7 +40,7 @@ public class MenuImagesAdvancedSearchWaybackTest extends WebDriverTestBaseParall
 				() ->  waitUntilElementIsVisibleAndGet(By.id("menu-images-advanced-search")).click());
 
 		appendError("Check if current url is the image search",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/image/advanced/search?")));
+				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/image/advanced/search?")));
 	}
 
 }

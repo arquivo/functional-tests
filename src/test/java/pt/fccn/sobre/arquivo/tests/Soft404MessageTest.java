@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.junit.Test;
@@ -56,7 +57,7 @@ public class Soft404MessageTest extends WebDriverTestBaseParallel {
 			appendError(() -> assertEquals("Maybe try searching?",
 					driver.findElement(By.id("messageSearch")).getText()));
 			
-			appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
+			appendError("Check if page is not archived", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 					.until(ExpectedConditions.visibilityOfElementLocated(By.id("___gcse_2"))));
 			
 		}

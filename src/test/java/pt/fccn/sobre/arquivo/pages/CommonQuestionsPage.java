@@ -9,6 +9,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -73,7 +75,7 @@ public class CommonQuestionsPage {
     		} else
     			xpathDivs = "//*[@id=\"post-2096\"]/div/div/div/h3";
 
-    		List< WebElement > results = ( new WebDriverWait( driver, timeout ) )
+    		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
 	                        .visibilityOfAllElementsLocatedBy(
 	                        		      By.xpath( xpathDivs )

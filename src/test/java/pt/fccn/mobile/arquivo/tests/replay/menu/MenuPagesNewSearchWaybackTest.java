@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.replay.menu;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,7 +40,7 @@ public class MenuPagesNewSearchWaybackTest extends WebDriverTestBaseParallel {
 				() ->  waitUntilElementIsVisibleAndGet(By.id("menu-pages-new-search")).click());
 
 		appendError("Check if current url is the page search",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains("/page/search?")));
+				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/page/search?")));
 	}
 
 }

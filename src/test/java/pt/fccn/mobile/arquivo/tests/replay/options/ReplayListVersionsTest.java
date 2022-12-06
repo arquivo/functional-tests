@@ -3,6 +3,8 @@ package pt.fccn.mobile.arquivo.tests.replay.options;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -48,7 +50,7 @@ public class ReplayListVersionsTest extends WebDriverTestBaseParallel {
 		String expectedUrl = this.testURL + "/url/search?q=http%3A%2F%2Fwww.fccn.pt%2F&from=19910806";
 
 		run("Check url is on list versions",
-				() -> new WebDriverWait(driver, 20).until(ExpectedConditions.urlContains(expectedUrl)));
+				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains(expectedUrl)));
 	}
 
 }

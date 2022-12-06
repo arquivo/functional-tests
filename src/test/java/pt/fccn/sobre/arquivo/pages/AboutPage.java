@@ -3,6 +3,8 @@ package pt.fccn.sobre.arquivo.pages;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -44,7 +46,7 @@ public class AboutPage {
 	
 	public boolean extractLinks( String xpath ) {
 		try{
-    		List< WebElement > results = ( new WebDriverWait( driver, timeout ) )
+    		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
 	                        .visibilityOfAllElementsLocatedBy(
 	                        		      By.xpath( xpath )

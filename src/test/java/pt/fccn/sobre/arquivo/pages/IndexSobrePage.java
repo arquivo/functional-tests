@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -75,7 +77,7 @@ public class IndexSobrePage {
     public CommonQuestionsPage goToCommonQuestionsPage( ) throws FileNotFoundException{
         try{
             System.out.println( "Start goToCommonQuestionsPage( ) method" );
-            WebElement cQuestionsLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement cQuestionsLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
             .until(
             		ExpectedConditions.presenceOfElementLocated(
             				By.xpath( "//*[@id=\"wp_editor_widget-8\"]/ul/li[1]/a" )
@@ -104,7 +106,7 @@ public class IndexSobrePage {
     		idMenu = "4397"; //*[@id="menu-item-4167"]/a
     	try{
     		System.out.println( "Start goToCollaboratePage() method" );
-            WebElement collaborateLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement collaborateLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
             .until(
             		ExpectedConditions.presenceOfElementLocated(
             				By.xpath( "//*[@id=\"menu-item-" + idMenu + "\"]/a" )
@@ -131,14 +133,14 @@ public class IndexSobrePage {
             System.out.println( "Start goToSiteMapPage() method" );
 
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"menu-item-4391\"]/a" )//*[@id="menu-item-4396"]/a/span
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( ); //click in menu ajuda
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"menu-item-4425\"]/a" ) //*[@id="menu-item-4425"]/a
@@ -174,14 +176,14 @@ public class IndexSobrePage {
             }
 
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\""+ idMenuPub +"\"]/a" )
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"" + idMenuPubCien + "\"]/a" )
@@ -215,14 +217,14 @@ public class IndexSobrePage {
             	idSubMenu 	= "menu-item-4402"; //*[@id="menu-item-4402"]/a
             }
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"" + idMenu + "\"]/a" )
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"" + idSubMenu + "\"]/a" )
@@ -257,14 +259,14 @@ public class IndexSobrePage {
             System.out.println( "Start goToNewOnMediaPage() method" );
 
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"menu-item-"+idDiv+"\"]/a" )
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( "//*[@id=\"menu-item-"+idDivSubMenu+"\"]/a" )
@@ -302,14 +304,14 @@ public class IndexSobrePage {
             System.out.println( "Start goToAudioPage() method" );
 
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathPublicationMenu )
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathAudio )
@@ -344,14 +346,14 @@ public class IndexSobrePage {
             System.out.println( "Start goToVideoPage() method" );
 
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathDiv )
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathVideo )
@@ -390,14 +392,14 @@ public class IndexSobrePage {
             System.out.println( "Start goToPresentationsPage() method" );
 
             Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathDivMenu )
                     				)
                     		);
             actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
                     .until(
                     		ExpectedConditions.presenceOfElementLocated(
                     				By.xpath( xpathDibSubMenu )
@@ -424,7 +426,7 @@ public class IndexSobrePage {
 
         try{
             System.out.println( "Start goToExamplePage() method" );
-            WebElement examplePageLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement examplePageLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
             .until(
             		ExpectedConditions.presenceOfElementLocated(
             				By.xpath( "//*[@id=\"menu-item-4389\"]/a" ) //*[@id="menu-item-4389"]/a
@@ -449,7 +451,7 @@ public class IndexSobrePage {
     public NewsPage goToNewsPage( ) throws FileNotFoundException{
         try{
             System.out.println( "Start goToNewsPage( ) method" );
-            WebElement newsLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement newsLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
             .until(
             		ExpectedConditions.presenceOfElementLocated(
             				By.xpath( "//*[@id=\"menu-item-4388\"]/a" ) //*[@id="menu-item-4388"]/a
@@ -479,7 +481,7 @@ public class IndexSobrePage {
 
     	try{
             System.out.println( "Start goToAboutPage( ) method" );
-            WebElement newsLink = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+            WebElement newsLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
             .until(
             		ExpectedConditions.presenceOfElementLocated(
             				By.xpath( "//*[@id=\""+idDiv+"\"]/a" )
@@ -525,7 +527,7 @@ public class IndexSobrePage {
    			readFromFileToMap( "FooterLinksPT.txt" );
 
     	try{
-    		List< WebElement > results = ( new WebDriverWait( driver, timeout ) )
+    		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
 	                        .visibilityOfAllElementsLocatedBy(
 	                        		      By.xpath( xpatha )
@@ -577,7 +579,7 @@ public class IndexSobrePage {
    			switchLanguage( );
 
     	try{
-    		List< WebElement > results = ( new WebDriverWait( driver, timeout ) )
+    		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
 	                        .visibilityOfAllElementsLocatedBy(
 	                        		      By.xpath( xpatha )
@@ -614,14 +616,14 @@ public class IndexSobrePage {
     	List< String > searchTerms = readFromFileToList( "FooterLinks.txt" );
     	try{
     		for( String term : searchTerms ) {
-        		WebElement input = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+        		WebElement input = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
         	            .until(
         	            		ExpectedConditions.presenceOfElementLocated(
         	            				By.xpath( xpathInput )
         	            				)
         	            		);
 
-        		WebElement btnsearch = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+        		WebElement btnsearch = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
         	            .until(
         	            		ExpectedConditions.presenceOfElementLocated(
         	            				By.xpath( xpathbtn )

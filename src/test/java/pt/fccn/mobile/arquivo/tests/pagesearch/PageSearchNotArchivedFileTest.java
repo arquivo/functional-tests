@@ -1,5 +1,7 @@
 package pt.fccn.mobile.arquivo.tests.pagesearch;
 
+import java.time.Duration;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -36,7 +38,7 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).click();
 		});
 
-		appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
+		appendError("Check if page is not archived", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("pageIsNotArchived"))));
 
 		driver.navigate().back();
@@ -47,7 +49,7 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[2]")).click();
 		});
 
-		appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
+		appendError("Check if page is not archived", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("pageIsNotArchived"))));
 
 		driver.navigate().back();
@@ -58,7 +60,7 @@ public class PageSearchNotArchivedFileTest extends WebDriverTestBaseParallel {
 			driver.findElement(By.xpath("//*[@id=\"pages-results\"]/ul[4]")).click();
 		});
 
-		appendError("Check if page is not archived", () -> new WebDriverWait(driver, 20)
+		appendError("Check if page is not archived", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 				.until(ExpectedConditions.invisibilityOfElementLocated(By.id("pageIsNotArchived"))));
 
 	}

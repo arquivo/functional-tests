@@ -54,7 +54,7 @@
         <remote.saucelabs.user>${env.SAUCE_USERNAME}</remote.saucelabs.user>
 
         <test.resolution></test.resolution>
-        <selenium.version>3.141.59</selenium.version>
+        <selenium.version>4.4.0</selenium.version>
         <test.browsers.json>${env.SAUCE_ONDEMAND_BROWSERS}</test.browsers.json>
 
     </properties>
@@ -276,6 +276,24 @@
                   "browser-version":"11",
                 }]</test.browsers.json>
                 <test.resolution>1920x1080</test.resolution>
+            </properties>
+        </profile>
+        <profile>
+            <id>browsers-minimum-requirements</id>
+            <activation>
+                <property>
+                    <name>browsers</name>
+                    <value>minimum-requirements</value>
+                </property>
+            </activation>
+            <properties>
+                <test.browsers.json>
+                [{
+                  "platform":"Windows 10",
+                  "browser":"chrome",
+                  "browser-version":"latest",
+                }]</test.browsers.json>
+                <test.resolution>1280x1024</test.resolution>
             </properties>
         </profile>
         <profile>

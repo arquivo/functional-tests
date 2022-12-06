@@ -3,6 +3,8 @@ package pt.fccn.sobre.arquivo.pages;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -40,28 +42,28 @@ public class SuggestionPage {
 			String xpathCaptcha 	= "//*[@id=\"recaptcha-anchor\"]/div[5]";
 			
 			
-	      	WebElement UrlsElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+	      	WebElement UrlsElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	            .until( 
 	            		ExpectedConditions.presenceOfElementLocated( 
 	            				By.xpath( xpathSites ) ) );             
 	      	UrlsElement.clear( );
 	      	UrlsElement.sendKeys( "[Test Selenium] Url field." );
 	        
-	        WebElement descriptionElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+	        WebElement descriptionElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	            .until(
 	            		ExpectedConditions.presenceOfElementLocated( 
 	            				By.xpath( xpathDescription ) ) );
 	        descriptionElement.clear( );
 	        descriptionElement.sendKeys( "[Test Selenium] Description field." );
 	
-	        WebElement emailElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+	        WebElement emailElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	                .until(
 	                		ExpectedConditions.presenceOfElementLocated( 
 	                				By.xpath( xpathEmail ) ) );
 	        emailElement.clear( );
 	        emailElement.sendKeys( "[Test Selenium] Email field." );
 	        
-	     /*   WebElement iframeSwitch = ( new WebDriverWait( driver, timeout ) ) 
+	     /*   WebElement iframeSwitch = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) 
 	                .until(
 	                		ExpectedConditions.presenceOfElementLocated( 
 	                				By.xpath( xpathiframe ) ) );
@@ -76,7 +78,7 @@ public class SuggestionPage {
 	        
 	        IndexSobrePage.sleepThread( );
 	        
-	        WebElement btnSubmitElement = ( new WebDriverWait( driver, timeout ) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
+	        WebElement btnSubmitElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
 	            .until(
 	            		ExpectedConditions.presenceOfElementLocated(
 	            				By.id( xpathSendButton ) ) );
@@ -95,17 +97,17 @@ public class SuggestionPage {
 	private void inicializar( ) {
 		handlePrincipal = driver.getWindowHandle( );
 		System.out.println("handlePrincipal -> " + handlePrincipal);
-		WebElement iframeSwitch = ( new WebDriverWait( driver, timeout ) ) 
+		WebElement iframeSwitch = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) 
 	                .until(
 	                		ExpectedConditions.presenceOfElementLocated( 
 	                				By.xpath( xpathiframe ) ) );
 
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		driver.switchTo().frame( iframeSwitch );
 		handleCheckBox = driver.getWindowHandle( );
 		System.out.println( "handleCheckBox -> " + handleCheckBox );
 
-		wait = new WebDriverWait( driver, 20 );
+		wait = new WebDriverWait( driver, Duration.ofSeconds(20 ));
 		checkBox = wait.until(
 				ExpectedConditions.presenceOfElementLocated(
 						By.id( "recaptcha-anchor" ) ) );
@@ -127,7 +129,7 @@ public class SuggestionPage {
 
 		do {
 			try {
-				wait = new WebDriverWait( driver, timeout - 30 );
+				wait = new WebDriverWait( driver, Duration.ofSeconds(timeout - 30 ));
 				driver.switchTo( ).window( handlePrincipal );
 				for ( WebElement frame : driver.findElements( By.tagName( "iframe" ) ) ) {
 					System.out.println( "FRAME -> " + frame.getAttribute( "title" ) );
@@ -142,7 +144,7 @@ public class SuggestionPage {
 				} catch ( NoSuchElementException csee ) { }
 				
 				while ( frames.size( ) < 2 ) {
-					wait = new WebDriverWait( driver, 20 );
+					wait = new WebDriverWait( driver, Duration.ofSeconds(20 ));
 					frames = wait.until(
 							ExpectedConditions.presenceOfAllElementsLocatedBy(
 									By.tagName( "iframe" ) ) );
@@ -156,7 +158,7 @@ public class SuggestionPage {
 				handleImages = driver.getWindowHandle( );
 				System.out.println("handleImages -> " + handleImages);
 
-				wait = new WebDriverWait(driver, 20);
+				wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 				List<WebElement> imagens = wait.until(
 						ExpectedConditions.presenceOfAllElementsLocatedBy(
 								By.xpath( "//div[contains(@class, 'rc-image-tile-target')]" ) ) );
@@ -186,7 +188,7 @@ public class SuggestionPage {
 					System.out.println( elemento.getAttribute( "innerHTML" ) );
 				}
 
-				wait = new WebDriverWait( driver, timeout - 30 );
+				wait = new WebDriverWait( driver, Duration.ofSeconds(timeout - 30 ));
 				driver.switchTo( ).window( handlePrincipal );
 
 				try {
@@ -196,7 +198,7 @@ public class SuggestionPage {
 				} catch (NoSuchElementException csee) {
 				}
 
-				wait = new WebDriverWait( driver, timeout - 30 );
+				wait = new WebDriverWait( driver, Duration.ofSeconds(timeout - 30 ));
 				wait.until(
 						ExpectedConditions.presenceOfElementLocated( 
 								By.tagName( "iframe" ) ) );
@@ -204,7 +206,7 @@ public class SuggestionPage {
 				driver.switchTo( ).frame( iframeCheck.getAttribute( "title" ) );
 				handleCheckBox = driver.getWindowHandle();
 				System.out.println("handleCheckBox -> " + handleCheckBox);
-				wait = new WebDriverWait( driver , timeout );
+				wait = new WebDriverWait( driver , Duration.ofSeconds(timeout) );
 				checkBox = wait.until(
 						ExpectedConditions.presenceOfElementLocated(
 								By.id("recaptcha-anchor") ) );
@@ -216,7 +218,7 @@ public class SuggestionPage {
 			}
 
 			if ( !continuar ) {
-				wait = new WebDriverWait( driver, timeout );
+				wait = new WebDriverWait( driver, Duration.ofSeconds(timeout ));
 				driver.switchTo( ).window( handlePrincipal );
 				driver.findElement( By.tagName( "button" ) ).click( );
 				try {

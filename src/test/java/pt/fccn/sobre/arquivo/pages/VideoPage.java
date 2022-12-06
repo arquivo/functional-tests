@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.List;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -49,7 +51,7 @@ public class VideoPage {
 	
 	public boolean extractLinks( String xpath ) {
 		try{
-    		List< WebElement > results = ( new WebDriverWait( driver, timeout ) )
+    		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
 	                        .visibilityOfAllElementsLocatedBy(
 	                        		      By.xpath( xpath )
