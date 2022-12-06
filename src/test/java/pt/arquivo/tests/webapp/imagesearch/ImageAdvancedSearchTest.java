@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.tests.webapp.utils.DatePicker;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DatePicker;
 
 /**
  * Test the search of one term in the index interface.
@@ -20,14 +20,13 @@ import pt.arquivo.tests.webapp.utils.DatePicker;
  */
 public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
-    public ImageAdvancedSearchTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public ImageAdvancedSearchTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test
     @Retry
-    public void testImageAdvancedSearchPage() throws Exception {
+    public void imageAdvancedSearchPageTest() throws Exception {
 
         run("Search FCCN term", () -> {
             waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();

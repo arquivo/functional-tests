@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.LocaleUtils;
 
 /**
  *
@@ -21,20 +21,20 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 
 	private static final String QUERY = "xptoxptoxptoxptoxptoxptoxptoxptoxpto";
 
-	public PageSearchEmptyTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public PageSearchEmptyTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test
 	@Retry
-	public void pageSearchEmptyTestPT() {
+	public void pageSearchEmptyPTTest() {
 		LocaleUtils.changeLanguageToPT(this);
 		pageSearchTest("Não foram encontrados resultados para a sua pesquisa: ");
 	}
 
 	@Test
 	@Retry
-	public void pageSearchEmptyTestEN() {
+	public void pageSearchEmptyENTest() {
 		LocaleUtils.changeLanguageToEN(this);
 		pageSearchTest("No results were found for the query: ");
 	}

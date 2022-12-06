@@ -16,12 +16,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pt.arquivo.tests.webapp.utils.CustomConditions;
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.DateUtils;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
-import pt.fccn.mobile.arquivo.utils.LocalizedString;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.CustomConditions;
+import pt.arquivo.utils.DateUtils;
+import pt.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.LocalizedString;
 
 /**
  *
@@ -30,19 +30,19 @@ import pt.fccn.mobile.arquivo.utils.LocalizedString;
  */
 public class URLSearchListTest extends WebDriverTestBaseParallel {
 
-    public URLSearchListTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public URLSearchListTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test
     @Retry
-    public void urlSearchListTestPT() {
+    public void urlSearchListPTTest() {
         urlSearchListTest("fccn.pt", LocaleUtils.PORTUGUESE);
     }
 
     @Test
     @Retry
-    public void urlSearchListTestEN() {
+    public void urlSearchListENTest() {
         urlSearchListTest("fccn.pt", LocaleUtils.ENGLISH);
     }
 

@@ -10,9 +10,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.arquivo.tests.webapp.utils.LocaleUtils;
-import pt.arquivo.tests.webapp.utils.LocalizedString;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.LocalizedString;
 
 /**
  *
@@ -21,8 +21,8 @@ import pt.arquivo.tests.webapp.utils.LocalizedString;
  */
 public class MenuAboutHomepageTest extends MenuTest {
 
-    public MenuAboutHomepageTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public MenuAboutHomepageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test

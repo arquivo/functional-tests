@@ -7,9 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.utils.LocaleUtils;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 
 /**
@@ -19,9 +19,8 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 
-	public MenuAboutWaybackTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public MenuAboutWaybackTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
@@ -47,7 +46,18 @@ public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 		System.out.println("Current url: " + driver.getCurrentUrl());
 
 		run("Click menu button",
-				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton > span.headerMenuText")).click());
+		() -> {
+			waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton"));
+			
+			if(driver.findElement(By.cssSelector("#menuButton > span")).isDisplayed()){
+				// Desktop
+				driver.findElement(By.cssSelector("#menuButton > span")).click();
+			} else {
+				// Mobile
+				driver.findElement(By.cssSelector("#menuButton > div")).click();
+			}
+		});
+		
 
 		run("Click about button",
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(1) > a:nth-child(9) > h4:nth-child(1)")).click());

@@ -11,9 +11,9 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.DatePicker;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DatePicker;
 
 /**
  *
@@ -22,9 +22,8 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
  */
 public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBaseParallel {
 
-    public PageSearchLimitedDatesFromHomepageTest(String os, String version, String browser, String deviceName,
-            String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public PageSearchLimitedDatesFromHomepageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test

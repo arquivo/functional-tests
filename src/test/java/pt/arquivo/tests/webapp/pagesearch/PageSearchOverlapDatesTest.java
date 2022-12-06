@@ -2,12 +2,14 @@ package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.DatePicker;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DatePicker;
 
 /**
  * 
@@ -17,9 +19,8 @@ import pt.fccn.mobile.arquivo.utils.DatePicker;
 
 public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 
-	public PageSearchOverlapDatesTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public PageSearchOverlapDatesTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test
@@ -42,13 +43,9 @@ public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 	}
 
 	private boolean checkDatePicker() {
-		String start = waitUntilElementIsVisibleAndGet(By.id("start-date")).getAttribute("value");
-		String end = waitUntilElementIsVisibleAndGet(By.id("end-date")).getAttribute("value");
-		try{
-			return (Integer.parseInt(start) <= Integer.parseInt(end));
-		} catch (Error e){
-			return false;
-		}
+		LocalDate start = DatePicker.getStartDate(driver);
+		LocalDate end = DatePicker.getEndDate(driver);
+		return start.isBefore(end) || start.isEqual(end);
 	}
 
 }

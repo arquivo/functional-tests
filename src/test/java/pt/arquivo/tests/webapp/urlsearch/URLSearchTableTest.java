@@ -9,10 +9,10 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.fccn.mobile.arquivo.utils.DateUtils;
-import pt.fccn.mobile.arquivo.utils.LocaleUtils;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.utils.DateUtils;
+import pt.arquivo.utils.LocaleUtils;
 
 /**
  *
@@ -21,20 +21,20 @@ import pt.fccn.mobile.arquivo.utils.LocaleUtils;
  */
 public class URLSearchTableTest extends WebDriverTestBaseParallel {
 
-    public URLSearchTableTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-        super(os, version, browser, deviceName, deviceOrientation, automationName);
+    public URLSearchTableTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
 
     @Test
     @Retry
-    public void urlSearchTableTestPT() {
+    public void urlSearchTablePTTest() {
         LocaleUtils.changeLanguageToPT(this);
         urlSearchTableTest("fccn.pt", "Tabela", "13 Out", LocaleUtils.PORTUGUESE);
     }
 
     @Test
     @Retry
-    public void urlSearchTableTestEN() {
+    public void urlSearchTableENTest() {
         LocaleUtils.changeLanguageToEN(this);
         urlSearchTableTest("fccn.pt", "Table", "13 Oct", LocaleUtils.ENGLISH);
     }

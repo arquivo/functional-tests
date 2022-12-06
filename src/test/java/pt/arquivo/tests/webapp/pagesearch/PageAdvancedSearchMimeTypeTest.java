@@ -7,8 +7,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import pt.fccn.arquivo.selenium.Retry;
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.selenium.Retry;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 /**
  * 
@@ -18,14 +18,13 @@ import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
 
 public class PageAdvancedSearchMimeTypeTest extends WebDriverTestBaseParallel {
 
-	public PageAdvancedSearchMimeTypeTest(String os, String version, String browser, String deviceName,
-			String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public PageAdvancedSearchMimeTypeTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	@Test
 	@Retry
-	public void testPageAdvancedSearchMimeType() throws Exception {
+	public void pageAdvancedSearchMimeTypeTest() throws Exception {
 		run("Search with fccn", () -> {
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");

@@ -2,12 +2,12 @@ package pt.arquivo.tests.webapp.menu;
 
 import org.openqa.selenium.By;
 
-import pt.fccn.arquivo.selenium.WebDriverTestBaseParallel;
+import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 public abstract class MenuTest extends WebDriverTestBaseParallel {
 
-	public MenuTest(String os, String version, String browser, String deviceName, String deviceOrientation, String automationName) {
-		super(os, version, browser, deviceName, deviceOrientation, automationName);
+	public MenuTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
+		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
 	}
 
 	protected void openMenu() {

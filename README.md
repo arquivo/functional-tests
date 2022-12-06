@@ -2,23 +2,41 @@
 ---------------
 
 ## Status of functional tests build
+[![Build Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/builds/7cf39791df3937efa655426a7768c0bb)
 
-The link below must be updated for each build:
+# Functional Tests
 
-[![Build Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/builds/5ed5b031f86a379db868ece6ad5f9711)
+## Execute the tests
 
-## Run Functional Tests
-
-Generate eclipse .project and .classpath files, similar for idea.
+To select which platform/browser combinations to test on, set the **SAUCE_ONDEMAND_BROWSERS** environment variable to a string such as:
 
 ```bash
- mvn eclipse:clean eclipse:eclipse
+[
+  {
+    "platform": "Windows 10",
+    "browser": "Chrome",
+    "browser-version": "latest",
+    "resolution": "1280x960"
+  },
+  {
+    "platform":"Android",
+    "platform-version":"12.0",
+    "browser":"Chrome",
+    "device": "Android GoogleAPI Emulator",
+    "automation-name": "UiAutomator2"
+  }
+]
 ```
-
-Execute the tests
+Then execute maven:
 
 ```bash
- mvn clean verify -Dit.test=pt.fccn.arquivo.tests.AllTests -Dtest.url=https://preprod.arquivo.pt -Dremote.saucelabs.user=xxxx -Dremote.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Dtest.resolution=1280x1024 -Djava.locale.providers=COMPAT,SPI
+ mvn clean verify -Djava.locale.providers=COMPAT,SPI \
+    -Dit.test=pt.arquivo.tests.** \
+    -Dtest.url=https://preprod.arquivo.pt \
+    -Dtest.saucelabs.user=xxxx \
+    -Dtest.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+    -Dtest.selenium.host=ondemand.us-west-1.saucelabs.com \
+    -Dtest.selenium.port=443
 ```
 
 To debug tests add the argument:
@@ -27,30 +45,34 @@ To debug tests add the argument:
 -Dmaven.failsafe.debug
 ```
 
-To run the test collection that don't use saucelabs run:
+## To execute through sauce-connect proxy:
 
+First start the proxy:
 ```bash
- mvn clean verify -Dit.test=pt.fccn.arquivo.tests.TestCollections
+/root/sc-4.4.12-linux/bin/sc --user xxxx --api-key xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --se-port 4444 
 ```
 
-Additionaly the maven has a couple of profiles to make it more easilly to run tests directly to a specific browser.
-For Internet Explorer:
-
 ```bash
--Dbrowsers=IE
+ mvn clean verify -Djava.locale.providers=COMPAT,SPI \
+    -Dit.test=pt.arquivo.tests.** \
+    -Dtest.url=https://preprod.arquivo.pt \
+    -Dtest.saucelabs.user=xxxx \
+    -Dtest.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
+    -Dtest.selenium.host=localhost \
+    -Dtest.selenium.port=4444
 ```
 
-For mobile phones:
+In some cases when the test or tunnel is closed incorrectly a process is pending which makes it impossible to run the test again. So, use the following steps:
 
 ```bash
--Dbrowsers=mobile
+ps aux | grep sc
 ```
-
-For development purposes you could use:
+And a process will appear with a name similar to "/root/sc-4.4.12-linux/bin/sc -u ArquivoPT". Then,
 
 ```bash
--Dbrowsers=desktop-linux
+kill process_ID
 ```
+
 
 ## Speed up development
 
@@ -65,21 +87,14 @@ docker-compose up
 And another run your tests like:
 
 ```bash
-mvn clean verify -Dbrowsers=desktop-linux -Dit.test=pt.fccn.arquivo.tests.imagesearch.ImageSearchTest -Dtest.url=https://arquivo.pt -Djava.locale.providers=COMPAT,SPI
+mvn clean verify \
+    -Dit.test=pt.arquivo.tests.webapp.imagesearch.ImageSearchTest \
+    -Dtest.url=https://arquivo.pt \
+    -Djava.locale.providers=COMPAT,SPI \
+    -Dtest.selenium.port=4444 \
+    -Dtest.selenium.host=localhost
 ```
 
 More information on:
 https://github.com/SeleniumHQ/docker-selenium
 
-## Kill process
-
-In some cases when the test or tunnel is closed incorrectly a process is pending which makes it impossible to run the test again. So, use the following steps:
-
-```bash
-ps aux | grep sc
-```
-And a process will appear with a name similar to "/root/sc-4.4.12-linux/bin/sc -u ArquivoPT". Then,
-
-```bash
-kill process_ID
-```
