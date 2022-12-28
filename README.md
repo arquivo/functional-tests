@@ -1,7 +1,7 @@
 Recursive tests developed with selenium framework for Arquivo.pt
 ---------------
 
-[![Sauce Test Status](https://app.saucelabs.com/browser-matrix/ArquivoPT)](https://app.saucelabs.com/u/ArquivoPT)
+[![Sauce Test Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/u/ArquivoPT)
 
 # Functional Tests
 
