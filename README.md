@@ -2,7 +2,7 @@
 ---------------
 
 ## Status of functional tests build
-[![Build Status](https://app.saucelabs.com/browser-matrix/ArquivoPT.svg)](https://app.saucelabs.com/builds/7cf39791df3937efa655426a7768c0bb)
+[Build Status](https://app.saucelabs.com/u/ArquivoPT)
 
 # Functional Tests
 
