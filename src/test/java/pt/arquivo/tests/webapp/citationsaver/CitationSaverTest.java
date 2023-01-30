@@ -17,17 +17,12 @@ public class CitationSaverTest extends WebDriverTestBaseParallel {
     public CitationSaverTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
         super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
     }
-
+    
     @Test
     @Retry
-    public void savePageNowURLNotFound() {
-        savePageNowURLNotFound("/services/citationsaver");
-    }
-    
-    private void savePageNowURLNotFound(String path) {
+    public void citationSaverTest() {
 
-        driver.get(this.testURL + path);
-
+        driver.get(this.testURL + "/services/citationsaver");
 
         run("Wait for citationSaver page", () -> {
             waitUntilElementIsVisibleAndGet(By.id("logo-citation-saver"));
