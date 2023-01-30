@@ -29,7 +29,7 @@ public class CitationSaverTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> assertEquals("Verify slogan from CitationSaver", "Preserva citações a conteúdos online",
-            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"save-page-now-slogan\"]")).getText().trim()));
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"citation-saver-slogan\"]")).getText().trim()));
         
         appendError(() -> assertEquals("Verify text from CitationSaver", "Submeta um documento e o CitationSaver preservará as ligações nele citadas:",
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"citation-saver-main\"]/p[3]")).getText().trim()));
