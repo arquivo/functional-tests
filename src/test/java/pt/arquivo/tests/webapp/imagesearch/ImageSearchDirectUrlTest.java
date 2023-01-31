@@ -32,33 +32,37 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
     @Test
     @Retry
     public void imageSearchDirectUrlNoLanguageTest() throws Exception {
-        imageSearchDirectUrlTest(testURL + IMAGE_SEARCH_DIRECT_URL, Optional.empty());
+        imageSearchDirectUrlTest(testURL + IMAGE_SEARCH_DIRECT_URL, Optional.empty(), Optional.empty());
     }
 
     @Test
     @Retry
     public void imageSearchDirectUrlPTTest() throws Exception {
     	imageSearchDirectUrlTest(testURL + IMAGE_SEARCH_DIRECT_URL + "&" + LocaleUtils.languagePTUrlQueryParameter(),
-    			Optional.of("Imagens"));
+    			Optional.of("Imagens"),
+                Optional.of("Cerca de 60 resultados desde 2007 até 2007"));
     }
 
     @Test
     @Retry
     public void imageSearchDirectUrlENTest() throws Exception {
     	imageSearchDirectUrlTest(testURL + IMAGE_SEARCH_DIRECT_URL + "&" + LocaleUtils.languageENUrlQueryParameter(),
-    			Optional.of("Images"));
+    			Optional.of("Images"),
+                Optional.of("About 60 results from 2007 to 2007"));
     }
 
-    private void imageSearchDirectUrlTest(String url, Optional<String> imageButtonText) {
+    private void imageSearchDirectUrlTest(String url, Optional<String> imageButtonText, Optional<String> resultsEstimateText) {
         driver.get(url);
 
         WebElement firstImage = waitUntilElementIsVisibleAndGet(By.id("image-card-1"));
         assertNotNull("Should exist at least one image", firstImage);
 
-        appendError(() -> {
-            List<WebElement> photoDivList = driver.findElements(By.xpath("//*[@id=\"image-cards-container\"]/li"));
-            assertEquals("Verify results count", 60, photoDivList.size());
-        });
+        if (resultsEstimateText.isPresent()) {
+            appendError(() -> {
+                WebElement resultsEstimate = driver.findElement(By.id("estimated-results"));
+                assertEquals("Verify results count", resultsEstimateText.get(), resultsEstimate.getText());
+            });
+        }
 
         appendError(() -> assertThat("Check image original origin/domain",
                 waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-card-1\"]/ul/li[4]/a")).getText().trim(),
