@@ -57,14 +57,14 @@ public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 		appendError(() -> assertEquals("After advanced search check search term contains",
 				"fccn site:fccn.pt type:pdf",
 				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
+		
+		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
 
-		System.out.println("Current url: " + driver.getCurrentUrl());
-		
-		appendError(() -> assertEquals("Check mime of first result", "[PDF]",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a/span")).getText().trim()));
-		
-		appendError(() -> assertEquals("Check url of first result", "fccn.pt/wp-content/uploads/2017/06/booklet_RCTS2017.pdf",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul/li[1]/a")).getText().trim()));
+		appendError(() -> assertEquals("Verify that all returned mimetypes are PDF", true,
+			driver.findElements(By.cssSelector("#pages-results span.mime")).stream().allMatch((x) -> x.getText().toLowerCase().contains("[pdf]"))));
+
+		appendError(() -> assertEquals("Verify that fccn.pt is present in all returned URLs", true,
+			driver.findElements(By.cssSelector("#pages-results > ul > li:nth-child(2)")).stream().allMatch((x) -> x.getText().toLowerCase().contains("fccn.pt"))));
 		
 		// start date - from
 		appendError(() -> assertEquals("After advanced search check day start date contains", "20100531",

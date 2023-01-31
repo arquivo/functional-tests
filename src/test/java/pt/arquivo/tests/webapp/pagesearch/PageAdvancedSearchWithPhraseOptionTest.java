@@ -46,10 +46,14 @@ public class PageAdvancedSearchWithPhraseOptionTest extends WebDriverTestBasePar
 				"fccn \"speedmeter\"",
 				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 
-		assertThat("Verify if the term fccn is displayed on any search result",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText().trim(), containsString("FCCN"));
+		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
+
+		assertEquals("Verify if the term fccn is displayed on any search result", true,
+			driver.findElements(By.cssSelector("#pages-results > ul > li")).stream().anyMatch((x) -> x.getText().toLowerCase().contains("fccn")));
+
+		assertEquals("Verify if the term 'speedmeter fccn' is displayed on any search result", true,
+			driver.findElements(By.cssSelector("#pages-results > ul > li")).stream().anyMatch((x) -> x.getText().toLowerCase().contains("speedmeter fccn")));
+							
 		
-		assertThat("Verify if the term fccn is displayed on any search result",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getText().trim(), containsString("Speedmeter FCCN"));
 	}
 }

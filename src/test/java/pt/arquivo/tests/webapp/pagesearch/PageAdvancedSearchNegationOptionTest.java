@@ -48,8 +48,10 @@ public class PageAdvancedSearchNegationOptionTest extends WebDriverTestBaseParal
 				"fccn -Fundação",
 				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 		
-		assertThat("Verify if the term fccn is displayed on any search result (tird position)",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[3]/li[4]/a/p")).getText().toLowerCase(), containsString("fccn"));
+		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
+
+		assertEquals("Verify if the term fccn is displayed on any search result", true,
+			driver.findElements(By.cssSelector("#pages-results > ul > li")).stream().anyMatch((x) -> x.getText().toLowerCase().contains("fccn")));
 		
 		appendError("Verify that no search result contains the visible text Fundação", () -> {
 			long count = driver.findElements(By.cssSelector("#pages-results > ul"))

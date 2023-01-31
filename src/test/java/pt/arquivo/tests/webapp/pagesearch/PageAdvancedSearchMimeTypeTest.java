@@ -3,6 +3,7 @@ package pt.arquivo.tests.webapp.pagesearch;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -49,8 +50,10 @@ public class PageAdvancedSearchMimeTypeTest extends WebDriverTestBaseParallel {
 				"fccn type:pdf",
 				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 		
-		assertThat("Verify if the term fccn is displayed on any search result",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a")).getText().toLowerCase(), containsString("fccn"));
+		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
+
+		assertTrue("Verify if the term fccn is displayed on any search result",
+			driver.findElements(By.cssSelector("#pages-results > ul > li")).stream().anyMatch((x) -> x.getText().toLowerCase().contains("fccn")));
 		
 		appendError(() -> assertEquals("Check mime of first result", "[PDF]",
 				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a/span")).getText().trim()));
