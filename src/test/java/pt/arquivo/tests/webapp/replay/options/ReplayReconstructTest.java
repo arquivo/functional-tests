@@ -1,5 +1,7 @@
 package pt.arquivo.tests.webapp.replay.options;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -71,7 +73,7 @@ public class ReplayReconstructTest extends WebDriverTestBaseParallel {
 		run("Check that we moved to CompletePage service", 
 		() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.and(
 				CustomConditions.browserUrlContains("/services/complete-page"),
-				CustomConditions.browserUrlContains("url=http://www.fccn.pt/"),
+				CustomConditions.browserUrlContains("url=" + URLEncoder.encode("http://www.fccn.pt/", StandardCharsets.UTF_8.toString())),
 				CustomConditions.browserUrlContains("timestamp=19961013145650")
 		)));
 		
