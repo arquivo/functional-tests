@@ -5,6 +5,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -22,8 +24,8 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
     /**
      * Test the search of one term in the index interface.
      */
-    public ImageSearchTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public ImageSearchTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

@@ -2,6 +2,8 @@ package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -16,8 +18,8 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
 
 public class PageSearchNotSpamTest extends WebDriverTestBaseParallel {
 
-	public PageSearchNotSpamTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public PageSearchNotSpamTest(Map<String, String> config) {
+		super(config);
 
 	}
 

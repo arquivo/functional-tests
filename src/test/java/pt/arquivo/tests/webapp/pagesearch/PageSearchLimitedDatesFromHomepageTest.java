@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -22,8 +23,8 @@ import pt.arquivo.utils.DatePicker;
  */
 public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBaseParallel {
 
-    public PageSearchLimitedDatesFromHomepageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public PageSearchLimitedDatesFromHomepageTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

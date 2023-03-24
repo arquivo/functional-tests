@@ -2,16 +2,14 @@ package pt.arquivo.tests.webapp.replay;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 
 import java.time.Duration;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.arquivo.selenium.Retry;
@@ -25,8 +23,8 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class ReplayTest extends WebDriverTestBaseParallel {
 
-	public ReplayTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public ReplayTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -15,8 +16,8 @@ import pt.arquivo.tests.cms.pages.IndexSobrePage;
 
 public class CommonQuestionsTest extends WebDriverTestBaseParallel {
 
-	public CommonQuestionsTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public CommonQuestionsTest(Map<String, String> config) {
+		super(config);
 	}
 	
 	boolean isPreProd = true;

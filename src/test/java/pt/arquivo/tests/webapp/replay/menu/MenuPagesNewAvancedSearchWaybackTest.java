@@ -1,5 +1,7 @@
 package pt.arquivo.tests.webapp.replay.menu;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -7,8 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-
-import java.time.Duration;
 /**
  *
  * @author Pedro Gomes <pedro.gomes@fccn.pt>
@@ -18,8 +18,8 @@ public class MenuPagesNewAvancedSearchWaybackTest extends WebDriverTestBaseParal
 
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
-	public MenuPagesNewAvancedSearchWaybackTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public MenuPagesNewAvancedSearchWaybackTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

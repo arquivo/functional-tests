@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -26,8 +27,8 @@ public class ReplayTechnicalDetailsTest extends WebDriverTestBaseParallel {
 
         private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
-        public ReplayTechnicalDetailsTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-                super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+        public ReplayTechnicalDetailsTest(Map<String, String> config) {
+                super(config);
         }
 
         public String getBaseServiceUrl() {

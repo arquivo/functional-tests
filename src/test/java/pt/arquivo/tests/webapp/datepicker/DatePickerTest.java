@@ -8,6 +8,8 @@ import pt.arquivo.utils.DatePicker;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 /**
  * Test the datepicker interface
  *
@@ -16,8 +18,8 @@ import static org.junit.Assert.assertEquals;
  */
 public class DatePickerTest extends WebDriverTestBaseParallel {
 
-    public DatePickerTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public DatePickerTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

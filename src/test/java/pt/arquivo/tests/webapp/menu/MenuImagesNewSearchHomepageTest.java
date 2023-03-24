@@ -1,6 +1,7 @@
 package pt.arquivo.tests.webapp.menu;
 
 import java.time.Duration;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -16,8 +17,8 @@ import pt.arquivo.selenium.Retry;
  */
 public class MenuImagesNewSearchHomepageTest extends MenuTest {
 
-    public MenuImagesNewSearchHomepageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public MenuImagesNewSearchHomepageTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

@@ -3,6 +3,7 @@ package pt.arquivo.tests.webapp.pagesearch;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -19,8 +20,8 @@ import pt.arquivo.utils.DatePicker;
 
 public class PageSearchOverlapDatesTest extends WebDriverTestBaseParallel {
 
-	public PageSearchOverlapDatesTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public PageSearchOverlapDatesTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

@@ -2,6 +2,8 @@ package pt.arquivo.tests.contamehistorias;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -14,8 +16,8 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class ContaMeHistoriasTest extends WebDriverTestBaseParallel {
 
-	public ContaMeHistoriasTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public ContaMeHistoriasTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

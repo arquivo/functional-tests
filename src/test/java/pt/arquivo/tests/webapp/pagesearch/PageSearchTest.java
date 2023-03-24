@@ -4,11 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
-import java.util.stream.Stream;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel; 
@@ -20,8 +19,8 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class PageSearchTest extends WebDriverTestBaseParallel {
 
-	public PageSearchTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public PageSearchTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

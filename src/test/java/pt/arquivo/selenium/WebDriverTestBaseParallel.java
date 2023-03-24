@@ -31,7 +31,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.rules.TestName;
@@ -92,76 +91,24 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * rule.
      */
     @Rule
-    public RetryRule rule = new RetryRule(1);
+    public RetryRule rule = new RetryRule(2);
 
-    /**
-     * Represents the browser to be used as part of the test run.
-     */
-    protected String browser;
-    /**
-     * Represents the version of the browser to be used as part of the test run.
-     */
-    protected String browserVersion;
-    /**
-     * Represents the operating system to be used as part of the test run.
-     */
-    protected String platformName;
-    /**
-     * Represents the operating system version to be used as part of the test run.
-     */
-    protected String platformVersion;
-    /**
-     * Represents the deviceName of mobile device
-     */
-    protected String device;
-    /**
-     * Represents the device-orientation of mobile device
-     */
-    protected String deviceOrientation;
-    /**
-     * Represents the automation driver of the mobile device
-     */
-    protected String automationName;
-    /**
-     * Represents the screen resolution
-     */
-    protected String screenResolution;
-    /**
-     * Instance variable which contains the Sauce Job Id.
-     */
     protected String sessionId;
-
     protected RemoteWebDriver driver;
 
     protected String testURL;
-    protected String titleOfFirstResult;
+    protected Map<String, String> config;
 
-    @Deprecated
-    protected static String pre_prod = "preprod";
 
-    protected final boolean isPreProd;
-
-    public WebDriverTestBaseParallel(String platformName, String platformVersion, String browser, String browserVersion,
-        String device, String deviceOrientation, String automationName, String resolution) {
-
+    public WebDriverTestBaseParallel(Map<String, String> config) {
         super();
-        this.platformName = platformName;
-        this.platformVersion = platformVersion;
-        this.browser = browser;
-        this.browserVersion = browserVersion;
-        this.device = device;
-        this.deviceOrientation = deviceOrientation;
-        this.automationName = automationName;
-        this.screenResolution = resolution;
+        this.config = config;
+        for(String key : config.keySet()) {
+            System.out.println(key + " : " + config.get(key));
+        }
+        
         this.testURL = System.getProperty("test.url");
         assertNotNull("test.url property is required", this.testURL);
-        this.isPreProd = this.testURL.contains(pre_prod);
-
-        System.out.println("Platform name: " + platformName);
-        System.out.println("Browser: " + browser);
-        System.out.println("Browser version: " + browserVersion);
-        System.out.println("Device: " + device);
-        System.out.println("Orientation: " + deviceOrientation);
     }
 
     /**
@@ -170,36 +117,32 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      *         array are used as part of the invocation of the test constructor
      */
     @ConcurrentParameterized.Parameters
-    public static LinkedList<String[]> browsersStrings() {
+    public static LinkedList<Map<String, String>[]> browsersStrings() {
         String browsersJSON = System.getProperty("test.browsers.json");
+        LinkedList<Map<String, String>[]> configList = new LinkedList<>();
         System.out.println("SAUCE_ONDEMAND_BROWSERS: " + browsersJSON);
 
-        LinkedList<String[]> browsers = new LinkedList<String[]>();
         if (browsersJSON == null || browsersJSON.isEmpty()) {
-            System.out.println("You did not specify browsers, testing with latest chrome on windows 10...");
-            browsers.add(new String[] { "Windows 10", null, "Chrome", "latest", null, null, null, "1280x960" });
+            HashMap<String, String> defaultConfig = new HashMap<>();
+            defaultConfig.put("platformName", "Windows 10");
+            defaultConfig.put("browserName", "Chrome");
+            defaultConfig.put("browserVersion", "latest");
+            defaultConfig.put("screenResolution", "1280x960");
+            configList.add(new Map[]{defaultConfig});
         } else {
             JSONObject browsersJSONObject = new JSONObject("{browsers:" + browsersJSON + "}");
-
             JSONArray browsersJSONArray = browsersJSONObject.getJSONArray("browsers");
-
             for (int i = 0; i < browsersJSONArray.length(); i++) {
                 JSONObject browserConfigs = browsersJSONArray.getJSONObject(i);
-                browsers.add(new String[] {
-                    browserConfigs.getString("platform"),
-                    browserConfigs.optString("platform-version", null),
-                    browserConfigs.getString("browser"),
-                    browserConfigs.optString("browser-version", null),
-                    browserConfigs.optString("device", null),
-                    browserConfigs.optString("device-orientation", null),
-                    browserConfigs.optString("automation-name", null),
-                    browserConfigs.optString("resolution", null)
-                });
+                HashMap<String, String> config = new HashMap<>();
+                for (String key : browserConfigs.keySet()) {
+                    config.put(key, browserConfigs.getString(key));
+                }
+                configList.add(new Map[]{config});
             }
         }
 
-
-        return browsers;
+        return configList;
     }
 
     /**
@@ -214,31 +157,11 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      */
     @Before
     public void setUp() throws Exception {
-        Map<String, Object> sauceOptions = new HashMap<>();
-        sauceOptions.put("username", authentication.getUsername());
-        sauceOptions.put("accessKey", authentication.getAccessKey());
-        sauceOptions.put("name", name.getMethodName());
-
-        //the default value is false
-        //sauceOptions.put("acceptInsecureCerts", true);
-        
-        // Getting the build name.
-        // Using the Jenkins ENV var. You can use your own. If it is not set test will
-        // run without a build id.
-        sauceOptions.put("build", System.getProperty("test.build.id"));
-
-        //SauceHelpers.addSauceConnectTunnelId(capabilities);
-
         DriverManager driveManager = new DriverManager();
-
-        this.driver = driveManager.getDriver(platformName, platformVersion, browser, browserVersion, device, deviceOrientation, automationName, screenResolution, sauceOptions);
+        
+        this.driver = driveManager.getDriver(config, buildSauceOptions());
         this.driver.get(testURL);
-
         this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
-
-        String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, name.getMethodName());
-        System.out.println(message);
-
 
         Timeouts timeouts = driver.manage().timeouts();
         timeouts.pageLoadTimeout(5, TimeUnit.MINUTES);
@@ -246,6 +169,22 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         timeouts.setScriptTimeout(5, TimeUnit.MINUTES);
 
         System.out.println(String.format("Start running test: %s\n", this.getClass().getSimpleName()));
+    }
+
+    private Map<String, Object> buildSauceOptions() {
+        Map<String, Object> sauceOptions = new HashMap<>();
+        sauceOptions.put("username", System.getProperty("test.saucelabs.user"));
+        sauceOptions.put("accessKey", System.getProperty("test.saucelabs.key"));
+        sauceOptions.put("build", System.getProperty("test.build.id"));
+        sauceOptions.put("name", name.getMethodName());
+        if (!System.getProperty("test.saucelabs.tunnelname").isEmpty()) {
+            sauceOptions.put("tunnelName", System.getProperty("test.saucelabs.tunnelname"));
+        }
+        String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, name.getMethodName());
+        System.out.println(message);
+        //the default value is false
+        //sauceOptions.put("acceptInsecureCerts", true);
+        return sauceOptions;
     }
 
     /**
@@ -264,12 +203,6 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         public String getClassName() {
             return getClassContext()[1].getName();
         }
-    }
-
-    @BeforeClass
-    public static void setupClass() {
-        // get the uri to send the commands to.
-        seleniumURI = SauceHelpers.buildSauceUri();
     }
 
     /**
@@ -309,11 +242,4 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         return testURL;
     }
 
-    protected boolean isPreprod() {
-        return this.isPreProd;
-    }
-
-    protected boolean isProduction() {
-        return this.testURL.contains("://arquivo.pt") || this.testURL.contains("://m.arquivo.pt");
-    }
 }

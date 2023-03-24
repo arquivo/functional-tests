@@ -3,17 +3,13 @@ package pt.arquivo.tests.api.pagesearch.params;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.HttpURLConnection;
 
-import org.apache.commons.io.IOUtils;
-import org.json.JSONObject;
-import org.junit.Test;
-import java.util.Scanner;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.junit.Test;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.utils.AppendableErrorsBaseTest;

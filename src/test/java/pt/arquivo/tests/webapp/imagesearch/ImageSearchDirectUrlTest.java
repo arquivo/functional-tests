@@ -5,7 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -25,8 +25,8 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
 
     private static final String IMAGE_SEARCH_DIRECT_URL = "/image/search?size=all&type=&tools=off&safeSearch=on&query=fccn&btnSubmit=Search&dateStart=26%2F06%2F2007&dateEnd=27%2F06%2F2007";
 
-    public ImageSearchDirectUrlTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public ImageSearchDirectUrlTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

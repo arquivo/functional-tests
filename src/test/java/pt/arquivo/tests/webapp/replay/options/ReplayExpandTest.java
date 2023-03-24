@@ -1,11 +1,10 @@
 package pt.arquivo.tests.webapp.replay.options;
 
 import java.time.Duration;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.arquivo.selenium.Retry;
@@ -25,8 +24,8 @@ public class ReplayExpandTest extends WebDriverTestBaseParallel {
 
 	private static final String NOFRAME_EXAMPLE = "/noFrame/replay/19961013145650/" + WAYBACK_SITE;
 
-	public ReplayExpandTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public ReplayExpandTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

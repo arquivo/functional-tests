@@ -6,14 +6,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.text.MessageFormat;
-import java.util.Locale;
-
 import java.time.Duration;
+import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pt.arquivo.selenium.Retry;
@@ -30,8 +29,8 @@ import pt.arquivo.utils.LocalizedString;
  */
 public class URLSearchListTest extends WebDriverTestBaseParallel {
 
-    public URLSearchListTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public URLSearchListTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

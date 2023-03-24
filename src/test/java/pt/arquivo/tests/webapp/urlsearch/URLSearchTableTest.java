@@ -2,8 +2,8 @@ package pt.arquivo.tests.webapp.urlsearch;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.utils.DateUtils;
 import pt.arquivo.utils.LocaleUtils;
 
 /**
@@ -21,8 +20,8 @@ import pt.arquivo.utils.LocaleUtils;
  */
 public class URLSearchTableTest extends WebDriverTestBaseParallel {
 
-    public URLSearchTableTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public URLSearchTableTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

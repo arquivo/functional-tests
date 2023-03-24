@@ -13,17 +13,17 @@ To select which platform/browser combinations to test on, set the **SAUCE_ONDEMA
 ```bash
 [
   {
-    "platform": "Windows 10",
-    "browser": "Chrome",
-    "browser-version": "latest",
-    "resolution": "1280x960"
+    "platformName": "Windows 10",
+    "browserName": "Chrome",
+    "browserVersion": "latest",
+    "screenResolution": "1280x960"
   },
   {
-    "platform":"Android",
-    "platform-version":"12.0",
-    "browser":"Chrome",
-    "device": "Android GoogleAPI Emulator",
-    "automation-name": "UiAutomator2"
+    "platformName":"Android",
+    "platformVersion":"12.0",
+    "browserName":"Chrome",
+    "deviceName": "Android GoogleAPI Emulator",
+    "automationName": "UiAutomator2"
   }
 ]
 ```
@@ -49,7 +49,7 @@ To debug tests add the argument:
 
 First start the proxy:
 ```bash
-/root/sc-4.4.12-linux/bin/sc --user xxxx --api-key xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --se-port 4444 
+/root/sc-4.4.12-linux/bin/sc --user xxxx --api-key xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx --se-port 4444 --tunnel-name teste
 ```
 
 ```bash
@@ -59,7 +59,8 @@ First start the proxy:
     -Dtest.saucelabs.user=xxxx \
     -Dtest.saucelabs.key=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx \
     -Dtest.selenium.host=localhost \
-    -Dtest.selenium.port=4444
+    -Dtest.selenium.port=4444 \
+    -Dtest.saucelabs.tunnelname=teste
 ```
 
 In some cases when the test or tunnel is closed incorrectly a process is pending which makes it impossible to run the test again. So, use the following steps:

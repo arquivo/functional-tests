@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
@@ -20,8 +22,8 @@ import pt.arquivo.utils.DatePicker;
  */
 public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
-    public ImageAdvancedSearchTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public ImageAdvancedSearchTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.time.Duration;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -24,8 +25,8 @@ import pt.arquivo.utils.LocalizedString;
 
 public class MenuChangeLanguageTest extends WebDriverTestBaseParallel {
 
-    public MenuChangeLanguageTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public MenuChangeLanguageTest(Map<String, String> config) {
+        super(config);
     }
 
     @Test

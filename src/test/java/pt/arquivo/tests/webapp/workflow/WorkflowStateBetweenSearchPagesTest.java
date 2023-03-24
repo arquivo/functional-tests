@@ -2,11 +2,10 @@ package pt.arquivo.tests.webapp.workflow;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
@@ -20,8 +19,8 @@ import pt.arquivo.utils.DatePicker;
 
 public class WorkflowStateBetweenSearchPagesTest extends WebDriverTestBaseParallel {
 
-    public WorkflowStateBetweenSearchPagesTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-        super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+    public WorkflowStateBetweenSearchPagesTest(Map<String, String> config) {
+        super(config);
     }
 
 

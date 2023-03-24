@@ -21,10 +21,6 @@ import io.appium.java_client.remote.MobileCapabilityType;
 
 public class DriverManager {
 
-    // Saucelabs port
-    private static final String PORT = System.getProperty("test.selenium.port");
-    private static final String HOST = System.getProperty("test.selenium.host");
-
     // Web driver capabilities
     private MutableCapabilities capabilities;
 
@@ -34,33 +30,29 @@ public class DriverManager {
     }
 
     private URL buildUrl() throws MalformedURLException {
-
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(PORT.equals("443") ? "https://" : "http://");
-        urlBuilder.append(HOST);
-        urlBuilder.append(PORT.equals("443") ? "" : ":" + PORT);
+        urlBuilder.append(System.getProperty("test.selenium.port") == "443" ? "https://" : "http://");
+        urlBuilder.append(System.getProperty("test.selenium.host"));
+        urlBuilder.append(":");
+        urlBuilder.append(System.getProperty("test.selenium.port"));
         urlBuilder.append("/wd/hub");
 
         URL url = new URL(urlBuilder.toString());
-
         System.out.println("Remote web driver URL:" + url);
-
         return url;
     }
 
-    public RemoteWebDriver getDriver(String platformName, String platformVersion, String browser, String browserVersion,
-            String device, String deviceOrientation, String automationName, String resolution, Map<String, Object> sauceOptions) throws MalformedURLException {
-        if(device != null) {
-            return getMobileDriver(browser, platformName, platformVersion, device, deviceOrientation, automationName, sauceOptions);
+    
+    public RemoteWebDriver getDriver(Map<String, String> config, Map<String, Object> sauceOptions) throws MalformedURLException {
+        if(config.containsKey(MobileCapabilityType.DEVICE_NAME)) {
+            return getMobileDriver(config, sauceOptions);
         } else {
-            return getDesktopDriver(browser, browserVersion, platformName, resolution, sauceOptions);
+            return getDesktopDriver(config, sauceOptions);
         }
     }
 
-    public RemoteWebDriver getDesktopDriver(String browserName, String browserVersion, String platformName,
-            String resolution, Map<String, Object> sauceOptions) throws MalformedURLException {
-
-        BrowsersTypes browser = BrowsersTypes.valueOf(browserName.toUpperCase());
+    public RemoteWebDriver getDesktopDriver(Map<String, String> config, Map<String, Object> sauceOptions) throws MalformedURLException {
+        BrowsersTypes browser = BrowsersTypes.valueOf(config.get(CapabilityType.BROWSER_NAME).toUpperCase());
 
         switch (browser) {
             case CHROME:
@@ -81,34 +73,28 @@ public class DriverManager {
                 break;
             default:
                 capabilities = new MutableCapabilities();
-                capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
+                capabilities.setCapability(CapabilityType.BROWSER_NAME, config.get(CapabilityType.BROWSER_NAME));
         }
 
-        capabilities.setCapability(CapabilityType.PLATFORM_NAME, platformName);
-        capabilities.setCapability(CapabilityType.BROWSER_VERSION, browserVersion);
+        capabilities.setCapability(CapabilityType.PLATFORM_NAME, config.get(CapabilityType.PLATFORM_NAME));
+        capabilities.setCapability(CapabilityType.BROWSER_VERSION, config.get(CapabilityType.BROWSER_VERSION));
 
-        if (resolution != null && !resolution.isEmpty()) {
-            sauceOptions.put("screenResolution", resolution);
+        if (config.containsKey("screenResolution")) {
+            sauceOptions.put("screenResolution", config.get("screenResolution"));
         }
 
         capabilities.setCapability("sauce:options", sauceOptions);
-
-        System.out.println("Web driver configurations: browser[" + browserName +
-            "], browser version[" + browserVersion +
-            "], platform name[" + platformName +
-            "], sauce options[" + sauceOptions.toString() + "]"
-        );
-        System.out.println("Capabilities: " + capabilities.toString());
         return new RemoteWebDriver(buildUrl(), capabilities);
     }
 
-    public RemoteWebDriver getMobileDriver(String browserName, String platformName, String platformVersion,
-     String device, String deviceOrientation, String automationName, Map<String, Object> sauceOptions) throws MalformedURLException {
+    public RemoteWebDriver getMobileDriver(Map<String, String> config, Map<String, Object> sauceOptions) throws MalformedURLException {
 
-        switch (automationName) {
+        switch (config.get(MobileCapabilityType.AUTOMATION_NAME)) {
             case "XCUITest":
                 XCUITestOptions xcuiOptions = new XCUITestOptions();
                 capabilities = xcuiOptions;
+                capabilities.setCapability("appium:nativeWebTap", true);
+                capabilities.setCapability("appium:nativeWebTapStrict", true);
                 break;
             case "UiAutomator2":
                 UiAutomator2Options uiautomatorOptions = new UiAutomator2Options();
@@ -118,30 +104,21 @@ public class DriverManager {
                 capabilities = new MutableCapabilities();
         }
 
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, automationName);
-        capabilities.setCapability(CapabilityType.PLATFORM_NAME,platformName);
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, device);
-        capabilities.setCapability(CapabilityType.BROWSER_NAME, browserName);
+        capabilities.setCapability(CapabilityType.PLATFORM_NAME, config.get(CapabilityType.PLATFORM_NAME));
+        capabilities.setCapability(CapabilityType.BROWSER_NAME, config.get(CapabilityType.BROWSER_NAME));
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, config.get(MobileCapabilityType.AUTOMATION_NAME));
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, config.get(MobileCapabilityType.PLATFORM_VERSION));
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, config.get(MobileCapabilityType.DEVICE_NAME));
 
-        if(deviceOrientation != null)
-            capabilities.setCapability(MobileCapabilityType.ORIENTATION, deviceOrientation);
-
-        sauceOptions.remove("screenResolution");
+        if(config.containsKey(MobileCapabilityType.ORIENTATION)) {
+            capabilities.setCapability(MobileCapabilityType.ORIENTATION, config.get(MobileCapabilityType.ORIENTATION));
+        }
+            
         capabilities.setCapability("sauce:options", sauceOptions);
 
-        System.out.println("moibile Web driver configurations: browser[" + browserName +
-            "], device name[" + device +
-            "], platform version[" + platformVersion +
-            "], sauce options[" + sauceOptions.toString() + "]"
-        );
-        System.out.println("Capabilities: " + capabilities.toString());
-
-        if(platformName.equals("iOS")){
-            capabilities.setCapability("appium:nativeWebTap", true);
-            capabilities.setCapability("appium:nativeWebTapStrict", true);
+        if(config.get(CapabilityType.PLATFORM_NAME).equals("iOS")){
             return new IOSDriver(buildUrl(), capabilities);
-        } else if (platformName.equals("Android")){
+        } else if (config.get(CapabilityType.PLATFORM_NAME).equals("Android")){
             return new AndroidDriver(buildUrl(), capabilities);
         } else {
             return new AppiumDriver(buildUrl(), capabilities);

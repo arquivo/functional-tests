@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -13,8 +14,8 @@ import pt.arquivo.tests.cms.pages.IndexSobrePage;
 
 public class FooterTest extends WebDriverTestBaseParallel {
 
-	public FooterTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public FooterTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

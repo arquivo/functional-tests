@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.InputStreamReader;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -53,8 +54,8 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_PATH = "/wayback";
 
-	public MemorialTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public MemorialTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

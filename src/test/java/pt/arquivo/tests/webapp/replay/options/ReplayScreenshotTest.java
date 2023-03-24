@@ -1,6 +1,7 @@
 package pt.arquivo.tests.webapp.replay.options;
 
 import java.time.Duration;
+import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -19,8 +20,8 @@ public class ReplayScreenshotTest extends WebDriverTestBaseParallel {
 
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
-	public ReplayScreenshotTest(String platformName, String platformVersion, String browser, String browserVersion, String deviceName, String deviceOrientation, String automationName, String resolution) {
-		super(platformName, platformVersion, browser, browserVersion, deviceName, deviceOrientation, automationName, resolution);
+	public ReplayScreenshotTest(Map<String, String> config) {
+		super(config);
 	}
 
 	@Test

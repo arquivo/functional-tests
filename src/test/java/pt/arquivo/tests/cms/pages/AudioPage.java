@@ -2,9 +2,8 @@ package pt.arquivo.tests.cms.pages;
 
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
-import java.util.List;
-
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
