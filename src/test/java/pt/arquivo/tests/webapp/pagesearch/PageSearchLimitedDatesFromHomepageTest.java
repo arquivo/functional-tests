@@ -79,7 +79,7 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
 
         appendError("Check first result summary", () -> {
             WebElement we = driver
-                    .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[4]/a/p"));
+                    .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[4]/p"));
 
             assertThat("Check first result version", we.getText().trim(), containsString("Av. Brasil"));
         });
