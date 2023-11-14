@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.InputStreamReader;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -13,12 +14,14 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
+import net.bytebuddy.asm.Advice.Enter;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.arquivo.utils.ReplayUtils;
 
@@ -87,11 +90,18 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 
 			// click() didn't work consistently on every browser, so the solution was to use
 			// sendkeys method!
-			run("Click on button to redirect to Arquivo.pt",
-					() -> driver.findElement(By.id("redirectButton")).sendKeys(Keys.RETURN));
+			run("Click on button to redirect to Arquivo.pt",() -> {
+					driver.findElements(By.cssSelector("form > button")).stream().filter(button -> button.isDisplayed()).findFirst().orElse(null).click();
+				});
 
 			appendError("Check wayback page url",
-					() -> new WebDriverWait(driver, Duration.ofSeconds(120)).until(ExpectedConditions.urlContains(config.getWaybackUrl())));
+					() -> new WebDriverWait(driver, Duration.ofSeconds(120)).until(
+						ExpectedConditions.and(
+							ExpectedConditions.urlContains(config.getTimestamp()),
+							// ignore protocol and www
+							ExpectedConditions.urlContains(config.getWaybackUrl().replaceFirst("^(http[s]?://www\\.|http[s]?://|www\\.)",""))
+						)
+					));
 
 			run("Check some text on wayback page", () -> ReplayUtils.checkTextOnReplayPage(driver,
 					config.getWaybackTextXPath(), config.getWaybackText()));
@@ -150,7 +160,7 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 			if (this.waybackUrl != null) {
 				return this.waybackUrl;
 			} else {
-				return WAYBACK_PATH + "/" + getTimestamp() + "/" + getUrl();
+				return getUrl();
 			}
 		}
 

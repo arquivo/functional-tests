@@ -21,12 +21,12 @@ public class ContaMeHistoriasTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
-	public void testImageSearchOneTerm() {
+	public void findArquivoReference() {
 		driver.get("http://contamehistorias.pt");
 
 		appendError(() -> {
-			assertTrue("Check element contains arquivo.pt reference",
-					driver.findElement(By.xpath("/html/body/footer/div/div/div[1]/div[1]/div")).getText()
+			assertTrue("Check footer contains arquivo.pt reference",
+					driver.findElement(By.xpath("/html/body/footer")).getText()
 							.contains("Arquivo.pt"));
 		});
 

@@ -1,304 +1,239 @@
 configs:
--  url: http://www.umic.pt/
+-  url: https://umic.pt
    timestamp: 20170831104506
    waybackTextXPath: //*[@id="maincontent"]/div/div[1]/div/div/h3/strong/a
    waybackText: Grupo de Trabalho da CSTD da ONU
--  url: http://www.umic.pt/index.php?option=com_content&task=section&id=37&Itemid=511
+-  url: https://www.umic.pt/index.php?option=com_content&task=section&id=37&Itemid=511
    redirectPageText: UMIC
    timestamp: 20170831105224
    waybackTextXPath: //*[@id="maincontent"]/p[1]
    waybackText: lançada em 2006 envolvendo parcerias com instituições universitárias
--  url: http://www.english.umic.pt/
+-  url: https://www.english.umic.pt/
    redirectPageText: Knowledge Society Agency
    timestamp: 20170831175908
    waybackTextXPath: //*[@id="maincontent"]/div/div[1]/div/div/div/p
    waybackText: use of Information and Communication Technologies
--  url: http://www.english.umic.pt/index.php?option=com_content&task=section&id=12&Itemid=111
+-  url: https://www.english.umic.pt/index.php?option=com_content&task=section&id=12&Itemid=111
    redirectPageText: Knowledge Society Agency
    timestamp: 20170831190707
    waybackText: Making all basic public services available online
    waybackTextXPath: //*[@id="maincontent"]/ul[2]/li[1]
--  url: http://icolc.fccn.pt/
-   redirectPageText: O site icolc.fccn.pt foi desativado
-   timestamp: 20180831131331
+-  url: https://icolc.fccn.pt/
+   redirectPageText: O site foi desactivado
+   timestamp: 20180831131357
    waybackUrl: https://icolcfccn.wordpress.com/
    waybackText: International Coalition of Library Consortia
    waybackTextXPath: //*[@id="post-1"]/div/p[1]
--  url: http://icolc.fccn.pt/programme/
-   redirectPageText: O site icolc.fccn.pt foi desativado
+-  url: https://icolc.fccn.pt/programme/
+   redirectPageText: O site foi desactivado
    timestamp: 20150416112016
    waybackText: Update Battlefield Survey
    waybackTextXPath: //*[@id="post-29"]/div/p[3]
--  url: http://www.gridcomputing.pt
-   redirectPageText: O site www.gridcomputing.pt foi desativado.
+-  url: https://www.gridcomputing.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20170803133931
    waybackText: Computação Grid
    waybackTextXPath: //*[@id="mainbody"]/div/div[1]/div/div/div[2]/div/div/p
--  url: http://www.gridcomputing.pt/index.php?option=com_content&task=view&id=79&Itemid=82
-   redirectPageText: O site www.gridcomputing.pt foi desativado.
+-  url: https://www.gridcomputing.pt/index.php?option=com_content&task=view&id=79&Itemid=82
+   redirectPageText: O site foi desactivado.
    timestamp: 20170803153116
    waybackText: DEI-UC
    waybackTextXPath: //*[@id="mainbody"]/div[2]/div/div/p[3]
--  url: http://www.e-u.pt/
-   redirectPageText: O site www.e-u.pt foi desativado.
+-  url: https://www.e-u.pt/
+   redirectPageText: O site foi desactivado.
    timestamp: 20171228124550
--  url: http://www.e-u.pt/PresentationLayer/eU_homepage.html
-   redirectPageText: O site www.e-u.pt foi desativado.
-   timestamp: 20171228114832
-   waybackText: e-U Campus Virtual é uma iniciativa da
-   waybackTextXPath: //*[@id="ctrlCFIDestaquesHome_rptDestaques_ctl02_destaque"]/div[3]/p
--  url: http://www.ligarportugal.pt/
-   redirectPageText: O site www.ligarportugal.pt foi desativado.
+-  url: https://www.ligarportugal.pt/
+   redirectPageText: O site foi desactivado.
    timestamp: 20170628163113
--  url: http://www.ligarportugal.pt/figuras/figura8.html
-   redirectPageText: O site www.ligarportugal.pt foi desativado.
+-  url: https://www.ligarportugal.pt/figuras/figura8.html
+   redirectPageText: O site foi desactivado.
    timestamp: 20170806233220
--  url: http://jeremias.com.pt
-   redirectPageText: O site jeremias.com.pt foi desativado.
+-  url: https://jeremias.com.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20180504070838
    waybackText: FCCN - Fundação para a Computação Científica Nacional
    waybackTextXPath: /html/body/div/table[2]/tbody/tr/td/div/font[2]/font[3]
--  url: http://jeremias.com.pt/As_Aventuras_de_Jeremias_outras.htm
-   redirectPageText: O site jeremias.com.pt foi desativado.
+-  url: https://jeremias.com.pt/As_Aventuras_de_Jeremias_outras.htm
+   redirectPageText: O site foi desactivado.
    timestamp: 20180504070928
    waybackText: Conjunto de pequenas histórias onde aparece
    waybackTextXPath: /html/body/div/table[1]/tbody/tr[2]/td[2]/font
--  url: http://www.consultorioct.mctes.pt
-   redirectPageText: O site www.consultorioct.mctes.pt foi desativado.
+-  url: https://www.consultorioct.mctes.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20180504071337
    waybackText: Durante a Semana da Ciência e da Tecnologia de 2001
    waybackTextXPath: /html/body/table[2]/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/p[1]
--  url: http://cla.fccn.pt
-   redirectPageText: O site cla.fccn.pt foi desativado.
+-  url: https://cla.fccn.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20180504071206
    waybackText: Ciência 2009 – Encontro com a Ciência em Portugal
    waybackTextXPath: /html/body/div[1]/a/div/div[3]
--  url: http://cla.fccn.pt/2008/
-   redirectPageText: O site cla.fccn.pt foi desativado.
+-  url: https://cla.fccn.pt/2008/
+   redirectPageText: O site foi desactivado.
    timestamp: 20180504071227
    waybackText: Ciência 2008 – Encontro com a Ciência em Portugal
    waybackTextXPath: /html/body/div/div/div[3]
--  url: http://www.cidadesdigitais.pt/
-   redirectPageText: O site www.cidadesdigitais.pt foi desativado.
+-  url: https://www.cidadesdigitais.pt/
+   redirectPageText: O site foi desactivado.
    timestamp: 20180430171300
    waybackText: Cisco - multinacional reconhecida pela oferta de soluções
    waybackTextXPath: /html/body/table[2]/tbody/tr/td[3]/table[2]/tbody/tr/td[1]/table/tbody/tr/td/table/tbody/tr/td/div[1]/table[2]/tbody/tr[1]/td/p[2]
--  url: http://empregabilidadedigital.pt/
-   redirectPageText: O site empregabilidadedigital.pt foi desativado
+-  url: https://empregabilidadedigital.pt/
+   redirectPageText: O site foi desactivado
    timestamp: 20180511135909
    waybackText: Portugal está entre os países com a menor proporção de trabalhadores nas áreas
    waybackTextXPath: //*[@id="block-system-main"]/div/div/div/div/div[1]/div/div/div/div/div/div/div[1]/p
--  url: http://visibilidade.net
-   redirectPageText: O site visibilidade.net foi desativado
+-  url: https://visibilidade.net
+   redirectPageText: O site foi desactivado
    timestamp: 20180628130711
    waybackText: contem informação relacionada com publicação e divulgação na web
    waybackTextXPath: /html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/p[1]
--  url: http://visibilidade.net/tutorial/index.html
-   redirectPageText: O site visibilidade.net foi desativado
+-  url: https://visibilidade.net/tutorial/index.html
+   redirectPageText: O site foi desactivado
    timestamp: 20180628131252
    waybackText: Através de vários artigos acerca da visibilidade da informação publicada na web
    waybackTextXPath: /html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/p[1]
--  url: http://www.mundonaescola.pt/
+-  url: https://www.mundonaescola.pt/
    redirectPageText: O Mundo na Escola foi um programa de divulgação científica criado pelo Ministério da Educação e Ciência
       que funcionou entre abril de 2012 e novembro de 2015 com o objetivo de aproximar os profissionais das várias áreas do
       saber da comunidade escolar.
    timestamp: 20190315160356
    waybackText: O programa O Mundo na Escola focou o tema da ciência
    waybackTextXPath: //*[@id="post-10264"]/div/p
--  url: http://www.mundonaescola.pt/?page_id=129
+-  url: https://www.mundonaescola.pt/?page_id=129
    redirectPageText: O Mundo na Escola foi um programa de divulgação científica criado pelo Ministério da Educação e Ciência
       que funcionou entre abril de 2012 e novembro de 2015 com o objetivo de aproximar os profissionais das várias áreas do
       saber da comunidade escolar.
    timestamp: 20190315160428
    waybackText: A Física no dia-a-dia
    waybackTextXPath: //*[@id="post-10043"]/div/p
--  url: http://www.minema.di.fc.ul.pt/
-   redirectPageText: O site www.minema.di.fc.ul.pt foi desativado.
+-  url: https://www.minema.di.fc.ul.pt/
+   redirectPageText: O site foi desactivado.
    timestamp: 20191126170837
    waybackText: Scientific Programme aiming to bring together European
    waybackTextXPath: /html/body/table[5]/tbody/tr[1]/td[2]/table/tbody/tr/td/table/tbody/tr[2]/td[3]/p[3]/font/b
--  url: http://www.minema.di.fc.ul.pt/mobility.html
-   redirectPageText: O site www.minema.di.fc.ul.pt foi desativado.
+-  url: https://www.minema.di.fc.ul.pt/mobility.html
+   redirectPageText: O site foi desactivado.
    timestamp: 20191126171934
    waybackText: This novel and promising mechanism fosters further collaboration among different research groups working
    waybackTextXPath: /html/body/table[5]/tbody/tr[1]/td[2]/table/tbody/tr/td/table/tbody/tr[2]/td[3]/dt/font/dl[1]
--  url: http://www.ticsociedade.pt
-   redirectPageText: O site www.ticsociedade.pt foi desativado.
+-  url: https://www.ticsociedade.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20181101074454
    waybackText: Sabia que há 26% de portugueses que nunca usaram a Internet?
    waybackTextXPath: //*[@id="page-section-2"]/div/div/div[1]/h2
--  url: http://www.ticsociedade.pt/categorias-de-artigos/not%C3%ADcia
-   redirectPageText: O site www.ticsociedade.pt foi desativado.
+-  url: https://www.ticsociedade.pt/categorias-de-artigos/not%C3%ADcia
+   redirectPageText: O site foi desactivado.
    timestamp: 20181014085709
    waybackText: Cerimónia de Entrega dos Prémios Inclusão e Literacia Digital
    waybackTextXPath: //*[@id="node-724"]/h2/a
--  url: http://www.encontros.act.fct.pt
-   redirectPageText: O site www.encontros.act.fct.pt foi desativado.
+-  url: https://www.encontros.act.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403093603
    waybackText: Prosseguindo a sua missão de valorização
    waybackTextXPath: //*[@id="post-41"]/div/p[2]
--  url: http://www.encontros.act.fct.pt/?page_id=73
-   redirectPageText: O site www.encontros.act.fct.pt foi desativado.
+-  url: https://www.encontros.act.fct.pt/?page_id=73
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403093955
    waybackText: Já se encontra disponível a
    waybackTextXPath: //*[@id="post-73"]/div/p[1]
--  url: http://gow.fct.pt
-   redirectPageText: O site gow.fct.pt foi desativado.
+-  url: https://gow.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403093622
    waybackText: toda a Europa está convidada a participar na campanha de melhoria das competências digitais
    waybackTextXPath: /html/body/div[1]/section[2]/div/div/div[2]/div[1]/p[1]
--  url: http://gow.fct.pt/actividades.html
-   redirectPageText: O site gow.fct.pt foi desativado.
+-  url: https://gow.fct.pt/actividades.html
+   redirectPageText: O site foi desactivado.
    timestamp: 20200404044023
    waybackText: Confiança e Segurança
    waybackTextXPath: /html/body/div/section[2]/div/section/div/div[2]/div/h5[1]
--  url: http://eskills.fct.pt
-   redirectPageText: O site eskills.fct.pt foi desativado.
+-  url: https://eskills.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403093951
    waybackText: A campanha eSkills for Jobs tem o objetivo de sensibilizar
    waybackTextXPath: //*[@id="stat_img"]/div[1]/div/div/p[2]
--  url: http://eskills.fct.pt/embaixadores/
-   redirectPageText: O site eskills.fct.pt foi desativado.
+-  url: https://eskills.fct.pt/embaixadores/
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094656
    waybackText: licenciada em Engenharia Agrónoma pela Faculdade de Ciências da Universidade do Porto
    waybackTextXPath: //*[@id="post-2"]/div/div[1]/p[6]
--  url: http://curadoriadigital.fct.pt
-   redirectPageText: O site curadoriadigital.fct.pt foi desativado.
+-  url: https://curadoriadigital.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094000
    waybackText: Atas do Encontro Curadoria Digital
    waybackTextXPath: //*[@id="post-275"]/div/p[1]
--  url: http://curadoriadigital.fct.pt/?page_id=22
-   redirectPageText: O site curadoriadigital.fct.pt foi desativado.
+-  url: https://curadoriadigital.fct.pt/?page_id=22
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094050
    waybackText: Francisco Caramelo
    waybackTextXPath: //*[@id="post-22"]/div/p[6]
--  url: http://arquivosuniversitarios.fct.pt
-   redirectPageText: O site arquivosuniversitarios.fct.pt foi desativado.
+-  url: https://arquivosuniversitarios.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094336
    waybackText: As instituições de Ensino Superior nacionais dispõem de um património arquivístico único
    waybackTextXPath: //*[@id="post-79"]/div/p[2]
--  url: http://arquivosuniversitarios.fct.pt/mapa-do-sitio-2/
-   redirectPageText: O site arquivosuniversitarios.fct.pt foi desativado.
+-  url: https://arquivosuniversitarios.fct.pt/mapa-do-sitio-2/
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094620
    waybackText: Resumos e conferencistas | 4 de julho
    waybackTextXPath: //*[@id="post-252"]/div/ul[2]/li[1]/strong/a
--  url: http://arquivosuniversitarios.fct.pt
-   redirectPageText: O site arquivosuniversitarios.fct.pt foi desativado.
+-  url: https://arquivosuniversitarios.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094336
    waybackText: As instituições de Ensino Superior nacionais dispõem de um património arquivístico único
    waybackTextXPath: //*[@id="post-79"]/div/p[2]
--  url: http://arquivosuniversitarios.fct.pt/mapa-do-sitio-2/
-   redirectPageText: O site arquivosuniversitarios.fct.pt foi desativado.
+-  url: https://arquivosuniversitarios.fct.pt/mapa-do-sitio-2/
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094620
    waybackText: Resumos e conferencistas | 4 de julho
    waybackTextXPath: //*[@id="post-252"]/div/ul[2]/li[1]/strong/a
--  url: http://arquivoscientificos.fct.pt
-   redirectPageText: O site arquivoscientificos.fct.pt foi desativado.
+-  url: https://arquivoscientificos.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403093954
    waybackText: Já se encontram disponíveis as comunicações cedidas pelos oradores
    waybackTextXPath: //*[@id="post-8"]/div/ul/li/strong
--  url: http://arquivoscientificos.fct.pt/?page_id=158
-   redirectPageText: O site arquivoscientificos.fct.pt foi desativado.
+-  url: https://arquivoscientificos.fct.pt/?page_id=158
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094020
    waybackText: Nos dias 3 e 4 de julho de 2014
    waybackTextXPath: //*[@id="post-158"]/div[2]/p[1]
--  url: http://arquivosap.fct.pt
-   redirectPageText: O site arquivosap.fct.pt foi desativado.
+-  url: https://arquivosap.fct.pt
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403093850
    waybackText: As Atas do Encontro Arquivos da Administração Pública
    waybackTextXPath: //*[@id="post-387"]/div/p[1]
--  url: http://arquivosap.fct.pt/?page_id=42
-   redirectPageText: O site arquivosap.fct.pt foi desativado.
+-  url: https://arquivosap.fct.pt/?page_id=42
+   redirectPageText: O site foi desactivado.
    timestamp: 20200403094031
    waybackText: Nos últimos anos, tem crescido nos meios científicos o interesse
    waybackTextXPath: //*[@id="post-42"]/div/p[2]
--  url: http://www.diadomar.mdn.gov.pt/
+-  url: https://www.diadomar.mdn.gov.pt/
    redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
    timestamp: 20061117092548
    waybackText: DIA NACIONAL DO MAR
    waybackTextXPath: //*[@id="AutoNumber2"]/tbody/tr[1]/td[1]/p[1]/font/a/font
--  url: http://www.diadomar.mdn.gov.pt/actividades_continente.htm
+-  url: https://www.diadomar.mdn.gov.pt/actividades_continente.htm
    redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
    timestamp: 20061117092548
    waybackText: Ministério da Economia e Inovação
    waybackTextXPath: //*[@id="AutoNumber2"]/tbody/tr/td/p[3]/font/b/a
--  url: http://www.missaovenezuela.gov.pt/
+-  url: https://www.missaovenezuela.gov.pt/
    redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
    timestamp: 20160211010406
    waybackText: Galp quer triplicar os valores da parceria com a PDVSA
    waybackTextXPath: //*[@id="Table1"]/tbody/tr/td[2]/h2/a
--  url: http://www.missaovenezuela.gov.pt/noticias_noticia_17.asp
+-  url: https://www.missaovenezuela.gov.pt/noticias_noticia_17.asp
    redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
    timestamp: 20160211012347
    waybackText: GALP QUER TRIPLICAR OS VALORES DA PARCERIA COM A PDVSA
    waybackTextXPath: //*[@id="ContentMiddle"]/div[4]/h1
--  url: http://www.religare.gov.pt/
+-  url: https://www.religare.gov.pt/
    redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
    timestamp: 20191204111700
    waybackText: Página inicial
    waybackTextXPath: /html/body/table/tbody/tr[2]/td[1]/div/span
--  url: http://www.religare.gov.pt/religioes.htm
+-  url: https://www.religare.gov.pt/religioes.htm
    redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
    timestamp: 20191204111700
    waybackText: Princípios doutrinários
    waybackTextXPath: /html/body/table/tbody/tr[5]/td/p[1]/span[1]
--  url: http://www.disaster-recovery.gov.pt/
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424165203
-   waybackText: Projecto Disaster Recovery
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]
--  url: http://www.disaster-recovery.gov.pt/drecovery/pt/projecto/noticias/index.html
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190704102529
-   waybackText: 07.06.2010
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl2"]/p[1]/strong[1]
--  url: http://www.knetworks.gov.pt/
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424165218
-   waybackText: Página inicial
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]
--  url: http://www.knetworks.gov.pt/knetworks/pt/projecto/index.html
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424165429
-   waybackText: O Centro de Gestão da Rede Informática do Governo
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl2"]
--  url: http://www.redesdoconhecimento.gov.pt/
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424170738
-   waybackText: Seminário «Redes do Conhecimento e Conhecimento em Rede»
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]
--  url: http://www.redesdoconhecimento.gov.pt/rc/pt/seminario/index.html
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424171127
-   waybackText: O Seminário terá lugar no
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl2"]/p
--  url: http://www.natolisboa2010.gov.pt/
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424172251
-   waybackText: MENSAGEM DO PRESIDENTE DA REPÚBLICA
-   waybackTextXPath: /html/body/div[3]/div[4]/div[1]/h5[1]/b
--  url: http://www.natolisboa2010.gov.pt/pt/inicio/index-2.html
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424172405
-   waybackText: Nação atlântica de vocação universal e membro fundador da NATO
-   waybackTextXPath: /html/body/div[3]/div[4]/div[1]
--  url: http://www.natomedicalconference2009.gov.pt/
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424165218
-   waybackText: Welcome to NATO Medical Conference 2009 & 8th NATO Blood Conference website!
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]/h3
--  url: http://www.natomedicalconference2009.gov.pt/jmc/en/submissao/index.html
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424165659
-   waybackText: Topics of interest for the NATO Medical Conference 2009 & 8th NATO Blood Conference
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]/h2
--  url: http://www.pepal.gov.pt/
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424163439
-   waybackText: Nota de abertura
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]/span[2]/font/u/span/font
--  url: http://www.pepal.gov.pt/pepal/legislacao.html
-   redirectPageText: Esta página encontra-se preservada digitalmente pelo Arquivo.pt, ao abrigo de um protocolo de colaboração com o Centro de Gestão da Rede Informática do Governo.
-   timestamp: 20190424163552
-   waybackText: Decreto-Lei N.º 326/99
-   waybackTextXPath: //*[@id="RadEditorPlaceHolderControl1"]/p[3]/font[1]/a/font/strong
