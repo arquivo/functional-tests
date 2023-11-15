@@ -10,6 +10,7 @@ import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +59,7 @@ public class DatePicker {
         return ( 
                ( platform.equals("LINUX") && !userAgent.contains("Android") ) 
             || platform.equals("WINDOWS") 
+            || ( platform.equals("WIN10") && userAgent.contains("Edg") )
             || platform.equals("ANY")
             || ( platform.equals("MAC") && userAgent.contains("Macintosh") ) 
             );
@@ -66,6 +68,8 @@ public class DatePicker {
 	public static void changeTo(WebDriver driver, LocalDate date) {
         if (DatePicker.isDesktop(driver)) {
             new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.id("modal-datepicker-container")));
+            driver.findElement(By.id("modal-datepicker-input")).click();
+            driver.findElement(By.id("modal-datepicker-input")).sendKeys(Keys.HOME);
             driver.findElement(By.id("modal-datepicker-input")).sendKeys(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } else {
             new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ap-cont")));
