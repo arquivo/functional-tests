@@ -8,6 +8,10 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import pt.arquivo.selenium.Retry;
@@ -25,6 +29,36 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
     public ImageAdvancedSearchTest(Map<String, String> config) {
         super(config);
     }
+
+    private void iosCompatibleWaitUntilVisibleAndClick(String cssSelector){
+            Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
+            String platform = capabilities.getPlatformName().name();
+            if (platform.toLowerCase().equals("ios")){
+                // IOS driver is dumb and sometimes fails to click properly. So instead we use javascript to click.
+                waitUntilElementIsVisibleAndGet(By.cssSelector(cssSelector));
+                ((JavascriptExecutor) driver).executeScript("document.querySelector('"+cssSelector+"').click()");
+                
+            } else {
+                waitUntilElementIsVisibleAndGet(By.cssSelector(cssSelector)).click();
+            }
+    }
+
+    private void iosCompatibleWaitUntilVisibleAndSelect(String cssSelector, String value){
+        Capabilities capabilities = ((RemoteWebDriver) driver).getCapabilities();
+        String platform = capabilities.getPlatformName().name();
+        if (platform.toLowerCase().equals("ios")){
+            // IOS driver is dumb again.
+            waitUntilElementIsVisibleAndGet(By.cssSelector(cssSelector));
+            ((JavascriptExecutor) driver).executeScript("var ele = document.querySelector('"+cssSelector+"'); for(var i=0; i<ele.options.length;i++) {if (ele.options[i].value === '"+value+"') { ele.options[i].selected = true; break;}}");
+            
+        } else {
+            waitUntilElementIsVisibleAndGet(By.cssSelector(cssSelector)).click();
+            Select dropdown_size = new Select(waitUntilElementIsVisibleAndGet(By.cssSelector(cssSelector)));
+            dropdown_size.selectByValue(value);
+
+        }
+    }
+
 
     @Test
     @Retry
@@ -53,15 +87,11 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
         run("Set end date to 1 jan 2012", () -> DatePicker.setEndDatePicker(driver, "01/01/2012"));
 
-        appendError("Open select size (images)", () -> waitUntilElementIsVisibleAndGet(By.id("image-size")).click());
+        appendError("Select size to small images", () -> iosCompatibleWaitUntilVisibleAndSelect("#image-size","sm"));
 
-        Select dropdown_size = new Select(waitUntilElementIsVisibleAndGet(By.id("image-size")));
+        appendError("Unselect 'All formats'", () -> iosCompatibleWaitUntilVisibleAndClick("input[type=checkbox][format=all]"));
 
-        appendError("Set size", () -> dropdown_size.selectByValue("sm"));
-
-        appendError("Unselect 'All formats'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=all]")).click());
-
-        appendError("Set format type to 'PNG'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=png]")).click());
+        appendError("Set format type to 'PNG'", () -> iosCompatibleWaitUntilVisibleAndClick("input[type=checkbox][format=png]"));
 
         appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("fccn.pt"));
 
