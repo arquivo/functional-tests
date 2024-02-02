@@ -64,7 +64,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> {
-            assertEquals("Check image original link in image viewer", "http://www.fccn.eu/images/announce/thumbs/020_58137.jpg", driver
+            assertEquals("Check image original link in image viewer", "http://www.iscac.pt/files/footericones/01330444039.png", driver
                     .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[3]/p/span")).getText().trim());
         });
 
@@ -74,22 +74,22 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         // });
 
         appendError(() -> {
-            assertEquals("Check image capture date in image viewer", "4 Setembro 17h36, 2009", driver
+            assertEquals("Check image capture date in image viewer", "3 Março 10h12, 2021", driver
                     .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page title in image viewer", "FCCN - Fundação para a Computação Científica Nacional",
+            assertEquals("Check page title in image viewer", "ISCAC o teu futuro passa por aqui!",
                     waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page URL in image viewer", "http://www.fccn.eu/", driver
+            assertEquals("Check page URL in image viewer", "http://www.iscac.pt/", driver
                 .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[8]/p/span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page capture date in image viewer", "4 Setembro 17h36, 2009", driver
+            assertEquals("Check page capture date in image viewer", "3 Março 10h08, 2021", driver
                 .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
         });
 
@@ -105,21 +105,21 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
             assertThat("Check image detail page contains page timestamp",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("a6e8551fe818ebddbcc791f424c765aa95e22d5ed6a8960be6ce58cb5e7633cd"));
+                    containsString("1ab8d250e521e844e62f2426fb6c7ea3fd63f726a07fcefded094eec44007bf4"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("Apresentados os recentes desenvolvimentos da RCTS A FCCN contou com a presença do Ministro da C"));
+                    containsString("Notícias Regulamento Geral Interno da Unidade de Investigação Consulta Pública Ler mais"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page timestamp",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("https://arquivo.pt/wayback/20090904173557/http://www.fccn.eu/"));
+                    containsString("https://arquivo.pt/wayback/20210303100835/http://www.iscac.pt/"));
         });
 
         /**************************/
