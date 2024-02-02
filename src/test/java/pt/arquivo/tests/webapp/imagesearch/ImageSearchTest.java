@@ -90,7 +90,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> {
             assertEquals("Check page capture date in image viewer", "3 Março 10h08, 2021", driver
-                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
+                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[9]/p/span")).getText().trim());
         });
 
         appendError(() -> { // Click in Details button
