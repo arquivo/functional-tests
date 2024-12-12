@@ -36,8 +36,9 @@ public class MaxItemsTest extends AppendableErrorsBaseTest {
 		JSONTokener tokener;
 		JSONObject reply;
 		JSONArray apiResults;
-
-		String fromAPI = this.testURL + "/textsearch?q=fccn&maxItems=5";
+		
+		//We set dedupValue to 1 becaue deduplication with solr means that repeated results may exceed the maxItems 
+		String fromAPI = this.testURL + "/textsearch?q=fccn&maxItems=5&dedupValue=1";
 		try {
 			url = new URL(fromAPI);
 		} catch (MalformedURLException e) {
