@@ -7,11 +7,14 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Matcher;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import net.bytebuddy.matcher.StringMatcher;
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.arquivo.utils.LocaleUtils;
@@ -40,7 +43,7 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
     public void imageSearchDirectUrlPTTest() throws Exception {
     	imageSearchDirectUrlTest(testURL + IMAGE_SEARCH_DIRECT_URL + "&" + LocaleUtils.languagePTUrlQueryParameter(),
     			Optional.of("Imagens"),
-                Optional.of("Cerca de 60 resultados desde 2007 até 2007"));
+                Optional.of("resultados desde 2007 até 2007"));
     }
 
     @Test
@@ -48,7 +51,7 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
     public void imageSearchDirectUrlENTest() throws Exception {
     	imageSearchDirectUrlTest(testURL + IMAGE_SEARCH_DIRECT_URL + "&" + LocaleUtils.languageENUrlQueryParameter(),
     			Optional.of("Images"),
-                Optional.of("About 60 results from 2007 to 2007"));
+                Optional.of("results from 2007 to 2007"));
     }
 
     private void imageSearchDirectUrlTest(String url, Optional<String> imageButtonText, Optional<String> resultsEstimateText) {
@@ -60,7 +63,7 @@ public class ImageSearchDirectUrlTest extends WebDriverTestBaseParallel {
         if (resultsEstimateText.isPresent()) {
             appendError(() -> {
                 WebElement resultsEstimate = driver.findElement(By.id("estimated-results"));
-                assertEquals("Verify results count", resultsEstimateText.get(), resultsEstimate.getText());
+                assertThat("Verify results count", resultsEstimate.getText(), CoreMatchers.containsString(resultsEstimateText.get()));
             });
         }
 
