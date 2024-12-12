@@ -60,7 +60,7 @@ public class SiteSearchTest extends AppendableErrorsBaseTest {
 
 		assertEquals("Verify that the API reply isn't empty", true, apiResults.length() > 0);
 
-		Pattern pattern = Pattern.compile("^https?:\\/\\/www\\.publico\\.pt.*$");
+		Pattern pattern = Pattern.compile("^https?:\\/\\/([^\\.]+\\.)?publico\\.pt.*$");
 
 		for(int i=0;i<apiResults.length();i++){
 			originalURL = apiResults.getJSONObject(i).getString("originalURL");
