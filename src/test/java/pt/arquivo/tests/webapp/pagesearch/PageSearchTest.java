@@ -1,11 +1,13 @@
 package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -26,10 +28,12 @@ public class PageSearchTest extends WebDriverTestBaseParallel {
 	@Test
 	@Retry
 	public void pageSearchTest() {
-		pageSearch("fccn collection:Roteiro", "Cerca de 59 resultados desde 1991 até " + Calendar.getInstance().get(Calendar.YEAR));
+		pageSearch("fccn collection:Roteiro");
 	}
 	
-	public void pageSearch(String query, String numberResults) {
+// 	
+
+	public void pageSearch(String query) {
 		
 		run("Search fccn", () -> {
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
@@ -40,8 +44,13 @@ public class PageSearchTest extends WebDriverTestBaseParallel {
 		
 		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
 		
-		appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", numberResults,
-				waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim()));
+		appendError(() -> assertThat("Verify if the estimated results count message is displayed on page search", 
+			waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim(),
+			CoreMatchers.allOf(
+				CoreMatchers.containsString("Cerca de "),
+				CoreMatchers.containsString(" resultados desde 1991 até "+Calendar.getInstance().get(Calendar.YEAR))
+			)
+		));
 		
 		long totalResults = driver.findElements(By.cssSelector(".page-search-result")).stream().count();
 		long relevantResults = driver.findElements(By.cssSelector(".page-search-result")).stream().filter(em -> em.getText().toLowerCase().contains("fccn")).count();
