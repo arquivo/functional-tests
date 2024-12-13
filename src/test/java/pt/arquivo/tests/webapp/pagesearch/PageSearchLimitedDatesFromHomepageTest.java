@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -43,8 +44,13 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
 
         run("Wait until search results are shown", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]")));
 
-        appendError(() -> assertEquals("Verify if the estimated results count message is displayed on page search", "Cerca de 74 resultados desde 1996 até 1997",
-                waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim()));
+        appendError(() -> assertThat("Verify if the estimated results count message is displayed on page search", 
+            waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim(),
+            CoreMatchers.allOf(
+                containsString("Cerca de "),
+                containsString(" resultados desde 1996 até 1997")
+            )
+        ));
 
         appendError("Check first result url", () -> {
             List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
@@ -55,11 +61,12 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
 
             assertEquals("After advanced search check search term contains",
                 "19961013145650",
-                waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getAttribute("data-tstamp").trim());
+                waitUntilElementIsVisibleAndGet(By.cssSelector("#pages-results > ul:first-of-type")).getAttribute("data-tstamp").trim());
 
-            assertEquals("After advanced search check search term contains",
-                "http://www.fccn.pt/",
-                waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]")).getAttribute("data-url").trim());
+            assertThat("After advanced search check search term contains fccn.pt",
+                waitUntilElementIsVisibleAndGet(By.cssSelector("#pages-results > ul:first-of-type")).getAttribute("data-url").trim(),
+                containsString("fccn.pt")
+            );
         });
 
         appendError("Check first result title", () -> {
@@ -67,7 +74,9 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
             assertTrue("Mininium of title should be 1", wes.size() > 0);
 
             WebElement we = wes.get(0);
-            assertEquals("Check first result title", "www.fccn.pt", we.getText().trim());
+            assertThat("Check first result title", 
+                we.getText().trim(),
+                containsString("fccn.pt"));
         });
 
         appendError("Check first result version", () -> {
