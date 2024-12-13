@@ -32,9 +32,10 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
     @Retry
     public void imageSearchOneTermTest() throws Exception {
 
-        run("Search FCCN term", () -> {
+        // We force the collection to ensure every environment (dev, preprod, prod) retrieves the same data
+        run("Search Publico term with collection Roteiro", () -> {
             waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
-            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("fccn");
+            waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("Publico collection:Roteiro");
             waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
         });
 
@@ -59,12 +60,12 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> {
-            assertEquals("Check image name in image viewer", "FCCN",
-                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[1]/p/a")).getText().trim());
+            assertEquals("Check image alt text in image viewer", "PUBLICO",
+                    waitUntilElementIsVisibleAndGet(By.cssSelector("#modal > section > section.image-details-description > div:nth-child(4) > p > span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check image original link in image viewer", "http://www.fccn.eu/images/announce/thumbs/020_58137.jpg", driver
+            assertEquals("Check image original link in image viewer", "http://shiva.di.uminho.pt:80/~pinj/0/6/20.gif", driver
                     .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[3]/p/span")).getText().trim());
         });
 
@@ -74,23 +75,23 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         // });
 
         appendError(() -> {
-            assertEquals("Check image capture date in image viewer", "4 Setembro 17h36, 2009", driver
+            assertEquals("Check image capture date in image viewer", "13 Outubro 15h00, 1996", driver
                     .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page title in image viewer", "FCCN - Fundação para a Computação Científica Nacional",
+            assertEquals("Check page title in image viewer", "Jose Miranda - HOME PAGE",
                     waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page URL in image viewer", "http://www.fccn.eu/", driver
+            assertEquals("Check page URL in image viewer", "http://shiva.di.uminho.pt:80/~pinj/", driver
                 .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[8]/p/span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page capture date in image viewer", "4 Setembro 17h36, 2009", driver
-                .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
+            assertEquals("Check page capture date in image viewer", "13 Outubro 14h59, 1996", driver
+                .findElement(By.cssSelector("#modal > section > section.image-details-description > div:nth-child(12) > p > span")).getText().trim());
         });
 
         appendError(() -> { // Click in Details button
@@ -105,21 +106,21 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
             assertThat("Check image detail page contains page timestamp",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("a6e8551fe818ebddbcc791f424c765aa95e22d5ed6a8960be6ce58cb5e7633cd"));
+                    containsString("19961013145930"));
         });
 
         appendError(() -> {
-            assertThat("Check image detail page contains page timestamp",
+            assertThat("Check image detail page contains image caption",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("Apresentados os recentes desenvolvimentos da RCTS A FCCN contou com a presença do Ministro da C"));
+                    containsString("\"PÚBLICO ON-LINE é um projecto experimental fruto da colaboração entre o PÚBLICO e o Departamento de Informática da Faculdade"));
         });
 
         appendError(() -> {
-            assertThat("Check image detail page contains page timestamp",
+            assertThat("Check image detail page contains page link to archive",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("https://arquivo.pt/wayback/20090904173557/http://www.fccn.eu/"));
+                    containsString("arquivo.pt/wayback/19961013145930/http://shiva.di.uminho.pt:80/~pinj"));
         });
 
         /**************************/
