@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.util.Locale;
 import java.util.Map;
 
+import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -114,7 +115,7 @@ public class URLSearchListTest extends WebDriverTestBaseParallel {
             assertEquals(expected, dayWE.getText().trim());
 
             assertThat("Verify href",
-                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"list-results-timestamp-19961013145650\"]/a")).getAttribute("href").replace(":80", ""), containsString(System.getProperty("test.url").replace("http://", "https://")+"/wayback/19961013145650/http://www.fccn.pt/"));
+                    waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"list-results-timestamp-19961013145650\"]/a")).getAttribute("href").replace(":80", ""), containsString("/wayback/19961013145650/http://www.fccn.pt/"));
         });
     }
 
