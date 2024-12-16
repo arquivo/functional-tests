@@ -1,9 +1,11 @@
 package pt.arquivo.tests.webapp.savepagenow;
 
 import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -39,14 +41,18 @@ public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
             waitUntilElementIsVisibleAndGet(By.id("no-results-were-found"));
         });
 
-        appendError(() -> assertEquals("Verify text from Save Page Now", "Use o SavePageNow para gravar a página em falta",
-            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]")).getText().trim()));
+        appendError(() -> assertThat("Verify text from ArchivePageNow",
+            waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]")).getText().trim(),
+            CoreMatchers.anyOf(
+                CoreMatchers.containsString("Use o SavePageNow para gravar a página em falta"),
+                CoreMatchers.containsString("Use o ArchivePageNow para gravar a página em falta"))
+        ));
 
-        run("Wait for results not found", () -> {
+        run("Click on link to ArchivePageNow", () -> {
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"not-found-message\"]/ul/li[5]/a")).click();
         });
 
-        appendError(() -> assertEquals("Check if fccn is in search box on second page", query,
+        appendError(() -> assertEquals("Check that the query is placed on the search bar", query,
                 waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
         
     }
