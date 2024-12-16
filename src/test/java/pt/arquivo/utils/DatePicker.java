@@ -60,6 +60,7 @@ public class DatePicker {
                ( platform.equals("LINUX") && !userAgent.contains("Android") ) 
             || platform.equals("WINDOWS") 
             || ( platform.equals("WIN10") && userAgent.contains("Edg") )
+            || ( platform.equals("WIN10") && userAgent.contains("Firefox") )
             || platform.equals("ANY")
             || ( platform.equals("MAC") && userAgent.contains("Macintosh") ) 
             );
