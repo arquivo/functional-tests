@@ -53,7 +53,7 @@ public class ReplayTechnicalDetailsTest extends WebDriverTestBaseParallel {
         }
 
         @Test
-        // @Retry
+        @Retry
         public void replayTecnicalDetailsTest() {
                 driver.get(this.testURL + WAYBACK_EXAMPLE);
 
