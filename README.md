@@ -1,4 +1,4 @@
-# Recursive tests developed with selenium framework for Arquivo.pt
+# Regression tests developed with selenium framework for Arquivo.pt
 ---------------
 
 ## Status of functional tests build
