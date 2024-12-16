@@ -50,15 +50,18 @@ public class MenuAboutHomepageTest extends MenuTest {
             .en("https://sobre.arquivo.pt/en/")
             .apply(locale);
 
-        String logoXpath = new LocalizedString()
-            .pt("/html/body/header/div/div/aside/div/a/img")
-            .en("/html/body/header/div/div/aside/div/p/a/img")
-            .apply(locale);
+        // String logoXpath = new LocalizedString()
+        //     .pt("/html/body/header/div/div/aside/div/a/img")
+        //     .en("/html/body/header/div/div/aside/div/p/a/img")
+        //     .apply(locale);
         
+        // No need for fancy localized Xpath, we only need the one image on the header
+        String logoSelector = ".headerLogoAndSearch a img"; 
+
         //waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"logoContainer\"]"));
 
         appendError("Check if Arquivo.pt log appears", () -> new WebDriverWait(driver, Duration.ofSeconds(100))
-                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(logoXpath))));
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(logoSelector))));
 
                 
         run("Verify sobre.arquivo.pt", () -> {
