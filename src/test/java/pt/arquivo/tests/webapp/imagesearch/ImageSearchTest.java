@@ -65,7 +65,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> {
-            assertEquals("Check image original link in image viewer", "http://www.iscac.pt/files/footericones/01330444039.png", driver
+            assertEquals("Check image original link in image viewer", "http://shiva.di.uminho.pt:80/~pinj/0/6/20.gif", driver
                     .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[3]/p/span")).getText().trim());
         });
 
@@ -75,22 +75,22 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
         // });
 
         appendError(() -> {
-            assertEquals("Check image capture date in image viewer", "3 Março 10h12, 2021", driver
+            assertEquals("Check image capture date in image viewer", "13 Outubro 15h00, 1996", driver
                     .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[4]/p/span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page title in image viewer", "ISCAC o teu futuro passa por aqui!",
+            assertEquals("Check page title in image viewer", "Jose Miranda - HOME PAGE",
                     waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[7]/p/a")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page URL in image viewer", "http://www.iscac.pt/", driver
+            assertEquals("Check page URL in image viewer", "http://shiva.di.uminho.pt:80/~pinj/", driver
                 .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[8]/p/span")).getText().trim());
         });
 
         appendError(() -> {
-            assertEquals("Check page capture date in image viewer", "3 Março 10h08, 2021", driver
+            assertEquals("Check page capture date in image viewer", "13 Outubro 14h59, 1996", driver
                 .findElement(By.xpath("//*[@id=\"modal\"]/section/section[3]/div[9]/p/span")).getText().trim());
         });
 
@@ -106,21 +106,21 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
             assertThat("Check image detail page contains page timestamp",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("1ab8d250e521e844e62f2426fb6c7ea3fd63f726a07fcefded094eec44007bf4"));
+                    containsString("19961013150044"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains image caption",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("Notícias Regulamento Geral Interno da Unidade de Investigação Consulta Pública Ler mais"));
+                    containsString("PÚBLICO ON-LINE é um projecto experimental fruto da colaboração entre o PÚBLICO e o Departamento de Informática da Faculdade"));
         });
 
         appendError(() -> {
             assertThat("Check image detail page contains page link to archive",
                     waitUntilElementIsVisibleAndGet(
                             By.xpath("//*[@id=\"modal-window-image-technical-details\"]/div[2]/p")).getText().trim(),
-                    containsString("https://arquivo.pt/wayback/20210303100835/http://www.iscac.pt/"));
+                    containsString("arquivo.pt/wayback/19961013145930/http://shiva.di.uminho.pt:80/~pinj/"));
         });
 
         /**************************/
