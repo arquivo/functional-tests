@@ -43,9 +43,9 @@ public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 					waitUntilElementIsVisibleAndGet(By.id("words")).getAttribute("value"));
 		});
 
-		run("Insert 31 may 2010 on start date picker", () -> DatePicker.setStartDatePicker(driver, "31/05/2010"));
+		run("Insert 31 may 2010 on start date picker", () -> DatePicker.setStartDatePicker(driver, "31/05/2000"));
 
-		run("Insert 1 jan 2019 on end date picker", () -> DatePicker.setEndDatePicker(driver, "01/01/2019"));
+		run("Insert 1 jan 2019 on end date picker", () -> DatePicker.setEndDatePicker(driver, "01/01/2010"));
 		
 		appendError("Unselect 'All formats'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=all]")).click());
 
@@ -68,11 +68,11 @@ public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 			driver.findElements(By.cssSelector("#pages-results > ul > li:nth-child(2)")).stream().allMatch((x) -> x.getText().toLowerCase().contains("fccn.pt"))));
 		
 		// start date - from
-		appendError(() -> assertEquals("After advanced search check day start date contains", "20100531",
+		appendError(() -> assertEquals("After advanced search check day start date contains", "20000531",
 			new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated((By.id("start-date")))).getAttribute("value").trim()
 		));
 		// until - end date
-		appendError(() -> assertEquals("After advanced search check day end date contains", "20190101",
+		appendError(() -> assertEquals("After advanced search check day end date contains", "20100101",
 			new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.presenceOfElementLocated((By.id("end-date")))).getAttribute("value").trim()
 		));
 	}
