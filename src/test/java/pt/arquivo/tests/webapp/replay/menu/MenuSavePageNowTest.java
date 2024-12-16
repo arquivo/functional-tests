@@ -3,6 +3,7 @@ package pt.arquivo.tests.webapp.replay.menu;
 import java.time.Duration;
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -47,9 +48,15 @@ public class MenuSavePageNowTest extends WebDriverTestBaseParallel {
 		run("Click SavePageNow button",
 				() ->  waitUntilElementIsVisibleAndGet(By.cssSelector("#swiperWrapper > div.swiper-slide.menu.swiper-slide-active > a:nth-child(8) > h4")).click());
 
+// 
+
 
 		appendError("Check if current url is savepagenow",
-				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.urlContains("/services/savepagenow?")));
+				() -> new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.or(
+					ExpectedConditions.urlContains("/services/savepagenow?"),
+					ExpectedConditions.urlContains("/services/archivepagenow?")
+				))
+		);
 	}
 
 }
