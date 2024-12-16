@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -59,6 +60,26 @@ public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 			}
 		});
 		
+		String changeLanguageButtonText = driver.findElement(By.id("changeLanguage")).getText().trim();
+		if(
+			   expectedUrl.contains("/en/") && changeLanguageButtonText.equals("English")
+			|| expectedUrl.contains("/pt/") && changeLanguageButtonText.equals("Português")
+		){
+			run("Change to correct language and click menu button again",
+		() -> {
+			
+			waitUntilElementIsVisibleAndGet(By.id("changeLanguage")).click();
+			waitUntilElementIsVisibleAndGet(By.cssSelector("#menuButton"));
+			
+			if(driver.findElement(By.cssSelector("#menuButton > span")).isDisplayed()){
+				// Desktop
+				driver.findElement(By.cssSelector("#menuButton > span")).click();
+			} else {
+				// Mobile
+				driver.findElement(By.cssSelector("#menuButton > div")).click();
+			}
+		});
+		}
 
 		run("Click about button",
 				() -> waitUntilElementIsVisibleAndGet(By.cssSelector("div.swiper-slide:nth-child(1) > a:nth-child(9) > h4:nth-child(1)")).click());
