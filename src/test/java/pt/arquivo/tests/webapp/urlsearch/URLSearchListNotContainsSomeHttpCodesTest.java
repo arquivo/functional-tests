@@ -66,14 +66,14 @@ public class URLSearchListNotContainsSomeHttpCodesTest extends WebDriverTestBase
     @Test
     @Retry
     public void urlSearchListNotContains302PTTest() {
-        test("fccn.pt", LocaleUtils.PORTUGUESE, Arrays.asList("list-results-timestamp-20161212184040"),
+        test("fccn.pt", LocaleUtils.PORTUGUESE, Arrays.asList("list-results-timestamp-20090904173659"),
             Arrays.asList("list-results-timestamp-20161213184117"));
     }
 
     @Test
     @Retry
     public void urlSearchListNotContains302ENTest() {
-        test("fccn.pt", LocaleUtils.ENGLISH, Arrays.asList("list-results-timestamp-20161212184040"),
+        test("fccn.pt", LocaleUtils.ENGLISH, Arrays.asList("list-results-timestamp-20090904173659"),
             Arrays.asList("list-results-timestamp-20161213184117"));
     }
 
