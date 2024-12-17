@@ -51,12 +51,12 @@ public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
         appendError("Set format type to 'PDF'", () -> waitUntilElementIsVisibleAndGet(By.cssSelector("input[type=checkbox][format=pdf]")).click());
 
-		appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("fccn.pt"));
+		appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("www.fccn.pt"));
 		
 		appendError("Click on search on arquivo.pt button", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"advanced-search-form-pages\"]/fieldset/section[2]/button")).click());
 		
 		appendError(() -> assertEquals("After advanced search check search term contains",
-				"fccn site:fccn.pt type:pdf",
+				"fccn site:www.fccn.pt type:pdf",
 				waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 		
 		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
