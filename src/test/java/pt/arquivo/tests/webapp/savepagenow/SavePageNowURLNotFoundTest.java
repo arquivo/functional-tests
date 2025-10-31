@@ -49,7 +49,7 @@ public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
         ));
 
         run("Click on link to ArchivePageNow", () -> {
-            waitUntilElementIsVisibleAndGet(By.cssSelector("not-found-message > ul > li:nth-child(3) > a")).click();
+            waitUntilElementIsVisibleAndGet(By.cssSelector("#not-found-message > ul > li:nth-child(3) > a")).click();
         });
 
         appendError(() -> assertEquals("Check that the query is placed on the search bar", query,
