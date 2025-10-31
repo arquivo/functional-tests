@@ -45,7 +45,7 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
         run("Wait until search results are shown", () -> waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]")));
 
         appendError(() -> assertThat("Verify if the estimated results count message is displayed on page search", 
-            waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim(),
+            waitUntilElementIsVisibleAndGet(By.id("estimated-results")).getText().trim(),
             CoreMatchers.allOf(
                 containsString("Cerca de "),
                 containsString(" resultados desde 1996 até 1997")

@@ -45,7 +45,7 @@ public class PageSearchTest extends WebDriverTestBaseParallel {
 		waitUntilElementIsVisibleAndGet(By.id("pages-results"));
 		
 		appendError(() -> assertThat("Verify if the estimated results count message is displayed on page search", 
-			waitUntilElementIsVisibleAndGet(By.id("estimated-results-value")).getText().trim(),
+			waitUntilElementIsVisibleAndGet(By.id("estimated-results")).getText().trim(),
 			CoreMatchers.allOf(
 				CoreMatchers.containsString("Cerca de "),
 				CoreMatchers.containsString(" resultados desde 1991 até "+Calendar.getInstance().get(Calendar.YEAR))

@@ -43,7 +43,7 @@ public class ImageSearchTest extends WebDriverTestBaseParallel {
             waitUntilElementIsVisibleAndGet(By.id("search-form-images")).click();
         });
 
-        //Get estimated-results-value
+        //Get estimated-results
         String element = waitUntilElementIsVisibleAndGet(By.id("estimated-results")).getText().trim();
         String[] elements = element.split(" ");
         Double number_of_display_results = Double.valueOf(elements[2]);
