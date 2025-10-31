@@ -42,7 +42,7 @@ public class SavePageNowURLNotFoundTest extends WebDriverTestBaseParallel {
         });
 
         appendError(() -> assertThat("Verify text from ArchivePageNow",
-            waitUntilElementIsVisibleAndGet(By.cssSelector("#not-found-message > ul > li:nth-child(3) > a")).getText().trim(),
+            waitUntilElementIsVisibleAndGet(By.cssSelector("#not-found-message > ul > li:nth-child(3)")).getText().trim(),
             CoreMatchers.anyOf(
                 CoreMatchers.containsString("Use o SavePageNow para gravar a página em falta"),
                 CoreMatchers.containsString("Use o ArchivePageNow para gravar a página em falta"))
