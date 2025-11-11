@@ -31,11 +31,11 @@ public class DriverManager {
 
     private URL buildUrl() throws MalformedURLException {
         StringBuilder urlBuilder = new StringBuilder();
-        urlBuilder.append(System.getProperty("test.selenium.port") == "443" ? "https://" : "http://");
-        urlBuilder.append(System.getProperty("test.selenium.host"));
+        urlBuilder.append("https://");
+        urlBuilder.append(System.getProperty("test.saucelabs.user"));
         urlBuilder.append(":");
-        urlBuilder.append(System.getProperty("test.selenium.port"));
-        urlBuilder.append("/wd/hub");
+        urlBuilder.append(System.getProperty("test.saucelabs.key"));
+        urlBuilder.append("@ondemand.saucelabs.com/wd/hub");
 
         URL url = new URL(urlBuilder.toString());
         System.out.println("Remote web driver URL:" + url);
