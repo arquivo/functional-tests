@@ -177,9 +177,8 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         sauceOptions.put("accessKey", System.getProperty("test.saucelabs.key"));
         sauceOptions.put("build", System.getProperty("test.build.id"));
         sauceOptions.put("name", name.getMethodName());
-        if (!System.getProperty("test.saucelabs.tunnelname").isEmpty()) {
-            sauceOptions.put("tunnelName", System.getProperty("test.saucelabs.tunnelname"));
-        }
+        sauceOptions.put("tunnelName", System.getProperty("test.saucelabs.tunnelname"));
+
         String message = String.format("SessionID=%1$s job-name=%2$s", this.sessionId, name.getMethodName());
         System.out.println(message);
         //the default value is false
