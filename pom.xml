@@ -33,7 +33,7 @@
     </issueManagement>
 
     <properties>
-        <selenium.version>4.38.0</selenium.version>
+        <selenium.version>4.14.0</selenium.version>
         <appium.version>8.6.0</appium.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
