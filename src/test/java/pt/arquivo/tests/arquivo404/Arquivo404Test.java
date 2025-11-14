@@ -1,10 +1,8 @@
 package pt.arquivo.tests.arquivo404;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
-import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Test;
@@ -13,11 +11,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import dev.failsafe.internal.util.Assert;
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
-import pt.arquivo.utils.LocaleUtils;
-import pt.arquivo.utils.LocalizedString;
 
 /**
  *
