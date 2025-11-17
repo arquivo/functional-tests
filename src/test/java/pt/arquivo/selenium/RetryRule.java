@@ -15,16 +15,22 @@ public class RetryRule implements TestRule {
     @Override
     public Statement apply(final Statement base, final Description description) {
         return new Statement() {
+
             @Override
             public void evaluate() throws Throwable {
+                if (description.getAnnotation(Retry.class) == null) {
+                    base.evaluate();
+                    return;
+                }
+
                 Throwable caughtThrowable = null;
 
                 for (int i = 0; i <= retryCount; i++) {
                     try {
                         System.out.println("Running test: " + description.getDisplayName() +
                                 " (attempt " + (i + 1) + ")");
-                        base.evaluate(); // only the test method
-                        return; // success
+                        base.evaluate();
+                        return;
                     } catch (Throwable t) {
                         caughtThrowable = t;
                         System.err.println(description.getDisplayName() +
