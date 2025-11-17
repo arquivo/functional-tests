@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -106,7 +105,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
         for(String key : config.keySet()) {
             System.out.println(key + " : " + config.get(key));
         }
-        
+
         this.testURL = System.getProperty("test.url");
         assertNotNull("test.url property is required", this.testURL);
     }
@@ -158,15 +157,15 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
     @Before
     public void setUp() throws Exception {
         DriverManager driveManager = new DriverManager();
-        
+
         this.driver = driveManager.getDriver(config, buildSauceOptions());
         this.driver.get(testURL);
         this.sessionId = (((RemoteWebDriver) driver).getSessionId()).toString();
 
         Timeouts timeouts = driver.manage().timeouts();
-        timeouts.pageLoadTimeout(5, TimeUnit.MINUTES);
-        timeouts.implicitlyWait(5, TimeUnit.MINUTES);
-        timeouts.setScriptTimeout(5, TimeUnit.MINUTES);
+        timeouts.pageLoadTimeout(Duration.ofMinutes(5));
+        timeouts.implicitlyWait(Duration.ofMinutes(5));
+        timeouts.scriptTimeout(Duration.ofMinutes(5));
 
         System.out.println(String.format("Start running test: %s\n", this.getClass().getSimpleName()));
     }
@@ -240,5 +239,4 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
     public String getTestURL() {
         return testURL;
     }
-
 }
