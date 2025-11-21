@@ -24,8 +24,8 @@ public class RetryRule implements TestRule {
                     base.evaluate();
                     return;
                 }
-                
-                private static final int waitSeconds = 30;
+
+                int waitSeconds = 30;
                 Throwable caughtThrowable = null;
 
                 for (int i = 0; i <= retryCount; i++) {
