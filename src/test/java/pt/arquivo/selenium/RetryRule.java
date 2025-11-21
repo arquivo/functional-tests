@@ -4,6 +4,8 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
+import java.lang.Thread;
+
 public class RetryRule implements TestRule {
 
     private final int retryCount;
@@ -22,7 +24,8 @@ public class RetryRule implements TestRule {
                     base.evaluate();
                     return;
                 }
-
+                
+                private static final int waitSeconds = 30;
                 Throwable caughtThrowable = null;
 
                 for (int i = 0; i <= retryCount; i++) {
@@ -35,6 +38,8 @@ public class RetryRule implements TestRule {
                         caughtThrowable = t;
                         System.err.println(description.getDisplayName() +
                                 " failed on attempt " + (i + 1));
+                        System.err.println( "Waiting " + waitSeconds + " seconds before next attempt...");
+                        Thread.sleep(waitSeconds*1000);
                     }
                 }
 

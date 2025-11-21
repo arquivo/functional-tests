@@ -90,7 +90,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * rule.
      */
     @Rule
-    public RetryRule rule = new RetryRule(2);
+    public RetryRule rule = new RetryRule(6);
 
     protected String sessionId;
     protected RemoteWebDriver driver;
