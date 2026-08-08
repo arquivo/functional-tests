@@ -4,6 +4,16 @@
 ## Status of functional tests build
 [Build Status](https://app.saucelabs.com/u/ArquivoPT)
 
+## Test documentation
+
+Every test in this suite is documented as a standalone markdown spec — purpose/scenario,
+preconditions, steps, expected results, and tags/categories — under the [`docs/`](docs/README.md)
+folder, mirroring the `src/test/java/pt/arquivo/tests` package layout. These specs exist as the
+source of truth for re-implementing the tests natively with Playwright in
+[`arquivo-webapp-eros`](https://github.com/arquivo/arquivo-webapp-eros), as part of
+[arquivo/pwa-technologies#1596](https://github.com/arquivo/pwa-technologies/issues/1596). Start at
+[`docs/README.md`](docs/README.md) for the full index and the shared test-framework conventions.
+
 # Functional Tests
 
 ## Execute the tests
