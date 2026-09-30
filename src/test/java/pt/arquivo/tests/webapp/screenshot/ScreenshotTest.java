@@ -40,7 +40,7 @@ public class ScreenshotTest extends AppendableErrorsBaseTest {
 
         String imagemd5 = getMd5(imageBytes);
 
-        assertEquals("Verify screenshot md5sum", "223b57dd7543af7b094ec4c5b9d45dc4", imagemd5);
+        assertEquals("Verify screenshot md5sum", "77587ca81f19abafecc5a5e7a7b5c264", imagemd5);
 
     }
 

@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.selenium.WebDriverTestBaseParallel;
 import pt.arquivo.utils.LocaleUtils;
+import pt.arquivo.utils.DatePicker;
 
 /**
  *
@@ -37,10 +38,11 @@ public class PageSearchEmptyTest extends WebDriverTestBaseParallel {
 	@Retry
 	public void pageSearchEmptyENTest() {
 		LocaleUtils.changeLanguageToEN(this);
-		pageSearchTest("No results were found for the query: ");
+                pageSearchTest("No results were found for the query: ");
 	}
 
 	private void pageSearchTest(String noResultsMessage) {
+                run("Set end date to 1 January 1997", () -> DatePicker.setEndDatePicker(driver, "01/01/1997"));
 		run("Search with " + QUERY, () -> {
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys(QUERY);

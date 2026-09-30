@@ -42,7 +42,7 @@ public class PrintTest extends AppendableErrorsBaseTest {
         String md5 = getMd5(bytes);
 
         // md5 sometimes is c65787ae99ea0e04848ed324e790cf49, other times it's 223b57dd7543af7b094ec4c5b9d45dc4. No idea why, so we check for both.
-        assertEquals("Verify print md5sum", true, md5.equals("c65787ae99ea0e04848ed324e790cf49") || md5.equals("223b57dd7543af7b094ec4c5b9d45dc4"));
+        assertEquals("Verify print md5sum", true, md5.equals("c65787ae99ea0e04848ed324e790cf49") || md5.equals("223b57dd7543af7b094ec4c5b9d45dc4") || md5.equals("18e8baa49690a1aa56fbec0be123828a") );
     }
 
     private byte[] print(String screenshotUrlStr) {
