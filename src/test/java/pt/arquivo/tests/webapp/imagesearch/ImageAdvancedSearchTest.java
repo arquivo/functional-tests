@@ -108,7 +108,7 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[5]/p")).getText().trim()));
 
         appendError(() -> assertEquals("Check image src",
-            this.getTestURL() + "/wayback/19961013222744im_/http://www.di.uminho.pt:80/~cdrom/LIVRO/Prefacio/90/1/45.gif",
+            this.getTestURL() + "/wayback/19961013222744im_/http://www.di.uminho.pt:80/~cdrom/LIVRO/Prefacio/90/1/46.gif",
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[2]/a/img")).getAttribute("src")));
 
         appendError(() -> assertEquals("After advanced search check search term contains", "fccn site:www.di.uminho.pt size:md type:gif",
