@@ -83,17 +83,17 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
                             .getAttribute("value"));
         });
 
-        run("Set start date to 31 may 2010", () -> DatePicker.setStartDatePicker(driver, "31/05/2010"));
+        run("Set start date to 31 may 1996", () -> DatePicker.setStartDatePicker(driver, "31/05/1996"));
 
-        run("Set end date to 1 jan 2012", () -> DatePicker.setEndDatePicker(driver, "01/01/2012"));
+        run("Set end date to 1 jan 1997", () -> DatePicker.setEndDatePicker(driver, "01/01/1997"));
 
-        appendError("Select size to small images", () -> iosCompatibleWaitUntilVisibleAndSelect("#image-size","sm"));
+        appendError("Select size to medium images", () -> iosCompatibleWaitUntilVisibleAndSelect("#image-size","md"));
 
         appendError("Unselect 'All formats'", () -> iosCompatibleWaitUntilVisibleAndClick("input[type=checkbox][format=all]"));
 
-        appendError("Set format type to 'PNG'", () -> iosCompatibleWaitUntilVisibleAndClick("input[type=checkbox][format=png]"));
+        appendError("Set format type to 'GIF'", () -> iosCompatibleWaitUntilVisibleAndClick("input[type=checkbox][format=gif]"));
 
-        appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("fccn.pt"));
+        appendError("Set site", () -> waitUntilElementIsVisibleAndGet(By.id("website")).sendKeys("www.di.uminho.pt"));
 
         appendError("Click on search on arquivo.pt button", () -> driver
             .findElement(By.xpath("//*[@id=\"advanced-search-form-images\"]/fieldset/section[2]/button")).click());
@@ -102,16 +102,16 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
 
         appendError(() -> assertThat("Check image original origin/domain",
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]")).getText().trim(),
-            containsString("fccn.pt")));
+            containsString("www.di.uminho.pt")));
 
-        appendError(() -> assertEquals("Check image date", "20 Janeiro 2011",
+        appendError(() -> assertEquals("Check image date", "13 Outubro 1996",
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[5]/p")).getText().trim()));
 
         appendError(() -> assertEquals("Check image src",
-            this.getTestURL() + "/wayback/20110120225358im_/http://fccn.pt/images/announce/modulo_moodle_04109.jpg",
+            this.getTestURL() + "/wayback/19961013222744im_/http://www.di.uminho.pt:80/~cdrom/LIVRO/Prefacio/90/1/45.gif",
             waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"image-cards-container\"]/li[1]/ul/li[2]/a/img")).getAttribute("src")));
 
-        appendError(() -> assertEquals("After advanced search check search term contains", "fccn site:fccn.pt size:sm type:png",
+        appendError(() -> assertEquals("After advanced search check search term contains", "fccn site:www.di.uminho.pt size:md type:gif",
             waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).getAttribute("value").trim()));
 
         System.out.println("Current url: " + driver.getCurrentUrl());
@@ -120,14 +120,14 @@ public class ImageAdvancedSearchTest extends WebDriverTestBaseParallel {
         appendError(() -> assertEquals("After advanced search check day start date contains", "31 Mai",
             waitUntilElementIsVisibleAndGet(By.id("start-day-month")).getAttribute("value")));
 
-        appendError(() -> assertEquals("After advanced search check year start date contains", "2010",
+        appendError(() -> assertEquals("After advanced search check year start date contains", "1996",
             waitUntilElementIsVisibleAndGet(By.id("start-year")).getAttribute("value")));
 
         // until - end date
         appendError(() -> assertEquals("After advanced search check month end date contains", "1 Jan",
             waitUntilElementIsVisibleAndGet(By.id("end-day-month")).getAttribute("value")));
 
-        appendError(() -> assertEquals("After advanced search check year end date contains", "2012",
+        appendError(() -> assertEquals("After advanced search check year end date contains", "1997",
             waitUntilElementIsVisibleAndGet(By.id("end-year")).getAttribute("value")));
     }
 }
