@@ -1,12 +1,14 @@
 package pt.arquivo.tests.cms.tests;
 
+import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -45,18 +47,23 @@ public class Soft404MessageTest extends WebDriverTestBaseParallel {
 			 
 			//The language of the page is not based on the "English or Portugues" button, but depends on the language of the search engine. 
 			
-			appendError(() -> assertThat("Verify text from Arquivo.pt link",
-					driver.findElement(By.xpath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a")).getText(),
-					containsString("Visit an earlier version of this page on 27 February, 2017")));
+			// the link is added by a script after it finds the page on Arquivo.pt
+			WebElement we = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions
+					.visibilityOfElementLocated(By.xpath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a")));
 
-			List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"post-9818\"]/div/div/p[2]/div/a"));
-			WebElement we = wes.get(0);
+			appendError(() -> assertThat("Verify text from Arquivo.pt link", we.getText(),
+					anyOf(containsString("Visite uma versão anterior desta página"),
+							containsString("Visit an earlier version of this page"))));
+
+			// the archived version linked can change, so don't check its timestamp
 			String href = we.getAttribute("href");
-			assertEquals("Check link to wayback", href, "https://arquivo.pt/wayback/20170227184149mp_/http://sobre.arquivo.pt" + WAYBACK_404_PAGE_EXAMPLE);
+			appendError(() -> assertTrue("Check link to wayback, was " + href,
+					href.matches("https://arquivo\\.pt/wayback/\\d{14}mp_/http://sobre\\.arquivo\\.pt"
+							+ Pattern.quote(WAYBACK_404_PAGE_EXAMPLE))));
 			
 			//Test search
-			appendError(() -> assertEquals("Maybe try searching?",
-					driver.findElement(By.id("messageSearch")).getText()));
+			appendError(() -> assertThat(driver.findElement(By.id("messageSearch")).getText(),
+					anyOf(equalTo("Experimente pesquisar:"), equalTo("Maybe try searching?"))));
 			
 			appendError("Check if page is not archived", () -> new WebDriverWait(driver, Duration.ofSeconds(20))
 					.until(ExpectedConditions.visibilityOfElementLocated(By.id("___gcse_2"))));
