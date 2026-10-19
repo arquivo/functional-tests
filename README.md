@@ -124,5 +124,9 @@ These optional properties make local runs fail faster:
 | `test.retry.count` | `6` | Times a failing test is retried |
 | `test.implicit.wait.seconds` | `300` | Selenium implicit wait when looking for elements |
 
+The environments rate limit requests and reply with a "429 - Demasiados Pedidos" page, which shows up as
+timeouts or missing results. If several tests fail like this when running many test classes in parallel
+(e.g. `-DforkCount=4`), run them again with fewer forks.
+
 More information on:
 https://github.com/SeleniumHQ/docker-selenium
