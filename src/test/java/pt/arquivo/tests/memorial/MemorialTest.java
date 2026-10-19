@@ -14,6 +14,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -69,6 +70,9 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 				new InputStreamReader(ClassLoader.getSystemResourceAsStream("memorial_config.yaml")),
 				MemorialTestConfigYAMLFile.class);
 
+		// Don't wait for the default page load timeout on archived pages that never finish loading
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+
 		Arrays.asList(configsy.getConfigs()).forEach(config -> {
 
 			String url = config.getUrl();
@@ -88,11 +92,15 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 				});
 			}
 
-			// click() didn't work consistently on every browser, so the solution was to use
-			// sendkeys method!
 			run("Click on button to redirect to Arquivo.pt",() -> {
-					driver.findElements(By.cssSelector("form > button")).stream().filter(button -> button.isDisplayed()).findFirst()
-							.orElseThrow(() -> new AssertionError("No visible redirect button on " + url)).click();
+					WebElement button = driver.findElements(By.cssSelector("form > button")).stream().filter(b -> b.isDisplayed()).findFirst()
+							.orElseThrow(() -> new AssertionError("No visible redirect button on " + url));
+					try {
+						button.click();
+					} catch (TimeoutException e) {
+						// Some archived pages take minutes to finish loading, the next checks wait for the wayback url and text
+						System.out.println("Archived page didn't finish loading after redirect from " + url);
+					}
 				});
 
 			appendError("Check wayback page url",

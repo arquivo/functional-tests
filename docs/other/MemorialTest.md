@@ -36,13 +36,13 @@ For each `config` entry in `memorial_config.yaml` (looped in a single `@Test` me
 1. Load YAML config via Jackson (`ObjectMapper` + `YAMLFactory`) from classpath resource `memorial_config.yaml`.
 2. Navigate the browser to `config.getUrl()`.
 3. If `redirectPageText` is set, check the full page (`/html`) text contains it.
-4. Click the first visible `form > button` element on the redirect page (uses filtered `findElements` + `.click()`, since a plain `click()` was unreliable across browsers). If no visible button exists, fail with `AssertionError` "No visible redirect button on <url>".
+4. Click the first visible `form > button` element on the redirect page. If no visible button exists, fail with `AssertionError` "No visible redirect button on <url>". The test sets a 60 second page load timeout, and a page load timeout on this click is only logged, because some archived pages take minutes to finish loading; the next steps wait for the wayback url and text.
 5. Wait (up to 120s) until the resulting URL contains both `config.getTimestamp()` and a normalized form of `config.getWaybackUrl()` (protocol and leading `www.` stripped).
 6. Call `ReplayUtils.checkTextOnReplayPage(driver, config.getWaybackTextXPath(), config.getWaybackText())`, which switches into the `replay_iframe`, waits (up to 30s) for `waybackText` to be present at `waybackTextXPath` (defaulting to `/html` if no xpath given), then switches back to default content.
 
 **Expected results:**
 - (soft/appendError) "Check some visible text on redirect page should contain some text to inform user before redirect to Arquivo.pt" — only evaluated when `redirectPageText` is non-null.
-- (hard/`run`) "Click on button to redirect to Arquivo.pt" — a visible form button must exist (otherwise "No visible redirect button on <url>") and clicking it must succeed (any exception is rethrown, halting further per-entry checks in `run`, but the outer forEach continues to the next config since exceptions are handled at each config's own step... actually since `run` rethrows and the loop is a plain `forEach`, an exception here would abort processing of remaining configs for that test invocation).
+- (hard/`run`) "Click on button to redirect to Arquivo.pt" — a visible form button must exist (otherwise "No visible redirect button on <url>"). Any other exception than a page load timeout is rethrown, and since the loop is a plain `forEach`, it aborts the remaining configs.
 - (soft/appendError) "Check wayback page url" — final URL contains both the expected timestamp and the (normalized) wayback URL.
 - (hard/`run`) "Check some text on wayback page" — the expected `waybackText` (if any) is present at `waybackTextXPath` inside the iframe.
 
