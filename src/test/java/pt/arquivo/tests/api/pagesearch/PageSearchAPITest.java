@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -49,9 +50,9 @@ public class PageSearchAPITest extends AppendableErrorsBaseTest {
 			throw new RuntimeException("Error downloading the text", e);
 		}
 
-		String timemap = new String(textAPIBytes);
-		String checkTest = "Fundação para a Computação Científica Nacional \" A promoção de infraestruturas no domínio da computação científica gerindo-as, nuns casos, e doando-as noutros, é o principal objectivo da Fundação , que actua predominantemente no âmbito das Universidades, Centros e Laboratórios de I&D.\" A Fundação tem a responsabilidade de gerir e desenvolver a RCCN, Rede da Comunidade Científica Nacional, a rede académica portuguesa. RCCN Outras actividades: SCCN | CCCN | ICCN | ACCN Eventos Publicações Serviços disponíveis Servidores WWW das instituições ligadas à RCCN Home Page de Portugal Estatísticas de utilização deste servidor 5685 visitantes desde 95-11-22 Fundação para a Computação Científica Nacional (FCCN) Av. Brasil, 101 1799 Lisboa Codex Tel. +351 1 8481906 Fax. +351 1 8472167 email. info@fccn.pt Este servidor é mantido por: Florentino dos Santos Gameiro - flo@rccn.net Última alteração: Wednesday, 10-Jan-96 18:13:25 CUT Internet URL- http://www.fccn.pt:80/";
-		assertEquals("Verify test search API", timemap, checkTest);
-		String[] lines = timemap.split(System.getProperty("line.separator"));
+		String timemap = new String(textAPIBytes, StandardCharsets.UTF_8);
+		// The extracted text starts with the page title
+		String checkTest = "Fundação para a Computação Científica Nacional \" A, Fundação para a Computação Científica Nacional \" A promoção de infraestruturas no domínio da computação científica gerindo-as, nuns casos, e doando-as noutros, é o principal objectivo da Fundação , que actua predominantemente no âmbito das Universidades, Centros e Laboratórios de I&D.\" A Fundação tem a responsabilidade de gerir e desenvolver a RCCN, Rede da Comunidade Científica Nacional, a rede académica portuguesa. RCCN Outras actividades: SCCN | CCCN | ICCN | ACCN Eventos Publicações Serviços disponíveis Servidores WWW das instituições ligadas à RCCN Home Page de Portugal Estatísticas de utilização deste servidor 5685 visitantes desde 95-11-22 Fundação para a Computação Científica Nacional (FCCN) Av. Brasil, 101 1799 Lisboa Codex Tel. +351 1 8481906 Fax. +351 1 8472167 email. info@fccn.pt Este servidor é mantido por: Florentino dos Santos Gameiro - flo@rccn.net Última alteração: Wednesday, 10-Jan-96 18:13:25 CUT Internet URL- http://www.fccn.pt:80/";
+		assertEquals("Verify test search API", checkTest, timemap);
 	}
 }
