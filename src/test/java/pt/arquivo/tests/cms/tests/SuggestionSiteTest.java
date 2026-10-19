@@ -21,7 +21,7 @@ public class SuggestionSiteTest extends WebDriverTestBaseParallel{
 	}
 
 	/**
-	 * Test has no effect. Turned into a manual test
+	 * Checks that the suggestion form is shown. It isn't submitted, submitting it is a manual test
 	 */
 	@Test
 	@Retry
@@ -32,9 +32,9 @@ public class SuggestionSiteTest extends WebDriverTestBaseParallel{
 			index = new IndexSobrePage( driver );
 			CollaboratePage collaborate = index.goToCollaboratePage( "PT" );
 			System.out.println( "Going to the Collborate Page" );
-		    SuggestionPage sug = collaborate.goToSuggestionSitePage( );
+		    SuggestionPage sug = collaborate.goToSuggestionSitePage( "PT" );
 		    System.out.println( "Going to the Suggestion Site Page" );
-	        assertTrue("Failed The Suggestion Site Page Test in Portuguese", sug.sendSuggestion( "PT" ) );
+	        assertTrue("Failed The Suggestion Site Page Test in Portuguese", sug.checkSuggestionForm( "PT" ) );
 	        
 	        //TODO english version missing
 	        

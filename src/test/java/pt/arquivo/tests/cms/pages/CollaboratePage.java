@@ -34,23 +34,8 @@ public class CollaboratePage {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public SuggestionPage goToSuggestionSitePage( ) throws FileNotFoundException{
-		
-        try{
-            System.out.println( "Start goToSuggestionSitePage() method" );
-            WebElement suggestionSiteLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\"parent-fieldname-text\"]/ul/li[2]/a" )
-            				)
-            		);            
-            suggestionSiteLink.click( );
-            System.out.println( "Finished goToSuggestionSitePage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-		
+	public SuggestionPage goToSuggestionSitePage( String language ) throws FileNotFoundException{
+		IndexSobrePage.clickMenuItem( driver, language.equals( "EN" ) ? "4435" : "4408" );
 		return new SuggestionPage( driver );
 	}
 	
