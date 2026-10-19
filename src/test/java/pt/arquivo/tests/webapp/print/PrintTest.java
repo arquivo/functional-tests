@@ -1,20 +1,19 @@
 package pt.arquivo.tests.webapp.print;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import pt.arquivo.selenium.Retry;
 import pt.arquivo.utils.AppendableErrorsBaseTest;
+import pt.arquivo.utils.ImageUtils;
 
 /**
  *
@@ -39,10 +38,10 @@ public class PrintTest extends AppendableErrorsBaseTest {
 
         byte[] bytes = print(screenshotUrlStr);
 
-        String md5 = getMd5(bytes);
+        // The default size differs between environments, so only check it's a non blank image
+        BufferedImage image = ImageUtils.readImage(bytes);
 
-        // md5 sometimes is c65787ae99ea0e04848ed324e790cf49, other times it's 223b57dd7543af7b094ec4c5b9d45dc4. No idea why, so we check for both.
-        assertEquals("Verify print md5sum", true, md5.equals("c65787ae99ea0e04848ed324e790cf49") || md5.equals("223b57dd7543af7b094ec4c5b9d45dc4") || md5.equals("18e8baa49690a1aa56fbec0be123828a") );
+        assertTrue("Verify print isn't blank", ImageUtils.nonWhitePercentage(image) > 0.5);
     }
 
     private byte[] print(String screenshotUrlStr) {
@@ -63,33 +62,6 @@ public class PrintTest extends AppendableErrorsBaseTest {
             throw new RuntimeException("Error downloading a screenshot", e);
         }
         return bytes;
-    }
-
-    public static String getMd5(byte[] input) {
-        try {
-
-            // Static getInstance method is called with hashing MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // digest() method is called to calculate message digest
-            // of an input digest() return array of byte
-            byte[] messageDigest = md.digest(input);
-
-            // Convert byte array into signum representation
-            BigInteger no = new BigInteger(1, messageDigest);
-
-            // Convert message digest into hex value
-            String hashtext = no.toString(16);
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
-        }
-
-        // For specifying wrong message digest algorithms
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }
