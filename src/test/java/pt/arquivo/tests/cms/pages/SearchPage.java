@@ -12,7 +12,9 @@ import java.util.List;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -41,18 +43,16 @@ public class SearchPage {
 		System.out.println( "[checkSearch]" );
 		//String xpathResults = "//*[@id=\"search-4\"]/form/label/input"; //get search links
 		String xpathResults = "//*[@id=\"gsc-i-id1\"]";
-		//String xpathButton = "//*[@id=\"wp_editor_widget-17\"]/div/div[2]/div/span/a";
-		String xpathButton = "//*[@id=\"___gcse_0\"]/div/form/table/tbody/tr/td[2]/button";
 
 		try{
 
 			if( language.equals( "EN" ) )
-				if( searchEN( xpathResults , xpathButton ) )
+				if( searchEN( xpathResults ) )
 					return true;
 				else
 					return false;
 			else
-				if( searchPT( xpathResults , xpathButton ) )
+				if( searchPT( xpathResults ) )
 					return true;
 				else
 					return false;
@@ -66,20 +66,25 @@ public class SearchPage {
 	}
 
 
+	/**
+	 * Checks that the topic is highlighted in the snippet of a search result
+	 */
 	private boolean checkResults( String topic ) {
 		System.out.println( "[checkResults]" );
-	    try{
-			String text = driver.findElement( By.cssSelector("b") ).getText( );
-		    System.out.println( "Text = " + text );
-		    Charset.forName( "UTF-8" ).encode( text );
-			System.out.println( "[checkResults] text["+text+"] equals topic["+topic+"]" );
-			return ( text.toLowerCase( ).equals( topic.toLowerCase( ) ) );
-	    } catch( NoSuchElementException e ){
-            System.out.println( "Error in checkOPSite" );
-            e.printStackTrace( );
-            return false;
-    	}
-
+		try{
+			List< WebElement > highlights = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
+				.until( ExpectedConditions.presenceOfAllElementsLocatedBy( By.cssSelector( ".gsc-webResult .gs-snippet b" ) ) );
+			for( WebElement highlight : highlights ) {
+				String text = highlight.getText( );
+				System.out.println( "[checkResults] text["+text+"] equals topic["+topic+"]" );
+				if( text.equalsIgnoreCase( topic ) )
+					return true;
+			}
+			return false;
+		} catch( TimeoutException e ){
+			System.out.println( "No search results for " + topic );
+			return false;
+		}
 	}
 
 	/*private boolean checkResults( String topic ) {
@@ -126,7 +131,7 @@ public class SearchPage {
     	}
 	}*/
 
-	private boolean searchEN( String xpathResults , String xpathButton ) {
+	private boolean searchEN( String xpathResults ) {
 		System.out.println( "[searchEN]" );
         for( String topic : topicsEN ) {
 			WebElement emailElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
@@ -139,11 +144,8 @@ public class SearchPage {
 
 	        IndexSobrePage.sleepThread( );
 
-	        WebElement btnSubmitElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-	            .until(
-	            		ExpectedConditions.presenceOfElementLocated(
-	            				By.xpath( xpathButton ) ) );
-	        btnSubmitElement.click( );
+	        // the search button is hidden on narrow windows
+	        emailElement.sendKeys( Keys.ENTER );
 
 	        sleepThread( );
 
@@ -153,7 +155,7 @@ public class SearchPage {
         return true;
 	}
 
-	private boolean searchPT( String xpathResults , String xpathSendButton ) {
+	private boolean searchPT( String xpathResults ) {
 		System.out.println( "[searchPT]" );
         for( String topic : topicsPT ) {
         	System.out.println( "Search for " + topic );
@@ -166,11 +168,8 @@ public class SearchPage {
 
             IndexSobrePage.sleepThread( );
 
-            WebElement btnSubmitElement = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                .until(
-                		ExpectedConditions.presenceOfElementLocated(
-                				By.xpath( xpathSendButton ) ) );
-            btnSubmitElement.click( );
+            // the search button is hidden on narrow windows
+            emailElement.sendKeys( Keys.ENTER );
 
             sleepThread( );
 
