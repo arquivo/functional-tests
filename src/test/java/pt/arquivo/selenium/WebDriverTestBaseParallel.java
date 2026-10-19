@@ -90,7 +90,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
      * rule.
      */
     @Rule
-    public RetryRule rule = new RetryRule(6);
+    public RetryRule rule = new RetryRule(Integer.getInteger("test.retry.count", 6));
 
     protected String sessionId;
     protected RemoteWebDriver driver;
@@ -164,7 +164,7 @@ public class WebDriverTestBaseParallel extends AppendableErrorsBaseTest implemen
 
         Timeouts timeouts = driver.manage().timeouts();
         timeouts.pageLoadTimeout(Duration.ofMinutes(5));
-        timeouts.implicitlyWait(Duration.ofMinutes(5));
+        timeouts.implicitlyWait(Duration.ofSeconds(Long.getLong("test.implicit.wait.seconds", 300L)));
         timeouts.scriptTimeout(Duration.ofMinutes(5));
 
         System.out.println(String.format("Start running test: %s\n", this.getClass().getSimpleName()));

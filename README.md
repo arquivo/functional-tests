@@ -95,6 +95,12 @@ On a different shell start selenium grid using:
 docker-compose up
 ```
 
+or a single standalone Chrome:
+
+```bash
+docker run -d --rm --name arquivo-selenium -p 4444:4444 --shm-size=2g selenium/standalone-chrome:latest
+```
+
 And another run your tests like:
 
 ```bash
@@ -103,9 +109,20 @@ mvn clean verify \
     -Dtest.url=https://arquivo.pt \
     -Djava.locale.providers=COMPAT,SPI \
     -Dtest.selenium.port=4444 \
-    -Dtest.selenium.host=localhost
+    -Dtest.selenium.host=localhost \
+    '-Dtest.browsers.json=[{"browserName":"chrome","platformName":"linux"}]'
 ```
+
+When `test.selenium.host` isn't a Sauce Labs host, the tests connect to `http://<host>:<port>/wd/hub` without Sauce Labs credentials.
+
+Use a JDK 11 to run maven, newer JDKs don't support the `COMPAT` locale provider.
+
+These optional properties make local runs fail faster:
+
+| Property | Default | Description |
+| --- | --- | --- |
+| `test.retry.count` | `6` | Times a failing test is retried |
+| `test.implicit.wait.seconds` | `300` | Selenium implicit wait when looking for elements |
 
 More information on:
 https://github.com/SeleniumHQ/docker-selenium
-

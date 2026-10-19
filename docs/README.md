@@ -43,9 +43,16 @@ every file:
   Labs or a local Selenium Grid (`docker-compose.yaml`). `testURL` comes from the `test.url` system
   property (e.g. `https://arquivo.pt` or `https://preprod.arquivo.pt`).
   `waitUntilElementIsVisibleAndGet(By)` waits up to 40s for an element to become visible.
-- **`@Retry`** (`src/test/java/pt/arquivo/selenium/Retry.java`) + **`RetryRule`** (retry count 6): a
-  test method annotated `@Retry` is retried up to 6 extra times with a 30s wait between attempts if
-  it fails, before the failure is reported.
+- **`@Retry`** (`src/test/java/pt/arquivo/selenium/Retry.java`) + **`RetryRule`** (retry count from
+  the `test.retry.count` system property, default 6): a test method annotated `@Retry` is retried up
+  to that many extra times with a 30s wait between attempts if it fails, before the failure is
+  reported.
+- Optional system properties to make local runs (e.g. against a local Selenium Grid) fail faster:
+
+  | Property | Default | Description |
+  | --- | --- | --- |
+  | `test.retry.count` | `6` | Times a failing `@Retry` test is retried (`RetryRule`) |
+  | `test.implicit.wait.seconds` | `300` | Selenium implicit wait when looking for elements (`WebDriverTestBaseParallel`) |
 - **`AppendableErrorsBaseTest`** (`src/test/java/pt/arquivo/utils/AppendableErrorsBaseTest.java`)
   provides two assertion styles used throughout:
   - `run(String errorMessage, Runnable/Callable)` — wraps an action; on failure, rethrows
