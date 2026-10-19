@@ -57,15 +57,14 @@ public class CollaboratePage {
 	
 	public boolean checkCollaborateLinks( String language ) {
 		System.out.println( "[checkCollaborateLinks]" );
-		String xpatha = "//*[@id=\"parent-fieldname-text\"]/ul/li/a"; 
-    	
-	/*	if( language.equals( "EN" ) ) //redirect to english version
-    		switchLanguage( );*/
-    		
+		// the links of the Collaborate menu, there isn't a Collaborate page
+		String menuId = language.equals( "EN" ) ? "11510" : "11376";
+		String xpatha = "//*[@id=\"menu-item-" + menuId + "\"]/ul/li/a";
+
 		try{
     		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
-	                        .visibilityOfAllElementsLocatedBy(
+	                        .presenceOfAllElementsLocatedBy(
 	                        		      By.xpath( xpatha )
 	                        )
 	        );

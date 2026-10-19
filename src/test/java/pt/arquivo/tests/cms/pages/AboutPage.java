@@ -20,26 +20,13 @@ public class AboutPage {
 	
 	public AboutPage( WebDriver driver ) throws FileNotFoundException{
 		this.driver = driver;
-		
-		//TODO check page title
 	}
 	
 	public boolean checkAboutLinks( String language ) {
 		System.out.println( "[checkAboutLinks]" );
-		String xpathVideos 			= "//*[@id=\"parent-fieldname-text\"]/ul[1]/li/a";
-		String xpathDissemination 	= "//*[@id=\"parent-fieldname-text\"]/ul[2]/li/a";
-    	String xpathTechnical 		= "//*[@id=\"parent-fieldname-text\"]/ul[3]/li/a";
-    	/*if( language.equals( "EN" ) )
-    		switchLanguage( );*/
-    	
-		if( !extractLinks( xpathVideos ) )
-			return false;
-		if( !extractLinks( xpathDissemination ) )
-			return false;
-		if( !extractLinks( xpathTechnical ) )
-			return false;
-		
-		return true;
+		// the links of the About menu, there isn't an About page
+		String menuId = language.equals( "EN" ) ? "11519" : "11380";
+		return extractLinks( "//*[@id=\"menu-item-" + menuId + "\"]/ul/li/a" );
 	}
 	
 	
@@ -47,12 +34,12 @@ public class AboutPage {
 		try{
     		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
-	                        .visibilityOfAllElementsLocatedBy(
+	                        .presenceOfAllElementsLocatedBy(
 	                        		      By.xpath( xpath )
 	                        )
 	        );
     		
-    		System.out.println( "[Video Links] results size = " + results.size( ) );
+    		System.out.println( "[About Links] results size = " + results.size( ) );
     		for( WebElement elem : results ) {
     			String url = elem.getAttribute( "href" );
     			int statusCode = AnalyzeURLs.linkExists( url );
@@ -64,7 +51,7 @@ public class AboutPage {
     		
 	    	return true;
     	} catch( NoSuchElementException e ){
-            System.out.println( "Error in checkVideoLinks" );
+            System.out.println( "Error in checkAboutLinks" );
             e.printStackTrace( );
             return false;
     	}
