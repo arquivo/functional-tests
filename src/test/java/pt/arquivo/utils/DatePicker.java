@@ -159,6 +159,11 @@ public class DatePicker {
                     ExpectedConditions.attributeToBe(By.id(inputId), "value", expected));
                 new WebDriverWait(driver, Duration.ofSeconds(10)).until(
                     ExpectedConditions.invisibilityOfElementLocated(By.id("modal-datepicker-container")));
+                // Wait for the modal blocker to fade out, so it doesn't get the next click. #menus-overlay
+                // is always on the page. Checked with javascript because findElements waits the whole
+                // implicit wait when there's none.
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(d -> (Boolean) ((JavascriptExecutor) d)
+                    .executeScript("return document.querySelectorAll('.jquery-modal.blocker:not(#menus-overlay)').length === 0;"));
                 return;
             } catch (TimeoutException e) {
                 if (attempt == attempts) {
