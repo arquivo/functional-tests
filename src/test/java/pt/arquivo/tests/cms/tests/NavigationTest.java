@@ -62,7 +62,7 @@ public class NavigationTest  extends WebDriverTestBaseParallel {
 			assertTrue("[Nabigation Test] Failed The News Page Test in Portuguese", newsEN.checkNewsLinks( "EN" ) );
 			PublicationsPage publicationsEN = index.goToPublicationsPage( "EN" );
 			ReportsPage reportsEN = index.goToReportsPage( "EN" );
-			assertTrue("[Nabigation Test] Failed The Reports Page Test in Portuguese", reports.checkReportsLinks( "EN" ) );
+			assertTrue("[Nabigation Test] Failed The Reports Page Test in Portuguese", reportsEN.checkReportsLinks( "EN" ) );
 			NewsOnMediaPage newsonmediaEN = index.goToNewOnMediaPage( "EN" );
 			assertTrue("[Nabigation Test] Failed The New on Media Page Test in Portuguese", newsonmediaEN.checkNewsLinks( "EN") );
 			AudioPage audioEN = index.goToAudioPage( "EN" );
