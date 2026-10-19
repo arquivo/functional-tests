@@ -56,6 +56,6 @@ public class PageAdvancedSearchMimeTypeTest extends WebDriverTestBaseParallel {
 			driver.findElements(By.cssSelector("#pages-results > ul > li")).stream().anyMatch((x) -> x.getText().toLowerCase().contains("fccn")));
 		
 		appendError(() -> assertEquals("Check mime of first result", "[PDF]",
-				waitUntilElementIsVisibleAndGet(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[2]/a/span")).getText().trim()));
+				waitUntilElementIsVisibleAndGet(By.cssSelector("#pages-results > ul:first-of-type .results-title .mime")).getText().trim()));
 	}
 }

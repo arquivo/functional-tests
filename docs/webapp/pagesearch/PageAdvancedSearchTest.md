@@ -38,7 +38,7 @@ Verifies that the Advanced Search form correctly combines multiple filters at on
 10. Read the resulting value of the main search input.
 11. Wait for `#pages-results` to appear.
 12. Check that every result's mime label (`#pages-results span.mime`) contains `[pdf]`.
-13. Check that every result under `#pages-results > ul > li:nth-child(2)` contains `fccn.pt`.
+13. Check that every result URL (`#pages-results .results-url`) contains `fccn.pt`.
 14. Read `#start-date` value (waited up to 20s via `WebDriverWait`/`ExpectedConditions.presenceOfElementLocated`).
 15. Read `#end-date` value similarly.
 
@@ -50,7 +50,7 @@ Verifies that the Advanced Search form correctly combines multiple filters at on
 - "Click on search on arquivo.pt button" succeeds (soft/appendError).
 - "After advanced search check search term contains" — search input value equals `fccn site:www.fccn.pt type:pdf` (soft/appendError).
 - "Verify that all returned mimetypes are PDF" — all result mime spans contain `[pdf]` (soft/appendError).
-- "Verify that fccn.pt is present in all returned URLs" — all matching result rows' text contains `fccn.pt` (soft/appendError).
+- "Verify that fccn.pt is present in all returned URLs" — every `#pages-results .results-url` element's text (lower-cased) contains `fccn.pt` (soft/appendError).
 - "After advanced search check day start date contains" — `#start-date` value equals `20000531` (soft/appendError).
 - "After advanced search check day end date contains" — `#end-date` value equals `20100101` (soft/appendError).
 

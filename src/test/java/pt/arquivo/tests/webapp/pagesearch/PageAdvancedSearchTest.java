@@ -65,7 +65,7 @@ public class PageAdvancedSearchTest extends WebDriverTestBaseParallel {
 			driver.findElements(By.cssSelector("#pages-results span.mime")).stream().allMatch((x) -> x.getText().toLowerCase().contains("[pdf]"))));
 
 		appendError(() -> assertEquals("Verify that fccn.pt is present in all returned URLs", true,
-			driver.findElements(By.cssSelector("#pages-results > ul > li:nth-child(2)")).stream().allMatch((x) -> x.getText().toLowerCase().contains("fccn.pt"))));
+			driver.findElements(By.cssSelector("#pages-results .results-url")).stream().allMatch((x) -> x.getText().toLowerCase().contains("fccn.pt"))));
 		
 		// start date - from
 		appendError(() -> assertEquals("After advanced search check day start date contains", "20000531",
