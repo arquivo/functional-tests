@@ -91,7 +91,8 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 			// click() didn't work consistently on every browser, so the solution was to use
 			// sendkeys method!
 			run("Click on button to redirect to Arquivo.pt",() -> {
-					driver.findElements(By.cssSelector("form > button")).stream().filter(button -> button.isDisplayed()).findFirst().orElse(null).click();
+					driver.findElements(By.cssSelector("form > button")).stream().filter(button -> button.isDisplayed()).findFirst()
+							.orElseThrow(() -> new AssertionError("No visible redirect button on " + url)).click();
 				});
 
 			appendError("Check wayback page url",

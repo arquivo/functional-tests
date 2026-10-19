@@ -1,23 +1,4 @@
 configs:
--  url: https://umic.pt
-   timestamp: 20170831104506
-   waybackTextXPath: //*[@id="maincontent"]/div/div[1]/div/div/h3/strong/a
-   waybackText: Grupo de Trabalho da CSTD da ONU
--  url: https://www.umic.pt/index.php?option=com_content&task=section&id=37&Itemid=511
-   redirectPageText: UMIC
-   timestamp: 20170831105224
-   waybackTextXPath: //*[@id="maincontent"]/p[1]
-   waybackText: lançada em 2006 envolvendo parcerias com instituições universitárias
--  url: https://www.english.umic.pt/
-   redirectPageText: Knowledge Society Agency
-   timestamp: 20170831175908
-   waybackTextXPath: //*[@id="maincontent"]/div/div[1]/div/div/div/p
-   waybackText: use of Information and Communication Technologies
--  url: https://www.english.umic.pt/index.php?option=com_content&task=section&id=12&Itemid=111
-   redirectPageText: Knowledge Society Agency
-   timestamp: 20170831190707
-   waybackText: Making all basic public services available online
-   waybackTextXPath: //*[@id="maincontent"]/ul[2]/li[1]
 -  url: https://icolc.fccn.pt/
    redirectPageText: O site foi desactivado
    timestamp: 20180831131357
@@ -39,25 +20,6 @@ configs:
    timestamp: 20170803153116
    waybackText: DEI-UC
    waybackTextXPath: //*[@id="mainbody"]/div[2]/div/div/p[3]
--  url: https://www.e-u.pt/
-   redirectPageText: O site foi desactivado.
-   timestamp: 20171228124550
--  url: https://www.ligarportugal.pt/
-   redirectPageText: O site foi desactivado.
-   timestamp: 20170628163113
--  url: https://www.ligarportugal.pt/figuras/figura8.html
-   redirectPageText: O site foi desactivado.
-   timestamp: 20170806233220
--  url: https://jeremias.com.pt
-   redirectPageText: O site foi desactivado.
-   timestamp: 20180504070838
-   waybackText: FCCN - Fundação para a Computação Científica Nacional
-   waybackTextXPath: /html/body/div/table[2]/tbody/tr/td/div/font[2]/font[3]
--  url: https://jeremias.com.pt/As_Aventuras_de_Jeremias_outras.htm
-   redirectPageText: O site foi desactivado.
-   timestamp: 20180504070928
-   waybackText: Conjunto de pequenas histórias onde aparece
-   waybackTextXPath: /html/body/div/table[1]/tbody/tr[2]/td[2]/font
 -  url: https://www.consultorioct.mctes.pt
    redirectPageText: O site foi desactivado.
    timestamp: 20180504071337
@@ -73,40 +35,6 @@ configs:
    timestamp: 20180504071227
    waybackText: Ciência 2008 – Encontro com a Ciência em Portugal
    waybackTextXPath: /html/body/div/div/div[3]
--  url: https://www.cidadesdigitais.pt/
-   redirectPageText: O site foi desactivado.
-   timestamp: 20180430171300
-   waybackText: Cisco - multinacional reconhecida pela oferta de soluções
-   waybackTextXPath: /html/body/table[2]/tbody/tr/td[3]/table[2]/tbody/tr/td[1]/table/tbody/tr/td/table/tbody/tr/td/div[1]/table[2]/tbody/tr[1]/td/p[2]
--  url: https://empregabilidadedigital.pt/
-   redirectPageText: O site foi desactivado
-   timestamp: 20180511135909
-   waybackText: Portugal está entre os países com a menor proporção de trabalhadores nas áreas
-   waybackTextXPath: //*[@id="block-system-main"]/div/div/div/div/div[1]/div/div/div/div/div/div/div[1]/p
--  url: https://visibilidade.net
-   redirectPageText: O site foi desactivado
-   timestamp: 20180628130711
-   waybackText: contem informação relacionada com publicação e divulgação na web
-   waybackTextXPath: /html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/p[1]
--  url: https://visibilidade.net/tutorial/index.html
-   redirectPageText: O site foi desactivado
-   timestamp: 20180628131252
-   waybackText: Através de vários artigos acerca da visibilidade da informação publicada na web
-   waybackTextXPath: /html/body/table[3]/tbody/tr/td[2]/table/tbody/tr[2]/td/p[1]
--  url: https://www.mundonaescola.pt/
-   redirectPageText: O Mundo na Escola foi um programa de divulgação científica criado pelo Ministério da Educação e Ciência
-      que funcionou entre abril de 2012 e novembro de 2015 com o objetivo de aproximar os profissionais das várias áreas do
-      saber da comunidade escolar.
-   timestamp: 20190315160356
-   waybackText: O programa O Mundo na Escola focou o tema da ciência
-   waybackTextXPath: //*[@id="post-10264"]/div/p
--  url: https://www.mundonaescola.pt/?page_id=129
-   redirectPageText: O Mundo na Escola foi um programa de divulgação científica criado pelo Ministério da Educação e Ciência
-      que funcionou entre abril de 2012 e novembro de 2015 com o objetivo de aproximar os profissionais das várias áreas do
-      saber da comunidade escolar.
-   timestamp: 20190315160428
-   waybackText: A Física no dia-a-dia
-   waybackTextXPath: //*[@id="post-10043"]/div/p
 -  url: https://www.minema.di.fc.ul.pt/
    redirectPageText: O site foi desactivado.
    timestamp: 20191126170837
@@ -117,16 +45,6 @@ configs:
    timestamp: 20191126171934
    waybackText: This novel and promising mechanism fosters further collaboration among different research groups working
    waybackTextXPath: /html/body/table[5]/tbody/tr[1]/td[2]/table/tbody/tr/td/table/tbody/tr[2]/td[3]/dt/font/dl[1]
--  url: https://www.ticsociedade.pt
-   redirectPageText: O site foi desactivado.
-   timestamp: 20181101074454
-   waybackText: Sabia que há 26% de portugueses que nunca usaram a Internet?
-   waybackTextXPath: //*[@id="page-section-2"]/div/div/div[1]/h2
--  url: https://www.ticsociedade.pt/categorias-de-artigos/not%C3%ADcia
-   redirectPageText: O site foi desactivado.
-   timestamp: 20181014085709
-   waybackText: Cerimónia de Entrega dos Prémios Inclusão e Literacia Digital
-   waybackTextXPath: //*[@id="node-724"]/h2/a
 -  url: https://www.encontros.act.fct.pt
    redirectPageText: O site foi desactivado.
    timestamp: 20200403093603
@@ -167,16 +85,6 @@ configs:
    timestamp: 20200403094050
    waybackText: Francisco Caramelo
    waybackTextXPath: //*[@id="post-22"]/div/p[6]
--  url: https://arquivosuniversitarios.fct.pt
-   redirectPageText: O site foi desactivado.
-   timestamp: 20200403094336
-   waybackText: As instituições de Ensino Superior nacionais dispõem de um património arquivístico único
-   waybackTextXPath: //*[@id="post-79"]/div/p[2]
--  url: https://arquivosuniversitarios.fct.pt/mapa-do-sitio-2/
-   redirectPageText: O site foi desactivado.
-   timestamp: 20200403094620
-   waybackText: Resumos e conferencistas | 4 de julho
-   waybackTextXPath: //*[@id="post-252"]/div/ul[2]/li[1]/strong/a
 -  url: https://arquivosuniversitarios.fct.pt
    redirectPageText: O site foi desactivado.
    timestamp: 20200403094336
