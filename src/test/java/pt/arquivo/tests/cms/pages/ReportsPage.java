@@ -30,7 +30,7 @@ public class ReportsPage {
 		String idDiv = "";
 		
 		if( language.equals( "EN" ) ) {
-			idDiv = "post-3196";
+			idDiv = "post-10347";
 			//switchLanguage( );
 		} else 
 			idDiv = "post-2977";
