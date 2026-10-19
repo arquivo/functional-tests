@@ -13,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -69,9 +70,7 @@ public class DatePicker {
 	public static void changeTo(WebDriver driver, LocalDate date) {
         if (DatePicker.isDesktop(driver)) {
             new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.id("modal-datepicker-container")));
-            driver.findElement(By.id("modal-datepicker-input")).click();
-            driver.findElement(By.id("modal-datepicker-input")).sendKeys(Keys.HOME);
-            driver.findElement(By.id("modal-datepicker-input")).sendKeys(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            DatePicker.typeModalDate(driver, date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } else {
             new WebDriverWait(driver, Duration.ofSeconds(40)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ap-cont")));
             DatePicker.mobileDatepickerChangeYearTo(driver,date.getYear());
@@ -79,6 +78,32 @@ public class DatePicker {
             DatePicker.mobileDatepickerChangeDayTo(driver,date.getDayOfMonth());
         }
 	}
+
+    /**
+     * Types the date on the desktop modal input, after its script has filled in the current date,
+     * and retypes it if keystrokes were lost and the input didn't end up with the expected date.
+     */
+    private static void typeModalDate(WebDriver driver, String date) {
+        WebElement input = driver.findElement(By.id("modal-datepicker-input"));
+        new WebDriverWait(driver, Duration.ofSeconds(40)).until(d -> {
+            String value = input.getDomProperty("value");
+            return value != null && value.matches("\\d{2}/\\d{2}/\\d{4}");
+        });
+        int attempts = 3;
+        for (int attempt = 1; ; attempt++) {
+            input.click();
+            input.sendKeys(Keys.HOME);
+            input.sendKeys(date);
+            try {
+                new WebDriverWait(driver, Duration.ofSeconds(5)).until(d -> date.equals(input.getDomProperty("value")));
+                return;
+            } catch (TimeoutException e) {
+                if (attempt == attempts) {
+                    throw new AssertionError("Date picker input is [" + input.getDomProperty("value") + "] instead of [" + date + "]", e);
+                }
+            }
+        }
+    }
 
     public static LocalDate getStartDate(WebDriver driver){
         return stringToLocalDate(getStartDateString(driver));
@@ -106,9 +131,35 @@ public class DatePicker {
     }
 
     public static void setDatePicker(WebDriver driver, LocalDate date, String openerId){
-        DatePicker.open(driver, openerId);
-        DatePicker.changeTo(driver, date);
-        DatePicker.confirmSelection(driver);
+        if (!DatePicker.isDesktop(driver)) {
+            DatePicker.open(driver, openerId);
+            DatePicker.changeTo(driver, date);
+            DatePicker.confirmSelection(driver);
+            return;
+        }
+        // The search form only uses the date once the hidden input is updated, and sometimes the
+        // selection is lost when running many tests concurrently, so check it and retry.
+        String inputId = openerId.equals(DatePicker.startId) ? DatePicker.startInputId : DatePicker.endInputId;
+        String expected = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+        int attempts = 3;
+        for (int attempt = 1; ; attempt++) {
+            DatePicker.open(driver, openerId);
+            DatePicker.changeTo(driver, date);
+            DatePicker.confirmSelection(driver);
+            try {
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+                    ExpectedConditions.attributeToBe(By.id(inputId), "value", expected));
+                new WebDriverWait(driver, Duration.ofSeconds(10)).until(
+                    ExpectedConditions.invisibilityOfElementLocated(By.id("modal-datepicker-container")));
+                return;
+            } catch (TimeoutException e) {
+                if (attempt == attempts) {
+                    throw e;
+                }
+                System.out.println("Date picker didn't set " + inputId + " to " + expected + ", retrying");
+                ((JavascriptExecutor) driver).executeScript("if (window.jQuery && jQuery.modal) { jQuery.modal.close(); }");
+            }
+        }
     }
 
     public static void setStartDatePicker(WebDriver driver, LocalDate date){
