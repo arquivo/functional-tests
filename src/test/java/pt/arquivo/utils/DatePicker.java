@@ -139,8 +139,16 @@ public class DatePicker {
         }
         // The search form only uses the date once the hidden input is updated, and sometimes the
         // selection is lost when running many tests concurrently, so check it and retry.
-        String inputId = openerId.equals(DatePicker.startId) ? DatePicker.startInputId : DatePicker.endInputId;
+        boolean isStart = openerId.equals(DatePicker.startId);
+        String inputId = isStart ? DatePicker.startInputId : DatePicker.endInputId;
         String expected = date.format(DateTimeFormatter.BASIC_ISO_DATE);
+        // The webapp doesn't let the start date be after the end date (and vice versa), it uses the
+        // other date instead. Both are yyyyMMdd, so they can be compared as strings.
+        String other = driver.findElement(By.id(isStart ? DatePicker.endInputId : DatePicker.startInputId)).getDomProperty("value");
+        if (other != null && other.matches("\\d{8}")
+                && (isStart ? expected.compareTo(other) > 0 : expected.compareTo(other) < 0)) {
+            expected = other;
+        }
         int attempts = 3;
         for (int attempt = 1; ; attempt++) {
             DatePicker.open(driver, openerId);
