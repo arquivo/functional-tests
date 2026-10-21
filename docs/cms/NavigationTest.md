@@ -16,7 +16,9 @@ An end-to-end smoke test that navigates through the main "Publications" menu tre
 - No notable hardcoded expected text; all checks are link-reachability based (HTTP 200) via each page object's respective `check*Links(language)` method.
 
 ## Test Data
-- Each page object's check method uses its own hardcoded WordPress-menu XPath/IDs (e.g. `menu-item-4388` News, `menu-item-4390`/`4395` Publications PT/EN, `menu-item-4402`/`4429` Reports PT/EN, `menu-item-4403`/`4430` News-on-Media PT/EN, `menu-item-4404`/`4431` Audio PT/EN, `menu-item-4406`/`4433` Presentations PT/EN, `menu-item-4397`/`4398` Collaborate PT/EN, `menu-item-4399`/`4400` About PT/EN) and requires all extracted links to return HTTP 200.
+- Navigation uses hardcoded WordPress menu item ids: `menu-item-4388` News, `menu-item-4401`/`4428` Publications PT/EN, `menu-item-4402`/`19137` Reports PT/EN, `menu-item-4403`/`4430` News-on-Media PT/EN, `menu-item-4404`/`4431` Audio PT/EN, `menu-item-4406`/`4433` Presentations PT/EN. Menu items are reached with `IndexSobrePage.clickMenuItem`/`hoverMenuItem`, which hover each ancestor menu item from the top menu down (the sub-menus open on hover) and click the item by its WordPress id `menu-item-<id>`.
+- Collaborate and About have no page of their own: `goToCollaboratePage`/`goToAboutPage` only hover the top menu items `menu-item-11376`/`11510` (Colabore, PT/EN) and `menu-item-11380`/`11519` (Acerca, PT/EN), and their check methods collect the links of the sub-menu (`//*[@id="menu-item-<id>"]/ul/li/a`).
+- Each page object's check method requires all extracted links to return HTTP 200.
 - Note: `NewsOnMediaPage.checkNewsLinks`, `PresentationsPage.checkPresentationLinks`, and `CollaboratePage.checkCollaborateLinks` currently have their actual `AnalyzeURLs.checkOk(...)` failure branch commented out — they always return `true` (log-only), so those three sub-checks are effectively no-ops today.
 
 ## Steps & Expected Results
@@ -37,7 +39,7 @@ Portuguese pass:
 English pass (repeats the same navigation sequence with `"EN"`):
 11. `index.goToNewsPage()` again, assert `newsEN.checkNewsLinks("EN")`.
 12. `index.goToPublicationsPage("EN")` (unused).
-13. `index.goToReportsPage("EN")`, then — due to a copy-paste bug — asserts on the **PT** `reports` object's `checkReportsLinks("EN")` rather than the new `reportsEN` object (see Notes).
+13. `index.goToReportsPage("EN")`, assert `reportsEN.checkReportsLinks("EN")`.
 14. `index.goToNewOnMediaPage("EN")`, assert `newsonmediaEN.checkNewsLinks("EN")`.
 15. `index.goToAudioPage("EN")`, assert `audioEN.checkAudioLinks("EN")`.
 16. `index.goToPresentationsPage("EN")`, assert `presEN.checkPresentationLinks("EN")`.
@@ -56,7 +58,6 @@ English pass (repeats the same navigation sequence with `"EN"`):
 
 ## Notes
 - **Video page is explicitly skipped** in both PT and EN passes with a `TODO to slow` comment — `VideoPage`/`checkVideoLinks` is never exercised by this test despite being imported.
-- **Copy-paste bug in the EN pass**: at line 65, the EN Reports assertion re-uses the PT `reports` object (`reports.checkReportsLinks("EN")`) instead of `reportsEN`, even though `reportsEN` was freshly obtained on the previous line. Functionally this still calls `checkReportsLinks("EN")`, but on a page object that navigated to the PT reports page — likely benign since the check method itself doesn't depend on page-object state beyond the injected `driver`, but worth flagging for a faithful reimplementation decision.
 - **All assertion messages read "Failed The X Page Test in Portuguese"** even in the English-language block — a copy/paste artifact, not a functional bug (the actual language argument passed is correct).
 - Several link-check methods (`NewsOnMediaPage`, `PresentationsPage`, `CollaboratePage`) have their failure-return code path commented out, so those steps currently always pass regardless of actual link health — only log to stdout. A native reimplementation should decide whether to restore real assertions or intentionally keep these as smoke/log-only checks.
 - `PublicationsPage` returned by `goToPublicationsPage()` is fetched but never asserted on in this test (separately covered by `PublicationsTest`).

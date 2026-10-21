@@ -11,7 +11,7 @@ Verifies that all outbound links listed on the "Site Map" page of the Arquivo.pt
 
 ## Preconditions
 - Target env: `test.url`.
-- Page objects used: `IndexSobrePage` (entry point), `SiteMapPage` (navigated to via `index.goToSiteMapPage()`, which hovers the "Ajuda" menu item `menu-item-4391` then clicks the sub-menu item `menu-item-4425`).
+- Page objects used: `IndexSobrePage` (entry point), `SiteMapPage` (navigated to via `index.goToSiteMapPage()`, which hovers the menu items above it and clicks the sub-menu item `menu-item-4425`).
 - No fixture files are actually consumed by this test's code path (see Notes — `SiteMapTopicsPT.txt` exists but is unreferenced).
 
 ## Test Data
@@ -40,4 +40,4 @@ Verifies that all outbound links listed on the "Site Map" page of the Arquivo.pt
 ## Notes
 - **Fixture file not used**: `src/test/resources/sobreTestsFiles/SiteMapTopicsPT.txt` (85 lines, e.g. "Acerca", "Funcionamento do Arquivo.pt", "Arquitectura", ...) exists in the resources but is not referenced by any code reachable from this test (or anywhere in the current source tree) — it appears to be an orphaned/legacy fixture, possibly intended for a stricter topic-list comparison that was never implemented or was later removed. Worth flagging when deciding what the native reimplementation should assert (link-health only vs. also verifying the expected topic list).
 - No topic/content comparison is performed — only link reachability.
-- Hardcoded WordPress post/menu IDs (`post-2659`, `post-2764`, `menu-item-4391`, `menu-item-4425`) are brittle if CMS content/menu structure changes.
+- Hardcoded WordPress post/menu IDs (`post-2659`, `post-2764`, `menu-item-4425`) are brittle if CMS content/menu structure changes.

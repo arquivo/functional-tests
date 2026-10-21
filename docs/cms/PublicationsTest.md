@@ -11,7 +11,7 @@ Verifies that all outbound links listed on the "Publications" page of the Arquiv
 
 ## Preconditions
 - Target env: `test.url`.
-- Page objects used: `IndexSobrePage` (entry point), `PublicationsPage` (navigated to via `index.goToPublicationsPage("PT")` — hovers the Publications menu item then clicks the "Scientific Publications" sub-menu item; PT uses `menu-item-4390`/`menu-item-4401`, EN would use `menu-item-4395`/`menu-item-4428`, but the test always navigates in PT first — see Notes).
+- Page objects used: `IndexSobrePage` (entry point), `PublicationsPage` (navigated to via `index.goToPublicationsPage("PT")` — hovers the menu items above it then clicks the "Scientific Publications" sub-menu item; PT uses `menu-item-4401`, EN would use `menu-item-4428`, but the test always navigates in PT first — see Notes).
 - No fixture files loaded from `sobreTestsFiles/`.
 - No notable hardcoded expected text; the check is purely link-reachability based.
 

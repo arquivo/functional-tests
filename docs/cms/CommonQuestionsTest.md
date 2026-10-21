@@ -11,7 +11,7 @@ Verifies that the "Common Questions" (FAQ) page of the Arquivo.pt "Sobre" (about
 
 ## Preconditions
 - Target env: `test.url` (loaded via `WebDriverTestBaseParallel`, driver navigates there in `setUp()`).
-- Page objects used: `IndexSobrePage` (constructed from the loaded home page; reads `sobreTestsFiles/props_indexPage.properties` for expected page titles, though the title check itself is commented out/dead code), `CommonQuestionsPage` (navigated to via `index.goToCommonQuestionsPage()`, clicking the FAQ link in a sidebar widget).
+- Page objects used: `IndexSobrePage` (constructed from the loaded home page; reads `sobreTestsFiles/props_indexPage.properties` for expected page titles, though the title check itself is commented out/dead code), `CommonQuestionsPage` (navigated to via `index.goToCommonQuestionsPage()`, clicking the "O que é o Arquivo.pt?" item `menu-item-4418` of the FAQ menu).
 - Fixture files loaded (by `CommonQuestionsPage` constructor): `src/test/resources/sobreTestsFiles/CommonQuestions_pt.txt` and `CommonQuestions_en.txt`.
 - No other hardcoded data in the test class itself; an unused field `isPreProd = true` is present but never referenced.
 
@@ -25,15 +25,15 @@ Verifies that the "Common Questions" (FAQ) page of the Arquivo.pt "Sobre" (about
   1. What is it for?
   2. When was Arquivo.pt born?
   ... through 9. Others questions?
-- `CommonQuestionsPage.inspectQuestions()` locates FAQ headings via XPath `//*[@id="post-2096"]/div/div/div/h3` (PT) or `//*[@id="post-2392"]/div/div/div/h3` (EN), requires the count to match the fixture list size, and each heading's text to equal the fixture line at the same index, in order.
+- `CommonQuestionsPage.inspectQuestions()` locates FAQ headings via XPath `//*[@id="post-2096"]//h2` (PT) or `//*[@id="post-16555"]//h2` (EN), requires the count to match the fixture list size, and each heading's text to equal the fixture line at the same index, in order.
 
 ## Steps & Expected Results
 
 ### `commonQuestionsTest()`
 1. Construct `IndexSobrePage` from the current driver (loads `props_indexPage.properties`, waits 5s for the index page to load).
-2. Navigate to the Common Questions page: `index.goToCommonQuestionsPage()` (clicks the FAQ sidebar widget link).
-3. Portuguese version: call `commonQuestions.inspectQuestions("PT")`, which reads the 9 `<h3>` question headings under `post-2096` and compares them one-by-one, in order, against `CommonQuestions_pt.txt`.
-4. English version: `switchLanguage()` is invoked internally by `inspectQuestions("EN")` (clicks the "English" language toggle link), then reads `<h3>` headings under `post-2392` and compares against `CommonQuestions_en.txt`.
+2. Navigate to the Common Questions page: `index.goToCommonQuestionsPage()` (hovers the FAQ menu and clicks `menu-item-4418`).
+3. Portuguese version: call `commonQuestions.inspectQuestions("PT")`, which reads the 9 `<h2>` question headings under `post-2096` and compares them one-by-one, in order, against `CommonQuestions_pt.txt`.
+4. English version: `switchLanguage()` is invoked internally by `inspectQuestions("EN")` (clicks the "English" language toggle link), then reads `<h2>` headings under `post-16555` and compares against `CommonQuestions_en.txt`.
 
 **Expected results:**
 - `assertTrue("Failed The Common Question in Portuguese", ...)` (hard) — the 9 PT questions must match fixture content exactly, in order.
@@ -50,5 +50,5 @@ Verifies that the "Common Questions" (FAQ) page of the Arquivo.pt "Sobre" (about
 ## Notes
 - Depends on fixture files `CommonQuestions_pt.txt` and `CommonQuestions_en.txt` (both 9 lines) — a native Playwright reimplementation should keep these as the source of truth for expected question text and count.
 - `CommonQuestionsPage` constructor itself throws `FileNotFoundException` if either fixture is missing, which the test also catches generically at the `goToCommonQuestionsPage()` call site.
-- The XPath-based element IDs (`post-2096`, `post-2392`) are hardcoded WordPress post IDs and may be fragile/brittle if CMS content changes.
+- The XPath-based element IDs (`post-2096`, `post-16555`) are hardcoded WordPress post IDs and may be fragile/brittle if CMS content changes.
 - Comparison is strict equality per line index (order-sensitive), not just membership.

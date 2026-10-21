@@ -248,7 +248,9 @@ public class AnalyzeURLs {
 		if ( status != HttpURLConnection.HTTP_OK ) {
     		if ( status == HttpURLConnection.HTTP_MOVED_TEMP
     			|| status == HttpURLConnection.HTTP_MOVED_PERM
-    				|| status == HttpURLConnection.HTTP_SEE_OTHER )
+    				|| status == HttpURLConnection.HTTP_SEE_OTHER
+    				|| status == 307 // temporary redirect
+    				|| status == 308 ) // permanent redirect
     		return true;
     	}
 		return false;

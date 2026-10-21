@@ -17,6 +17,7 @@ import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +32,7 @@ import pt.arquivo.utils.AnalyzeURLs;
 public class IndexSobrePage {
 	WebDriver driver;
 
-	private final int timeout = 50;
+	private static final int timeout = 50;
 	Map< String, String > textTolink;
 	private final String dir = "sobreTestsFiles";
 
@@ -71,429 +72,108 @@ public class IndexSobrePage {
     }
 
     /**
-     * Click the link to the footer of the page
+     * Hovers a menu item and the menus that contain it, so its link and sub menu are visible.
+     * The top menus only open on hover and their ids change when the menu is edited, so the
+     * items are found by their own id.
+     * @param id the number in the menu-item-[id] id of the item
+     * @return the link of the menu item
+     */
+    public static WebElement hoverMenuItem( WebDriver driver, String id ) {
+        WebElement link = ( new WebDriverWait( driver, Duration.ofSeconds( timeout ) ) )
+            .until( ExpectedConditions.presenceOfElementLocated( By.cssSelector( "#menu-item-" + id + " > a" ) ) );
+        Actions actions = new Actions( driver );
+        // includes the item itself, from the top menu down
+        for( WebElement menu : link.findElements( By.xpath( "ancestor::li[starts-with(@id,'menu-item')]/a" ) ) )
+            actions.moveToElement( menu );
+        actions.perform( );
+        return link;
+    }
+
+    /**
+     * Clicks a menu item, hovering the menus that contain it first.
+     * @param id the number in the menu-item-[id] id of the item
+     */
+    public static void clickMenuItem( WebDriver driver, String id ) {
+        // hovers again until the sub-menu opens, a hover while the page is still loading can be lost
+        WebElement link = ( new WebDriverWait( driver, Duration.ofSeconds( timeout ) ) )
+            .ignoring( StaleElementReferenceException.class )
+            .until( d -> {
+                WebElement item = hoverMenuItem( d, id );
+                // closed sub-menus are moved off the screen, to the left
+                return item.isDisplayed( ) && item.isEnabled( ) && item.getLocation( ).getX( ) >= 0 ? item : null;
+            } );
+        link.click( );
+    }
+
+    /**
+     * Go to the general information page of the common questions
      * @throws FileNotFoundException
      */
     public CommonQuestionsPage goToCommonQuestionsPage( ) throws FileNotFoundException{
-        try{
-            System.out.println( "Start goToCommonQuestionsPage( ) method" );
-            WebElement cQuestionsLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\"wp_editor_widget-8\"]/ul/li[1]/a" )
-            				)
-            		);
-            cQuestionsLink.click( );
-            System.out.println( "Finished goToCommonQuestionsPage( ) method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, "4418" );
         return new CommonQuestionsPage( driver );
     }
 
     /**
-     *
-     * @return
+     * There isn't a Collaborate page, only a menu with the pages about collaborating, so this opens the menu.
      * @throws FileNotFoundException
      */
     public CollaboratePage goToCollaboratePage( String  language ) throws FileNotFoundException{
-    	String idMenu = "";
-    	if( language.equals( "EN" ) )
-    		idMenu = "4398"; //*[@id="menu-item-4168"]/a
-    	else
-    		idMenu = "4397"; //*[@id="menu-item-4167"]/a
-    	try{
-    		System.out.println( "Start goToCollaboratePage() method" );
-            WebElement collaborateLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\"menu-item-" + idMenu + "\"]/a" )
-            				)
-            		);
-            collaborateLink.click( );
-            System.out.println( "Finished goToCollaboratePage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-    	return new CollaboratePage( driver );
+        hoverMenuItem( driver, language.equals( "EN" ) ? "11510" : "11376" );
+        return new CollaboratePage( driver );
     }
 
-
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public SiteMapPage goToSiteMapPage( ) throws FileNotFoundException {
-
-        try{
-            System.out.println( "Start goToSiteMapPage() method" );
-
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"menu-item-4391\"]/a" )//*[@id="menu-item-4396"]/a/span
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( ); //click in menu ajuda
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"menu-item-4425\"]/a" ) //*[@id="menu-item-4425"]/a
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToSiteMapPage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, "4425" );
         return new SiteMapPage( driver );
 	}
 
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public PublicationsPage goToPublicationsPage( String language ) throws FileNotFoundException {
-		String idMenuPub 		= "";
-		String idMenuPubCien 	= "";
-
-		try{
-            System.out.println( "Start goToPublicationsPage( ) method" );
-            if( language.equals( "EN" ) ) {
-            	idMenuPub 		= "menu-item-4395"; //*[@id="menu-item-4395"]/a
-            	idMenuPubCien 	= "menu-item-4428"; //*[@id="menu-item-4428"]/a
-            } else {
-            	idMenuPub 		= "menu-item-4390"; //*[@id="menu-item-4160"]/a
-            	idMenuPubCien 	= "menu-item-4401"; //*[@id="menu-item-4401"]/a
-            }
-
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\""+ idMenuPub +"\"]/a" )
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"" + idMenuPubCien + "\"]/a" )
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToPublicationsPage( ) method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, language.equals( "EN" ) ? "4428" : "4401" );
         return new PublicationsPage( driver );
 	}
 
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public ReportsPage goToReportsPage( String language ) throws FileNotFoundException {
-		String idMenu 		= "";
-		String idSubMenu 	= "";
-        try{
-            System.out.println( "Start goToReportsPage() method" );
-            if( language.equals( "EN" ) ) {
-            	idMenu 		= "menu-item-4395"; //*[@id="menu-item-4165"]/a
-            	idSubMenu 	= "menu-item-4429"; //*[@id="menu-item-4429"]/a
-            } else {
-            	idMenu 		= "menu-item-4390"; //*[@id="menu-item-4160"]/a
-            	idSubMenu 	= "menu-item-4402"; //*[@id="menu-item-4402"]/a
-            }
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"" + idMenu + "\"]/a" )
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"" + idSubMenu + "\"]/a" )
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToReportsPage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, language.equals( "EN" ) ? "19137" : "4402" );
         return new ReportsPage( driver );
 	}
 
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public NewsOnMediaPage goToNewOnMediaPage( String language ) throws FileNotFoundException {
-		String idDiv = "";
-		String idDivSubMenu = "";
-		if( language.equals( "EN" ) ) {
-			idDiv = "4395";
-			idDivSubMenu = "4430"; //*[@id="menu-item-4430"]/a
-		} else {
-			idDiv = "4390";
-			idDivSubMenu = "4403"; //*[@id="menu-item-4403"]/a
-		}
-        try{
-            System.out.println( "Start goToNewOnMediaPage() method" );
-
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"menu-item-"+idDiv+"\"]/a" )
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( "//*[@id=\"menu-item-"+idDivSubMenu+"\"]/a" )
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToNewOnMediaPage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, language.equals( "EN" ) ? "4430" : "4403" );
         return new NewsOnMediaPage( driver );
 	}
 
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public AudioPage goToAudioPage( String language ) throws FileNotFoundException {
-		String xpathPublicationMenu = "";
-		String xpathAudio = "";
-
-		if( language.equals( "PT" ) ){
-			xpathAudio = "//*[@id=\"menu-item-4404\"]/a";  //*[@id="menu-item-4174"]/a
-			xpathPublicationMenu = "//*[@id=\"menu-item-4390\"]/a";
-		}
-		else{
-			xpathAudio = "//*[@id=\"menu-item-4431\"]/a";  //*[@id="menu-item-4201"]/a
-			xpathPublicationMenu = "//*[@id=\"menu-item-4395\"]/a";
-		}
-
-        try{
-            System.out.println( "Start goToAudioPage() method" );
-
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( xpathPublicationMenu )
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( xpathAudio )
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToAudioPage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, language.equals( "EN" ) ? "4431" : "4404" );
         return new AudioPage( driver );
 	}
 
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public VideoPage goToVideoPage( String language ) throws FileNotFoundException {
-		String xpathVideo = "";
-		String xpathDiv = "";
-		if( language.equals( "EN" ) ){
-			xpathVideo = "//*[@id=\"menu-item-4432\"]/a"; //*[@id="menu-item-4202"]/a
-			xpathDiv = "//*[@id=\"menu-item-4395\"]/a";
-		} else {
-			xpathVideo = "//*[@id=\"menu-item-4405\"]/a"; //*[@id="menu-item-4175"]/a
-			xpathDiv =  "//*[@id=\"menu-item-4390\"]/a";
-		}
-        try{
-            System.out.println( "Start goToVideoPage() method" );
-
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( xpathDiv )
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( xpathVideo )
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToVideoPage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, language.equals( "EN" ) ? "4432" : "4405" );
         return new VideoPage( driver );
 	}
 
-
-    /**
-     *
-     * @return
-     * @throws FileNotFoundException
-     */
 	public PresentationsPage goToPresentationsPage( String language ) throws FileNotFoundException {
-
-		String xpathDivMenu = "";
-		String xpathDibSubMenu = "";
-
-		if( language.equals( "EN" ) ) {
-			xpathDivMenu =  "//*[@id=\"menu-item-4395\"]/a";
-			xpathDibSubMenu = "//*[@id=\"menu-item-4433\"]/a"; //*[@id="menu-item-4203"]/a
-		} else {
-			xpathDivMenu = "//*[@id=\"menu-item-4390\"]/a";
-			xpathDibSubMenu = "//*[@id=\"menu-item-4406\"]/a"; //*[@id="menu-item-4176"]
-		}
-
-		try{
-            System.out.println( "Start goToPresentationsPage() method" );
-
-            Actions actions = new Actions( driver );
-            WebElement menuHoverLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( xpathDivMenu )
-                    				)
-                    		);
-            actions.moveToElement( menuHoverLink ).perform( );
-            WebElement menuClickLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-                    .until(
-                    		ExpectedConditions.presenceOfElementLocated(
-                    				By.xpath( xpathDibSubMenu )
-                    				)
-                    		);
-            menuClickLink.click( );
-            System.out.println( "Finished goToPresentationsPage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, language.equals( "EN" ) ? "4433" : "4406" );
         return new PresentationsPage( driver );
 	}
 
-
-
-
-    /**
-     *
-     * @return
-     */
     public ExamplesPage goToExamplePage( ) {
-
-        try{
-            System.out.println( "Start goToExamplePage() method" );
-            WebElement examplePageLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\"menu-item-4389\"]/a" ) //*[@id="menu-item-4389"]/a
-            				)
-            		);
-            examplePageLink.click( );
-            System.out.println( "Finished goToExamplePage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, "4389" );
         return new ExamplesPage( driver );
-
     }
 
-
-    /**
-     *
-     * @throws FileNotFoundException
-     */
     public NewsPage goToNewsPage( ) throws FileNotFoundException{
-        try{
-            System.out.println( "Start goToNewsPage( ) method" );
-            WebElement newsLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\"menu-item-4388\"]/a" ) //*[@id="menu-item-4388"]/a
-            				)
-            		);
-            newsLink.click( );
-            System.out.println( "Finished goToNewsPaindexge( ) method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        clickMenuItem( driver, "4388" );
         return new NewsPage( driver );
     }
 
     /**
-     *
+     * There isn't an About page, only a menu with the pages about Arquivo.pt, so this opens the menu.
      * @throws FileNotFoundException
      */
     public AboutPage goToAboutPage( String language ) throws FileNotFoundException{
-        String idDiv = "";
-
-        if( language.equals( "EN" ) )
-        	idDiv = "menu-item-4400"; //*[@id="menu-item-4170"]/a
-        else
-        	idDiv = "menu-item-4399"; //*[@id="menu-item-4169"]/a
-
-    	try{
-            System.out.println( "Start goToAboutPage( ) method" );
-            WebElement newsLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\""+idDiv+"\"]/a" )
-            				)
-            		);
-            newsLink.click( );
-            System.out.println( "Finished goToAboutPage( ) method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-
+        hoverMenuItem( driver, language.equals( "EN" ) ? "11519" : "11380" );
         return new AboutPage( driver );
     }
 

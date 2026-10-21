@@ -34,38 +34,22 @@ public class CollaboratePage {
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public SuggestionPage goToSuggestionSitePage( ) throws FileNotFoundException{
-		
-        try{
-            System.out.println( "Start goToSuggestionSitePage() method" );
-            WebElement suggestionSiteLink = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) ) /* Wait Up to 50 seconds should throw RunTimeExcpetion*/
-            .until(
-            		ExpectedConditions.presenceOfElementLocated(
-            				By.xpath( "//*[@id=\"parent-fieldname-text\"]/ul/li[2]/a" )
-            				)
-            		);            
-            suggestionSiteLink.click( );
-            System.out.println( "Finished goToSuggestionSitePage() method" );
-        }catch( NoSuchElementException e ){
-        	System.out.println( "Could not find the link element" );
-        	throw e;
-        }
-		
+	public SuggestionPage goToSuggestionSitePage( String language ) throws FileNotFoundException{
+		IndexSobrePage.clickMenuItem( driver, language.equals( "EN" ) ? "4435" : "4408" );
 		return new SuggestionPage( driver );
 	}
 	
 	
 	public boolean checkCollaborateLinks( String language ) {
 		System.out.println( "[checkCollaborateLinks]" );
-		String xpatha = "//*[@id=\"parent-fieldname-text\"]/ul/li/a"; 
-    	
-	/*	if( language.equals( "EN" ) ) //redirect to english version
-    		switchLanguage( );*/
-    		
+		// the links of the Collaborate menu, there isn't a Collaborate page
+		String menuId = language.equals( "EN" ) ? "11510" : "11376";
+		String xpatha = "//*[@id=\"menu-item-" + menuId + "\"]/ul/li/a";
+
 		try{
     		List< WebElement > results = ( new WebDriverWait( driver, Duration.ofSeconds(timeout )) )
 	                .until( ExpectedConditions
-	                        .visibilityOfAllElementsLocatedBy(
+	                        .presenceOfAllElementsLocatedBy(
 	                        		      By.xpath( xpatha )
 	                        )
 	        );
