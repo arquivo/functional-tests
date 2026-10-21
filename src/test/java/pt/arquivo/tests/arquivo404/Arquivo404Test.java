@@ -21,7 +21,11 @@ import pt.arquivo.selenium.WebDriverTestBaseParallel;
  */
 public class Arquivo404Test extends WebDriverTestBaseParallel {
 
-    
+    // arquivo404.js gives its default archive a 2s timeout, and the www.arquivo.pt timemap
+    // often takes longer than that, so tests configure the same archive with a longer timeout.
+    private static final String ARQUIVO_404 = "ARQUIVO_NOT_FOUND_404"
+            + ".archive({timeout: 30000, archiveName: 'Arquivo.pt', archiveApiUrl: 'https://arquivo.pt/arquivo404server/timemap/link/'})";
+
     public Arquivo404Test(Map<String, String> config) {
         super(config);
     }
@@ -56,7 +60,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
         });
 
         appendError("Verify that url method works", () -> {
-            ((JavascriptExecutor) driver).executeScript("ARQUIVO_NOT_FOUND_404.url('https://www.arquivo.pt').call();");
+            ((JavascriptExecutor) driver).executeScript(ARQUIVO_404 + ".url('https://www.arquivo.pt').call();");
             new WebDriverWait(driver, Duration.ofSeconds(100)).until(ExpectedConditions.visibilityOfElementLocated(By.id(messageDivId)));
         });
     }
@@ -72,7 +76,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
 
         appendError("Verify that message method works", () -> {
             String testText = "Test message";
-            ((JavascriptExecutor) driver).executeScript("ARQUIVO_NOT_FOUND_404.url('https://www.arquivo.pt').message('"+testText+"').call();");
+            ((JavascriptExecutor) driver).executeScript(ARQUIVO_404 + ".url('https://www.arquivo.pt').message('"+testText+"').call();");
             new WebDriverWait(driver, Duration.ofSeconds(100)).until(ExpectedConditions.textToBe(By.id(messageDivId),testText));
         });
 
@@ -92,7 +96,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
             String newDivId = "test-div";
             ((JavascriptExecutor) driver).executeScript("g = document.createElement('div'); g.setAttribute('id', '"+newDivId+"'); document.getElementById('"+messageDivId+"').parentElement.appendChild(g)");
             
-            ((JavascriptExecutor) driver).executeScript("ARQUIVO_NOT_FOUND_404.url('https://www.arquivo.pt').messageElementId('"+newDivId+"').call();");
+            ((JavascriptExecutor) driver).executeScript(ARQUIVO_404 + ".url('https://www.arquivo.pt').messageElementId('"+newDivId+"').call();");
             new WebDriverWait(driver, Duration.ofSeconds(100)).until(ExpectedConditions.visibilityOfElementLocated(By.id(newDivId)));
         });
 
@@ -111,7 +115,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
             // We change the date formatter to only display the year, and the message to only display the date.
             //   This should make the message be just the year of the archived version.
             ((JavascriptExecutor) driver).executeScript(
-                "ARQUIVO_NOT_FOUND_404" +
+                ARQUIVO_404 +
                 ".url('https://www.arquivo.pt')" +
                 ".setDateFormatter(date => '' + date.getFullYear())" +
                 ".message('{date}')" +
@@ -134,7 +138,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
         appendError("Verify that setMinimumDate method works", () -> {
             // create a new element to receive the message
             ((JavascriptExecutor) driver).executeScript(
-                "ARQUIVO_NOT_FOUND_404" +
+                ARQUIVO_404 +
                 ".url('https://www.arquivo.pt')" +
                 ".setDateFormatter(date => '' + date.getFullYear())" +
                 ".setMinimumDate(new Date('2010-01-01'))" +
@@ -157,7 +161,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
         appendError("Verify that setMostRelevantMemento method works", () -> {
             // create a new element to receive the message
             ((JavascriptExecutor) driver).executeScript(
-                "ARQUIVO_NOT_FOUND_404" +
+                ARQUIVO_404 +
                 ".url('https://www.arquivo.pt')" +
                 ".setDateFormatter(date => '' + date.getFullYear())" +
                 ".setMostRelevantMemento('most-recent')" +
@@ -181,7 +185,7 @@ public class Arquivo404Test extends WebDriverTestBaseParallel {
         appendError("Verify that setMaximumDate method works", () -> {
             // create a new element to receive the message
             ((JavascriptExecutor) driver).executeScript(
-                "ARQUIVO_NOT_FOUND_404" +
+                ARQUIVO_404 +
                 ".url('https://www.arquivo.pt')" +
                 ".setDateFormatter(date => '' + date.getFullYear())" +
                 ".setMostRelevantMemento('most-recent')" +

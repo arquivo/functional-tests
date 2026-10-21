@@ -2,7 +2,7 @@ package pt.arquivo.tests.webapp.pagesearch;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -52,45 +52,39 @@ public class PageSearchLimitedDatesFromHomepageTest extends WebDriverTestBasePar
             )
         ));
 
-        appendError("Check first result url", () -> {
-            List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
-            assertTrue("Mininium of urls should be 1", wes.size() > 0);
-
-            WebElement we = wes.get(0);
-            assertThat("Check first result url", we.getText().trim(), containsString("fccn.pt"));
-
-            assertEquals("After advanced search check search term contains",
-                "19961013145650",
-                waitUntilElementIsVisibleAndGet(By.cssSelector("#pages-results > ul:first-of-type")).getAttribute("data-tstamp").trim());
-
-            assertThat("After advanced search check search term contains fccn.pt",
-                waitUntilElementIsVisibleAndGet(By.cssSelector("#pages-results > ul:first-of-type")).getAttribute("data-url").trim(),
-                containsString("fccn.pt")
-            );
+        appendError("Check results are within the selected dates", () -> {
+            List<WebElement> results = driver.findElements(By.cssSelector("#pages-results > ul"));
+            assertTrue("Mininium of results should be 1", results.size() > 0);
+            for (WebElement result : results) {
+                String tstamp = result.getAttribute("data-tstamp").trim();
+                assertTrue("Result " + tstamp + " should be between 12 October 1996 and 1 January 1997",
+                    tstamp.compareTo("19961012") >= 0 && tstamp.compareTo("19970102") < 0);
+            }
         });
 
-        appendError("Check first result title", () -> {
-            List<WebElement> wes = driver.findElements(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[1]/a"));
-            assertTrue("Mininium of title should be 1", wes.size() > 0);
+        appendError("Check first result", () -> {
+            WebElement first = waitUntilElementIsVisibleAndGet(By.cssSelector("#pages-results > ul:first-of-type"));
 
-            WebElement we = wes.get(0);
-            assertThat("Check first result title", 
-                we.getText().trim(),
-                containsString("fccn.pt"));
+            assertThat("Check first result url", first.getAttribute("data-url").trim(), containsString("fccn.pt"));
+            assertThat("Check first result shown url",
+                first.findElement(By.cssSelector(".results-url")).getText().trim(), containsString("fccn.pt"));
+            assertFalse("Check first result title isn't empty",
+                first.findElement(By.cssSelector(".results-title")).getText().trim().isEmpty());
         });
 
-        appendError("Check first result version", () -> {
-            WebElement we = driver
-                    .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[3]/p"));
+        // The ranking differs between environments, so look for the fccn.pt home page anywhere on the results
+        By homepageResultBy = By.cssSelector("#pages-results > ul[data-tstamp=\"19961013145650\"]");
 
-            assertThat("Check first result version", we.getText().trim(), containsString("13 Outubro 1996"));
+        appendError("Check fccn.pt home page result version", () -> {
+            assertThat("Check fccn.pt home page result version",
+                driver.findElement(homepageResultBy).findElement(By.cssSelector(".results-date")).getText().trim(),
+                containsString("13 Outubro 1996"));
         });
 
-        appendError("Check first result summary", () -> {
-            WebElement we = driver
-                    .findElement(By.xpath("//*[@id=\"pages-results\"]/ul[1]/li[4]/p"));
-
-            assertThat("Check first result version", we.getText().trim(), containsString("Av. Brasil"));
+        appendError("Check fccn.pt home page result summary", () -> {
+            assertThat("Check fccn.pt home page result summary",
+                driver.findElement(homepageResultBy).findElement(By.cssSelector(".results-summary")).getText().trim(),
+                containsString("Av. Brasil"));
         });
     }
 

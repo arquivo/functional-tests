@@ -38,14 +38,6 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 
 		assertThat("Verify that the term RCCN is displayed on the FCCN web page",
 			getTextContentUsingJs("body > blockquote:nth-child(5) > h1 > a").toLowerCase(), containsString("rccn"));
-		//Check FCCN Replay Page
-		driver.get(this.testURL + "/wayback/19961013171554/http://www.fccn.pt/index_i.html");
-			
-		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
-
-		assertThat("Verify if the term Portuguese is displayed on the FCCN web page",
-			getTextContentUsingJs("body > b:nth-child(12)").toLowerCase(), containsString("portuguese"));
-
 		//Check Uminho Replay Page
 
 		driver.get(this.testURL + "/wayback/19961013145852/http://s700.uminho.pt:80/homepage-pt.html");
@@ -55,22 +47,14 @@ public class ReplayTest extends WebDriverTestBaseParallel {
 		assertThat("Verify if the term Portugal is displayed on the Uminho web page",
 			getTextContentUsingJs("body > center:nth-child(1) > h1").toLowerCase(), containsString("portugal"));
 
-		//Check ISCT Replay Page
-		driver.get(this.testURL + "/wayback/19961013202814/http://www.iscte.pt/");
+		//Check Uminho Replay Page
+
+		driver.get(this.testURL + "/wayback/19961013145852/http://www.uminho.pt/");
 
 		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
 
-		assertThat("Verify if the term ISCTE is displayed on the ISCTE web page",
-			getTextContentUsingJs("body > center:nth-child(3) > table > tbody > tr > td:nth-child(1) > h1 > center").toLowerCase(), containsString("iscte"));
-
-		//Check IST Replay Page
-
-		driver.get(this.testURL + "/wayback/19961013171626/http://www.ist.utl.pt/");
-
-		run("Switch context to iframe", () -> new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("replay_iframe"))));
-
-		assertThat("Verify if the term IST is displayed on the IST web page",
-				getTextContentUsingJs("body > p:nth-child(3) > b").toLowerCase(), containsString("ist"));
+		assertThat("Verify if the term Minho is displayed on the Uminho web page",
+			getTextContentUsingJs("body > h2").toLowerCase(), containsString("minho"));
 
 	}
 

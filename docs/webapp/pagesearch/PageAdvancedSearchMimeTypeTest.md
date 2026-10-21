@@ -32,7 +32,7 @@ Verifies that a user can perform a basic search, jump into the Advanced Search f
 7. Read the resulting value of the main search input.
 8. Wait for `#pages-results` to appear.
 9. Check whether any result text contains "fccn".
-10. Read the mime-type label of the first result item.
+10. Read the mime-type label of the first result (`#pages-results > ul:first-of-type .results-title .mime`).
 
 **Expected results:**
 - "Check if search words maintain fccn term" — `words` field value equals `fccn` (soft/appendError).
@@ -41,7 +41,7 @@ Verifies that a user can perform a basic search, jump into the Advanced Search f
 - "Click on search on arquivo.pt button" succeeds (soft/appendError, no explicit assertion — just wraps the click).
 - "Verify if the - operator is on text box" — search input value trimmed equals `fccn type:pdf` (soft/appendError).
 - "Verify if the term fccn is displayed on any search result" — at least one `#pages-results > ul > li` result's text contains "fccn" (hard — plain `assertTrue`, not wrapped in `run`/`appendError`).
-- "Check mime of first result" — mime span text of the first result (`#pages-results/ul[1]/li[2]/a/span`) trims to `[PDF]` (soft/appendError).
+- "Check mime of first result" — mime label text of the first result (`#pages-results > ul:first-of-type .results-title .mime`, waited until visible) trims to `[PDF]` (soft/appendError).
 
 ## Tags / Annotations
 - `@Retry`: yes (retried up to 6x, 30s backoff)
@@ -52,4 +52,4 @@ Verifies that a user can perform a basic search, jump into the Advanced Search f
 ## Notes
 - Shares the identical "search fccn → open advanced search → verify words field" preamble with the other `PageAdvancedSearch*` tests in this package.
 - The "fccn is displayed" assertion (step 9) is a hard `assertTrue`, not wrapped in `appendError`/`run`, so a failure there would abort the test immediately without evaluating the final mime-type check.
-- XPath locators are brittle/positional (e.g. `fieldset/section[2]/button`, `ul[1]/li[2]/a/span`) — worth flagging for the Playwright rewrite as candidates for more robust selectors.
+- The first-result mime label is located with class selectors (`.results-title .mime`) rather than a positional XPath, but the advanced-search submit button is still located positionally (`fieldset/section[2]/button`) — worth flagging for the Playwright rewrite as a candidate for a more robust selector.

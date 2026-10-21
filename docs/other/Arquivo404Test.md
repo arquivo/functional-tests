@@ -16,6 +16,14 @@ Arquivo404 is a client-side JavaScript widget (exposed globally as `ARQUIVO_NOT_
 ## Test Data
 None — no external config/resource file is used. Each test method drives the widget directly via `driver.executeScript(...)` calls with literal strings/dates written inline in the test method.
 
+Every `ARQUIVO_NOT_FOUND_404` call chain starts by configuring the archive with a longer timeout (Java constant `ARQUIVO_404`):
+
+```js
+ARQUIVO_NOT_FOUND_404.archive({timeout: 30000, archiveName: 'Arquivo.pt', archiveApiUrl: 'https://arquivo.pt/arquivo404server/timemap/link/'})
+```
+
+The library's default archive uses a 2 s timeout, which is often shorter than the `www.arquivo.pt` timemap lookup takes, so the tests configure the same archive with a 30 s timeout.
+
 ## Steps & Expected Results
 
 ### `checkThatPageHasArquivo404()`
@@ -31,7 +39,7 @@ None — no external config/resource file is used. Each test method drives the w
 
 ### `testUrlMethod()`
 1. Navigate to 404 page, wait for message div presence.
-2. Execute `ARQUIVO_NOT_FOUND_404.url('https://www.arquivo.pt').call();`.
+2. Execute `ARQUIVO_NOT_FOUND_404.archive({timeout: 30000, archiveName: 'Arquivo.pt', archiveApiUrl: 'https://arquivo.pt/arquivo404server/timemap/link/'}).url('https://www.arquivo.pt').call();`.
 3. Wait for the message div to become visible.
 
 **Expected results:**
@@ -39,7 +47,7 @@ None — no external config/resource file is used. Each test method drives the w
 
 ### `testMessageMethod()`
 1. Navigate to 404 page, wait for message div presence.
-2. Execute `ARQUIVO_NOT_FOUND_404.url('https://www.arquivo.pt').message('Test message').call();`.
+2. Execute `ARQUIVO_NOT_FOUND_404.archive({timeout: 30000, archiveName: 'Arquivo.pt', archiveApiUrl: 'https://arquivo.pt/arquivo404server/timemap/link/'}).url('https://www.arquivo.pt').message('Test message').call();`.
 3. Wait for the message div's text to equal `"Test message"`.
 
 **Expected results:**
@@ -48,7 +56,7 @@ None — no external config/resource file is used. Each test method drives the w
 ### `testMessageElementIdMethod()`
 1. Navigate to 404 page, wait for message div presence.
 2. Via JS, create a new `div#test-div` and append it as a sibling of the message div's parent.
-3. Execute `ARQUIVO_NOT_FOUND_404.url('https://www.arquivo.pt').messageElementId('test-div').call();`.
+3. Execute `ARQUIVO_NOT_FOUND_404.archive({timeout: 30000, archiveName: 'Arquivo.pt', archiveApiUrl: 'https://arquivo.pt/arquivo404server/timemap/link/'}).url('https://www.arquivo.pt').messageElementId('test-div').call();`.
 4. Wait for `#test-div` to become visible.
 
 **Expected results:**
@@ -56,7 +64,7 @@ None — no external config/resource file is used. Each test method drives the w
 
 ### `testSetDateFormatter()`
 1. Navigate to 404 page, wait for message div presence.
-2. Execute widget chain with `.url(...).setDateFormatter(date => '' + date.getFullYear()).message('{date}').call();`.
+2. Execute widget chain `ARQUIVO_NOT_FOUND_404.archive({...})` with `.url('https://www.arquivo.pt').setDateFormatter(date => '' + date.getFullYear()).message('{date}').call();`.
 3. Wait for message div to become visible.
 4. Assert the div's text, parsed as an integer, is greater than 1990.
 
@@ -65,7 +73,7 @@ None — no external config/resource file is used. Each test method drives the w
 
 ### `testSetMinimumDate()`
 1. Navigate to 404 page, wait for message div presence.
-2. Execute widget chain with `.setDateFormatter(year formatter).setMinimumDate(new Date('2010-01-01')).message('{date}').call();`.
+2. Execute widget chain `ARQUIVO_NOT_FOUND_404.archive({...}).url('https://www.arquivo.pt')` with `.setDateFormatter(year formatter).setMinimumDate(new Date('2010-01-01')).message('{date}').call();`.
 3. Wait for message div text to equal `"2010"`.
 
 **Expected results:**
@@ -73,7 +81,7 @@ None — no external config/resource file is used. Each test method drives the w
 
 ### `testSetMostRelevantMemento()`
 1. Navigate to 404 page, wait for message div presence.
-2. Execute widget chain with `.setDateFormatter(year formatter).setMostRelevantMemento('most-recent').message('{date}').call();`.
+2. Execute widget chain `ARQUIVO_NOT_FOUND_404.archive({...}).url('https://www.arquivo.pt')` with `.setDateFormatter(year formatter).setMostRelevantMemento('most-recent').message('{date}').call();`.
 3. Wait for message div to become visible.
 4. Assert displayed year (as integer) is greater than 2010.
 
@@ -82,7 +90,7 @@ None — no external config/resource file is used. Each test method drives the w
 
 ### `testSetMaximumDate()`
 1. Navigate to 404 page, wait for message div presence.
-2. Execute widget chain with `.setDateFormatter(year formatter).setMostRelevantMemento('most-recent').setMaximumDate(new Date('2010-12-31')).message('{date}').call();`.
+2. Execute widget chain `ARQUIVO_NOT_FOUND_404.archive({...}).url('https://www.arquivo.pt')` with `.setDateFormatter(year formatter).setMostRelevantMemento('most-recent').setMaximumDate(new Date('2010-12-31')).message('{date}').call();`.
 3. Wait for message div text to equal `"2010"`.
 
 **Expected results:**
@@ -96,5 +104,6 @@ None — no external config/resource file is used. Each test method drives the w
 
 ## Notes
 - All assertions use `appendError` (soft assertions collected and thrown together at tear-down), except the inner `assertTrue` calls in `testSetDateFormatter`/`testSetMostRelevantMemento`, which are hard JUnit assertions executed inside the soft-assertion lambda (a failure there still surfaces via the lambda's appendError wrapping, but as an assertion error rather than a custom message).
+- The `.archive({timeout: 30000, ...})` prefix only overrides the timeout of the default Arquivo.pt archive (same name and timemap API URL), because the `www.arquivo.pt` timemap lookup often takes longer than the widget's 2 s default timeout. A Playwright port should keep this prefix (or an equivalent timeout) on every call chain.
 - This test depends on the target site under test (`test.url`) already having the Arquivo404 widget script installed and configured to serve its own real 404 page at `/thispagedoesnotexist/` — it is not testing Arquivo.pt itself but a reusable client-side integration script.
 - No dependency on aging archived snapshots for most tests since URLs/dates are widget-internal; `testSetMostRelevantMemento`/`testSetMaximumDate` implicitly depend on there being at least one archived memento of `https://www.arquivo.pt` after 2010 and one on/before 2010-12-31.
