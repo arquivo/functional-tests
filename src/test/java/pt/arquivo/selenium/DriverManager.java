@@ -29,14 +29,16 @@ public class DriverManager {
 
     private URL buildUrl() throws MalformedURLException {
         String host = System.getProperty("test.selenium.host");
-        if (host != null && !host.isEmpty() && !host.startsWith("$") && !host.contains("saucelabs")) {
+        String user = System.getProperty("test.saucelabs.user");
+        String key = System.getProperty("test.saucelabs.key");
+        boolean hasSauceCredentials = user != null && !user.isEmpty() && !user.startsWith("$")
+                && key != null && !key.isEmpty() && !key.startsWith("$");
+        if (!hasSauceCredentials && host != null && !host.isEmpty() && !host.startsWith("$")) {
             String port = System.getProperty("test.selenium.port", "4444");
             URL url = new URL(String.format("http://%s:%s/wd/hub", host, port));
             System.out.println("Remote web driver URL: " + url);
             return url;
         }
-        String user = System.getProperty("test.saucelabs.user");
-        String key = System.getProperty("test.saucelabs.key");
         URL url = new URL(String.format("https://%s:%s@ondemand.saucelabs.com:443/wd/hub", user, key));
         System.out.println("Remote web driver URL: " + url);
         return url;
