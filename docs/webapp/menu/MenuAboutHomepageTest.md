@@ -44,7 +44,7 @@ Both test methods delegate to the shared private helper `menuAbout(Locale locale
 
 ## Tags / Annotations
 - `@Retry`: yes (both `@Test` methods, retried up to 6x, 30s backoff)
-- `@Ignore`: no
+- `@Ignore`: yes (both `@Test` methods) — sobre.arquivo.pt is temporarily served elsewhere due to a security issue; re-enable once it is back
 - Runs across configured browser/device matrix
 - Category tags: webapp, menu, navigation, localization, external-link
 

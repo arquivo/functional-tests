@@ -47,7 +47,7 @@ Verifies that, from an archived (wayback) page, opening the hamburger menu and c
 
 ## Tags / Annotations
 - `@Retry`: yes (both test methods; retried up to 6x, 30s backoff)
-- `@Ignore`: no
+- `@Ignore`: yes (both `@Test` methods) — sobre.arquivo.pt is temporarily served elsewhere due to a security issue; re-enable once it is back
 - Runs across configured browser/device matrix
 - Category tags: webapp, replay, menu, about-page, locale
 

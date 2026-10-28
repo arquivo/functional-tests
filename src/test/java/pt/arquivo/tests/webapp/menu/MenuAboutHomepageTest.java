@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.Locale;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,6 +28,7 @@ public class MenuAboutHomepageTest extends MenuTest {
     }
 
     @Test
+    @Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue")
     @Retry
     public void menuAboutHomepagePTTest() {
         LocaleUtils.changeLanguageToPT(this);
@@ -34,6 +36,7 @@ public class MenuAboutHomepageTest extends MenuTest {
     }
 
     @Test
+    @Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue")
     @Retry
     public void menuAboutHomepageENTest() {
         LocaleUtils.changeLanguageToEN(this);

@@ -3,6 +3,7 @@ package pt.arquivo.tests.webapp.replay.menu;
 import java.time.Duration;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -28,6 +29,7 @@ public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 	private static final String WAYBACK_EXAMPLE = "/wayback/19961013145650/http://www.fccn.pt/";
 
 	@Test
+	@Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue")
 	@Retry
 	public void menuAboutWaybackPTTest() {
 		LocaleUtils.changeLanguageToPT(this);
@@ -36,6 +38,7 @@ public class MenuAboutWaybackTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
+	@Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue")
 	@Retry
 	public void menuAboutWaybackENTest() {
 		LocaleUtils.changeLanguageToEN(this);
