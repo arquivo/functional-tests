@@ -25,14 +25,14 @@ public class PageSearchQuerySuggestionTest extends WebDriverTestBaseParallel {
 	@Test
 	@Retry
 	public void pageSearchQuerySuggestionTest() {
-		run("Search with amazoncouk", () -> {
+		run("Search with lisbao", () -> {
 			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).clear();
-			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("amazoncouk");
+			waitUntilElementIsVisibleAndGet(By.id("submit-search-input")).sendKeys("lisbao");
 			waitUntilElementIsVisibleAndGet(By.id("submit-search")).click();
 		});
 
 		assertThat("Verify if a suggestion is presented",
-				waitUntilElementIsVisibleAndGet(By.id("term-suggested")).getText().trim(), containsString("→ Será que quis dizer: amazon.co.uk"));
+				waitUntilElementIsVisibleAndGet(By.id("term-suggested")).getText().trim(), containsString("→ Será que quis dizer: lisboa"));
 	}
 
 }
