@@ -41,7 +41,7 @@ Fills in and submits the "Suggest a site" form on the Arquivo.pt about site (Col
 
 ## Tags / Annotations
 - `@Retry`: yes
-- `@Ignore`: no (present at class level as an active `@Test`, despite the Javadoc calling it a "manual test")
+- `@Ignore`: yes — sobre.arquivo.pt is temporarily served elsewhere due to a security issue (same reason as fd77b20); re-enable once it is back
 - Runs across configured browser/device matrix
 - Category tags: cms, suggestion-form
 - **Not included in `TestSuite`** — call this out explicitly: of the 10 classes documented in this batch, `SuggestionSiteTest` is the one exception not wired into `pt.arquivo.tests.cms.suite.TestSuite`.

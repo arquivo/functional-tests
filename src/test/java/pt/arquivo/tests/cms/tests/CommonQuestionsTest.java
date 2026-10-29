@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import pt.arquivo.selenium.Retry;
@@ -23,6 +24,7 @@ public class CommonQuestionsTest extends WebDriverTestBaseParallel {
 	boolean isPreProd = true;
 	
 	@Test
+	@Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue (same reason as fd77b20)")
 	@Retry
 	public void commonQuestionsTest( )  {
 		System.out.print( "Running Common Questions Test. \n");

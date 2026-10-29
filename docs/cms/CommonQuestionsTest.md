@@ -43,7 +43,7 @@ Verifies that the "Common Questions" (FAQ) page of the Arquivo.pt "Sobre" (about
 
 ## Tags / Annotations
 - `@Retry`: yes
-- `@Ignore`: no
+- `@Ignore`: yes — sobre.arquivo.pt is temporarily served elsewhere due to a security issue (same reason as fd77b20); re-enable once it is back
 - Runs across configured browser/device matrix
 - Category tags: cms, faq
 

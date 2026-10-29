@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import pt.arquivo.selenium.Retry;
@@ -19,6 +20,7 @@ public class FooterTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
+	@Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue (same reason as fd77b20)")
 	@Retry
 	public void footerTest( ) {
 		System.out.print( "Running examples Test. \n");

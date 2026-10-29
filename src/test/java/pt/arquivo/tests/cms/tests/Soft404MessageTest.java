@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,7 @@ public class Soft404MessageTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
+	@Ignore("sobre.arquivo.pt is temporarily served elsewhere due to a security issue (same reason as fd77b20)")
 	@Retry
 	public void soft404MessageTest() {
 		
