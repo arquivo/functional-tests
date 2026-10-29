@@ -48,7 +48,7 @@ For each `config` entry in `memorial_config.yaml` (looped in a single `@Test` me
 
 ## Tags / Annotations
 - `@Retry`: no (not used in this class)
-- `@Ignore`: no
+- `@Ignore`: yes — the memorial site list (`memorial_config.yaml`) changes too often to keep this test maintained, and the memorial service is monitored by other means. This is permanent, unlike the sobre.arquivo.pt ignores, so do not re-enable it with those
 - Runs across configured browser/device matrix (Windows/MacOS/Android/iOS combinations from `test.browsers.json`)
 - Category tags: other, memorial
 

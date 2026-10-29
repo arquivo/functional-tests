@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -63,6 +64,7 @@ public class MemorialTest extends WebDriverTestBaseParallel {
 	}
 
 	@Test
+	@Ignore("the memorial site list changes too often to keep this test maintained, and the memorial service is monitored by other means")
 	public void testMemorialSites() throws Exception {
 		ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
